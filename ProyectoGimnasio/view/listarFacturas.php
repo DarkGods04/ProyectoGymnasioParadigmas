@@ -145,17 +145,17 @@ include '../business/servicioBusiness.php';
                                     $servicioBusiness = new ServicioBusiness();
                                     $servicios = $servicioBusiness->obtener();
                                     $array = explode(";", $row->getServiciosTBFactura());
-                                    $serviciosExist="\n";
+                                    $serviciosExist="";
                                     foreach ($servicios as $rr) {
                                         foreach ($array as $selected) {
                                             if ($rr->getIdTBServicio() == $selected) {
-                                                $serviciosExist = $rr->getNombreTBServicio() . $serviciosExist . '\n';
+                                                $serviciosExist = $rr->getNombreTBServicio() .".". $serviciosExist;
                                               
                                                
                                             }
                                         }
                                     }
-                                    echo '<input type="text" readonly value="'. $serviciosExist .  '" />';
+                                    echo '<input type="text" readonly value="'. $serviciosExist . '" />';
                                     ?>
                             </td>
                             <?php echo '<td><input type="text" name="montoBruto" id="montoBruto" value="' . $row->getMontoBrutoTBFactura() .  '"readonly /></td>'; ?>
