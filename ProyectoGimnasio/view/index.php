@@ -52,6 +52,11 @@
     <div>
         <a href="../view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de Modalidad Funcional</a>
     </div>
+
+    <div>
+        <a href="../view/listarInstructores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Hola mundo</a>
+    </div>
+</body>
 </body>
 
 </html>
