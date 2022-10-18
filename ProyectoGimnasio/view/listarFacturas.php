@@ -437,7 +437,6 @@ include '../business/servicioBusiness.php';
             </tr>
         </form>
     </div>
-    <script src="app.js"></script>
 </body>
 
 </html>
