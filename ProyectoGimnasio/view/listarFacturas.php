@@ -14,35 +14,17 @@ include '../business/servicioBusiness.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Facturas</title>
     <script type="text/javascript">
         function confirmarAccionModificar() {
-            return confirm("¿Está seguro de que desea modificar este cliente?");
+            return confirm("¿Está seguro de que desea modificar esta factura?");
         }
 
         function confirmarAccionEliminar() {
-            return confirm("¿Está seguro de que desea eliminar este cliente?");
+            return confirm("¿Está seguro de que desea eliminar esta factura?");
         }
     </script>
-    <style type="text/css">
-        ul {
-            list-style-type: none;
-            width: 300px;
-            height: auto;
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        li {
-            background-color: #EEEEEE;
-            border-top: 1px solid #9e9e9e;
-            padding: 5px;
-            width: 100%;
-            float: left;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
@@ -59,8 +41,8 @@ include '../business/servicioBusiness.php';
             <ul id="listaFacturas"></ul>
         </div>
     </form> </br>
-
     <script src="../js/peticiones.js"></script>
+
     <div>
         <?php
         if (!isset($_POST['campo'])) {
@@ -113,9 +95,7 @@ include '../business/servicioBusiness.php';
                                 </select>
                             </td>
 
-
                             <td>
-
                                 <?php
                                 $instructorBusiness = new InstructorBusiness();
                                 $instructores = $instructorBusiness->obtener();
@@ -131,11 +111,10 @@ include '../business/servicioBusiness.php';
                             </td>
 
                             <?php
-
                             echo '<td><input type="date" name="fechaPago" id="fechaPago" value="' . $row->getFechaPagoTBFactura() . '"/></td>';
                             ?>
-                            <td>
 
+                            <td>
                                 <?php
                                 $modalidadPagoBusiness = new PagoModalidadBusiness();
                                 $modalidadesPago = $modalidadPagoBusiness->obtener();
@@ -149,7 +128,6 @@ include '../business/servicioBusiness.php';
                                     } ?>
                                 </select>
                             </td>
-
 
                             <td>
                                 <select id="servicios" name="servicios[]" multiple="multiple" method="POST">
@@ -179,7 +157,6 @@ include '../business/servicioBusiness.php';
                             ?>
 
                             <td>
-
                                 <?php
                                 $impuestoVentaBusiness = new ImpuestoVentaBusiness();
                                 $impuestoVentas = $impuestoVentaBusiness->obtener();
@@ -193,7 +170,8 @@ include '../business/servicioBusiness.php';
                                     } ?>
                                 </select>
                             </td>
-                    <?php
+
+                            <?php
                             echo '<td><input type="text" disabled ="true" name="montoNeto" id="montoNeto" value="' . $row->getMontoNetoTBFactura() .  '"/></td>';
                             echo '<td><input type="submit" name="actualizarFactura" id="actualizarFactura" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
                             echo '<input type="submit" name="eliminarFactura" id="eliminarFactura" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
@@ -206,27 +184,27 @@ include '../business/servicioBusiness.php';
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No hay facturas registrados!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron facturas!</p>';
         }
         ?>
     </div>
 
     <div>
-        <h3>Crear nueva factura</h3>
+        <h3>Crear una nueva factura</h3>
 
         <script src="../js/app.js"></script>
         <form name="formulario" method="POST" id="direccionform" action="../business/facturaAction.php">
             <table border="1">
                 <thead style="text-align: left;">
                     <tr>
-                        <th>Seleccione el cliente</th>
-                        <th>Seleccione el instructor</th>
-                        <th>Seleccione la fecha de pago</th>
+                        <th>Cliente</th>
+                        <th>Instructor</th>
+                        <th>Fecha</th>
                         <th>Modalidad de pago</th>
-                        <th>Seleccione los Servicios</th>
-                        <th>Monto Bruto</th>
-                        <th>Seleccione el Impuesto Venta</th>
-                        <th>Monto Neto</th>
+                        <th>Servicios</th>
+                        <th>Monto bruto</th>
+                        <th>Impuesto de venta</th>
+                        <th>Monto neto</th>
                         <th>Acción</th>
                     </tr>
                 </thead>

@@ -21,7 +21,7 @@
     </div>
 
     <div>
-        <a href="../view/listarClientePeso.php" style="text-decoration: none; color: blue; font-size: 150%;">- Cliente peso</a>
+        <a href="../view/listarClientePeso.php" style="text-decoration: none; color: blue; font-size: 150%;">- Clientes pesos</a>
     </div>
 
     <div>
@@ -29,7 +29,7 @@
     </div>
 
     <div>
-        <a href="../view/listarPagoModalidad.php" style="text-decoration: none; color: blue; font-size: 150%;">- Periodicidades de pago</a>
+        <a href="../view/listarPagoModalidad.php" style="text-decoration: none; color: blue; font-size: 150%;">- Periodos de pago</a>
     </div>
 
     <div>
@@ -53,7 +53,7 @@
     </div>
 
     <div>
-        <a href="../view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de modalidad funcionales</a>
+        <a href="../view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de modalidades funcionales</a>
     </div>
 
 </body>
