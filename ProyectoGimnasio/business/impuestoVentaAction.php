@@ -59,7 +59,7 @@ if (isset($_POST['actualizar'])) {
         if (strlen($valor) > 0 && strlen($descripcion) > 0 ) {
             $tempValor = str_replace("%", "", $valor);
 
-            if (!is_numeric($descripcion) && is_numeric($valor)) {
+            if (!is_numeric($descripcion)) {
                 $impuestoVenta = new ImpuestoVenta($id, $tempValor, $descripcion, 1);
                 $impuestoBusiness = new ImpuestoVentaBusiness();
                 $resultado = $impuestoBusiness->update($impuestoVenta);
