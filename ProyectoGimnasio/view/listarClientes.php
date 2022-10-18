@@ -27,40 +27,6 @@ include '../business/clienteBusiness.php';
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
 
-    <script>
-        function validarCorreo(correo){
-            var cadena = /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|yahoo|live|gmail|est.una|una)\.(?:|com|es|ac.cr|cr)+$/.test(campo.value);
-            var esValido = cadena.test(correo);
-            if(esValido == false){
-                alert('El correo ingresado es invalido');
-            }
-        }
-
-        function validarLetras(nombre){
-            var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-            var esValido = cadena.test(nombre);
-            if(esValido == false){
-                alert('El correo ingresado es invalido');
-            }
-        }
-
-        function validarLetras(apellido1){
-            var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-            var esValido = cadena.test(apellido1);
-            if(esValido == false){
-                alert('El correo ingresado es invalido');
-            }
-        }
-
-        function validarLetras(apellido2){
-            var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-            var esValido = cadena.test(apellido2);
-            if(esValido == false){
-                alert('El correo ingresado es invalido');
-            }
-        }
-    </script>
-
     <style type="text/css">
         ul {
             list-style-type: none;
