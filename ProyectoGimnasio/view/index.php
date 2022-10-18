@@ -10,7 +10,6 @@
 
 <body>
     <h1>Proyecto Gimnasio</h1>
-    
     <h2>Menú principal</h2>
 
     <div>
