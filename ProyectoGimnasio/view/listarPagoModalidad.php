@@ -8,8 +8,9 @@ include '../business/pagoModalidadBusiness.php';
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <title>Pago modalidad </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">    
+    <title>Peridiocidad de pago</title>
 
    <script>
         function confirmarAccionModificar() {
@@ -20,32 +21,12 @@ include '../business/pagoModalidadBusiness.php';
             return confirm("¿Está seguro de que desea eliminar esta modalidad de pago?");
         }
     </script>
-
-    <style type="text/css">
-        ul {
-            list-style-type: none;
-            width: 300px;
-            height: auto;
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        li {
-            background-color: #EEEEEE;
-            border-top: 1px solid #9e9e9e;
-            padding: 5px;
-            width: 100%;
-            float: left;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
     <?php include 'header.php';?>
 
-    <h1>Pago modalidad</h1>
+    <h1>Peridiocidades de pago</h1>
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
