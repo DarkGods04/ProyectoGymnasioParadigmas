@@ -13,11 +13,11 @@ include 'header.php';
     <title>Tipos Pago</title>
     <script>
         function confirmarAccionModificar() {
-            return confirm("¿Está seguro de que desea modificar esta modalidad de pago?");
+            return confirm("¿Está seguro de que desea modificar este tipo de pago?");
         }
 
         function confirmarAccionEliminar() {
-            return confirm("¿Está seguro de que desea eliminar esta modalidad de pago?");
+            return confirm("¿Está seguro de que desea eliminar este tipo de pago?");
         }
     </script>
     <style type="text/css">
