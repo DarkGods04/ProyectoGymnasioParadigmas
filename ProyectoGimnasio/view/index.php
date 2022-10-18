@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>Proyecto Gimnasio</h1>
+    <h1>Proyecto Gimnasio 1</h1>
     <h2>Menú principal</h2>
 
     <div>
