@@ -23,11 +23,18 @@
     <div>
         <a href="../view/listarClientePeso.php" style="text-decoration: none; color: blue; font-size: 150%;">- Cliente peso</a>
     </div>
-    
+
     <div>
         <a href="../view/menuListarActivos.php" style="text-decoration: none; color: blue; font-size: 150%;">- Activos</a>
     </div>
-    
+
+    <div>
+        <a href="../view/listarPagoModalidad.php" style="text-decoration: none; color: blue; font-size: 150%;">- Periodicidades de pago</a>
+    </div>
+
+    <div>
+        <a href="../view/listarTiposPago.php" style="text-decoration: none; color: blue; font-size: 150%;">- Métodos de pago</a>
+    </div>
 
     <div>
         <a href="../view/listarImpuestoVentas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Impuestos</a>
@@ -40,26 +47,15 @@
     <div>
         <a href="../view/listarFacturas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Facturas</a>
     </div>
-    
+
     <div>
-        <a href="../view/listarPagoModalidad.php" style="text-decoration: none; color: blue; font-size: 150%;">- Pago modalidad</a>
+        <a href="../view/listarModalidadFuncional.php" style="text-decoration: none; color: blue; font-size: 150%;">- Modalidades funcionales</a>
     </div>
 
     <div>
-        <a href="../view/listarTiposPago.php" style="text-decoration: none; color: blue; font-size: 150%;">- Tipos Pago</a>
+        <a href="../view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de modalidad funcionales</a>
     </div>
 
-    <div>
-        <a href="../view/listarModalidadFuncional.php" style="text-decoration: none; color: blue; font-size: 150%;">- Modalidades Funcionales</a>
-    </div>
-
-    <div>
-        <a href="../view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de Modalidad Funcional</a>
-    </div>
-
-    <div>
-        <a href="../view/listarInstructores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Hola mundo</a>
-    </div>
 </body>
 </body>
 
