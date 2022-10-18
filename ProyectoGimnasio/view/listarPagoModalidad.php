@@ -26,7 +26,7 @@ include '../business/pagoModalidadBusiness.php';
 <body>
     <?php include 'header.php';?>
 
-    <h1>Peridiocidades de pago</h1>
+    <h1>Periodos de pago</h1>
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
@@ -92,7 +92,7 @@ include '../business/pagoModalidadBusiness.php';
     </div></br>
 
     <div>
-        <h3>Registrar un nuevo tipo de pago modalidad </h3>
+        <h3>Registrar un nuevo periodo de pago</h3>
 
         <form method="POST" id="direccionform" action="../business/pagoModalidadAction.php">
             <table border="1">
@@ -108,7 +108,7 @@ include '../business/pagoModalidadBusiness.php';
                     <tr>
                     <td><input type="text" name="nombre" placeholder="Nombre"></td>
                         <td><input type="text" name="descripcion" placeholder="Descripción"></td>
-                        <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar pago modalidad</button></td>
+                        <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>
                 </tbody>
             </table>
