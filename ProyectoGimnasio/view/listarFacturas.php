@@ -17,11 +17,11 @@ include '../business/servicioBusiness.php';
     <title>Facturas</title>
     <script type="text/javascript">
         function confirmarAccionModificar() {
-            return confirm("¿Está seguro de que desea modificar este cliente?");
+            return confirm("¿Está seguro de que desea modificar esta factura?");
         }
 
         function confirmarAccionEliminar() {
-            return confirm("¿Está seguro de que desea eliminar este cliente?");
+            return confirm("¿Está seguro de que desea eliminar esta factura?");
         }
     </script>
     <style type="text/css">
