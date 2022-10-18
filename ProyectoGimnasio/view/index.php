@@ -15,15 +15,19 @@
     <div>
         <a href="../view/listarInstructores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Instructores</a>
     </div>
+
     <div>
         <a href="../view/listarClientes.php" style="text-decoration: none; color: blue; font-size: 150%;">- Clientes</a>
     </div>
-    <div>
-        <a href="../view/menuListarActivos.php" style="text-decoration: none; color: blue; font-size: 150%;">- Activos</a>
-    </div>
+
     <div>
         <a href="../view/listarClientePeso.php" style="text-decoration: none; color: blue; font-size: 150%;">- Cliente peso</a>
     </div>
+    
+    <div>
+        <a href="../view/menuListarActivos.php" style="text-decoration: none; color: blue; font-size: 150%;">- Activos</a>
+    </div>
+    
 
     <div>
         <a href="../view/listarImpuestoVentas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Impuestos</a>
