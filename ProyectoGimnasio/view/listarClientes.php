@@ -99,6 +99,10 @@ include '../business/clienteBusiness.php';
     <script src="../js/peticiones.js"></script>
 
     <div>
+        <a href="listarClientesDesactivos.php" style="text-decoration: none; color: blue; font-size: 150%;">Recuperar Clientes</a>
+    </div>
+    
+    <div>
         <?php
         if (!isset($_POST['campo'])) {
             $_POST['campo'] = "";
