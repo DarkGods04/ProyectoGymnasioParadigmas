@@ -66,7 +66,6 @@ if (isset($_POST['actualizarModalidadfuncionalcriterio'])) {
         $rangoValorMaximo = $_POST['rangoValorMaximo'];
         $rangoValorMinimo = $_POST['rangoValorMinimo'];
       
-
         if (strlen($idModalidadfuncional) > 0 && strlen($nombre) > 0 && strlen($descripcion) > 0 && strlen($rangoValorMinimo) > 0
         && strlen($rangoValorMaximo) > 0) {
 

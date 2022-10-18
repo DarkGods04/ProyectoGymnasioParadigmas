@@ -12,19 +12,17 @@ if (isset($_POST["insertar"])) {
 
             $tempMonto = str_replace("₡","",$montoServicio);
 
-            if (is_numeric($montoServicio)) {
-                $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $tempMonto, 1);
-                $servicioBusiness = new servicioBusiness();
-                $result = $servicioBusiness->insertar($servicio);
+            
+            $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $tempMonto, 1);
+            $servicioBusiness = new servicioBusiness();
+            $result = $servicioBusiness->insertar($servicio);
 
-                if ($result == 1) {
-                    header("location: ../view/listarServicios.php?success=updated");
-                } else {
-                    header("location: ../view/listarServicios.php?error=dbError");
-                }
+            if ($result == 1) {
+                header("location: ../view/listarServicios.php?success=updated");
             } else {
-                header("location: ../view/listarServicios.php?error=numberFormat");
+                header("location: ../view/listarServicios.php?error=dbError");
             }
+            
         } else {
             header("location: ../view/listarServicios.php?error=emptyField");
         }
@@ -62,19 +60,16 @@ if (isset($_POST['actualizar'])) {
         if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
             $tempMonto = str_replace("₡","",$montoServicio);
             
-            if (is_numeric($montoServicio)) {
-                $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $tempMonto, 1);
-                $servicioBusiness = new servicioBusiness();
-                $result = $servicioBusiness->update($servicio, $anteriorMontoServicio);
+            $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $tempMonto, 1);
+            $servicioBusiness = new servicioBusiness();
+            $result = $servicioBusiness->update($servicio, $anteriorMontoServicio);
 
-                if ($result == 1) {
-                    header("location: ../view/listarServicios.php?success=updated");
-                } else {
-                    header("location: ../view/listarServicios.php?error=dbError");
-                }
+            if ($result == 1) {
+                header("location: ../view/listarServicios.php?success=updated");
             } else {
-                header("location: ../view/listarServicios.php?error=numberFormat");
+                header("location: ../view/listarServicios.php?error=dbError");
             }
+            
         } else {
             header("location: ../view/listarServicios.php?error=emptyField");
         }
