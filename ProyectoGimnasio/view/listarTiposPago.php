@@ -103,6 +103,8 @@ include 'header.php';
         </form>
     </div>
 
+            <div><h1>PRUEBA</h1></div>
+
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/pagoTipoAction.php">
             <tr>
