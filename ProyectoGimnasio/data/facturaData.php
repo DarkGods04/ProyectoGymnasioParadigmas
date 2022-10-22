@@ -142,7 +142,17 @@ class FacturaData extends Data
             }
         }
 
-        $querySelect = "SELECT * FROM tbfactura WHERE tbfacturaservicios LIKE '%$idServicio%' OR tbfacturaid LIKE '%$palabra%' OR tbfacturaclienteid LIKE '%$idCliente%' OR tbfacturainstructorid LIKE '%$idInstructor%' OR tbfacturafechapago LIKE '%$palabra%' OR tbfacturapagomodalidad LIKE '%$idModalidad%';";
+        
+        $querySelectImpuesto = "SELECT * FROM tbimpuestoventa WHERE tbimpuestoventadescripcion LIKE '%$palabra%';";
+        $resultImpuesto = mysqli_query($conn, $querySelectImpuesto);
+        $idImpuesto=0;
+        while ($rowimpuesto = mysqli_fetch_array($resultImpuesto)) {
+            if ($rowimpuesto['tbimpuestoventaactivo'] == 1) {
+                $idImpuesto = $rowimpuesto['tbimpuestoventaid'];
+            }
+        }
+
+        $querySelect = "SELECT * FROM tbfactura WHERE tbfacturaid LIKE '%$palabra%' OR tbfacturaclienteid LIKE '%$idCliente%' OR tbfacturainstructorid LIKE '%$idInstructor%' OR tbfacturafechapago LIKE '%$palabra%' OR tbfacturapagomodalidad LIKE '%$idModalidad%' OR tbfacturaservicios LIKE '%$idServicio%' OR tbfacturaimpuestoventaid LIKE '%$idImpuesto%' OR tbfacturamontobruto LIKE '%$palabra%' OR tbfacturamontoneto LIKE '%$palabra%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         $Facturas = [];

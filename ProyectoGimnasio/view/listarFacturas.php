@@ -54,9 +54,7 @@ include '../business/servicioBusiness.php';
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
-            <input type="text" name="campo" id="campo" placeholder="Buscar"> 
-            <label for="campo"> Buscar por fecha: </label>
-            <input type="date" name="campo" id="campo" placeholder="Buscar">
+            <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
             <ul id="listaFacturas"></ul>
         </div>
