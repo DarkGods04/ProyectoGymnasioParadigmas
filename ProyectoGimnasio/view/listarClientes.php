@@ -191,9 +191,7 @@ include '../business/clienteBusiness.php';
                         <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" onclick="validarCorreo(document.getElementByID('nombre').value)"></td>
                         <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido" onclick="validarCorreo(document.getElementByID('apellido1').value)"></td>
                         <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido" onclick="validarCorreo(document.getElementByID('apellido2').value)"></td>
-                        <label for="email">Enter your globex.com email:</label>
-
-                        <td><input type="email" id="email" pattern=".+@globex\.com" size="30" required></td>
+                        
                         <td><input type="email" name="correo" id="correo" placeholder="micorreo@gmail.com" onclick="validarCorreo(document.getElementByID('correo').value)"></td>
                         <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="0000-0000"></td>
                         <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento"></td>
@@ -211,6 +209,10 @@ include '../business/clienteBusiness.php';
                     </tr>
                 </tbody>
             </table>
+
+            <label for="email">Enter your globex.com email:</label>
+
+                        <td><input type="email" id="email" pattern=".+@globex\.com" size="30" required></td>
         </form>
     </div>
 
