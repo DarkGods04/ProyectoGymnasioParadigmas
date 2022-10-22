@@ -7,7 +7,36 @@ document.getElementById("campo").addEventListener("keyup",getNombresImpuestoVent
 document.getElementById("campo").addEventListener("keyup",getNombresServicio)
 document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncional)
 document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncionalCriterio)
+document.getElementById("campo").addEventListener("keyup",getNombresFacturas)
 
+
+function getNombresFacturas(){
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaFacturas")
+
+    if(inputCP.length > 0){
+
+        let url= "../data/prediccionFactura.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+        .then(data => {
+            lista.style.display = 'block'
+            lista.innerHTML = data
+        })
+        .catch(err => console.log(err))
+
+    }else {
+        lista.style.display = 'none'
+    }
+
+}
 
 function getNombresCliente(){
     let inputCP = document.getElementById("campo").value

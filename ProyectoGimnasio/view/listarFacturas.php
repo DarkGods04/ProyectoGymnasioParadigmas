@@ -54,23 +54,26 @@ include '../business/servicioBusiness.php';
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
-            <input type="text" name="campo" id="campo" placeholder="Buscar">
+            <input type="text" name="campo" id="campo" placeholder="Buscar"> 
+            <label for="campo"> Buscar por fecha: </label>
+            <input type="date" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
             <ul id="listaFacturas"></ul>
         </div>
-    </form> </br>
-
+    </form></br></br>
     <script src="../js/peticiones.js"></script>
+
     <div>
         <?php
-        if (!isset($_POST['campo'])) {
+          if (!isset($_POST['campo'])) {
             $_POST['campo'] = "";
             $campo = $_POST['campo'];
-        }
-        $campo = $_POST['campo'];
-        $facturaBusiness = new FacturaBusiness();
-        $facturas = $facturaBusiness->buscar($campo);
-        if (!empty($facturas)) {
+         }
+          $campo = $_POST['campo'];
+
+          $facturaBusiness = new FacturaBusiness();
+          $facturas = $facturaBusiness->buscar($campo);
+          if (!empty($facturas)) {
         ?>
             <table border="1">
                 <thead style="text-align: left;">
@@ -141,22 +144,20 @@ include '../business/servicioBusiness.php';
 
 
                             <td>
-                                    <?php
-                                    $servicioBusiness = new ServicioBusiness();
-                                    $servicios = $servicioBusiness->obtener();
-                                    $array = explode(";", $row->getServiciosTBFactura());
-                                    $serviciosExist="";
-                                    foreach ($servicios as $rr) {
-                                        foreach ($array as $selected) {
-                                            if ($rr->getIdTBServicio() == $selected) {
-                                                $serviciosExist = $rr->getNombreTBServicio() .".". $serviciosExist;
-                                              
-                                               
-                                            }
+                                <?php
+                                $servicioBusiness = new ServicioBusiness();
+                                $servicios = $servicioBusiness->obtener();
+                                $array = explode(";", $row->getServiciosTBFactura());
+                                $serviciosExist = "";
+                                foreach ($servicios as $rr) {
+                                    foreach ($array as $selected) {
+                                        if ($rr->getIdTBServicio() == $selected) {
+                                            $serviciosExist = $rr->getNombreTBServicio() . "." . $serviciosExist;
                                         }
                                     }
-                                    echo '<input type="text" readonly value="'. $serviciosExist . '" />';
-                                    ?>
+                                }
+                                echo '<input type="text" readonly value="' . $serviciosExist . '" />';
+                                ?>
                             </td>
                             <?php echo '<td><input type="text" name="montoBruto" id="montoBruto" value="' . $row->getMontoBrutoTBFactura() .  '"readonly /></td>'; ?>
 
@@ -181,9 +182,9 @@ include '../business/servicioBusiness.php';
                 </tbody>
             </table>
         <?php
-        } else {
-            echo '<p style="color: red">SIN RESULTADOS: No hay facturas registrados!</p>';
-        }
+          } else {
+            echo '<p style="color: red">SIN RESULTADOS: No hay facturas registradas!</p>';
+          }
         ?>
     </div>
 
@@ -342,8 +343,8 @@ include '../business/servicioBusiness.php';
                             <button name="añadirServicios" id="añadirServicios" value="añadirServicios">Añadir</button>
                         </td>
                         <td><input type="text" name="MontoBruto" readonly value="<?php if (isset($_GET['MontoBruto'])) {
-                                                                            echo $_GET['MontoBruto'];
-                                                                        } ?>">
+                                                                                        echo $_GET['MontoBruto'];
+                                                                                    } ?>">
                         <td>
                             <?php
                             $impuestoVentaBusiness = new ImpuestoVentaBusiness();
