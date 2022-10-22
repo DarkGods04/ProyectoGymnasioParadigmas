@@ -237,9 +237,7 @@ include '../business/clienteBusiness.php';
             </tr>
 
 
-            <label for="email">Enter your globex.com email:</label>
-
-            <input type="email" id="email" pattern="+@globex\.com : +@globex\.globex\.globex\ " size="30" required>
+            
         </form>
     </div>
 </body>
