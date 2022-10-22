@@ -63,5 +63,4 @@ $html = "";
 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
     $html .= "<li onclick=\"mostrar('" . $row["tbfacturaid"] . "')\">" . $row["tbfacturaid"] . "</li>";
 }
-
 echo json_encode($html, JSON_UNESCAPED_UNICODE);
