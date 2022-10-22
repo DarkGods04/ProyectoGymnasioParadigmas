@@ -22,6 +22,17 @@ include '../business/clienteBusiness.php';
         function confirmarAccionRecuperar() {
             return confirm("¿Está seguro de que desea reactivar este cliente?");
         }
+
+        function validarCorreo(correo){
+        var cadena = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test(campo.value);
+        var esValido = cadena.test(correo);
+        if(esValido == true){
+            alert('El correo es valido');
+        }else{
+            alert('El correo es incorrecto');
+        }
+    }
+
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -161,7 +172,7 @@ include '../business/clienteBusiness.php';
                         <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" onclick="validarCorreo(document.getElementByID('nombre').value)"></td>
                         <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido" onclick="validarCorreo(document.getElementByID('apellido1').value)"></td>
                         <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido" onclick="validarCorreo(document.getElementByID('apellido2').value)"></td>
-                        <td><input type="email" name="correo" id="correo" placeholder="micorreo@gmail.com" onclick="validarCorreo(document.getElementByID('correo').value)"></td>
+                        <td><input type="text" name="correo" id="correo" placeholder="micorreo@ejemplo.com" onclick="validarCorreo(document.getElementByID('correo').value)"></td>
                         <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="0000-0000"></td>
                         <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento"></td>
                         <td>

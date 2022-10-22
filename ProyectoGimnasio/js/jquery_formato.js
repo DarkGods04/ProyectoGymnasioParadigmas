@@ -15,7 +15,7 @@
     });
         
     function validarCorreo(correo){
-        var cadena = /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|yahoo|live|gmail|est.una|una)\.(?:|com|es|ac.cr|cr)+$/.test(campo.value);
+        var cadena = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test(campo.value);
         var esValido = cadena.test(correo);
         if(esValido == false){
             alert('El correo ingresado es invalido');
