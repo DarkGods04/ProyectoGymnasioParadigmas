@@ -23,16 +23,6 @@ include '../business/clienteBusiness.php';
             return confirm("¿Está seguro de que desea reactivar este cliente?");
         }
 
-        function validarCorreo(correo){
-        var cadena = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test(campo.value);
-        var esValido = cadena.test(correo);
-        if(esValido == true){
-            alert('El correo es valido');
-        }else{
-            alert('El correo es incorrecto');
-        }
-    }
-
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -169,10 +159,10 @@ include '../business/clienteBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" onclick="validarCorreo(document.getElementByID('nombre').value)"></td>
-                        <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido" onclick="validarCorreo(document.getElementByID('apellido1').value)"></td>
-                        <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido" onclick="validarCorreo(document.getElementByID('apellido2').value)"></td>
-                        <td><input type="text" name="correo" id="correo" placeholder="micorreo@ejemplo.com" onclick="validarCorreo(document.getElementByID('correo').value)"></td>
+                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" onclick="validarLetras('nombre')"></td>
+                        <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido" onclick="validarLetras('apellido1')"></td>
+                        <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido" onclick="validarLetras('apellido2')"></td>
+                        <td><input type="text" name="correo" id="correo" placeholder="micorreo@ejemplo.com"></td>
                         <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="0000-0000"></td>
                         <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento"></td>
                         <td>
@@ -185,12 +175,30 @@ include '../business/clienteBusiness.php';
                         </td>
                         <td><input type="text" class="mascarapeso" name="peso" id="peso" placeholder="00.00kg"></td>
                         <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="0.00m"></td>
-                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente">Registrar cliente</button></td>
+                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick="validarCorreo('correo')">Registrar cliente</button></td>
                     </tr>
                 </tbody>
             </table>
         </form>
-    </div>
+    </div>    
+
+    <script>
+        function validarCorreo(correo){
+            var correoR = document.getElementById(correo).value;
+            var esValido = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test(correoR);
+            if(esValido == false){
+                alert('El correo es incorrecto');
+            }
+        }
+
+        function validarLetras(palabra){
+            var palabraR = document.getElementById(palabra).value;
+            var esValido = /^[a-zA-Z\u00c0-\u017F]+$/.test(palabraR);
+            if(esValido == false){
+                alert('El texto ingresado es incorrecto');
+            }
+        }
+    </script>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/clienteAction.php">
