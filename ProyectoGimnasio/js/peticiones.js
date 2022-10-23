@@ -228,7 +228,6 @@ function getNombresServicio(){
     }
 }
 
-
 function getNombresModalidadFuncional(){
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaModalidadFuncional")

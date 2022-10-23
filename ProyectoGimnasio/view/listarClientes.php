@@ -28,34 +28,34 @@ include '../business/clienteBusiness.php';
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
 
     <script>
-        function validarCorreo(correo){
+        function validarCorreo(correo) {
             var cadena = /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|yahoo|live|gmail|est.una|una)\.(?:|com|es|ac.cr|cr)+$/.test(campo.value);
             var esValido = cadena.test(correo);
-            if(esValido == false){
+            if (esValido == false) {
                 alert('El correo ingresado es invalido');
             }
         }
 
-        function validarLetras(nombre){
+        function validarLetras(nombre) {
             var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
             var esValido = cadena.test(nombre);
-            if(esValido == false){
+            if (esValido == false) {
                 alert('El correo ingresado es invalido');
             }
         }
 
-        function validarLetras(apellido1){
+        function validarLetras(apellido1) {
             var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
             var esValido = cadena.test(apellido1);
-            if(esValido == false){
+            if (esValido == false) {
                 alert('El correo ingresado es invalido');
             }
         }
 
-        function validarLetras(apellido2){
+        function validarLetras(apellido2) {
             var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
             var esValido = cadena.test(apellido2);
-            if(esValido == false){
+            if (esValido == false) {
                 alert('El correo ingresado es invalido');
             }
         }
@@ -98,10 +98,6 @@ include '../business/clienteBusiness.php';
     </form></br></br>
     <script src="../js/peticiones.js"></script>
 
-    <div>
-        <a href="listarClientesDesactivos.php" style="text-decoration: none; color: blue; font-size: 150%;">Recuperar Clientes</a>
-    </div>
-    
     <div>
         <?php
         if (!isset($_POST['campo'])) {
@@ -155,7 +151,7 @@ include '../business/clienteBusiness.php';
                             echo '<td><input type="text" class="mascarapeso" name="peso" id="peso" value="' . $row->getPesoTBCliente() .  '"/></td>';
                             echo '<td><input type="text" class="mascaraaltura" name="altura" id="altura" value="' . $row->getAlturaTBCliente() .  '"/></td>';
                             echo '<td><input type="submit" name="actualizarCliente" id="actualizarCliente" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
-                        
+
                             echo '<input type="submit" name="eliminarCliente" id="eliminarCliente" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
                             echo '</tr>';
                             echo '</form>';
@@ -195,6 +191,7 @@ include '../business/clienteBusiness.php';
                         <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" onclick="validarCorreo(document.getElementByID('nombre').value)"></td>
                         <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido" onclick="validarCorreo(document.getElementByID('apellido1').value)"></td>
                         <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido" onclick="validarCorreo(document.getElementByID('apellido2').value)"></td>
+                        
                         <td><input type="email" name="correo" id="correo" placeholder="micorreo@gmail.com" onclick="validarCorreo(document.getElementByID('correo').value)"></td>
                         <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="0000-0000"></td>
                         <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento"></td>
@@ -212,6 +209,7 @@ include '../business/clienteBusiness.php';
                     </tr>
                 </tbody>
             </table>
+ 
         </form>
     </div>
 
