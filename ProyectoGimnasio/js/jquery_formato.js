@@ -13,35 +13,3 @@
         $("").mask("");
         */
     });
-        
-    function validarCorreo(correo){
-        var cadena = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test(campo.value);
-        var esValido = cadena.test(correo);
-        if(esValido == false){
-            alert('El correo ingresado es invalido');
-        }
-    }
-
-    function validarLetras(nombre){
-        var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-        var esValido = cadena.test(nombre);
-        if(esValido == false){
-            alert('El correo ingresado es invalido');
-        }
-    }
-
-    function validarLetras(apellido1){
-        var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-        var esValido = cadena.test(apellido1);
-        if(esValido == false){
-            alert('El correo ingresado es invalido');
-        }
-    }
-
-    function validarLetras(apellido2){
-        var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-        var esValido = cadena.test(apellido2);
-        if(esValido == false){
-            alert('El correo ingresado es invalido');
-        }
-    }
