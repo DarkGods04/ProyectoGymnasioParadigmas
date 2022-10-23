@@ -157,7 +157,7 @@ include '../business/servicioBusiness.php';
                                 echo '<input type="text" readonly value="' . $serviciosExist . '" />';
                                 ?>
                             </td>
-                            <?php echo '<td><input type="text" name="montoBruto" id="montoBruto" value="' . $row->getMontoBrutoTBFactura() .  '"readonly /></td>'; ?>
+                            <?php echo '<td><input type="text" name="montoBruto" id="montoBruto" value="₡ ' . $row->getMontoBrutoTBFactura() .  '"readonly /></td>'; ?>
 
                             <td>
                                 <?php
@@ -170,7 +170,7 @@ include '../business/servicioBusiness.php';
                                 } ?>
                             </td>
                     <?php
-                            echo '<td><input type="text" name="montoNeto" id="montoNeto" value="' . $row->getMontoNetoTBFactura() .  '"readonly /></td>';
+                            echo '<td><input type="text" name="montoNeto" id="montoNeto" value="₡ ' . $row->getMontoNetoTBFactura() .  '"readonly /></td>';
                             echo '<td><input type="submit" name="eliminarFactura" id="eliminarFactura" value="Anular" onclick="return confirmarAccionEliminar()"/></td>';
                             echo '</tr>';
                             echo '</form>';
@@ -394,7 +394,7 @@ include '../business/servicioBusiness.php';
                     if (isset($_GET['error'])) {
 
                         if ($_GET['error'] == "error") {
-                            echo "Ni idea de que es este error help";
+                            echo "Error en formato de factura";
                         } else
                         if ($_GET['error'] == "emptyField") {
                             echo '<p style="color: red">Campo(s) vacio(s)</p>';
