@@ -175,7 +175,7 @@ include '../business/clienteBusiness.php';
                         </td>
                         <td><input type="text" class="mascarapeso" name="peso" id="peso" placeholder="00.00kg"></td>
                         <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="0.00m"></td>
-                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick="validarCorreo('correo')">Registrar cliente</button></td>
+                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick="validarEspacios()">Registrar cliente</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -183,19 +183,21 @@ include '../business/clienteBusiness.php';
     </div>    
 
     <script>
-        function validarCorreo(correo){
-            var correoR = document.getElementById(correo).value;
-            var esValido = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test(correoR);
-            if(esValido == false){
-                alert('El correo es incorrecto');
-            }
-        }
+        function validarEspacios(){
+            varCorreo = document.getElementById('correo').value;
+            varNombre = document.getElementById('nombre').value;
+            varApellido1 = document.getElementById('apellido1').value;
+            varApellido2 = document.getElementById('apellido2').value;
 
-        function validarLetras(palabra){
-            var palabraR = document.getElementById(palabra).value;
-            var esValido = /^[a-zA-Z\u00c0-\u017F]+$/.test(palabraR);
-            if(esValido == false){
-                alert('El texto ingresado es incorrecto');
+            var esValidoCorreo = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test('correo');
+            var esValidoNombre = /^[a-zA-Z\u00c0-\u017F]+$/.test('nombre');
+            var esValidoApellido1 = /^[a-zA-Z\u00c0-\u017F]+$/.test('nombre');
+            var esValidoApellido2 = /^[a-zA-Z\u00c0-\u017F]+$/.test('nombre');
+
+            if ((esValidoCorreo == false) && (esValidoNombre == false) && (esValidoApellido1 == false) && (esValidoApellido2 == false)){
+                alert('Los espacios ingresados son incorrectos');
+            } else {
+                alert('Los espacios ingresados son correctos');
             }
         }
     </script>
