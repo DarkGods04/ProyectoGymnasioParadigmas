@@ -109,7 +109,8 @@ if (isset($_POST['insertarFactura'])) {
             header("Location: ../view/listarFacturas.php?error=emptyField&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult");
         }
     } else {
-        header("location: ../view/listarFacturas.php?error=error");
+        header("Location: ../view/listarFacturas.php?error=error&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult");
+      
     }
 }
 
