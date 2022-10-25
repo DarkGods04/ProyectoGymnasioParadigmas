@@ -350,7 +350,7 @@ include '../business/servicioBusiness.php';
                             ?>
                             <select name="impuestoVentaid" id="impuestoVentaid" method="POST">
                                 <?php
-                                if (isset($_GET['impuestoVentaid'])) {
+                                if (isset($_GET['impuestoVentaid']) && strlen($_GET['impuestoVentaid']) > 0) {
                                     foreach ($impuestoVentas as $row) :
                                         if ($row->getActivoImpuestoVenta() == 1) {
 
@@ -394,21 +394,23 @@ include '../business/servicioBusiness.php';
                     if (isset($_GET['error'])) {
 
                         if ($_GET['error'] == "error") {
-                            echo "Error en formato de factura";
+                            echo '<center><p style="color: red">Error en formato de factura</p></center>';
                         } else
                         if ($_GET['error'] == "emptyField") {
-                            echo '<p style="color: red">Campo(s) vacio(s)</p>';
+                            echo '<center><p style="color: red">Campo(s) vacio(s)</p></center>';
                         } else if ($_GET['error'] == "numberFormat") {
-                            echo '<p style="color: red">Error, formato de numero!</p>';
+                            echo '<center><p style="color: red">Error, formato de numero!</p></center>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         }else if ($_GET['error'] == "noServiceSelection") {
                             echo '<center><p style="color: red">Servicio no agregado, seleccione un servicio y marque donde dice añadir!</p></center>';
                         }else if ($_GET['error'] == "unselectedTax") {
                             echo '<center><p style="color: red">Impuesto no seleccionado!</p></center>';
+                        }else if($_GET['error'] == "serviceTaxnotSelected"){
+                            echo '<center><p style="color: red">Servicio e impuestos no seleccionados!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
-                        echo '<p style="color: green">Transacción realizada!</p>';
+                        echo '<center><p style="color: green">Transacción realizada!</p></center>';
                     }
                     ?>
                 </td>

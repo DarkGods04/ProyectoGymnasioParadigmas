@@ -14,7 +14,7 @@ $serviciosMult = urlencode($serviciosMult);
 
 if (isset($_POST['calcularImpuesto'])) {
 
-    if (!empty($_POST['serviciosMult'])) {
+    if (!empty($_POST['serviciosMult']) && !empty($_POST['MontoBruto'])) {
         if (!empty($_POST['impuestoVentaid'])) {
             $facturaBusiness = new FacturaBusiness();
             $valorImpuesto = $facturaBusiness->obtenerImpuesto($_POST['impuestoVentaid']);
@@ -27,7 +27,7 @@ if (isset($_POST['calcularImpuesto'])) {
             header("location: ../view/listarFacturas.php?error=unselectedTax&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&serviciosMult=$serviciosMult");
         }
     } else {
-        header("Location: ../view/listarFacturas.php?error=noServiceSelection&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&serviciosMult=$serviciosMult");
+        header("Location: ../view/listarFacturas.php?error=noServiceSelection&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult");
     }
 }
 
@@ -46,7 +46,7 @@ if (isset($_POST['añadirServicios'])) {
         header("Location: ../view/listarFacturas.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult");
         exit();
     } else {
-        header("Location: ../view/listarFacturas.php?error=noServiceSelection&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&serviciosMult=$serviciosMult");
+        header("Location: ../view/listarFacturas.php?error=noServiceSelection&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult");
     }
 }
 
@@ -72,6 +72,7 @@ if (isset($_POST['actualizarServicios'])) {
 }
 
 if (isset($_POST['insertarFactura'])) {
+    if( isset($_POST['serviciosMult']) && isset($_POST['impuestoVentaid'])){
     if (
         isset($_POST['clienteid']) && isset($_POST['instructorid']) && isset($_POST['fechaPago']) && isset($_POST['modalidadPago']) &&
         isset($_POST['serviciosMult']) && isset($_POST['MontoBruto']) && isset($_POST['impuestoVentaid']) && isset($_POST['MontoNeto'])
@@ -112,6 +113,9 @@ if (isset($_POST['insertarFactura'])) {
         header("Location: ../view/listarFacturas.php?error=error&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult");
       
     }
+}else{
+    header("Location: ../view/listarFacturas.php?error=serviceTaxnotSelected&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult");
+}
 }
 
 if (isset($_POST['eliminarFactura'])) {
