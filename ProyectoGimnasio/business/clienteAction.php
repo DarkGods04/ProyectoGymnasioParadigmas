@@ -30,16 +30,16 @@ if (isset($_POST['insertarCliente'])) {
                 if ($resultado == 1) {
                     Header("Location: ../view/listarClientes.php?success=inserted");
                 } else {
-                    Header("Location: ../view/listarClientes.php?error=dbError");
+                    Header("Location: ../view/listarClientes.php?error=dbError&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
                 }
             } else {
-                header("location: ../view/listarClientes.php?error=numberFormat");
+                header("location: ../view/listarClientes.php?error=numberFormat&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo ");
             }
         } else {
-            header("location: ../view/listarClientes.php?error=emptyField");
+            header("location: ../view/listarClientes.php?error=emptyField&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
         }
     } else {
-        header("location: ../view/listarClientes.php?error=error");
+       header("location: ../view/listarClientes.php?error=error&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
     }
 }
 

@@ -25,16 +25,16 @@ if (isset($_POST['insertar'])) {
                 if ($resultado == 1) {
                     Header("Location: ../view/listarInstructores.php?success=inserted");
                 } else {
-                    Header("Location: ../view/listarInstructores.php?error=dbError");
+                    Header("Location: ../view/listarInstructores.php?error=dbError&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
                 }
             } else {
-                header("location: ../view/listarInstructores.php?error=numberFormat");
+                header("location: ../view/listarInstructores.php?error=numberFormat&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
             }
         } else {
-            header("location: ../view/listarInstructores.php?error=emptyField");
+            header("location: ../view/listarInstructores.php?error=emptyField&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
         }
     } else {
-        header("location: ../view/listarInstructores.php?error=error");
+        header("location: ../view/listarInstructores.php?error=error&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
     }
 }
 
