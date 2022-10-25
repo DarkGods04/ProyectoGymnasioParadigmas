@@ -12,7 +12,6 @@ if (isset($_POST["insertar"])) {
 
             $tempMonto = str_replace("₡","",$montoServicio);
 
-            
             $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $tempMonto, 1);
             $servicioBusiness = new servicioBusiness();
             $result = $servicioBusiness->insertar($servicio);

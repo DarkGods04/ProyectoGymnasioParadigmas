@@ -159,7 +159,7 @@ include '../business/clienteBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre"></td>
+                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" required></td>
                         <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido"></td>
                         <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido"></td>
                         <td><input type="text" name="correo" id="correo" placeholder="micorreo@ejemplo.com"></td>
@@ -209,8 +209,11 @@ include '../business/clienteBusiness.php';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         } else if ($_GET['error'] == "emailError"){
-                            echo '<center><p style="color: red">Error de formato en correo!</p></center>';
-                        }
+                            echo '<p style="color: red">Error de formato en correo!</p>';
+                        } else if ($_GET['error'] == "nameError"){
+                            echo '<p style="color: red">Error de formato de letra!</p>';
+                        } 
+
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
                     }
