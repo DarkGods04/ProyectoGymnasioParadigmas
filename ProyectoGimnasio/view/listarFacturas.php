@@ -407,7 +407,7 @@ include '../business/servicioBusiness.php';
                         }else if ($_GET['error'] == "unselectedTax") {
                             echo '<center><p style="color: red">Impuesto no seleccionado!</p></center>';
                         }else if($_GET['error'] == "serviceTaxnotSelected"){
-                            echo '<center><p style="color: red">Servicio e impuestos no seleccionados!</p></center>';
+                            echo '<center><p style="color: red">Servicio e impuestos no agregados!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<center><p style="color: green">Transacción realizada!</p></center>';
