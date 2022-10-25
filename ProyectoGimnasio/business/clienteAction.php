@@ -22,21 +22,19 @@ if (isset($_POST['insertarCliente'])) {
                 $tempPeso = str_replace("Kgg", "", $peso);
                 $tempAltura = str_replace("cmm", "", $altura);
 
-                if (filter_var($correo, FILTER,VALIDATE_EMAIL)){
-                    echo("Correo valido");
-                }else{
-                    echo("Correo erroneo");
-                }
-
             if (!is_numeric($nombre) && !is_numeric($apellido1) && !is_numeric($apellido2) && !is_numeric($genero)) {
-                $cliente = new Cliente(0, $nombre, $apellido1 , $apellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
-                $clienteBusiness = new ClienteBusiness();
-                $resultado = $clienteBusiness->insertar($cliente);
+                if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
+                    $cliente = new Cliente(0, $nombre, $apellido1 , $apellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
+                    $clienteBusiness = new ClienteBusiness();
+                    $resultado = $clienteBusiness->insertar($cliente);
 
-                if ($resultado == 1) {
-                    Header("Location: ../view/listarClientes.php?success=inserted");
+                    if ($resultado == 1) {
+                        Header("Location: ../view/listarClientes.php?success=inserted");
+                    } else {
+                        Header("Location: ../view/listarClientes.php?error=dbError");
+                    }
                 } else {
-                    Header("Location: ../view/listarClientes.php?error=dbError");
+                    header("location: ../view/listarClientes.php?error=emailError");
                 }
             } else {
                 header("location: ../view/listarClientes.php?error=numberFormat");

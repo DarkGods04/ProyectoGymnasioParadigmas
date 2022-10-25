@@ -189,16 +189,10 @@ include '../business/clienteBusiness.php';
             varApellido1 = document.getElementById('apellido1').value;
             varApellido2 = document.getElementById('apellido2').value;
 
-            var esValidoCorreo = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test('correo');
-            var esValidoNombre = /^[a-zA-Z\u00c0-\u017F]+$/.test('nombre');
-            var esValidoApellido1 = /^[a-zA-Z\u00c0-\u017F]+$/.test('nombre');
-            var esValidoApellido2 = /^[a-zA-Z\u00c0-\u017F]+$/.test('nombre');
-
-            if ((esValidoCorreo == false) && (esValidoNombre == false) && (esValidoApellido1 == false) && (esValidoApellido2 == false)){
-                alert('Los espacios ingresados son incorrectos');
-            } else {
-                alert('Los espacios ingresados son correctos');
-            }
+            var esValidoCorreo = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test(varCorreo);
+            var esValidoNombre = /^[a-zA-Z\u00c0-\u017F]+$/.test(varNombre);
+            var esValidoApellido1 = /^[a-zA-Z\u00c0-\u017F]+$/.test(varApellido1);
+            var esValidoApellido2 = /^[a-zA-Z\u00c0-\u017F]+$/.test(varApellido2);
         }
     </script>
 
@@ -214,6 +208,8 @@ include '../business/clienteBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "emailError"){
+                            echo '<center><p style="color: red">Error de formato en correo!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
