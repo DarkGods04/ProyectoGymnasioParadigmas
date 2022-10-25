@@ -13,7 +13,7 @@ if (isset($_POST["insertar"])) {
             $tempMonto = str_replace("₡","",$montoServicio);
 
             if (is_numeric($montoServicio)) {
-                $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $tempMonto, 1);
+                $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $montoServicio, 1);
                 $servicioBusiness = new servicioBusiness();
                 $result = $servicioBusiness->insertar($servicio);
 
@@ -63,7 +63,7 @@ if (isset($_POST['actualizar'])) {
             $tempMonto = str_replace("₡","",$montoServicio);
             
             if (is_numeric($montoServicio)) {
-                $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $tempMonto, 1);
+                $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $montoServicio, 1);
                 $servicioBusiness = new servicioBusiness();
                 $result = $servicioBusiness->update($servicio, $anteriorMontoServicio);
 
