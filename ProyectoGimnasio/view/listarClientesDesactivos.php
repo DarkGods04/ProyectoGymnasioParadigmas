@@ -147,53 +147,6 @@ include '../business/clienteBusiness.php';
     </div></br>
 
     <div>
-        <h3>Registrar un nuevo cliente</h3>
-
-        <form method="POST" id="direccionform" action="../business/clienteAction.php">
-            <table border="1">
-                <thead style="text-align: left;">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Primer apellido</th>
-                        <th>Segundo apellido</th>
-                        <th>Correo</th>
-                        <th>Telefono</th>
-                        <th>Fecha nacimiento</th>
-                        <th>Genero</th>
-                        <th>Peso (ejemplo: 80kg)</th>
-                        <th>Altura en formato(1.66)</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <!-- 
-                            <td><input id="nombre" type="text" tabindex="1" /></td><td>aaaaaaaaaaaaaaaaaaaa</td>
-                        -->
-                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre"></td>
-                        <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido"></td>
-                        <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido"></td>
-                        <td><input type="email" name="correo" id="correo" placeholder="micorreo@gmail.com"></td>
-                        <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="9999-9999"></td>
-                        <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento"></td>
-                        <td>
-                            <select name="genero">
-                                <option value="" selected disabled hidden>Género</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </td>
-                        <td><input type="text" class="mascarapeso" name="peso" id="peso" placeholder="99.99kg"></td>
-                        <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="9.99m"></td>
-                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente">Registrar cliente</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
-
-    <div>
         <form method="POST" enctype="multipart/form-data" action="../business/clienteAction.php">
             <tr>
                 <td>
