@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-10-2022 a las 17:34:19
+-- Tiempo de generación: 25-10-2022 a las 23:13:43
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -148,7 +148,8 @@ CREATE TABLE `tbfactura` (
 --
 
 INSERT INTO `tbfactura` (`tbfacturaid`, `tbfacturaclienteid`, `tbfacturainstructorid`, `tbfacturafechapago`, `tbfacturapagomodalidad`, `tbfacturaservicios`, `tbfacturamontobruto`, `tbfacturaimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`) VALUES
-(1, 1, 1, '2022-10-01', '1', '1;2', 6500, 1, 7345, 1);
+(1, 1, 1, '2022-10-01', '1', '1;2', 6500, 1, 7345, 1),
+(2, 3, 2, '2022-10-30', '2', '1;2', 5800, 2, 6380, 1);
 
 -- --------------------------------------------------------
 
@@ -310,7 +311,7 @@ CREATE TABLE `tbservicio` (
 INSERT INTO `tbservicio` (`tbservicioid`, `tbservicionombre`, `tbserviciodescripcion`, `tbservicioactivo`) VALUES
 (1, 'Spinning', 'Cardio haciendo spinning', 1),
 (2, 'Zumba', 'Cardio haciendo zumba', 1),
-(3, 'Boxeo', 'Clases de boxeo', 1);
+(3, 'Yoga', 'Meditación mediante el yoga', 1);
 
 -- --------------------------------------------------------
 
@@ -320,7 +321,8 @@ INSERT INTO `tbservicio` (`tbservicioid`, `tbservicionombre`, `tbserviciodescrip
 
 CREATE TABLE `tbserviciotarifa` (
   `tbserviciotarifaid` int(11) NOT NULL,
-  `tbserviciotarifaservicioid` int(11) NOT NULL,
+  `tbservicioid` int(11) NOT NULL,
+  `tbserviciotarifafechamodificacion` date NOT NULL,
   `tbserviciotarifamonto` float NOT NULL,
   `tbserviciotarifaactivo` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -329,10 +331,14 @@ CREATE TABLE `tbserviciotarifa` (
 -- Volcado de datos para la tabla `tbserviciotarifa`
 --
 
-INSERT INTO `tbserviciotarifa` (`tbserviciotarifaid`, `tbserviciotarifaservicioid`, `tbserviciotarifamonto`, `tbserviciotarifaactivo`) VALUES
-(1, 1, 3000, 1),
-(2, 2, 3500, 1),
-(3, 3, 4000, 1);
+INSERT INTO `tbserviciotarifa` (`tbserviciotarifaid`, `tbservicioid`, `tbserviciotarifafechamodificacion`, `tbserviciotarifamonto`, `tbserviciotarifaactivo`) VALUES
+(1, 1, '2022-10-25', 2500, 0),
+(2, 1, '2022-10-25', 2600, 1),
+(3, 2, '2022-10-25', 3000, 0),
+(4, 3, '2022-10-25', 3200, 0),
+(5, 2, '2022-10-25', 3200, 1),
+(6, 3, '2022-10-25', 3500, 0),
+(7, 3, '2022-10-25', 3600, 1);
 
 --
 -- Índices para tablas volcadas
