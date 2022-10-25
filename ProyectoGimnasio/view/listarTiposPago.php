@@ -77,7 +77,7 @@ include 'header.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" name="nombrePagoTipo" placeholder="Modalidad"></td>
+                        <td><input type="text" name="nombrePagoTipo" placeholder="Método de pago"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>
                 </tbody>
