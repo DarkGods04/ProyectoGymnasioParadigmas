@@ -57,13 +57,8 @@ if (isset($_POST['actualizar'])) {
         $montoServicio = $_POST["montoServicio"];
 
         if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
-<<<<<<< HEAD
-            $tempMonto = str_replace("₡","",$montoServicio);
-
-=======
             //$tempMonto = str_replace("₡","",$montoServicio);
-            
->>>>>>> main
+
             if (is_numeric($montoServicio)) {
                 $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $montoServicio, 1);
                 $servicioBusiness = new servicioBusiness();
