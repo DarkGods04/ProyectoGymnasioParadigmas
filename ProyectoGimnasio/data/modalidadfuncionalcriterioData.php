@@ -43,7 +43,6 @@ class ModalidadfuncionalcriterioData extends Data {
         $rangoMinimo = $modalidadfuncionalcriterio->getRangoValorMinimoTBModalidadfuncionalcriterio();
         
 
-        echo '<script>alert("Alfinnn")</script>';
        
         $queryUpdate = "UPDATE tbmodalidadfuncionalcriterio 
                         SET tbmodalidadfuncionalcriteriomodalidadfuncionalid='$idmodalidadfuncional',
