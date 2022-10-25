@@ -49,15 +49,6 @@
     </div>
 
     <div>
-        <a href="../view/listarModalidadFuncional.php" style="text-decoration: none; color: blue; font-size: 150%;">- Modalidades funcionales</a>
-    </div>
-
-    <div>
-        <a href="../view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de modalidades funcionales</a>
-    </div>
-
-<<<<<<< HEAD
-    <div>
         <a href="../view/listarModalidadFuncional.php" style="text-decoration: none; color: blue; font-size: 150%;">- Modalidades Funcionales</a>
     </div>
 
@@ -65,12 +56,7 @@
         <a href="../view/listarModalidadfuncionalcriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de Modalidad Funcional</a>
     </div>
 
-    
 
-    
-=======
-</body>
->>>>>>> c866f3d3efd21cf5241cbcd127390c2904539b99
 </body>
 
 </html>
