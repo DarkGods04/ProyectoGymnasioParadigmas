@@ -42,8 +42,7 @@ if (isset($_POST['añadirServicios'])) {
                     $sumaMonto = $sumaMonto + $row->getMontoTBServicio();
                 }
             }
-        } 
-        $_SESSION["user"] = $user;
+        }
         header("Location: ../view/listarFacturas.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult");
         exit();
     } else {
