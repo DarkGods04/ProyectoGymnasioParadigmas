@@ -101,8 +101,8 @@ include '../business/impuestoVentaBusiness.php';
                     <th>Acción</th>
                 </thead>
                 <tbody>
-                    <td><input class="mascaraimpuesto" type="text" name="valor" placeholder="Valor"></td>
-                    <td><input type="text" name="descripcion" placeholder="Descripcion"></td>
+                    <td><input class="mascaraimpuesto" type="text" name="valor" placeholder="Valor porcentual"></td>
+                    <td><input type="text" name="descripcion" placeholder="Descripción"></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                 </tbody>
             </table>
