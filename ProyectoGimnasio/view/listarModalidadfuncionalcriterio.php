@@ -94,18 +94,20 @@ include '../business/ModalidadFuncionalBusiness.php';
                             echo '<td>' . $row->getIdTBModalidadfuncionalcriterio() . '</td>';
 
                         ?>
-                        <td>
+                       <td>
 
                         <?php
                        $modalidadFuncionalBusiness = new ModalidadFuncionalBusiness();
                         $modalidadFuncionales = $modalidadFuncionalBusiness->obtener();
                         ?>
                         <select name="idModalidadfuncional">
-                        <?php foreach($modalidadFuncionales as $row1){ 
-                           if($row1->getIdTBModalidadFuncional() == $row->getIdModalidadfuncionalTBModalidadfuncionalcriterio()){
-                              echo  '  <option value="' .$row1->getIdTBModalidadFuncional() .'" selected disabled hidden>'.$row1->getNombreTBModalidadFuncional().'</option>';
+                        <?php foreach($modalidadFuncionales as $rowTemp){ 
+                        if($rowTemp->getIdTBModalidadFuncional() == $row->getIdModalidadfuncionalTBModalidadfuncionalcriterio()){
+                              echo '<option value="' .$rowTemp->getIdTBModalidadFuncional() .'">'.$rowTemp->getNombreTBModalidadFuncional().'</option>';
                            }
-                           echo  '  <option value="' .$row1->getIdTBModalidadFuncional() .'">'.$row1->getNombreTBModalidadFuncional().'</option>';
+                        } ?>
+                        <?php foreach($modalidadFuncionales as $row1){ 
+                           echo '<option value="' .$row1->getIdTBModalidadFuncional() .'">'.$row1->getNombreTBModalidadFuncional().'</option>';
                              } ?>
                            </select>
                        </td>

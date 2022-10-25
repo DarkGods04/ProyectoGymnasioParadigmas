@@ -10,7 +10,8 @@ include 'header.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tipos Pago</title>
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <title>Métodos de pago</title>
     <script>
         function confirmarAccionModificar() {
             return confirm("¿Está seguro de que desea modificar esta modalidad de pago?");
@@ -20,29 +21,10 @@ include 'header.php';
             return confirm("¿Está seguro de que desea eliminar esta modalidad de pago?");
         }
     </script>
-    <style type="text/css">
-        ul {
-            list-style-type: none;
-            width: 300px;
-            height: auto;
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        li {
-            background-color: #EEEEEE;
-            border-top: 1px solid #9e9e9e;
-            padding: 5px;
-            width: 100%;
-            float: left;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
-    <h1>Tipos de Pago</h1>
+    <h1>Métodos de pago</h1>
 
     <div>
         <?php 
@@ -53,7 +35,7 @@ include 'header.php';
             <thead style="text-align: center;">
                 <tr>
                     <th>ID</th>
-                    <th>Modalidad Pago</th>
+                    <th>Método de pago</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -83,20 +65,20 @@ include 'header.php';
     </div></br>
 
     <div>
-        <h3>Registrar nueva modalidad</h3>
+        <h3>Registrar un nuevo método de pago</h3>
         
         <form method="POST" id="direccionform" action="../business/pagoTipoAction.php">
             <table border="1">
                 <thead style="text-align: left;">
                     <tr>
-                        <th>Modalidad Pago</th>
+                        <th>Método de pago</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td><input type="text" name="nombrePagoTipo" placeholder="Modalidad"></td>
-                        <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar Modalidad</button></td>
+                        <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>
                 </tbody>
             </table>

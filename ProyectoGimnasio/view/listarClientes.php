@@ -122,7 +122,7 @@ include '../business/clienteBusiness.php';
                             echo '<td><input type="text" class="mascarapeso" name="peso" id="peso" value="' . $row->getPesoTBCliente() .  '"/></td>';
                             echo '<td><input type="text" class="mascaraaltura" name="altura" id="altura" value="' . $row->getAlturaTBCliente() .  '"/></td>';
                             echo '<td><input type="submit" name="actualizarCliente" id="actualizarCliente" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
-                        
+
                             echo '<input type="submit" name="eliminarCliente" id="eliminarCliente" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
                             echo '</tr>';
                             echo '</form>';
@@ -141,7 +141,7 @@ include '../business/clienteBusiness.php';
     <div>
         <h3>Registrar un nuevo cliente</h3>
 
-        <form method="POST" id="direccionform" action="../business/clienteAction.php">
+        <form method="POST" id="formcliente" action="../business/clienteAction.php">
             <table border="1">
                 <thead style="text-align: left;">
                     <tr>
@@ -159,26 +159,28 @@ include '../business/clienteBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" required></td>
-                        <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido"></td>
-                        <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido"></td>
-                        <td><input type="text" name="correo" id="correo" placeholder="micorreo@ejemplo.com"></td>
-                        <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="0000-0000"></td>
-                        <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento"></td>
+                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"  ></td>
+                        <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido"  value="<?php if(isset($_GET['apellido1'])){ echo $_GET['apellido1']; }?>" ></td>
+                        <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido"  value="<?php if(isset($_GET['apellido2'])){ echo $_GET['apellido2']; }?>" ></td>
+                        
+                        <td><input type="email" name="correo" id="correo" placeholder="micorreo@gmail.com"  value="<?php if(isset($_GET['correo'])){ echo $_GET['correo']; }?>" ></td>
+                        <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="0000-0000"  value="<?php if(isset($_GET['telefono'])){ echo $_GET['telefono']; }?>" ></td>
+                        <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento"   value="<?php if(isset($_GET['fechaNacimiento'])){ echo $_GET['fechaNacimiento']; }?>" ></td>
                         <td>
                             <select name="genero">
-                                <option value="" selected disabled hidden>Género</option>
+                                <option value="<?php if(isset($_GET['genero'])){ echo $_GET['genero']; }?>"><?php if(isset($_GET['genero'])){ echo $_GET['genero']; }?></option>
                                 <option value="Masculino">Masculino</option>
                                 <option value="Femenino">Femenino</option>
                                 <option value="Otro">Otro</option>
                             </select>
                         </td>
-                        <td><input type="text" class="mascarapeso" name="peso" id="peso" placeholder="00.00kg"></td>
-                        <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="0.00m"></td>
-                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick="validarEspacios()">Registrar cliente</button></td>
+                        <td><input type="text" class="mascarapeso" name="peso" id="peso" placeholder="00.00kg"  value="<?php if(isset($_GET['peso'])){ echo $_GET['peso']; }?>" ></td>
+                        <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="0.00m"  value="<?php if(isset($_GET['altura'])){ echo $_GET['altura']; }?>" ></td>
+                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick=""validarEspacios()>Registrar cliente</button></td>
                     </tr>
                 </tbody>
             </table>
+ 
         </form>
     </div>    
 

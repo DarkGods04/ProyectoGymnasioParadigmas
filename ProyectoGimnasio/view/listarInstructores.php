@@ -122,14 +122,14 @@ include '../business/instructorBusiness.php';
                 </thead>
                 <tbody>
                 <tr>
-                        <td><input type="text" class="mascaranombre" name="nombre" placeholder="Nombre"></td>
-                        <td><input type="text" class="mascaranombre" name="apellido" placeholder="Apellido(s)"></td>
-                        <td><input type="email" name="correo" placeholder="micorreo@gmail.com"></td>
-                        <td><input type="tel" class="mascaratelefono" name="telefono" placeholder="Número de teléfono"></td>
-                        <td><input type="text" class="mascaranumcuenta" name="numcuenta" placeholder="Número de cuenta bancaria"></td>
+                        <td><input type="text" class="mascaranombre" name="nombre" placeholder="Nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"></td>
+                        <td><input type="text" class="mascaranombre" name="apellido" placeholder="Apellido(s)" value="<?php if(isset($_GET['apellido'])){ echo $_GET['apellido']; }?>"></td>
+                        <td><input type="email" name="correo" placeholder="micorreo@gmail.com" value="<?php if(isset($_GET['correo'])){ echo $_GET['correo']; }?>"></td>
+                        <td><input type="tel" class="mascaratelefono" name="telefono" placeholder="Número de teléfono" value="<?php if(isset($_GET['telefono'])){ echo $_GET['telefono']; }?>"></td>
+                        <td><input type="text" class="mascaranumcuenta" name="numcuenta" placeholder="Número de cuenta bancaria" value="<?php if(isset($_GET['numcuenta'])){ echo $_GET['numcuenta']; }?>"></td>
                         <td>
                             <select name="tipoinstructor">
-                                <option value="" selected disabled hidden>Tipo de instructor</option>
+                            <option value="<?php if(isset($_GET['tipoinstructor'])){ echo $_GET['tipoinstructor']; }?>"><?php if(isset($_GET['tipoinstructor'])){ echo $_GET['tipoinstructor']; }?></option>
                                 <option value="Entrenador personal">Entrenador personal</option>
                                 <option value="Fisioterapeuta">Fisioterapeuta</option>
                                 <option value="Nutricionista">Nutricionista</option>

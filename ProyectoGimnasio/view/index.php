@@ -15,14 +15,25 @@
     <div>
         <a href="../view/listarInstructores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Instructores</a>
     </div>
+
     <div>
         <a href="../view/listarClientes.php" style="text-decoration: none; color: blue; font-size: 150%;">- Clientes</a>
     </div>
+
+    <div>
+        <a href="../view/listarClientePeso.php" style="text-decoration: none; color: blue; font-size: 150%;">- Clientes pesos</a>
+    </div>
+
     <div>
         <a href="../view/menuListarActivos.php" style="text-decoration: none; color: blue; font-size: 150%;">- Activos</a>
     </div>
+
     <div>
-        <a href="../view/listarClientePeso.php" style="text-decoration: none; color: blue; font-size: 150%;">- Cliente peso</a>
+        <a href="../view/listarPagoModalidad.php" style="text-decoration: none; color: blue; font-size: 150%;">- Periodos de pago</a>
+    </div>
+
+    <div>
+        <a href="../view/listarTiposPago.php" style="text-decoration: none; color: blue; font-size: 150%;">- Métodos de pago</a>
     </div>
 
     <div>
@@ -36,14 +47,6 @@
     <div>
         <a href="../view/listarFacturas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Facturas</a>
     </div>
-    
-    <div>
-        <a href="../view/listarPagoModalidad.php" style="text-decoration: none; color: blue; font-size: 150%;">- Pago modalidad</a>
-    </div>
-
-    <div>
-        <a href="../view/listarTiposPago.php" style="text-decoration: none; color: blue; font-size: 150%;">- Tipos Pago</a>
-    </div>
 
     <div>
         <a href="../view/listarModalidadFuncional.php" style="text-decoration: none; color: blue; font-size: 150%;">- Modalidades Funcionales</a>
@@ -52,6 +55,8 @@
     <div>
         <a href="../view/listarModalidadfuncionalcriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de Modalidad Funcional</a>
     </div>
+
+
 </body>
 
 </html>
