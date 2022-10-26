@@ -16,17 +16,18 @@ if (isset($_POST["insertar"])) {
                 $servicioBusiness = new servicioBusiness();
                 $result = $servicioBusiness->insertar($servicio);
 
-            if ($result == 1) {
-                header("location: ../view/listarServicios.php?success=updated");
-            } else {
-                header("location: ../view/listarServicios.php?error=dbError");
-            }
+                if ($result == 1) {
+                    header("location: ../view/listarServicios.php?success=updated");
+                } else {
+                    header("location: ../view/listarServicios.php?error=dbError");
+                }
             
+            } else {
+                header("location: ../view/listarServicios.php?error=emptyField");
+            }
         } else {
-            header("location: ../view/listarServicios.php?error=emptyField");
+            header("location: ../view/listarServicios.php?error=error");
         }
-    } else {
-        header("location: ../view/listarServicios.php?error=error");
     }
 }
 
