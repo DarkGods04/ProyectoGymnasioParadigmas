@@ -62,7 +62,7 @@ if (isset($_POST['actualizar'])) {
             if (is_numeric($montoServicio)) {
                 $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $montoServicio, 1);
                 $servicioBusiness = new servicioBusiness();
-                $result = $servicioBusiness->update($servicio, $anteriorMontoServicio)
+                $result = $servicioBusiness->update($servicio, $anteriorMontoServicio);
 
             if ($result == 1) {
                 header("location: ../view/listarServicios.php?success=updated");
@@ -76,4 +76,5 @@ if (isset($_POST['actualizar'])) {
     } else {
         header("location: ../view/listarServicios.php?error=error");
     }
+}
 }
