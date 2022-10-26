@@ -14,6 +14,7 @@ include '../business/servicioBusiness.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Facturas</title>
     <script type="text/javascript">
         function confirmarAccionModificar() {
@@ -24,25 +25,6 @@ include '../business/servicioBusiness.php';
             return confirm("¿Está seguro de que desea eliminar este cliente?");
         }
     </script>
-    <style type="text/css">
-        ul {
-            list-style-type: none;
-            width: 300px;
-            height: auto;
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        li {
-            background-color: #EEEEEE;
-            border-top: 1px solid #9e9e9e;
-            padding: 5px;
-            width: 100%;
-            float: left;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
@@ -82,10 +64,10 @@ include '../business/servicioBusiness.php';
                         <th>Fecha de pago</th>
                         <th>Modalidad de pago</th>
                         <th>Servicios</th>
-                        <th>Monto Bruto</th>
-                        <th>Impuesto Venta</th>
-                        <th>Monto Neto</th>
-                        <th>Acciones</th>
+                        <th>Monto bruto</th>
+                        <th>Impuesto de venta</th>
+                        <th>Monto neto</th>
+                        <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -194,14 +176,14 @@ include '../business/servicioBusiness.php';
             <table border="1">
                 <thead style="text-align: left;">
                     <tr>
-                        <th>Seleccione el cliente</th>
-                        <th>Seleccione el instructor</th>
-                        <th>Seleccione la fecha de pago</th>
+                        <th>Cliente</th>
+                        <th>Instructor</th>
+                        <th>Fecha de pago</th>
                         <th>Modalidad de pago</th>
-                        <th>Seleccione los Servicios</th>
-                        <th>Monto Bruto</th>
-                        <th>Seleccione el Impuesto Venta</th>
-                        <th>Monto Neto</th>
+                        <th>Servicios</th>
+                        <th>Monto bruto</th>
+                        <th>Impuesto de venta</th>
+                        <th>Monto neto</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
