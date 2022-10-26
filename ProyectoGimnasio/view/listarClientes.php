@@ -22,44 +22,11 @@ include '../business/clienteBusiness.php';
         function confirmarAccionRecuperar() {
             return confirm("¿Está seguro de que desea reactivar este cliente?");
         }
+
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
-
-    <script>
-        function validarCorreo(correo) {
-            var cadena = /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|yahoo|live|gmail|est.una|una)\.(?:|com|es|ac.cr|cr)+$/.test(campo.value);
-            var esValido = cadena.test(correo);
-            if (esValido == false) {
-                alert('El correo ingresado es invalido');
-            }
-        }
-
-        function validarLetras(nombre) {
-            var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-            var esValido = cadena.test(nombre);
-            if (esValido == false) {
-                alert('El nombre ingresado es invalido');
-            }
-        }
-
-        function validarLetras(apellido1) {
-            var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-            var esValido = cadena.test(apellido1);
-            if (esValido == false) {
-                alert('El primer apellido ingresado es invalido');
-            }
-        }
-
-        function validarLetras(apellido2) {
-            var cadena = /^[a-zA-ZÀ-ÿ\s]{1,40}$/;
-            var esValido = cadena.test(apellido2);
-            if (esValido == false) {
-                alert('El correo ingresado es invalido');
-            }
-        }
-    </script>
 
     <style type="text/css">
         ul {
@@ -97,6 +64,10 @@ include '../business/clienteBusiness.php';
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
+
+    <div>
+        <a href="listarClientesDesactivos.php" style="text-decoration: none; color: blue; font-size: 150%;">Recuperar Clientes</a>
+    </div>
 
     <div>
         <?php
@@ -188,11 +159,11 @@ include '../business/clienteBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" onclick="validarCorreo(document.getElementByID('nombre').value)" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"  ></td>
-                        <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido" onclick="validarLetras(document.getElementByID('apellido1').value)"  value="<?php if(isset($_GET['apellido1'])){ echo $_GET['apellido1']; }?>" ></td>
-                        <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido" onclick="validarCorreo(document.getElementByID('apellido2').value)"  value="<?php if(isset($_GET['apellido2'])){ echo $_GET['apellido2']; }?>" ></td>
+                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"  ></td>
+                        <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido"  value="<?php if(isset($_GET['apellido1'])){ echo $_GET['apellido1']; }?>" ></td>
+                        <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido"  value="<?php if(isset($_GET['apellido2'])){ echo $_GET['apellido2']; }?>" ></td>
                         
-                        <td><input type="email" name="correo" id="correo" placeholder="micorreo@gmail.com" onclick="validarCorreo(document.getElementByID('correo').value)"  value="<?php if(isset($_GET['correo'])){ echo $_GET['correo']; }?>" ></td>
+                        <td><input type="email" name="correo" id="correo" placeholder="micorreo@gmail.com"  value="<?php if(isset($_GET['correo'])){ echo $_GET['correo']; }?>" ></td>
                         <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="0000-0000"  value="<?php if(isset($_GET['telefono'])){ echo $_GET['telefono']; }?>" ></td>
                         <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento"   value="<?php if(isset($_GET['fechaNacimiento'])){ echo $_GET['fechaNacimiento']; }?>" ></td>
                         <td>
@@ -205,13 +176,27 @@ include '../business/clienteBusiness.php';
                         </td>
                         <td><input type="text" class="mascarapeso" name="peso" id="peso" placeholder="00.00kg"  value="<?php if(isset($_GET['peso'])){ echo $_GET['peso']; }?>" ></td>
                         <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="0.00m"  value="<?php if(isset($_GET['altura'])){ echo $_GET['altura']; }?>" ></td>
-                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente">Registrar cliente</button></td>
+                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick=""validarEspacios()>Registrar cliente</button></td>
                     </tr>
                 </tbody>
             </table>
  
         </form>
-    </div>
+    </div>    
+
+    <script>
+        function validarEspacios(){
+            varCorreo = document.getElementById('correo').value;
+            varNombre = document.getElementById('nombre').value;
+            varApellido1 = document.getElementById('apellido1').value;
+            varApellido2 = document.getElementById('apellido2').value;
+
+            var esValidoCorreo = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test(varCorreo);
+            var esValidoNombre = /^[a-zA-Z\u00c0-\u017F]+$/.test(varNombre);
+            var esValidoApellido1 = /^[a-zA-Z\u00c0-\u017F]+$/.test(varApellido1);
+            var esValidoApellido2 = /^[a-zA-Z\u00c0-\u017F]+$/.test(varApellido2);
+        }
+    </script>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/clienteAction.php">
@@ -225,7 +210,13 @@ include '../business/clienteBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
-                        }
+                        } else if ($_GET['error'] == "emailError"){
+                            echo '<p style="color: red">Error de formato en correo!</p>';
+                        } 
+                        /*else if ($_GET['error'] == "nameError"){
+                            echo '<p style="color: red">Error de formato de letra!</p>';
+                        } */
+
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
                     }

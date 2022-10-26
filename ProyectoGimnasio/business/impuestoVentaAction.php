@@ -11,7 +11,6 @@ if (isset($_POST['insertar'])) {
 
             $tempValor = str_replace("%", "", $valor);
 
-           
             $impuestoVenta = new ImpuestoVenta(0, $tempValor, $descripcion, 1);
             $impuestoBusiness = new ImpuestoVentaBusiness();
             $resultado = $impuestoBusiness->insertar($impuestoVenta);
@@ -59,7 +58,7 @@ if (isset($_POST['actualizar'])) {
         if (strlen($valor) > 0 && strlen($descripcion) > 0 ) {
             $tempValor = str_replace("%", "", $valor);
 
-            if (!is_numeric($descripcion) && is_numeric($valor)) {
+            if (!is_numeric($descripcion)) {
                 $impuestoVenta = new ImpuestoVenta($id, $tempValor, $descripcion, 1);
                 $impuestoBusiness = new ImpuestoVentaBusiness();
                 $resultado = $impuestoBusiness->update($impuestoVenta);
