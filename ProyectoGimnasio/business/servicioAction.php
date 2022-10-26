@@ -52,31 +52,31 @@ if (isset($_POST['eliminar'])) {
 if (isset($_POST['actualizar'])) {
     if (isset($_POST['idServicio']) && isset($_POST['nombreServicio']) && isset($_POST['descripcionServicio']) && isset($_POST['montoServicio'])) {
 
-        $anteriorMontoServicio = $_POST['anteriorMontoServicio'];
-        $id = $_POST['idServicio'];
-        $nombreServicio = $_POST['nombreServicio'];
-        $descripcionServicio = $_POST['descripcionServicio'];
-        $montoServicio = $_POST["montoServicio"];
+            $anteriorMontoServicio = $_POST['anteriorMontoServicio'];
+            $id = $_POST['idServicio'];
+            $nombreServicio = $_POST['nombreServicio'];
+            $descripcionServicio = $_POST['descripcionServicio'];
+            $montoServicio = $_POST["montoServicio"];
 
-        if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
-            //$tempMonto = str_replace("₡","",$montoServicio);
-            
-            if (is_numeric($montoServicio)) {
-                $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $montoServicio, 1);
-                $servicioBusiness = new servicioBusiness();
-                $result = $servicioBusiness->update($servicio, $anteriorMontoServicio);
+            if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
+                //$tempMonto = str_replace("₡","",$montoServicio);
 
-                if ($result == 1) {
-                    header("location: ../view/listarServicios.php?success=updated");
+                if (is_numeric($montoServicio)) {
+                    $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $montoServicio, 1);
+                    $servicioBusiness = new servicioBusiness();
+                    $result = $servicioBusiness->update($servicio, $anteriorMontoServicio);
+
+                    if ($result == 1) {
+                        header("location: ../view/listarServicios.php?success=updated");
+                    } else {
+                        header("location: ../view/listarServicios.php?error=dbError");
+                    }
                 } else {
-                    header("location: ../view/listarServicios.php?error=dbError");
+                    header("location: ../view/listarServicios.php?error=numberFormat");
                 }
             } else {
-                header("location: ../view/listarServicios.php?error=numberFormat");
+                header("location: ../view/listarServicios.php?error=emptyField");
             }
-        } else {
-            header("location: ../view/listarServicios.php?error=emptyField");
-        }
     } else {
         header("location: ../view/listarServicios.php?error=error");
     }
