@@ -1,6 +1,6 @@
 <?php
-include '../business/modalidadfuncionalcriterioBusiness.php';
-include '../business/ModalidadFuncionalBusiness.php';
+include '../business/modalidadFuncionalCriterioBusiness.php';
+include '../business/modalidadFuncionalBusiness.php';
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ include '../business/ModalidadFuncionalBusiness.php';
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listaModalidadfuncionalcriterio"></ul>
+            <ul id="listaModalidadFuncionalCriterio"></ul>
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
@@ -47,7 +47,7 @@ include '../business/ModalidadFuncionalBusiness.php';
         }
         $campo = $_POST['campo'];
 
-        $modalidadfuncionalcriterioBusiness = new ModalidadfuncionalcriterioBusiness();
+        $modalidadfuncionalcriterioBusiness = new ModalidadFuncionalCriterioBusiness();
         $modalidadfuncionalcriterios = $modalidadfuncionalcriterioBusiness->buscar($campo);
         if (!empty($modalidadfuncionalcriterios)) {
         ?>
@@ -116,7 +116,7 @@ include '../business/ModalidadFuncionalBusiness.php';
     </div><br>
 
     <div>
-        <h3>Registrar un nuevo criterio funcional</h3>
+        <h3>Registrar un nuevo criterio para modalidad funcional</h3>
 
         <form method="POST" id="direccionform" action="../business/modalidadfuncionalcriterioAction.php">
             <table border="1">

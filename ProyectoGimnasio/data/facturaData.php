@@ -1,5 +1,4 @@
 <?php
-
 include_once 'data.php';
 include '../domain/factura.php';
 
@@ -80,7 +79,7 @@ class FacturaData extends Data{
                 $row['tbclienteid'],
                 $row['tbinstructorid'],
                 $row['tbfacturafechapago'],
-                $row['tbcatalogopagoperidiocidadnombre'],
+                $row['tbcatalogopagoperidiocidadid'],
                 $row['tbservicioid'],
                 $row['tbfacturamontobruto'],
                 $row['tbimpuestoventaid'],
@@ -116,7 +115,7 @@ class FacturaData extends Data{
             }
         }
 
-        $querySelectModalidad = "SELECT * FROM tbcatalogopagoperidiocidad Where tbcatalogopagoperidiocidadnombre LIKE '%$palabra%';";
+        $querySelectModalidad = "SELECT * FROM tbcatalogopagoperidiocidad Where tbcatalogopagoperidiocidadid LIKE '%$palabra%';";
         $resultModalidad = mysqli_query($conn, $querySelectModalidad);
         $idModalidad = 0;
         while ($rowModalidad = mysqli_fetch_array($resultModalidad)) {
@@ -144,7 +143,7 @@ class FacturaData extends Data{
             }
         }
 
-        $querySelect = "SELECT * FROM tbfactura WHERE tbfacturaid LIKE '%$palabra%' OR tbclienteid LIKE '%$idCliente%' OR tbinstructorid LIKE '%$idInstructor%' OR tbfacturafechapago LIKE '%$palabra%' OR tbcatalogopagoperidiocidadnombre LIKE '%$idModalidad%' OR tbservicioid LIKE '%$idServicio%' OR tbimpuestoventaid LIKE '%$idImpuesto%' OR tbfacturamontobruto LIKE '%$palabra%' OR tbfacturamontoneto LIKE '%$palabra%';";
+        $querySelect = "SELECT * FROM tbfactura WHERE tbfacturaid LIKE '%$palabra%' OR tbclienteid LIKE '%$idCliente%' OR tbinstructorid LIKE '%$idInstructor%' OR tbfacturafechapago LIKE '%$palabra%' OR tbcatalogopagoperidiocidadid LIKE '%$idModalidad%' OR tbservicioid LIKE '%$idServicio%' OR tbimpuestoventaid LIKE '%$idImpuesto%' OR tbfacturamontobruto LIKE '%$palabra%' OR tbfacturamontoneto LIKE '%$palabra%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         $Facturas = [];
@@ -155,7 +154,7 @@ class FacturaData extends Data{
                     $row['tbclienteid'],
                     $row['tbinstructorid'],
                     $row['tbfacturafechapago'],
-                    $row['tbcatalogopagoperidiocidadnombre'],
+                    $row['tbcatalogopagoperidiocidadid'],
                     $row['tbservicioid'],
                     $row['tbfacturamontobruto'],
                     $row['tbimpuestoventaid'],
