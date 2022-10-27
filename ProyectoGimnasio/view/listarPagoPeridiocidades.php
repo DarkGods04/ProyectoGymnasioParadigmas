@@ -1,5 +1,5 @@
 <?php
-include '../business/pagoModalidadBusiness.php';
+include '../business/pagoPeridiocidadBusiness.php';
 ?>
 
 <!DOCTYPE html>
@@ -8,50 +8,30 @@ include '../business/pagoModalidadBusiness.php';
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
-    <title>Pago modalidad </title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">    
+    <title>Peridiocidades de pago</title>
    <script>
         function confirmarAccionModificar() {
-            return confirm("¿Está seguro de que desea modificar esta modalidad de pago?");
+            return confirm("¿Está seguro de que desea modificar esta peridiocidad de pago?");
         }
 
         function confirmarAccionEliminar() {
-            return confirm("¿Está seguro de que desea eliminar esta modalidad de pago?");
+            return confirm("¿Está seguro de que desea eliminar esta peridiocidad de pago?");
         }
     </script>
-
-    <style type="text/css">
-        ul {
-            list-style-type: none;
-            width: 300px;
-            height: auto;
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        li {
-            background-color: #EEEEEE;
-            border-top: 1px solid #9e9e9e;
-            padding: 5px;
-            width: 100%;
-            float: left;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
     <?php include 'header.php';?>
 
-    <h1>Pago modalidad</h1>
+    <h1>Peridiocidades de pago (falta autocompletado)</h1>
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listarModalidadPago"></ul>
+            <ul id="listarPagoPeridiocidad"></ul>
         </div>
     </form></br></br>
 
@@ -59,22 +39,18 @@ include '../business/pagoModalidadBusiness.php';
 
     <div>        
         <?php
-
        if (!isset($_POST['campo'])) {
             $_POST['campo'] = "";
             $campo = $_POST['campo'];
         }
-
         $campo = $_POST['campo'];
-        $pagoModalidadBusiness = new PagoModalidadBusiness();
-        $pagoModalidad = $pagoModalidadBusiness->buscar($campo);
+        $pagoPeridiocidadBusiness = new PagoPeridiocidadBusiness();
+        $pagoPeridiocidades = $pagoPeridiocidadBusiness->buscar($campo);
 
-        if (!empty($pagoModalidad)) {
+        if (!empty($pagoPeridiocidades)) {
         ?>
             <table border="1">
-
                 <thead style="text-align: center;">
-
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
@@ -85,15 +61,16 @@ include '../business/pagoModalidadBusiness.php';
 
                 <tbody>
                     <?php
-                    foreach ($pagoModalidad as $row) {
-                        if ($row->getActivoTBpagoModalidad() == 1) {
+                    foreach ($pagoPeridiocidades as $row) {
+                        if ($row->getActivoTBPagoPeridiocidad() == 1) {
 
-                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/pagoModalidadAction.php">';
+                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/pagoPeridiocidadAction.php">';
                             echo '<tr>';
-                            echo '<input type="hidden" name="idPagoModalidad" id="id" value="' . $row->getIdTBpagoModalidad() . '"/>';
-                            echo '<td>' . $row->getIdTBpagoModalidad() . '</td>';
-                            echo '<td><input type="text" name="nombreModalidad" id="nombreModalidad" value="' . $row->getNombreTBpagoModalidad() . '"/></td>';
-                            echo '<td><input type="text" name="descripcionModalidad" id="descripcionModalidad" value="' . $row->getDescripcionTBpagoModalidad() . '"/></td>';
+                            echo '<input type="hidden" name="idPagoPeridiocidad" id="idPagoPeridiocidad" value="' . $row->getIdTBPagoPeridiocidad() . '"/>';
+                            echo '<td>' . $row->getIdTBPagoPeridiocidad() . '</td>';
+                            echo '<td><input type="text" name="nombrePagoPeridiocidad" id="nombrePagoPeridiocidad" value="' . $row->getNombreTBPagoPeridiocidad() . '"/></td>';
+                            echo '<td><input type="text" name="descripcionPagoPeridiocidad" id="descripcionPagoPeridiocidad" value="' . $row->getDescripcionTBPagoPeridiocidad() . '"/></td>';
+
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
                             echo '<input type="submit" name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
                             echo '</tr>';
@@ -105,15 +82,15 @@ include '../business/pagoModalidadBusiness.php';
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No hay modalidades de pago registrados!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron peridiocidades de pago!</p>';
         }
         ?>
     </div></br>
 
     <div>
-        <h3>Registrar un nuevo tipo de pago modalidad </h3>
+        <h3>Registrar una nueva peridiocidad de pago </h3>
 
-        <form method="POST" id="direccionform" action="../business/pagoModalidadAction.php">
+        <form method="POST" id="direccionform" action="../business/pagoPeridiocidadAction.php">
             <table border="1">
                 <thead style="text-align: left;">
 
@@ -125,9 +102,9 @@ include '../business/pagoModalidadBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                    <td><input type="text" name="nombre" placeholder="Nombre"></td>
-                        <td><input type="text" name="descripcion" placeholder="Descripción"></td>
-                        <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar pago modalidad</button></td>
+                    <td><input type="text" name="nombrePagoPeridiocidad" placeholder="Nombre"></td>
+                        <td><input type="text" name="descripcionPagoPeridiocidad" placeholder="Descripción"></td>
+                        <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -135,7 +112,7 @@ include '../business/pagoModalidadBusiness.php';
     </div>
 
     <div>
-        <form method="POST" enctype="multipart/form-data" action="../business/pagoModalidadAction.php">
+        <form method="POST" enctype="multipart/form-data" action="../business/pagoPeridiocidadAction.php">
             <tr>
                 <td>
                     <?php

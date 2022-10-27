@@ -131,7 +131,7 @@
                     <td><input type="text" name="descripcion" class="form-control" placeholder="Descripción del activo" autofocus></td>
                     <td><input type="text" class="mascaracantidad" name="cantidad" class="form-control" placeholder="Cantidad" autofocus></td>
                     <td><input type="text" class="mascaramonto" name="montoCompra" class="form-control" placeholder="Monto de compra" autofocus></td>
-                    <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
+                    <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar activo</button></td>
                 </tbody>
             </table>
         </form>

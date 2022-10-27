@@ -43,12 +43,11 @@ class ModalidadfuncionalcriterioData extends Data {
         $rangoMinimo = $modalidadfuncionalcriterio->getRangoValorMinimoTBModalidadfuncionalcriterio();
         
 
-        echo '<script>alert("Alfinnn")</script>';
        
         $queryUpdate = "UPDATE tbmodalidadfuncionalcriterio 
                         SET tbmodalidadfuncionalcriteriomodalidadfuncionalid='$idmodalidadfuncional',
                         tbmodalidadfuncionalcriterionombre='$nombre', tbmodalidadfuncionalcriteriodescripcion='$descripcion',
-                        tbmodalidadfuncionalcriteriorangomaximo='$rangoMaximo', modalidadfuncionalcriteriorangominimo='$rangoMinimo'
+                        tbmodalidadfuncionalcriteriorangomaximo='$rangoMaximo', tbmodalidadfuncionalcriteriorangominimo='$rangoMinimo'
                         WHERE tbmodalidadfuncionalcriterioid=$id";
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
