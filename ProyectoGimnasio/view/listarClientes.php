@@ -211,10 +211,18 @@ include '../business/clienteBusiness.php';
                         <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente">Registrar cliente</button></td>
                     </tr>
                 </tbody>
+
+
+
             </table>
+
+
+
 
         </form>
     </div>
+
+
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/clienteAction.php">
@@ -237,7 +245,7 @@ include '../business/clienteBusiness.php';
             </tr>
 
 
-            
+
         </form>
     </div>
 </body>
