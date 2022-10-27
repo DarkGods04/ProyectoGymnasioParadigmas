@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2022 a las 17:41:40
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.3
+-- Tiempo de generación: 27-10-2022 a las 07:46:14
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -73,19 +72,6 @@ INSERT INTO `tbactivovariable` (`tbactivovariableid`, `tbactivovariablenombre`, 
 (3, 'Pesa', 24, 5000, 'Pesa de 20 kilos', 1),
 (4, 'Mancuerna doble', 12, 35000, 'Mancuerna doble de 30kilos', 1),
 (5, 'Mancuernas', 10, 25000, 'Mancuernas de 10Lbs', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbcatalogoejercicio`
---
-
-CREATE TABLE `tbcatalogoejercicio` (
-  `tbcatalogoejercicioid` int(11) NOT NULL,
-  `tbcatalogoejercicionombre` varchar(50) NOT NULL,
-  `tbcatalogoejerciciodescripcion` varchar(200) NOT NULL,
-  `tbcatalogoejercicioactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -264,21 +250,6 @@ INSERT INTO `tbinstructor` (`tbinstructorid`, `tbinstructornombre`, `tbinstructo
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbmedidaisometrica`
---
-
-CREATE TABLE `tbmedidaisometrica` (
-  `tbmedidaisometricaid` int(11) NOT NULL,
-  `tbgrupomuscularid` int(11) NOT NULL,
-  `tbclienteid` int(11) NOT NULL,
-  `tbmedidaisometricafechamedicion` date NOT NULL,
-  `tbmedidaisometricamedida` int(11) NOT NULL,
-  `tbmedidaisometricaactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbmodalidadfuncional`
 --
 
@@ -388,12 +359,6 @@ ALTER TABLE `tbactivovariable`
   ADD PRIMARY KEY (`tbactivovariableid`);
 
 --
--- Indices de la tabla `tbcatalogoejercicio`
---
-ALTER TABLE `tbcatalogoejercicio`
-  ADD PRIMARY KEY (`tbcatalogoejercicioid`);
-
---
 -- Indices de la tabla `tbcatalogopagometodo`
 --
 ALTER TABLE `tbcatalogopagometodo`
@@ -436,12 +401,6 @@ ALTER TABLE `tbinstructor`
   ADD PRIMARY KEY (`tbinstructorid`);
 
 --
--- Indices de la tabla `tbmedidaisometrica`
---
-ALTER TABLE `tbmedidaisometrica`
-  ADD PRIMARY KEY (`tbmedidaisometricaid`);
-
---
 -- Indices de la tabla `tbmodalidadfuncional`
 --
 ALTER TABLE `tbmodalidadfuncional`
@@ -482,12 +441,6 @@ ALTER TABLE `tbactivovariable`
   MODIFY `tbactivovariableid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT de la tabla `tbcatalogoejercicio`
---
-ALTER TABLE `tbcatalogoejercicio`
-  MODIFY `tbcatalogoejercicioid` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT de la tabla `tbcatalogopagometodo`
 --
 ALTER TABLE `tbcatalogopagometodo`
@@ -504,12 +457,6 @@ ALTER TABLE `tbimpuestoventa`
 --
 ALTER TABLE `tbinstructor`
   MODIFY `tbinstructorid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `tbmedidaisometrica`
---
-ALTER TABLE `tbmedidaisometrica`
-  MODIFY `tbmedidaisometricaid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbmodalidadfuncional`
