@@ -75,19 +75,19 @@ class FacturaData extends Data{
 
         $Facturas = [];
         while ($row = mysqli_fetch_array($result)) {
-            $currentDireccion = new Factura(
+            $current = new Factura(
                 $row['tbfacturaid'],
-                $row['tbfacturaclienteid'],
-                $row['tbfacturainstructorid'],
+                $row['tbclienteid'],
+                $row['tbinstructorid'],
                 $row['tbfacturafechapago'],
-                $row['tbfacturapagomodalidad'],
+                $row['tbcatalogopagoperidiocidadnombre'],
                 $row['tbfacturaservicios'],
                 $row['tbfacturamontobruto'],
                 $row['tbfacturaimpuestoventaid'],
                 $row['tbfacturamontoneto'],
                 $row['tbfacturaactivo']
             );
-            array_push($Facturas, $currentDireccion);
+            array_push($Facturas, $current);
         }
         return $Facturas;
     }
@@ -116,12 +116,12 @@ class FacturaData extends Data{
             }
         }
 
-        $querySelectModalidad = "SELECT * FROM tbpagomodalidad Where tbpagomodalidadnombre LIKE '%$palabra%';";
+        $querySelectModalidad = "SELECT * FROM tbcatalogopagoperidiocidad Where tbcatalogopagoperidiocidadnombre LIKE '%$palabra%';";
         $resultModalidad = mysqli_query($conn, $querySelectModalidad);
         $idModalidad = 0;
         while ($rowModalidad = mysqli_fetch_array($resultModalidad)) {
-            if ($rowModalidad['tbpagomodalidadactivo'] == 1) {
-                $idModalidad = $rowModalidad['tbpagomodalidadid'];
+            if ($rowModalidad['tbcatalogopagoperidiocidadactivo'] == 1) {
+                $idModalidad = $rowModalidad['tbcatalogopagoperidiocidadid'];
             }
         }
 
@@ -144,7 +144,7 @@ class FacturaData extends Data{
             }
         }
 
-        $querySelect = "SELECT * FROM tbfactura WHERE tbfacturaid LIKE '%$palabra%' OR tbfacturaclienteid LIKE '%$idCliente%' OR tbfacturainstructorid LIKE '%$idInstructor%' OR tbfacturafechapago LIKE '%$palabra%' OR tbfacturapagomodalidad LIKE '%$idModalidad%' OR tbfacturaservicios LIKE '%$idServicio%' OR tbfacturaimpuestoventaid LIKE '%$idImpuesto%' OR tbfacturamontobruto LIKE '%$palabra%' OR tbfacturamontoneto LIKE '%$palabra%';";
+        $querySelect = "SELECT * FROM tbfactura WHERE tbfacturaid LIKE '%$palabra%' OR tbclienteid LIKE '%$idCliente%' OR tbinstructorid LIKE '%$idInstructor%' OR tbfacturafechapago LIKE '%$palabra%' OR tbcatalogopagoperidiocidadnombre LIKE '%$idModalidad%' OR tbfacturaservicios LIKE '%$idServicio%' OR tbfacturaimpuestoventaid LIKE '%$idImpuesto%' OR tbfacturamontobruto LIKE '%$palabra%' OR tbfacturamontoneto LIKE '%$palabra%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         $Facturas = [];
@@ -152,10 +152,10 @@ class FacturaData extends Data{
             if ($row['tbfacturaactivo'] == 1) {
                 $currentDireccion = new Factura(
                     $row['tbfacturaid'],
-                    $row['tbfacturaclienteid'],
-                    $row['tbfacturainstructorid'],
+                    $row['tbclienteid'],
+                    $row['tbinstructorid'],
                     $row['tbfacturafechapago'],
-                    $row['tbfacturapagomodalidad'],
+                    $row['tbcatalogopagoperidiocidadnombre'],
                     $row['tbfacturaservicios'],
                     $row['tbfacturamontobruto'],
                     $row['tbfacturaimpuestoventaid'],

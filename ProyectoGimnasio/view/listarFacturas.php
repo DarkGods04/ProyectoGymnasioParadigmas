@@ -3,7 +3,7 @@ include '../business/facturaBusiness.php';
 include '../business/clienteBusiness.php';
 include '../business/instructorBusiness.php';
 include '../business/impuestoVentaBusiness.php';
-include '../business/pagoModalidadBusiness.php';
+include '../business/pagoPeridiocidadBusiness.php';
 include '../business/servicioBusiness.php';
 ?>
 
@@ -18,11 +18,11 @@ include '../business/servicioBusiness.php';
     <title>Facturas</title>
     <script type="text/javascript">
         function confirmarAccionModificar() {
-            return confirm("¿Está seguro de que desea modificar este cliente?");
+            return confirm("¿Está seguro de que desea modificar esta factura?");
         }
 
         function confirmarAccionEliminar() {
-            return confirm("¿Está seguro de que desea eliminar este cliente?");
+            return confirm("¿Está seguro de que desea eliminar esta factura?");
         }
     </script>
 </head>
@@ -45,10 +45,10 @@ include '../business/servicioBusiness.php';
 
     <div>
         <?php
-          if (!isset($_POST['campo'])) {
+        if (!isset($_POST['campo'])) {
             $_POST['campo'] = "";
             $campo = $_POST['campo'];
-         }
+        }
           $campo = $_POST['campo'];
 
           $facturaBusiness = new FacturaBusiness();
@@ -62,7 +62,7 @@ include '../business/servicioBusiness.php';
                         <th>Cliente</th>
                         <th>Instructor</th>
                         <th>Fecha de pago</th>
-                        <th>Modalidad de pago</th>
+                        <th>Peridiocidad de pago</th>
                         <th>Servicios</th>
                         <th>Monto bruto</th>
                         <th>Impuesto de venta</th>
@@ -79,83 +79,77 @@ include '../business/servicioBusiness.php';
                             echo '<input  type="hidden" name="idFactura" id="id" value="' . $row->getIdTBFactura() . '"/>';
                             echo '<td>' . $row->getIdTBFactura() . '</td>';
                     ?>
-                            <td>
-                                <?php
-                                $clienteBusiness = new ClienteBusiness();
-                                $clientes = $clienteBusiness->obtener();
-                                foreach ($clientes as $row1) {
-                                    if ($row1->getActivoTBCliente() == 1) {
-                                        if ($row1->getIdTBCliente() == $row->getClienteidTBFactura()) {
-                                            echo  '<input type="text" value="' .  $row1->getNombreTBCliente() . " " . $row1->getApellido1TBCliente() . " " . $row1->getApellido2TBCliente() . '"readonly />';
-                                        }
-                                    }
-                                } ?>
-                            </td>
-
-
-                            <td>
-
-                                <?php
-                                $instructorBusiness = new InstructorBusiness();
-                                $instructores = $instructorBusiness->obtener();
-                                foreach ($instructores as $row2) {
-                                    if ($row2->getIdTBInstructor() == $row->getInstructoridTBFactura()) {
-                                        echo  '  <input type="text" value="' . $row2->getNombreTBInstructor() . " " . $row2->getApellidoTBInstructor() . '"readonly />';
-                                    }
-                                } ?>
-                            </td>
-
-                            <?php echo '<td><input type="date" name="fechaPago"  id="fechaPago" value="' . $row->getFechaPagoTBFactura() . '"readonly /></td>'; ?>
-
-
-
-
-                            <td>
-
-                                <?php
-                                $modalidadPagoBusiness = new PagoModalidadBusiness();
-                                $modalidadesPago = $modalidadPagoBusiness->obtener();
-                                foreach ($modalidadesPago as $modalidades) {
-                                    if ($modalidades->getIdTBpagoModalidad() == $row->getPagoModalidadTBFactura()) {
-                                        echo  '  <input type="text" value="' . $modalidades->getNombreTBpagoModalidad() .  '"readonly />';
-                                    }
-                                } ?>
-                            </td>
-
-
-                            <td>
-                                <?php
-                                $servicioBusiness = new ServicioBusiness();
-                                $servicios = $servicioBusiness->obtener();
-                                $array = explode(";", $row->getServiciosTBFactura());
-                                $serviciosExist = "";
-                                foreach ($servicios as $rr) {
-                                    foreach ($array as $selected) {
-                                        if ($rr->getIdTBServicio() == $selected) {
-                                            $serviciosExist = $rr->getNombreTBServicio() . "." . $serviciosExist;
-                                        }
+                        <td>
+                            <?php
+                            $clienteBusiness = new ClienteBusiness();
+                            $clientes = $clienteBusiness->obtener();
+                            foreach ($clientes as $row1) {
+                                if ($row1->getActivoTBCliente() == 1) {
+                                    if ($row1->getIdTBCliente() == $row->getClienteidTBFactura()) {
+                                        echo  '<input type="text" value="' .  $row1->getNombreTBCliente() . " " . $row1->getApellido1TBCliente() . " " . $row1->getApellido2TBCliente() . '"readonly />';
                                     }
                                 }
-                                echo '<input type="text" readonly value="' . $serviciosExist . '" />';
-                                ?>
-                            </td>
-                            <?php echo '<td><input type="text" name="montoBruto" id="montoBruto" value="₡ ' . $row->getMontoBrutoTBFactura() .  '"readonly /></td>'; ?>
+                            } ?>
+                        </td>
 
-                            <td>
-                                <?php
-                                $impuestoVentaBusiness = new ImpuestoVentaBusiness();
-                                $impuestoVentas = $impuestoVentaBusiness->obtener();
-                                foreach ($impuestoVentas as $row3) {
-                                    if ($row3->getidImpuestoVenta() == $row->getImpuestoVentaidTBFactura()) {
-                                        echo  '  <input type="text" value="' . $row3->getDescripcionImpuestoVenta() . '"readonly />';
+                        <td>
+                            <?php
+                            $instructorBusiness = new InstructorBusiness();
+                            $instructores = $instructorBusiness->obtener();
+                            foreach ($instructores as $row2) {
+                                if ($row2->getIdTBInstructor() == $row->getInstructoridTBFactura()) {
+                                    echo  '  <input type="text" value="' . $row2->getNombreTBInstructor() . " " . $row2->getApellidoTBInstructor() . '"readonly />';
+                                }
+                            } ?>
+                        </td>
+
+                        <?php echo '<td><input type="date" name="fechaPago"  id="fechaPago" value="' . $row->getFechaPagoTBFactura() . '"readonly /></td>'; ?>
+
+                        <td>
+                            <?php
+                            $modalidadPagoBusiness = new PagoPeridiocidadBusiness();
+                            $modalidadesPago = $modalidadPagoBusiness->obtener();
+                            foreach ($modalidadesPago as $modalidades) {
+                                if ($modalidades->getIdTBPagoPeridiocidad() == $row->getPagoModalidadTBFactura()) {
+                                    echo  '  <input type="text" value="' . $modalidades->getNombreTBPagoPeridiocidad() .  '"readonly />';
+                                }
+                            } ?>
+                        </td>
+
+                        <td>
+                            <?php
+                            $servicioBusiness = new ServicioBusiness();
+                            $servicios = $servicioBusiness->obtener();
+                            $array = explode(";", $row->getServiciosTBFactura());
+                            $serviciosExist = "";
+                            foreach ($servicios as $rr) {
+                                foreach ($array as $selected) {
+                                    if ($rr->getIdTBServicio() == $selected) {
+                                        $serviciosExist = $rr->getNombreTBServicio() . "." . $serviciosExist;
                                     }
-                                } ?>
-                            </td>
-                    <?php
-                            echo '<td><input type="text" name="montoNeto" id="montoNeto" value="₡ ' . $row->getMontoNetoTBFactura() .  '"readonly /></td>';
-                            echo '<td><input type="submit" name="eliminarFactura" id="eliminarFactura" value="Anular" onclick="return confirmarAccionEliminar()"/></td>';
-                            echo '</tr>';
-                            echo '</form>';
+                                }
+                            }
+                            echo '<input type="text" readonly value="' . $serviciosExist . '" />';
+                            ?>
+                        </td>
+                        <?php echo '<td><input type="text" name="montoBruto" id="montoBruto" value="₡ ' . $row->getMontoBrutoTBFactura() .  '"readonly /></td>'; ?>
+
+                        <td>
+                            <?php
+                            $impuestoVentaBusiness = new ImpuestoVentaBusiness();
+                            $impuestoVentas = $impuestoVentaBusiness->obtener();
+                            foreach ($impuestoVentas as $row3) {
+                                if ($row3->getidImpuestoVenta() == $row->getImpuestoVentaidTBFactura()) {
+                                    echo  '  <input type="text" value="' . $row3->getDescripcionImpuestoVenta() . '"readonly />';
+                                }
+                            } ?>
+                        </td>
+
+                        <?php
+                        echo '<td><input type="text" name="montoNeto" id="montoNeto" value="₡ ' . $row->getMontoNetoTBFactura() .  '"readonly /></td>';
+                        echo '<td><input type="submit" name="eliminarFactura" id="eliminarFactura" value="Anular" onclick="return confirmarAccionEliminar()"/></td>';
+                        echo '</tr>';
+                        echo '</form>';
                         }
                     }
                     ?>
@@ -163,7 +157,7 @@ include '../business/servicioBusiness.php';
             </table>
         <?php
           } else {
-            echo '<p style="color: red">SIN RESULTADOS: No hay facturas registradas!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron facturas!</p>';
           }
         ?>
     </div>
@@ -179,7 +173,7 @@ include '../business/servicioBusiness.php';
                         <th>Cliente</th>
                         <th>Instructor</th>
                         <th>Fecha de pago</th>
-                        <th>Modalidad de pago</th>
+                        <th>Peridiocidad de pago</th>
                         <th>Servicios</th>
                         <th>Monto bruto</th>
                         <th>Impuesto de venta</th>
@@ -260,7 +254,7 @@ include '../business/servicioBusiness.php';
 
 
                             <?php
-                            $pagoModalidadBusiness = new PagoModalidadBusiness();
+                            $pagoModalidadBusiness = new PagoPeridiocidadBusiness();
                             $pagosModalidades = $pagoModalidadBusiness->obtener();
                             ?>
 
@@ -268,22 +262,22 @@ include '../business/servicioBusiness.php';
                                 <?php
                                 if (isset($_GET['modalidadPago'])) {
                                     foreach ($pagosModalidades as $row) :
-                                        if ($row->getActivoTBpagoModalidad() == 1) {
+                                        if ($row->getActivoTBPagoPeridiocidad() == 1) {
 
-                                            if ($_GET['modalidadPago'] == $row->getIdTBpagoModalidad()) {
-                                                echo '<option value="' . $row->getIdTBpagoModalidad() . '" >' . $row->getNombreTBpagoModalidad() . '</option>';
+                                            if ($_GET['modalidadPago'] == $row->getIdTBPagoPeridiocidad()) {
+                                                echo '<option value="' . $row->getIdTBPagoPeridiocidad() . '" >' . $row->getNombreTBPagoPeridiocidad() . '</option>';
                                             }
                                         }
 
                                     endforeach;
                                 } else { ?>
-                                    <option value="" required>Modalidad de pago</option>
+                                    <option value="" required>Peridiocidad de pago</option>
                                 <?php }
 
                                 foreach ($pagosModalidades as $row) :
-                                    if ($row->getActivoTBpagoModalidad() == 1) {
-                                        if ($_GET['modalidadPago'] != $row->getIdTBpagoModalidad()) {
-                                            echo '<option value="' . $row->getIdTBpagoModalidad() . '">' . $row->getNombreTBpagoModalidad() . '</option>';
+                                    if ($row->getActivoTBPagoPeridiocidad() == 1) {
+                                        if ($_GET['modalidadPago'] != $row->getIdTBPagoPeridiocidad()) {
+                                            echo '<option value="' . $row->getIdTBPagoPeridiocidad() . '">' . $row->getNombreTBPagoPeridiocidad() . '</option>';
                                         }
                                     }
                                 endforeach;
