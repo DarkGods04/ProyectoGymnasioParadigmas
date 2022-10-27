@@ -9,6 +9,7 @@ include '../business/clienteBusiness.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Recuperar clientes</title>
     <script>
         function confirmarAccionModificar() {
@@ -26,7 +27,6 @@ include '../business/clienteBusiness.php';
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
-
     <script>
         jQuery(function($){
             $("#telefono").mask("9999-9999");
@@ -35,36 +35,12 @@ include '../business/clienteBusiness.php';
         });
         
     </script>
-
-    <style type="text/css">
-        ul {
-            list-style-type: none;
-            width: 300px;
-            height: auto;
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        li {
-            background-color: #EEEEEE;
-            border-top: 1px solid #9e9e9e;
-            padding: 5px;
-            width: 100%;
-            float: left;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
-    <?php
-    include 'header.php';
-    ?>
+    <?php include 'header.php'; ?><br>
 
-    <h2><a href="listarClientes.php" style="text-decoration: none; color: blue;">Atrás</a></h2>
-
-    <h1>Recuperar Clientes</h1>
+    <h1>Recuperar clientes</h1>
 
     <form action="" method="post" autocomplete="off">
         <div>
@@ -125,13 +101,10 @@ include '../business/clienteBusiness.php';
                                     <option value="Femenino">Femenino</option>
                                     <option value="Otro">Otro</option>
                                 </select></td>';
-
                             echo '<td><input type="text" class="mascarapeso" name="peso" id="peso" value="' . $row->getPesoTBCliente() .  '"/></td>';
                             echo '<td><input type="text" class="mascaraaltura" name="altura" id="altura" value="' . $row->getAlturaTBCliente() .  '"/></td>';
-                            echo '<td><input type="submit" name="actualizarCliente" id="actualizarCliente" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
                             
-                            echo '<input type="submit" name="recuperarCliente" id="recuperarCliente" value="Recuperar" onclick="return confirmarAccionRecuperar()"/></td>';
-                            
+                            echo '<td><input type="submit" name="recuperarCliente" id="recuperarCliente" value="Recuperar" onclick="return confirmarAccionRecuperar()"/></td>';
                             echo '</tr>';
                             echo '</form>';
                         }
@@ -141,56 +114,13 @@ include '../business/clienteBusiness.php';
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No hay clientes registrados!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron clientes deshabilitados!</p>';
         }
         ?>
     </div></br>
 
     <div>
-        <h3>Registrar un nuevo cliente</h3>
-
-        <form method="POST" id="direccionform" action="../business/clienteAction.php">
-            <table border="1">
-                <thead style="text-align: left;">
-                    <tr>
-                        <th>Nombre</th>
-                        <th>Primer apellido</th>
-                        <th>Segundo apellido</th>
-                        <th>Correo</th>
-                        <th>Telefono</th>
-                        <th>Fecha nacimiento</th>
-                        <th>Genero</th>
-                        <th>Peso (ejemplo: 80kg)</th>
-                        <th>Altura en formato(1.66)</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <!-- 
-                            <td><input id="nombre" type="text" tabindex="1" /></td><td>aaaaaaaaaaaaaaaaaaaa</td>
-                        -->
-                        <td><input type="text" class="mascaranombre" name="nombre" id="nombre" placeholder="Nombre"></td>
-                        <td><input type="text" class="mascaranombre" name="apellido1" id="apellido1" placeholder="Primer apellido"></td>
-                        <td><input type="text" class="mascaranombre" name="apellido2" id="apellido2" placeholder="Segundo apellido"></td>
-                        <td><input type="email" name="correo" id="correo" placeholder="micorreo@gmail.com"></td>
-                        <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="9999-9999"></td>
-                        <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento"></td>
-                        <td>
-                            <select name="genero">
-                                <option value="" selected disabled hidden>Género</option>
-                                <option value="Masculino">Masculino</option>
-                                <option value="Femenino">Femenino</option>
-                                <option value="Otro">Otro</option>
-                            </select>
-                        </td>
-                        <td><input type="text" class="mascarapeso" name="peso" id="peso" placeholder="99.99kg"></td>
-                        <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="9.99m"></td>
-                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente">Registrar cliente</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
+        <button><a href="listarClientes.php" style="text-decoration: none; color: blue; font-size: 140%;">Atrás</a></button>
     </div>
 
     <div>

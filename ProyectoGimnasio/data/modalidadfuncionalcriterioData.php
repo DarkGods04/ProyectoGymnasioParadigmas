@@ -1,9 +1,9 @@
 <?php
 
 include_once 'data.php';
-include '../domain/modalidadfuncionalcriterio.php';
+include '../domain/modalidadFuncionalCriterio.php';
 
-class ModalidadfuncionalcriterioData extends Data {
+class ModalidadFuncionalCriterioData extends Data {
 
     public function insertModalidadfuncionalcriterio($modalidadfuncionalcriterio){
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
@@ -28,9 +28,6 @@ class ModalidadfuncionalcriterioData extends Data {
         return $result;
     }
 
- 
-
- 
     public function updateModalidadfuncionalcriterio($modalidadfuncionalcriterio){
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
@@ -41,25 +38,17 @@ class ModalidadfuncionalcriterioData extends Data {
         $descripcion = $modalidadfuncionalcriterio->getDescripcionTBModalidadfuncionalcriterio();
         $rangoMaximo = $modalidadfuncionalcriterio->getRangoValorMaximoTBModalidadfuncionalcriterio();
         $rangoMinimo = $modalidadfuncionalcriterio->getRangoValorMinimoTBModalidadfuncionalcriterio();
-        
-
-        echo '<script>alert("Alfinnn")</script>';
        
         $queryUpdate = "UPDATE tbmodalidadfuncionalcriterio 
-                        SET tbmodalidadfuncionalcriteriomodalidadfuncionalid='$idmodalidadfuncional',
+                        SET tbmodalidadfuncionalid='$idmodalidadfuncional',
                         tbmodalidadfuncionalcriterionombre='$nombre', tbmodalidadfuncionalcriteriodescripcion='$descripcion',
                         tbmodalidadfuncionalcriteriorangomaximo='$rangoMaximo', tbmodalidadfuncionalcriteriorangominimo='$rangoMinimo'
                         WHERE tbmodalidadfuncionalcriterioid=$id";
+
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
         return $result;
     }
-
-
-    
-
-
-
 
     public function deleteModalidadfuncionalcriterio($idModalidadfuncionalcriterio){
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
@@ -69,11 +58,8 @@ class ModalidadfuncionalcriterioData extends Data {
 
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
-
         return $result;
     }
-
-    
 
     public function getModalidadfuncionalcriterio(){
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
@@ -85,18 +71,17 @@ class ModalidadfuncionalcriterioData extends Data {
         
         $Modalidadfuncionalcriterios = [];
         while ($row = mysqli_fetch_array($result)) {
-            $currentDireccion = new Modalidadfuncionalcriterio($row['tbmodalidadfuncionalcriterioid'], $row['tbmodalidadfuncionalcriteriomodalidadfuncionalid'], $row['tbmodalidadfuncionalcriterionombre'], $row['tbmodalidadfuncionalcriteriodescripcion'],$row['tbmodalidadfuncionalcriteriorangomaximo'], $row['tbmodalidadfuncionalcriteriorangominimo'],$row['tbmodalidadfuncionalcriterioactivo']);
-            array_push($Modalidadfuncionalcriterios, $currentDireccion);
+            $current = new ModalidadFuncionalCriterio($row['tbmodalidadfuncionalcriterioid'], $row['tbmodalidadfuncionalid'], $row['tbmodalidadfuncionalcriterionombre'], $row['tbmodalidadfuncionalcriteriodescripcion'],$row['tbmodalidadfuncionalcriteriorangomaximo'], $row['tbmodalidadfuncionalcriteriorangominimo'],$row['tbmodalidadfuncionalcriterioactivo']);
+            array_push($Modalidadfuncionalcriterios, $current);
         }
         return $Modalidadfuncionalcriterios;
     }
-
 
     public function buscarModalidadfuncionalcriterio($palabra){
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
-        $querySelect = "SELECT * FROM tbmodalidadfuncionalcriterio WHERE tbmodalidadfuncionalcriterioid LIKE '%$palabra%' OR tbmodalidadfuncionalcriteriomodalidadfuncionalid LIKE '%$palabra%' OR
+        $querySelect = "SELECT * FROM tbmodalidadfuncionalcriterio WHERE tbmodalidadfuncionalcriterioid LIKE '%$palabra%' OR tbmodalidadfuncionalid LIKE '%$palabra%' OR
         tbmodalidadfuncionalcriterionombre LIKE '%$palabra%' OR tbmodalidadfuncionalcriteriodescripcion LIKE '%$palabra%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
@@ -104,7 +89,7 @@ class ModalidadfuncionalcriterioData extends Data {
         $Modalidadfuncionalcriterios = [];
         while ($row = mysqli_fetch_array($result)) {
             if($row['tbmodalidadfuncionalcriterioactivo'] == 1){
-                $currentDireccion = new Modalidadfuncionalcriterio($row['tbmodalidadfuncionalcriterioid'], $row['tbmodalidadfuncionalcriteriomodalidadfuncionalid'],
+                $currentDireccion = new ModalidadFuncionalCriterio($row['tbmodalidadfuncionalcriterioid'], $row['tbmodalidadfuncionalid'],
                                                     $row['tbmodalidadfuncionalcriterionombre'], $row['tbmodalidadfuncionalcriteriodescripcion'],
                                                     $row['tbmodalidadfuncionalcriteriorangomaximo'], $row['tbmodalidadfuncionalcriteriorangominimo'],
                                                     $row['tbmodalidadfuncionalcriterioactivo']);

@@ -23,23 +23,31 @@ if (isset($_POST['insertarCliente'])) {
                 $tempAltura = str_replace("cmm", "", $altura);
 
             if (!is_numeric($nombre) && !is_numeric($apellido1) && !is_numeric($apellido2) && !is_numeric($genero)) {
-                $cliente = new Cliente(0, $nombre, $apellido1 , $apellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
-                $clienteBusiness = new ClienteBusiness();
-                $resultado = $clienteBusiness->insertar($cliente);
+                //if (filter_var($nombre, FILTER_SANITIZE_STRING)){
+                    if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
+                        $cliente = new Cliente(0, $tempNombre, $tempApellido1 , $tempApellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
+                        $clienteBusiness = new ClienteBusiness();
+                        $resultado = $clienteBusiness->insertar($cliente);
 
-                if ($resultado == 1) {
-                    Header("Location: ../view/listarClientes.php?success=inserted");
-                } else {
-                    Header("Location: ../view/listarClientes.php?error=dbError");
-                }
+                        if ($resultado == 1) {
+                            Header("Location: ../view/listarClientes.php?success=inserted");
+                        } else {
+                            Header("Location: ../view/listarClientes.php?error=dbError");
+                        }
+                    } else {
+                        header("location: ../view/listarClientes.php?error=emailError");
+                    }
+                /*} else {
+                    Header("Location: ../view/listarClientes.php?error=dbError&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
+                }*/
             } else {
-                header("location: ../view/listarClientes.php?error=numberFormat");
+                header("location: ../view/listarClientes.php?error=numberFormat&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo ");
             }
         } else {
-            header("location: ../view/listarClientes.php?error=emptyField");
+            header("location: ../view/listarClientes.php?error=emptyField&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
         }
     } else {
-        header("location: ../view/listarClientes.php?error=error");
+       header("location: ../view/listarClientes.php?error=error&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
     }
 }
 
@@ -95,22 +103,26 @@ if (isset($_POST['actualizarCliente'])) {
     $altura = $_POST['altura'];
     $correo = $_POST['correo'];
 
-    if (strlen($nombre) > 0 && strlen($apellido1) > 0  && strlen($apellido2) > 0 && strlen($telefono) > 0 && strlen($fechaNacimiento) > 0
-        && strlen($genero) > 0 && strlen($peso) > 0  && strlen($altura) > 0  && strlen($correo) > 0) {
+        if (strlen($nombre) > 0 && strlen($apellido1) > 0  && strlen($apellido2) > 0 && strlen($telefono) > 0 && strlen($fechaNacimiento) > 0
+            && strlen($genero) > 0 && strlen($peso) > 0  && strlen($altura) > 0  && strlen($correo) > 0) {
 
-        $tempTelefono = str_replace("-", "", $telefono);
-        $tempPeso = str_replace("Kgg", "", $peso);
-        $tempAltura = str_replace("cmm", "", $altura);
+            $tempTelefono = str_replace("-", "", $telefono);
+            $tempPeso = str_replace("Kgg", "", $peso);
+            $tempAltura = str_replace("cmm", "", $altura);
 
-        if (!is_numeric($nombre) && !is_numeric($apellido1) && !is_numeric($apellido2) && !is_numeric($genero)) {
-            $cliente = new Cliente($id, $nombre, $apellido1 , $apellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
-                $clienteBusiness = new ClienteBusiness();
-                $resultado = $clienteBusiness->update($cliente);
+            if (!is_numeric($nombre) && !is_numeric($apellido1) && !is_numeric($apellido2) && !is_numeric($genero)) {
+                if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
+                    $cliente = new Cliente($id, $nombre, $apellido1 , $apellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
+                    $clienteBusiness = new ClienteBusiness();
+                    $resultado = $clienteBusiness->update($cliente);
 
-                if ($resultado == 1) {
-                    Header("Location: ../view/listarClientes.php?success=update");
+                    if ($resultado == 1) {
+                        Header("Location: ../view/listarClientes.php?success=update");
+                    } else {
+                        Header("Location: ../view/listarClientes.php?error=dbError");
+                    }
                 } else {
-                    Header("Location: ../view/listarClientes.php?error=dbError");
+                    header("location: ../view/listarClientes.php?error=emailError");
                 }
             } else {
                 header("location: ../view/listarClientes.php?error=numberFormat");
