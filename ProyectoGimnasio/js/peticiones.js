@@ -1,4 +1,5 @@
 document.getElementById("campo").addEventListener("keyup",getNombresCliente)
+document.getElementById("campo").addEventListener("keyup",getNombresClienteDesactivados)
 document.getElementById("campo").addEventListener("keyup",getNombresIns)
 document.getElementById("campo").addEventListener("keyup",getNombresActivosVariables)
 document.getElementById("campo").addEventListener("keyup",getNombresClientePeso)
@@ -45,6 +46,32 @@ function getNombresCliente(){
     if(inputCP.length > 0){
 
         let url= "../data/prediccionCliente.php"
+        let formData = new FormData()
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+        .then(data => {
+            lista.style.display = 'block'
+            lista.innerHTML = data
+        })
+        .catch(err => console.log(err))
+
+    }else {
+        lista.style.display = 'none'
+    }
+}
+
+function getNombresClienteDesactivados(){
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaClientesDesactivados")
+
+    if(inputCP.length > 0){
+
+        let url= "../data/prediccionRecuperarCliente.php"
         let formData = new FormData()
         formData.append("campo", inputCP)
 

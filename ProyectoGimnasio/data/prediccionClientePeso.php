@@ -8,7 +8,8 @@ $pdo = $con->Data();
 $campo = $_POST["campo"];
 
 $sql = "SELECT tbclienteid, tbclientenombre, tbclienteapellido1 FROM tbcliente 
-WHERE (tbclienteactivo=1) AND tbclienteid LIKE ? OR tbclientenombre LIKE ? OR tbclienteapellido1 LIKE ? ORDER BY tbclienteid ASC LIMIT 0, 10";
+        WHERE tbclienteid LIKE ? OR (tbclientenombre LIKE ?) OR (tbclienteapellido1 LIKE ?)
+        ORDER BY tbclienteid ASC LIMIT 0, 10";
 $query = $pdo->prepare($sql);
 $query->execute([$campo . '%', $campo . '%', $campo . '%']);
 

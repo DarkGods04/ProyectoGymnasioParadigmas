@@ -40,7 +40,7 @@ include '../business/clienteBusiness.php';
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listaClientes"></ul>
+            <ul id="listaClientesDesactivados"></ul>
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
