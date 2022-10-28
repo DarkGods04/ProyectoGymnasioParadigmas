@@ -52,7 +52,7 @@ class ClientePesoData extends Data{
             $idCliente = $rowCliente['tbclienteid'];
         }
 
-        $querySelect = "SELECT * FROM tbclientepeso WHERE tbclientepesoid LIKE '%$palabra%' OR 	tbclientepesoclienteid LIKE '%$idCliente%';";
+        $querySelect = "SELECT * FROM tbclientepeso WHERE tbclientepesoid LIKE '%$palabra%' OR 	tbclienteid LIKE '%$idCliente%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         $ClientePeso = [];

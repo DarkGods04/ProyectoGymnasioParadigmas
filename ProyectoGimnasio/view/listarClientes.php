@@ -64,8 +64,8 @@ include '../business/clienteBusiness.php';
                         <th>Teléfono</th>
                         <th>Fecha nacimiento</th>
                         <th>Género</th>
-                        <th>Peso</th>
-                        <th>Altura</th>
+                        <th>Peso (Kg)</th>
+                        <th>Altura (cm)</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -128,8 +128,8 @@ include '../business/clienteBusiness.php';
                         <th>Telefono</th>
                         <th>Fecha nacimiento</th>
                         <th>Genero</th>
-                        <th>Peso</th>
-                        <th>Altura</th>
+                        <th>Peso (Kg)</th>
+                        <th>Altura (cm)</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -152,7 +152,7 @@ include '../business/clienteBusiness.php';
                         </td>
                         <td><input type="text" class="mascarapeso" name="peso" id="peso" placeholder="00.00kg"  value="<?php if(isset($_GET['peso'])){ echo $_GET['peso']; }?>" ></td>
                         <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="0.00m"  value="<?php if(isset($_GET['altura'])){ echo $_GET['altura']; }?>" ></td>
-                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick=""validarEspacios()>Registrar cliente</button></td>
+                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick="validarEspacios()">Registrar cliente</button></td>
                     </tr>
                 </tbody>
             </table>

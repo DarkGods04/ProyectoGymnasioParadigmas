@@ -68,8 +68,8 @@ include '../business/clienteBusiness.php';
                         <th>Teléfono</th>
                         <th>Fecha nacimiento</th>
                         <th>Género</th>
-                        <th>Peso</th>
-                        <th>Altura</th>
+                        <th>Peso (Kg)</th>
+                        <th>Altura (cm)</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
