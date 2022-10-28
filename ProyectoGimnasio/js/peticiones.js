@@ -260,11 +260,11 @@ function getNombresModalidadFuncional(){
 
 function getNombresModalidadFuncionalCriterio(){
     let inputCP = document.getElementById("campo").value
-    let lista = document.getElementById("listaModalidadFuncionalCriterio")
+    let lista = document.getElementById("listaModalidadfuncionalcriterio")
 
     if(inputCP.length > 0){
 
-        let url= "../data/prediccionModalidadFuncionalCriterio.php"
+        let url= "../data/prediccionmodalidadfuncionalcriterio.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
