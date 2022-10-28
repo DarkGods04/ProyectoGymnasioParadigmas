@@ -24,7 +24,6 @@ if (isset($_POST['insertarCliente'])) {
 
             if (!is_numeric($nombre) && !is_numeric($apellido1) && !is_numeric($apellido2) && !is_numeric($genero)) {
                 //if (filter_var($nombre, FILTER_SANITIZE_STRING)){
-                // IF (PREG_MATCH('expresion regular', $nombre)){ return true o el error
                     if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
                         $cliente = new Cliente(0, $tempNombre, $tempApellido1 , $tempApellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
                         $clienteBusiness = new ClienteBusiness();

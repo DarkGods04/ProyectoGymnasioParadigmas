@@ -26,6 +26,7 @@ include '../business/servicioBusiness.php';
         }
     </script>
 </head>
+
 <body>
     <?php
     include 'header.php';
