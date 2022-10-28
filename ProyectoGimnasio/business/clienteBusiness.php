@@ -32,4 +32,8 @@ class ClienteBusiness {
         return $this->ClienteData->buscarClientes($palabra);
     }
 
+    public function buscarRecuperar($palabra) {
+        return $this->ClienteData->buscarClientesDesactivados($palabra);
+    }
+
 }

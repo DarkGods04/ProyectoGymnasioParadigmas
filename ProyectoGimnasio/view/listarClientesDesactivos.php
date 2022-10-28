@@ -27,14 +27,7 @@ include '../business/clienteBusiness.php';
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
-    <script>
-        jQuery(function($){
-            $("#telefono").mask("9999-9999");
-            $("#peso").mask("99.99kg");
-            $("#altura").mask("9.99m");
-        });
-        
-    </script>
+
 </head>
 
 <body>
@@ -61,7 +54,7 @@ include '../business/clienteBusiness.php';
         $campo = $_POST['campo'];
 
         $clienteBusiness = new ClienteBusiness();
-        $clientes = $clienteBusiness->buscar($campo);
+        $clientes = $clienteBusiness->buscarRecuperar($campo);
         if (!empty($clientes)) {
         ?>
             <table border="1">
