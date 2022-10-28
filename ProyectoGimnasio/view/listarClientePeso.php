@@ -4,7 +4,6 @@
     include '../business/clienteBusiness.php';
 ?>
 
-
 <!DOCTYPE html>
 <html>
 
@@ -12,6 +11,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Peso clientes</title>
     <script>
         function confirmarAccionModificar() {
@@ -25,26 +25,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
-
-    <style type="text/css">
-        ul {
-            list-style-type: none;
-            width: 300px;
-            height: auto;
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        li {
-            background-color: #EEEEEE;
-            border-top: 1px solid #9e9e9e;
-            padding: 5px;
-            width: 100%;
-            float: left;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
