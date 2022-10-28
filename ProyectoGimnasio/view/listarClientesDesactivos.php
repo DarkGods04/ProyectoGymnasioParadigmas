@@ -9,7 +9,6 @@ include '../business/clienteBusiness.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Recuperar clientes</title>
     <script>
         function confirmarAccionModificar() {
@@ -27,6 +26,7 @@ include '../business/clienteBusiness.php';
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
+
     <script>
         jQuery(function($){
             $("#telefono").mask("9999-9999");
@@ -35,12 +35,36 @@ include '../business/clienteBusiness.php';
         });
         
     </script>
+
+    <style type="text/css">
+        ul {
+            list-style-type: none;
+            width: 300px;
+            height: auto;
+            position: absolute;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
+        li {
+            background-color: #EEEEEE;
+            border-top: 1px solid #9e9e9e;
+            padding: 5px;
+            width: 100%;
+            float: left;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
-    <?php include 'header.php'; ?><br>
+    <?php
+    include 'header.php';
+    ?>
 
-    <h1>Recuperar clientes</h1>
+    <h2><a href="listarClientes.php" style="text-decoration: none; color: blue;">Atrás</a></h2>
+
+    <h1>Recuperar Clientes</h1>
 
     <form action="" method="post" autocomplete="off">
         <div>
@@ -101,10 +125,13 @@ include '../business/clienteBusiness.php';
                                     <option value="Femenino">Femenino</option>
                                     <option value="Otro">Otro</option>
                                 </select></td>';
+
                             echo '<td><input type="text" class="mascarapeso" name="peso" id="peso" value="' . $row->getPesoTBCliente() .  '"/></td>';
                             echo '<td><input type="text" class="mascaraaltura" name="altura" id="altura" value="' . $row->getAlturaTBCliente() .  '"/></td>';
+                            echo '<td><input type="submit" name="actualizarCliente" id="actualizarCliente" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
                             
-                            echo '<td><input type="submit" name="recuperarCliente" id="recuperarCliente" value="Recuperar" onclick="return confirmarAccionRecuperar()"/></td>';
+                            echo '<input type="submit" name="recuperarCliente" id="recuperarCliente" value="Recuperar" onclick="return confirmarAccionRecuperar()"/></td>';
+                            
                             echo '</tr>';
                             echo '</form>';
                         }
@@ -114,14 +141,10 @@ include '../business/clienteBusiness.php';
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No se encontraron clientes deshabilitados!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No hay clientes registrados!</p>';
         }
         ?>
     </div></br>
-
-    <div>
-        <button><a href="listarClientes.php" style="text-decoration: none; color: blue; font-size: 140%;">Atrás</a></button>
-    </div>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/clienteAction.php">
