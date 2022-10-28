@@ -20,7 +20,7 @@ class ClientePeso{
         $this->clientePesoID = $clientePesoID;
     }
 
-    function setClienteID($clienteID){
+    function setClienteID($clienteNombre){
         $this->clienteID = $clienteID;
     }
 
