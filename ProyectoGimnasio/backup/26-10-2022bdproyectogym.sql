@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-10-2022 a las 17:49:28
+-- Tiempo de generación: 27-10-2022 a las 07:46:14
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -180,10 +180,10 @@ CREATE TABLE `tbfactura` (
   `tbclienteid` int(11) NOT NULL,
   `tbinstructorid` int(11) NOT NULL,
   `tbfacturafechapago` date NOT NULL,
-  `tbcatalogopagoperidiocidadid` varchar(200) NOT NULL,
-  `tbservicioid` varchar(200) NOT NULL,
+  `tbcatalogopagoperidiocidadnombre` varchar(200) NOT NULL,
+  `tbfacturaservicios` varchar(200) NOT NULL,
   `tbfacturamontobruto` float NOT NULL,
-  `tbimpuestoventaid` int(11) NOT NULL,
+  `tbfacturaimpuestoventaid` int(11) NOT NULL,
   `tbfacturamontoneto` float NOT NULL,
   `tbfacturaactivo` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -192,7 +192,7 @@ CREATE TABLE `tbfactura` (
 -- Volcado de datos para la tabla `tbfactura`
 --
 
-INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfacturafechapago`, `tbcatalogopagoperidiocidadid`, `tbservicioid`, `tbfacturamontobruto`, `tbimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`) VALUES
+INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfacturafechapago`, `tbcatalogopagoperidiocidadnombre`, `tbfacturaservicios`, `tbfacturamontobruto`, `tbfacturaimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`) VALUES
 (1, 1, 1, '2022-10-01', '1', '1;2', 6500, 1, 7345, 1),
 (2, 3, 2, '2022-10-20', '2', '1;2', 5800, 2, 6380, 1),
 (3, 2, 3, '2022-10-21', '3', '2;3', 6800, 1, 7718, 1);
@@ -277,7 +277,7 @@ INSERT INTO `tbmodalidadfuncional` (`tbmodalidadfuncionalid`, `tbmodalidadfuncio
 
 CREATE TABLE `tbmodalidadfuncionalcriterio` (
   `tbmodalidadfuncionalcriterioid` int(11) NOT NULL,
-  `tbmodalidadfuncionalid` int(11) NOT NULL,
+  `tbmodalidadfuncionalcriteriomodalidadfuncionalid` int(11) NOT NULL,
   `tbmodalidadfuncionalcriterionombre` varchar(50) NOT NULL,
   `tbmodalidadfuncionalcriteriodescripcion` varchar(1000) NOT NULL,
   `tbmodalidadfuncionalcriteriorangomaximo` int(11) NOT NULL,
@@ -289,10 +289,10 @@ CREATE TABLE `tbmodalidadfuncionalcriterio` (
 -- Volcado de datos para la tabla `tbmodalidadfuncionalcriterio`
 --
 
-INSERT INTO `tbmodalidadfuncionalcriterio` (`tbmodalidadfuncionalcriterioid`, `tbmodalidadfuncionalid`, `tbmodalidadfuncionalcriterionombre`, `tbmodalidadfuncionalcriteriodescripcion`, `tbmodalidadfuncionalcriteriorangomaximo`, `tbmodalidadfuncionalcriteriorangominimo`, `tbmodalidadfuncionalcriterioactivo`) VALUES
-(1, 3, 'Resistencia tiempo', 'Mantener su esfuerzo de manera eficaz durante el mayor tiempo posible', 45, 15, 1),
+INSERT INTO `tbmodalidadfuncionalcriterio` (`tbmodalidadfuncionalcriterioid`, `tbmodalidadfuncionalcriteriomodalidadfuncionalid`, `tbmodalidadfuncionalcriterionombre`, `tbmodalidadfuncionalcriteriodescripcion`, `tbmodalidadfuncionalcriteriorangomaximo`, `tbmodalidadfuncionalcriteriorangominimo`, `tbmodalidadfuncionalcriterioactivo`) VALUES
+(1, 3, 'Resistencia tiempo', 'Mantener su esfuerzo de manera eficaz durante el mayor tiempo posible', 15, 45, 1),
 (2, 1, 'Fuerza del corazón', 'Cantidad de pulsaciones por minuto', 50, 10, 1),
-(3, 2, 'RM', 'Máximo de repeticiones ejecutadas por ejercicio', 30, 10, 1);
+(3, 2, 'RM', 'Máximo de repeticiones ejecutadas por ejercicio', 10, 30, 1);
 
 -- --------------------------------------------------------
 
