@@ -1,5 +1,5 @@
 <?php
-include 'modalidadFuncionalCriterioBusiness.php';
+include 'modalidadfuncionalcriterioBusiness.php';
 
 if (isset($_POST['insertarModalidadfuncionalcriterio'])) {
     if (isset($_POST['idModalidadfuncional']) && isset($_POST['nombre']) && isset($_POST['descripcion']) &&
@@ -16,23 +16,23 @@ if (isset($_POST['insertarModalidadfuncionalcriterio'])) {
             && strlen($rangoValorMaximo) > 0 ) {
 
             if (!is_numeric($nombre) && !is_numeric($descripcion) && is_numeric($idModalidadfuncional) && is_numeric($rangoValorMinimo) && is_numeric($rangoValorMaximo) ) {
-                $modalidadfuncionalcriterio = new ModalidadFuncionalCriterio(0, $idModalidadfuncional, $nombre, $descripcion, $rangoValorMinimo, $rangoValorMaximo,1);
-                $modalidadfuncionalcriterioBusiness = new ModalidadFuncionalCriterioBusiness();
+                $modalidadfuncionalcriterio = new Modalidadfuncionalcriterio(0, $idModalidadfuncional, $nombre, $descripcion, $rangoValorMinimo, $rangoValorMaximo,1);
+                $modalidadfuncionalcriterioBusiness = new ModalidadfuncionalcriterioBusiness();
                 $resultado = $modalidadfuncionalcriterioBusiness->insertar($modalidadfuncionalcriterio);
 
                 if ($resultado == 1) {
-                    Header("Location: ../view/listarModalidadFuncionalCriterio.php?success=inserted");
+                    Header("Location: ../view/listarModalidadfuncionalcriterio.php?success=inserted");
                 } else {
-                    Header("Location: ../view/listarModalidadFuncionalCriterio.php?error=dbError");
+                    Header("Location: ../view/listarModalidadfuncionalcriterio.php?error=dbError");
                 }
             } else {
-                header("location: ../view/listarModalidadFuncionalCriterio.php?error=numberFormat");
+                header("location: ../view/listarModalidadfuncionalcriterio.php?error=numberFormat");
             }
         } else {
-            header("location: ../view/listarModalidadFuncionalCriterio.php?error=emptyField");
+            header("location: ../view/listarModalidadfuncionalcriterio.php?error=emptyField");
         }
     } else {
-        header("location: ../view/listarModalidadFuncionalCriterio.php?error=error");
+        header("location: ../view/listarModalidadfuncionalcriterio.php?error=error");
     }
 }
 
@@ -41,16 +41,16 @@ if (isset($_POST['eliminarModalidadfuncionalcriterio'])) {
     if (isset($_POST['idModalidadfuncionalcriterio'])) {
         $id = $_POST['idModalidadfuncionalcriterio'];
 
-        $modalidadfuncionalcriterioBusiness = new ModalidadFuncionalCriterioBusiness();
+        $modalidadfuncionalcriterioBusiness = new ModalidadfuncionalcriterioBusiness();
         $result = $modalidadfuncionalcriterioBusiness->delete($id);
 
         if ($result == 1) {
-            header("Location: ../view/listarModalidadFuncionalCriterio.php?success=deleted");
+            header("Location: ../view/listarModalidadfuncionalcriterio.php?success=deleted");
         } else {
-            header("Location: ../view/listarModalidadFuncionalCriterio.php?error=dbError");
+            header("Location: ../view/listarModalidadfuncionalcriterio.php?error=dbError");
         }
     } else {
-        header("location: ../view/listarModalidadFuncionalCriterio.php?error=error");
+        header("location: ../view/listarModalidadfuncionalcriterio.php?error=error");
     }
 }
 
@@ -71,23 +71,23 @@ if (isset($_POST['actualizarModalidadfuncionalcriterio'])) {
 
             if (!is_numeric($nombre) && !is_numeric($descripcion) && is_numeric($idModalidadfuncional) && is_numeric($rangoValorMinimo) && is_numeric($rangoValorMaximo) ) {
 
-                $modalidadfuncionalcriterio = new ModalidadFuncionalCriterio($id,$idModalidadfuncional, $nombre, $descripcion, $rangoValorMaximo,$rangoValorMinimo, 1);
-                $modalidadfuncionalcriterioBusiness = new ModalidadFuncionalCriterioBusiness();
+                $modalidadfuncionalcriterio = new Modalidadfuncionalcriterio($id,$idModalidadfuncional, $nombre, $descripcion, $rangoValorMaximo,$rangoValorMinimo, 1);
+                $modalidadfuncionalcriterioBusiness = new ModalidadfuncionalcriterioBusiness();
                 $resultado = $modalidadfuncionalcriterioBusiness->update($modalidadfuncionalcriterio);
 
                 if ($resultado == 1) {
-                    Header("Location: ../view/listarModalidadFuncionalCriterio.php?success=update");
+                    Header("Location: ../view/listarModalidadfuncionalcriterio.php?success=update");
                 } else {
 
-                    Header("Location: ../view/listarModalidadFuncionalCriterio.php?error=dbError");
+                    Header("Location: ../view/listarModalidadfuncionalcriterio.php?error=dbError");
                 }
             } else {
-                header("location: ../view/listarModalidadFuncionalCriterio.php?error=numberFormat");
+                header("location: ../view/listarModalidadfuncionalcriterio.php?error=numberFormat");
             }
         } else {
-            header("location: ../view/listarModalidadFuncionalCriterio.php?error=emptyField");
+            header("location: ../view/listarModalidadfuncionalcriterio.php?error=emptyField");
         }
     } else {
-        header("location: ../view/listarModalidadFuncionalCriterio.php?error=error");
+        header("location: ../view/listarModalidadfuncionalcriterio.php?error=error");
     }
 }
