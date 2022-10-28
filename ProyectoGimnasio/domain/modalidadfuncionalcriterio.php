@@ -1,6 +1,6 @@
 <?php
 
-class Modalidadfuncionalcriterio {
+class ModalidadFuncionalCriterio {
 
 	private $idTBModalidadfuncionalcriterio;
     private $idModalidadfuncionalTBModalidadfuncionalcriterio;
@@ -10,7 +10,7 @@ class Modalidadfuncionalcriterio {
     private $rangoValorMaximoTBModalidadfuncionalcriterio;
     private $activoTBModalidadfuncionalcriterio;
 
-	function Modalidadfuncionalcriterio($idTBModalidadfuncionalcriterio, $idModalidadfuncionalTBModalidadfuncionalcriterio, $nombreTBModalidadfuncionalcriterio, $descripcionTBModalidadfuncionalcriterio, $rangoValorMaximoTBModalidadfuncionalcriterio, $rangoValorMinimoTBModalidadfuncionalcriterio, $activoTBModalidadfuncionalcriterio) {
+	function ModalidadFuncionalCriterio($idTBModalidadfuncionalcriterio, $idModalidadfuncionalTBModalidadfuncionalcriterio, $nombreTBModalidadfuncionalcriterio, $descripcionTBModalidadfuncionalcriterio, $rangoValorMaximoTBModalidadfuncionalcriterio, $rangoValorMinimoTBModalidadfuncionalcriterio, $activoTBModalidadfuncionalcriterio) {
 		$this->idTBModalidadfuncionalcriterio = $idTBModalidadfuncionalcriterio;
 		$this->idModalidadfuncionalTBModalidadfuncionalcriterio = $idModalidadfuncionalTBModalidadfuncionalcriterio;
 		$this->nombreTBModalidadfuncionalcriterio = $nombreTBModalidadfuncionalcriterio;
