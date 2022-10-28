@@ -1,14 +1,14 @@
 <?php
 
-include '../data/modalidadFuncionalCriterioData.php';
+include '../data/modalidadfuncionalcriterioData.php';
 
-class ModalidadFuncionalCriterioBusiness {
+class ModalidadfuncionalcriterioBusiness {
 
     private $modalidadfuncionalcriterioData;
 
 
     public function ModalidadfuncionalcriterioBusiness() {
-        $this->modalidadfuncionalcriterioData = new ModalidadFuncionalCriterioData();
+        $this->modalidadfuncionalcriterioData = new ModalidadfuncionalcriterioData();
     }
 
     public function insertar($modalidadfuncionalcriterio) {

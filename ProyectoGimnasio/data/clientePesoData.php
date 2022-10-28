@@ -45,14 +45,14 @@ class ClientePesoData extends Data{
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
-        $querySelect = "SELECT * FROM tbclientepeso WHERE tbclientepesoid LIKE '%$palabra%' OR 	tbclienteid LIKE '%$palabra%' OR tbclientepesofecha LIKE '%$palabra%' OR tbclientepesopeso LIKE '%$palabra%' OR tbclientepesoinstructorid LIKE '%$palabra%';";
+        $querySelect = "SELECT * FROM tbclientepeso WHERE tbclientepesoid LIKE '%$palabra%' OR 	tbclientepesoclienteid LIKE '%$palabra%' OR tbclientepesofecha LIKE '%$palabra%' OR tbclientepesopeso LIKE '%$palabra%' OR tbclientepesoinstructorid LIKE '%$palabra%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
 
         $ClientePeso = [];
         while ($row = mysqli_fetch_array($result)) {
-            $current = new ClientePeso($row['tbclientepesoid'], $row['tbclienteid'], $row['tbclientepesofecha'], $row['tbclientepesopeso'], $row['tbclientepesoinstructorid']);
-            array_push($ClientePeso, $current);
+            $currentDireccion = new ClientePeso($row['tbclientepesoid'], $row['tbclientepesoclienteid'], $row['tbclientepesofecha'], $row['tbclientepesopeso'], $row['tbclientepesoinstructorid']);
+            array_push($ClientePeso, $currentDireccion);
         }
         return $ClientePeso;
     }
