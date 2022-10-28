@@ -101,13 +101,20 @@ include '../business/servicioBusiness.php';
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Monto</th>
+                    <th>Periodiocidad de actualización</th>
                     <th>Acción</th>
                 </thead>
 
                 <tbody>
                     <td><input type="text" class="mascaranombre" name="nombreServicio" class="form-control" placeholder="Nombre del servicio"></td>
                     <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio"></td>
-                    <td><input type="text"  name="montoServicio" class="form-control" placeholder="Monto del servicio"></td>
+                    <td><input type="text" name="montoServicio" class="form-control" placeholder="Monto del servicio"></td>
+                    <td><select name="periodicidad" required>
+                            <option value=""hidden>Seleccione periodicidad</option>
+                            <option value="30">Cada 30 días</option>
+                            <option value="60">Cada 60 días</option>
+                            <option value="90">Cada 90 días</option>
+                        </select></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                 </tbody>
             </table>
