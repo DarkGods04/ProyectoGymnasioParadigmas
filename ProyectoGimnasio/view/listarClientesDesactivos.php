@@ -77,14 +77,14 @@ include '../business/clienteBusiness.php';
                 <tbody>
                     <?php
                     foreach ($clientes as $row) {
-                        if ($row->getActivoTBCliente() == 0) {
+                        if ($row->getActivoTBCliente() != 1) {
                             echo '<form  method="POST" enctype="multipart/form-data" action="../business/clienteAction.php">';
                             echo '<tr>';
                             echo '<input  type="hidden" name="idCliente" id="id" value="' . $row->getIdTBCliente() . '"/>';
                             echo '<td>' . $row->getIdTBCliente() . '</td>';
-                            echo '<td><input class="mascaranombre" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBCliente() . '"/></td>';
-                            echo '<td><input class="mascaranombre" type="text" name="apellido1" id="apellido1" value="' . $row->getApellido1TBCliente() . '"/></td>';
-                            echo '<td><input class="mascaranombre" type="text" name="apellido2" id="apellido2" value="' . $row->getApellido2TBCliente() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBCliente() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="apellido1" id="apellido1" value="' . $row->getApellido1TBCliente() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="apellido2" id="apellido2" value="' . $row->getApellido2TBCliente() . '"/></td>';
                             echo '<td><input type="text" name="correo" id="correo" value="' . $row->getCorreoTBCliente() .  '"/></td>';
                             echo '<td><input type="text" class="mascaratelefono" name="telefono" id="telefono" value="' . $row->getTelefonoTBCliente() .  '"/></td>';
                             echo '<td><input type="date" name="fechaNacimiento" id="fechaNacimiento" value="' . $row->getFechaNacimientoTBCliente() .  '"/></td>';

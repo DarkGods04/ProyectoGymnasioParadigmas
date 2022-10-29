@@ -73,9 +73,9 @@ include '../business/servicioBusiness.php';
                             echo '<input  type="hidden" name="idServicio" id="idServicio" value="' . $row->getIdTBServicio() . '"/>';
                             echo '<input  type="hidden" name="anteriorMontoServicio" id="anteriorMontoServicio" value="' . $row->getMontoTBServicio() . '"/>';
                             echo '<td>' . $row->getIdTBServicio() . '</td>';
-                            echo '<td><input class="mascaranombre" type="text" name="nombreServicio" id="nombreServicio" value="' . $row->getNombreTBServicio() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombreServicio" id="nombreServicio" value="' . $row->getNombreTBServicio() . '"/></td>';
                             echo '<td><input  type="text" name="descripcionServicio" id="descripcionServicio" value="' . $row->getDescripcionTBServicio() . '"/></td>';
-                            echo '<td><input  type="text"  name="montoServicio" id="montoServicio" value="' . $row->getMontoTBServicio() . '"/></td>';
+                            echo '<td><input  type="text" class="mascaramonto" name="montoServicio" id="montoServicio" value="' . $row->getMontoTBServicio() . '"/></td>';
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
                             echo '<input type="submit" name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
                             echo '</tr>';
@@ -105,9 +105,9 @@ include '../business/servicioBusiness.php';
                 </thead>
 
                 <tbody>
-                    <td><input type="text" class="mascaranombre" name="nombreServicio" class="form-control" placeholder="Nombre del servicio"></td>
+                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreServicio" class="form-control" placeholder="Nombre del servicio"></td>
                     <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio"></td>
-                    <td><input type="text"  name="montoServicio" class="form-control" placeholder="Monto del servicio"></td>
+                    <td><input type="text" class="mascaramonto" name="montoServicio" class="form-control" placeholder="Monto del servicio"></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                 </tbody>
             </table>

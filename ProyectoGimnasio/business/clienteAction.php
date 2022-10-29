@@ -23,31 +23,21 @@ if (isset($_POST['insertarCliente'])) {
                 $tempAltura = str_replace("cmm", "", $altura);
 
             if (!is_numeric($nombre) && !is_numeric($apellido1) && !is_numeric($apellido2) && !is_numeric($genero)) {
-                /*if (preg_match('/^[a-zA-Z\u00c0-\u017F]/', $nombre)){
-                    if (preg_match('/^[a-zA-Z\u00c0-\u017F]/', $apellido1)){
-                        if (preg_match('/^[a-zA-Z\u00c0-\u017F]/', $apellido2)){*/
-                            if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
-                                $cliente = new Cliente(0, $nombre, $apellido1 , $apellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
-                                $clienteBusiness = new ClienteBusiness();
-                                $resultado = $clienteBusiness->insertar($cliente);
+                
+                if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
+                    $cliente = new Cliente(0, $nombre, $apellido1 , $apellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
+                    $clienteBusiness = new ClienteBusiness();
+                    $resultado = $clienteBusiness->insertar($cliente);
 
-                                if ($resultado == 1) {
-                                    Header("Location: ../view/listarClientes.php?success=inserted");
-                                } else {
-                                    Header("Location: ../view/listarClientes.php?error=dbError");
-                                }
-                            } else {
-                                header("location: ../view/listarClientes.php?error=emailError&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
-                            }
-                        /*} else {
-                            Header("Location: ../view/listarClientes.php?error=nameApellido2&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
-                        }
+                    if ($resultado == 1) {
+                        Header("Location: ../view/listarClientes.php?success=inserted");
                     } else {
-                        Header("Location: ../view/listarClientes.php?error=nameApellido1&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
+                        Header("Location: ../view/listarClientes.php?error=dbError");
                     }
                 } else {
-                    Header("Location: ../view/listarClientes.php?error=nameError&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
-                }*/
+                    header("location: ../view/listarClientes.php?error=emailError&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
+                }
+                        
             } else {
                 header("location: ../view/listarClientes.php?error=numberFormat&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo ");
             }
