@@ -81,7 +81,7 @@ include '../business/clienteBusiness.php';
                             echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBCliente() . '"/></td>';
                             echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="apellido1" id="apellido1" value="' . $row->getApellido1TBCliente() . '"/></td>';
                             echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="apellido2" id="apellido2" value="' . $row->getApellido2TBCliente() . '"/></td>';
-                            echo '<td><input type="text" name="correo" id="correo" value="' . $row->getCorreoTBCliente() .  '"/></td>';
+                            echo '<td><input type="text" pattern="\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+" name="correo" id="correo" value="' . $row->getCorreoTBCliente() .  '"/></td>';
                             echo '<td><input type="text" class="mascaratelefono" name="telefono" id="telefono" value="' . $row->getTelefonoTBCliente() .  '"/></td>';
                             echo '<td><input type="date" name="fechaNacimiento" id="fechaNacimiento" value="' . $row->getFechaNacimientoTBCliente() .  '"/></td>';
                             echo '<td><select name="genero" id="genero">
@@ -139,7 +139,7 @@ include '../business/clienteBusiness.php';
                         <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="apellido1" id="apellido1" placeholder="Primer apellido"  value="<?php if(isset($_GET['apellido1'])){ echo $_GET['apellido1']; }?>" ></td>
                         <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="apellido2" id="apellido2" placeholder="Segundo apellido"  value="<?php if(isset($_GET['apellido2'])){ echo $_GET['apellido2']; }?>" ></td>
                         
-                        <td><input type="email" name="correo" id="correo" placeholder="micorreo@gmail.com"  value="<?php if(isset($_GET['correo'])){ echo $_GET['correo']; }?>" ></td>
+                        <td><input type="email" pattern="\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+" name="correo" id="correo" placeholder="micorreo@gmail.com"  value="<?php if(isset($_GET['correo'])){ echo $_GET['correo']; }?>" ></td>
                         <td><input type="text" class="mascaratelefono" name="telefono" id="telefono" placeholder="0000-0000"  value="<?php if(isset($_GET['telefono'])){ echo $_GET['telefono']; }?>" ></td>
                         <td><input type="date" name="fechaNacimiento" id="fechaNacimiento" placeholder="Fecha de nacimiento" value="<?php if(isset($_GET['fechaNacimiento'])){ echo $_GET['fechaNacimiento']; }?>" ></td>
                         <td>
@@ -150,29 +150,15 @@ include '../business/clienteBusiness.php';
                                 <option value="Otro">Otro</option>
                             </select>
                         </td>
-                        <td><input type="text" class="mascarapeso" name="peso" id="peso" placeholder="00.00kg"  value="<?php if(isset($_GET['peso'])){ echo $_GET['peso']; }?>" ></td>
+                        <td><input type="text" class="mascarapeso" name="peso" id="peso" min="20" max="250" placeholder="000.00kg"  value="<?php if(isset($_GET['peso'])){ echo $_GET['peso']; }?>" ></td>
                         <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="0.00m"  value="<?php if(isset($_GET['altura'])){ echo $_GET['altura']; }?>" ></td>
-                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick="validarEspacios()">Registrar cliente</button></td>
+                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente">Registrar cliente</button></td>
                     </tr>
                 </tbody>
             </table>
  
         </form>
     </div>    
-
-    <script>
-        function validarEspacios(){
-            varCorreo = document.getElementById('correo').value;
-            varNombre = document.getElementById('nombre').value;
-            varApellido1 = document.getElementById('apellido1').value;
-            varApellido2 = document.getElementById('apellido2').value;
-
-            var esValidoCorreo = /\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+$/.test(varCorreo);
-            var esValidoNombre = /^[a-zA-Z\u00c0-\u017F]+$/.test(varNombre);
-            var esValidoApellido1 = /^[a-zA-Z\u00c0-\u017F]+$/.test(varApellido1);
-            var esValidoApellido2 = /^[a-zA-Z\u00c0-\u017F]+$/.test(varApellido2);
-        }
-    </script>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/clienteAction.php">
@@ -188,10 +174,7 @@ include '../business/clienteBusiness.php';
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         } else if ($_GET['error'] == "emailError"){
                             echo '<p style="color: red">Error de formato en correo!</p>';
-                        } 
-                        /*else if ($_GET['error'] == "nameError"){
-                            echo '<p style="color: red">Error de formato de letra!</p>';
-                        } */
+                        }
 
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
