@@ -71,4 +71,23 @@ class PagoMetodoData extends Data{
         return $PagosMetodo;
     }
 
+
+    public function buscarPagoMetodo($palabra){
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('UTF8');
+
+        $querySelect = "SELECT * FROM tbcatalogopagometodo WHERE tbcatalogopagometodoid LIKE '%$palabra%' OR tbcatalogopagometodonombre LIKE '%$palabra%' OR tbcatalogopagometododescripcion LIKE '%$palabra%';";
+        $result = mysqli_query($conn, $querySelect);
+        mysqli_close($conn);
+        
+        $pagoMetodos = [];
+        while ($row = mysqli_fetch_array($result)) {
+            if($row['tbcatalogopagometodoactivo'] == 1){
+                $current = new PagoMetodo($row['tbcatalogopagometodoid'],$row['tbcatalogopagometodonombre'],$row['tbcatalogopagometododescripcion'],$row['tbcatalogopagometodoactivo']);
+                array_push($pagoMetodos, $current);
+            }
+        }
+        return $pagoMetodos;
+    }
+
 }

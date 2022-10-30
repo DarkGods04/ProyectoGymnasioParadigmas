@@ -1,5 +1,4 @@
 <?php
-
 include '../data/pagoPeridiocidadData.php';
 
 class PagoPeridiocidadBusiness {
