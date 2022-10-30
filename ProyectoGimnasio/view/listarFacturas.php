@@ -371,8 +371,7 @@ include '../business/servicioBusiness.php';
 
                         if ($_GET['error'] == "error") {
                             echo '<center><p style="color: red">Error en formato de factura</p></center>';
-                        } else
-                        if ($_GET['error'] == "emptyField") {
+                        } else if ($_GET['error'] == "emptyField") {
                             echo '<center><p style="color: red">Campo(s) vacio(s)</p></center>';
                         } else if ($_GET['error'] == "numberFormat") {
                             echo '<center><p style="color: red">Error, formato de numero!</p></center>';
@@ -385,6 +384,7 @@ include '../business/servicioBusiness.php';
                         }else if($_GET['error'] == "serviceTaxnotSelected"){
                             echo '<center><p style="color: red">Servicio e impuestos no agregados!</p></center>';
                         }
+                        
                     } else if (isset($_GET['success'])) {
                         echo '<center><p style="color: green">Transacción realizada!</p></center>';
                     }

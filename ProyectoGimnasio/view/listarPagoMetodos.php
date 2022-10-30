@@ -15,6 +15,7 @@ include '../business/pagoMetodoBusiness.php';
         function confirmarAccionModificar() {
             return confirm("¿Está seguro de que desea modificar este método de pago?");
         }
+
         function confirmarAccionEliminar() {
             return confirm("¿Está seguro de que desea eliminar este método de pago?");
         }
@@ -26,20 +27,9 @@ include '../business/pagoMetodoBusiness.php';
     include 'header.php';
     ?>
     <h1>Métodos de pago</h1>
-    <!--
-    <form action="" method="post" autocomplete="off">
-        <div>
-            <label for="campo"> Buscar: </label>
-            <input type="text" name="campo" id="campo" placeholder="Buscar">
-            <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listaPagoMetodo"></ul>
-        </div>
-    </form></br></br>
-    <script src="../js/peticiones.js"></script>
-    -->
     <div>
-        <?php 
-        $pagoMetodoBusiness = new PagoMetodoBusiness(); 
+        <?php
+        $pagoMetodoBusiness = new PagoMetodoBusiness();
         $pagoMetodos = $pagoMetodoBusiness->obtener();
         if (!empty($pagoMetodos)) {
         ?>
@@ -52,11 +42,11 @@ include '../business/pagoMetodoBusiness.php';
                         <th>Acciones</th>
                     </tr>
                 </thead>
-            
+
                 <tbody>
                     <?php
                     foreach ($pagoMetodos as $row) {
-                        if ($row->getActivoTBPagoMetodo() == 1){
+                        if ($row->getActivoTBPagoMetodo() == 1) {
                             echo '<form  method="POST" enctype="multipart/form-data" action="../business/pagoMetodoAction.php">';
                             echo '<tr>';
                             echo '<input type="hidden" name="idPagoMetodo" id="idPagoMetodo" value="' . $row->getIDPagoMetodo() . '"/>';
@@ -71,7 +61,7 @@ include '../business/pagoMetodoBusiness.php';
                         }
                     }
                     ?>
-                
+
                 </tbody>
             </table>
         <?php
@@ -83,7 +73,7 @@ include '../business/pagoMetodoBusiness.php';
 
     <div>
         <h3>Registrar un nuevo método de pago</h3>
-        
+
         <form method="POST" id="direccionform" action="../business/pagoMetodoAction.php">
             <table border="1">
                 <thead style="text-align: left;">
@@ -95,7 +85,9 @@ include '../business/pagoMetodoBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" name="nombrePagoMetodo" placeholder="Nombre"></td>
+                        <td><input type="text" name="nombrePagoMetodo" id="campo" placeholder="Nombre"></td>
+                        <ul id="listaPagoMetodo"></ul>
+                        <script src="../js/peticiones.js"></script>
                         <td><input type="text" name="descripcionPagoMetodo" placeholder="Descripción"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>
@@ -126,4 +118,5 @@ include '../business/pagoMetodoBusiness.php';
         </form>
     </div>
 </body>
+
 </html>
