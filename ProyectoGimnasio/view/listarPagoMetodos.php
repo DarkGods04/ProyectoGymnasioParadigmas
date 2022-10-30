@@ -85,9 +85,12 @@ include '../business/pagoMetodoBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoMetodo" placeholder="Nombre"></td>
+                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="campo" placeholder="Nombre"></td>
                         <td><input type="text" name="descripcionPagoMetodo" placeholder="Descripción"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
+                        <ul id="listarPagoMetodos"></ul>
+                        <script src="../js/peticiones.js"></script>
+                       
                     </tr>
                 </tbody>
             </table>

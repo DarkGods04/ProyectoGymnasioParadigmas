@@ -13,11 +13,13 @@ document.getElementById("campo").addEventListener("keyup",getNombresPagoMetodo)
 
 function getNombresPagoMetodo(){
     let inputCP = document.getElementById("campo").value
-    let lista = document.getElementById("listaPagoMetodo")
+    let lista = document.getElementById("listarPagoMetodos")
 
     if(inputCP.length > 0){
+
         let url= "../data/prediccionPagoMetodo.php"
         let formData = new FormData()
+
         formData.append("campo", inputCP)
         fetch(url, {
             method: "POST",
@@ -29,10 +31,10 @@ function getNombresPagoMetodo(){
             lista.innerHTML = data
         })
         .catch(err => console.log(err))
+
     }else {
         lista.style.display = 'none'
     }
-
 }
 
 function getNombresFacturas(){
