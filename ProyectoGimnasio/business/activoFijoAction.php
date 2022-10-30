@@ -14,7 +14,6 @@ if (isset($_POST['insertar'])) {
 
         if (strlen($placa) > 0 && strlen($serie) > 0 && strlen($modelo) > 0 && strlen($fechaCompra) > 0
             && strlen($montoCompra) > 0 && strlen($estadoUso) > 0) {
-
                 $tempMonto = str_replace("₡","",$montoCompra);
 
             if (!is_numeric($estadoUso)) {
