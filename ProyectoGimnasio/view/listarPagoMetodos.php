@@ -22,11 +22,9 @@ include '../business/pagoMetodoBusiness.php';
 </head>
 
 <body>
-    <?php
-    include 'header.php';
-    ?>
+    <?php include 'header.php';?>
+
     <h1>Métodos de pago</h1>
-    <!--
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
@@ -36,11 +34,18 @@ include '../business/pagoMetodoBusiness.php';
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
-    -->
+    
     <div>
         <?php 
+        if (!isset($_POST['campo'])) {
+            $_POST['campo'] = "";
+            $campo = $_POST['campo'];
+        }
+        $campo = $_POST['campo'];
+
         $pagoMetodoBusiness = new PagoMetodoBusiness(); 
-        $pagoMetodos = $pagoMetodoBusiness->obtener();
+        $pagoMetodos = $pagoMetodoBusiness->buscar($campo);
+
         if (!empty($pagoMetodos)) {
         ?>
             <table border="1">

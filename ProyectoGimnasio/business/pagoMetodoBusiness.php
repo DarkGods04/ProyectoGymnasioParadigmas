@@ -22,4 +22,9 @@ class PagoMetodoBusiness{
     public function obtener() {
         return $this->PagoMetodoData->getPagoMetodos();
     }
+
+    public function buscar($palabra) { 
+        return $this->PagoMetodoData->buscarPagoMetodo($palabra);
+    }
+    
 }
