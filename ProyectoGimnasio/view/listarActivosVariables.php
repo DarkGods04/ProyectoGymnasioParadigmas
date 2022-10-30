@@ -8,6 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Activos variables</title>
     <script>
         function confirmarAccionModificar() {
@@ -25,26 +26,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
-
-    <style type="text/css">
-        ul {
-            list-style-type: none;
-            width: 300px;
-            height: auto;
-            position: absolute;
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        li {
-            background-color: #EEEEEE;
-            border-top: 1px solid #9e9e9e;
-            padding: 5px;
-            width: 100%;
-            float: left;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
@@ -93,7 +74,7 @@
                             echo '<tr>';
                             echo '<input  type="hidden" name="idActivo" id="id" value="' . $row->getIdTBActivo() . '"/>';
                             echo '<td>' . $row->getIdTBActivo() . '</td>';
-                            echo '<td><input  type="text" name="name" id="name" value="' . $row->getNameTBActivo() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="name" id="name" value="' . $row->getNameTBActivo() . '"/></td>';
                             echo '<td><input  type="text" name="descripcion" id="descripcion" value="' . $row->getDescripcionTBActivo() . '"/></td>';
                             echo '<td><input class="mascaracantidad" type="text" name="cantidad" id="cantidad" value="' . $row->getCantidadTBActivo() . '"/></td>';
                             echo '<td><input type="text" class="mascaramonto" name="montoCompra" id="montoCompra" value="' . $row->getMontoCompraTBActivo() . '"/></td>';
@@ -108,7 +89,7 @@
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No hay activos variables registrados!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron activos variables!</p>';
         }
         ?>
     </div><br>
@@ -127,7 +108,7 @@
                 </thead>
 
                 <tbody>
-                    <td><input type="text" name="name" class="form-control" placeholder="Nombre del activo" autofocus></td>
+                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="name" class="form-control" placeholder="Nombre del activo" autofocus></td>
                     <td><input type="text" name="descripcion" class="form-control" placeholder="Descripción del activo" autofocus></td>
                     <td><input type="text" class="mascaracantidad" name="cantidad" class="form-control" placeholder="Cantidad" autofocus></td>
                     <td><input type="text" class="mascaramonto" name="montoCompra" class="form-control" placeholder="Monto de compra" autofocus></td>

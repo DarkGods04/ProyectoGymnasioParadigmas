@@ -57,7 +57,7 @@ include '../business/impuestoVentaBusiness.php';
                 <thead style="text-align: left;">
                     <tr>
                         <th>ID</th>
-                        <th>Valor del impuesto</th>
+                        <th>Valor del impuesto (%)</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
@@ -96,7 +96,7 @@ include '../business/impuestoVentaBusiness.php';
         <form method="POST" id="direccionform" action="../business/impuestoVentaAction.php">
             <table border="1">
                 <thead style="text-align: left;">
-                    <th>Valor del impuesto</th>
+                    <th>Valor del impuesto (%)</th>
                     <th>Descripción</th>
                     <th>Acción</th>
                 </thead>

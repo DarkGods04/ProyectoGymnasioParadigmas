@@ -22,11 +22,9 @@ include '../business/pagoMetodoBusiness.php';
 </head>
 
 <body>
-    <?php
-    include 'header.php';
-    ?>
+    <?php include 'header.php';?>
+
     <h1>Métodos de pago</h1>
-    <!--
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
@@ -36,11 +34,18 @@ include '../business/pagoMetodoBusiness.php';
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
-    -->
+    
     <div>
         <?php 
+        if (!isset($_POST['campo'])) {
+            $_POST['campo'] = "";
+            $campo = $_POST['campo'];
+        }
+        $campo = $_POST['campo'];
+
         $pagoMetodoBusiness = new PagoMetodoBusiness(); 
-        $pagoMetodos = $pagoMetodoBusiness->obtener();
+        $pagoMetodos = $pagoMetodoBusiness->buscar($campo);
+
         if (!empty($pagoMetodos)) {
         ?>
             <table border="1">
@@ -61,7 +66,7 @@ include '../business/pagoMetodoBusiness.php';
                             echo '<tr>';
                             echo '<input type="hidden" name="idPagoMetodo" id="idPagoMetodo" value="' . $row->getIDPagoMetodo() . '"/>';
                             echo '<td>' . $row->getIDPagoMetodo() . '</td>';
-                            echo '<td><input type="text" name="nombrePagoMetodo" id="nombrePagoMetodo" value="' . $row->getNombreTBPagoMetodo() . '"/></td>';
+                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="nombrePagoMetodo" value="' . $row->getNombreTBPagoMetodo() . '"/></td>';
                             echo '<td><input type="text" name="descripcionPagoMetodo" id="descripcionPagoMetodo" value="' . $row->getDescripcionTBPagoMetodo() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -95,7 +100,7 @@ include '../business/pagoMetodoBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" name="nombrePagoMetodo" placeholder="Nombre"></td>
+                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoMetodo" placeholder="Nombre"></td>
                         <td><input type="text" name="descripcionPagoMetodo" placeholder="Descripción"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>

@@ -27,14 +27,6 @@ include '../business/clienteBusiness.php';
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
-    <script>
-        jQuery(function($){
-            $("#telefono").mask("9999-9999");
-            $("#peso").mask("99.99kg");
-            $("#altura").mask("9.99m");
-        });
-        
-    </script>
 </head>
 
 <body>
@@ -47,7 +39,7 @@ include '../business/clienteBusiness.php';
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listaClientes"></ul>
+            <ul id="listaClientesDesactivados"></ul>
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
@@ -61,7 +53,7 @@ include '../business/clienteBusiness.php';
         $campo = $_POST['campo'];
 
         $clienteBusiness = new ClienteBusiness();
-        $clientes = $clienteBusiness->buscar($campo);
+        $clientes = $clienteBusiness->buscarRecuperar($campo);
         if (!empty($clientes)) {
         ?>
             <table border="1">
@@ -75,8 +67,8 @@ include '../business/clienteBusiness.php';
                         <th>Teléfono</th>
                         <th>Fecha nacimiento</th>
                         <th>Género</th>
-                        <th>Peso</th>
-                        <th>Altura</th>
+                        <th>Peso (Kg)</th>
+                        <th>Altura (cm)</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -84,14 +76,14 @@ include '../business/clienteBusiness.php';
                 <tbody>
                     <?php
                     foreach ($clientes as $row) {
-                        if ($row->getActivoTBCliente() == 0) {
+                        if ($row->getActivoTBCliente() != 1) {
                             echo '<form  method="POST" enctype="multipart/form-data" action="../business/clienteAction.php">';
                             echo '<tr>';
                             echo '<input  type="hidden" name="idCliente" id="id" value="' . $row->getIdTBCliente() . '"/>';
                             echo '<td>' . $row->getIdTBCliente() . '</td>';
-                            echo '<td><input class="mascaranombre" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBCliente() . '"/></td>';
-                            echo '<td><input class="mascaranombre" type="text" name="apellido1" id="apellido1" value="' . $row->getApellido1TBCliente() . '"/></td>';
-                            echo '<td><input class="mascaranombre" type="text" name="apellido2" id="apellido2" value="' . $row->getApellido2TBCliente() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBCliente() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="apellido1" id="apellido1" value="' . $row->getApellido1TBCliente() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="apellido2" id="apellido2" value="' . $row->getApellido2TBCliente() . '"/></td>';
                             echo '<td><input type="text" name="correo" id="correo" value="' . $row->getCorreoTBCliente() .  '"/></td>';
                             echo '<td><input type="text" class="mascaratelefono" name="telefono" id="telefono" value="' . $row->getTelefonoTBCliente() .  '"/></td>';
                             echo '<td><input type="date" name="fechaNacimiento" id="fechaNacimiento" value="' . $row->getFechaNacimientoTBCliente() .  '"/></td>';

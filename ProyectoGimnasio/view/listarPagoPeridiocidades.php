@@ -15,7 +15,6 @@ include '../business/pagoPeridiocidadBusiness.php';
         function confirmarAccionModificar() {
             return confirm("¿Está seguro de que desea modificar esta peridiocidad de pago?");
         }
-
         function confirmarAccionEliminar() {
             return confirm("¿Está seguro de que desea eliminar esta peridiocidad de pago?");
         }
@@ -25,25 +24,25 @@ include '../business/pagoPeridiocidadBusiness.php';
 <body>
     <?php include 'header.php';?>
 
-    <h1>Peridiocidades de pago (falta autocompletado)</h1>
+    <h1>Peridiocidades de pago</h1>
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listarPagoPeridiocidad"></ul>
+            <ul id="listaPagoPeridiocidad"></ul>
         </div>
     </form></br></br>
-
     <script src="../js/peticiones.js"></script>
 
     <div>        
         <?php
-       if (!isset($_POST['campo'])) {
+        if (!isset($_POST['campo'])) {
             $_POST['campo'] = "";
             $campo = $_POST['campo'];
         }
         $campo = $_POST['campo'];
+
         $pagoPeridiocidadBusiness = new PagoPeridiocidadBusiness();
         $pagoPeridiocidades = $pagoPeridiocidadBusiness->buscar($campo);
 
@@ -68,7 +67,7 @@ include '../business/pagoPeridiocidadBusiness.php';
                             echo '<tr>';
                             echo '<input type="hidden" name="idPagoPeridiocidad" id="idPagoPeridiocidad" value="' . $row->getIdTBPagoPeridiocidad() . '"/>';
                             echo '<td>' . $row->getIdTBPagoPeridiocidad() . '</td>';
-                            echo '<td><input type="text" name="nombrePagoPeridiocidad" id="nombrePagoPeridiocidad" value="' . $row->getNombreTBPagoPeridiocidad() . '"/></td>';
+                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad" id="nombrePagoPeridiocidad" value="' . $row->getNombreTBPagoPeridiocidad() . '"/></td>';
                             echo '<td><input type="text" name="descripcionPagoPeridiocidad" id="descripcionPagoPeridiocidad" value="' . $row->getDescripcionTBPagoPeridiocidad() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -102,7 +101,7 @@ include '../business/pagoPeridiocidadBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                    <td><input type="text" name="nombrePagoPeridiocidad" placeholder="Nombre"></td>
+                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad" placeholder="Nombre"></td>
                         <td><input type="text" name="descripcionPagoPeridiocidad" placeholder="Descripción"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>

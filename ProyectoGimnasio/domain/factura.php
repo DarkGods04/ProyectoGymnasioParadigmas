@@ -1,7 +1,6 @@
 <?php
  
-class factura{
-
+class Factura{
     private $idTBFactura;
     private $clienteidTBFactura;
     private $instructoridTBFactura;
@@ -13,9 +12,8 @@ class factura{
     private $montoNetoTBFactura;
     private $activoTBFactura;
 
-
-    function factura($idTBFactura, $clienteidTBFactura, $instructoridTBFactura, $fechaPagoTBFactura,$pagoModalidadTBFactura,$serviciosTBFactura,$montoBrutoTBFactura,$impuestoVentaidTBFactura,
-    $montoNetoTBFactura,$activoTBFactura) {
+    function Factura($idTBFactura, $clienteidTBFactura, $instructoridTBFactura, $fechaPagoTBFactura,$pagoModalidadTBFactura,$serviciosTBFactura,$montoBrutoTBFactura,$impuestoVentaidTBFactura,
+    	$montoNetoTBFactura,$activoTBFactura) {
 		$this->idTBFactura = $idTBFactura;
         $this->clienteidTBFactura = $clienteidTBFactura;
         $this->instructoridTBFactura = $instructoridTBFactura;
@@ -26,7 +24,6 @@ class factura{
         $this->impuestoVentaidTBFactura = $impuestoVentaidTBFactura;
         $this->montoNetoTBFactura = $montoNetoTBFactura;
         $this->activoTBFactura = $activoTBFactura;
-		
 	}
 
 	public function getIdTBFactura() {

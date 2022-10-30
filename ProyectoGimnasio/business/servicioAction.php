@@ -1,6 +1,5 @@
 <?php
 include 'servicioBusiness.php';
-//Arturo Elizondo
 
 if (isset($_POST["insertar"])) {
     if (isset($_POST["nombreServicio"]) && isset($_POST["descripcionServicio"]) && isset($_POST["montoServicio"])) {
@@ -10,10 +9,10 @@ if (isset($_POST["insertar"])) {
         $montoServicio = $_POST["montoServicio"];
 
         if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
-            //$tempMonto = str_replace("₡","",$montoServicio);
+            $tempMonto = str_replace("₡","",$montoServicio);
 
-            if (is_numeric($montoServicio)) {
-                $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $montoServicio, 1);
+            //if (is_numeric($montoServicio)) {
+                $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $tempMonto, 1);
                 $servicioBusiness = new servicioBusiness();
                 $result = $servicioBusiness->insertar($servicio);
 
@@ -22,15 +21,17 @@ if (isset($_POST["insertar"])) {
                 } else {
                     header("location: ../view/listarServicios.php?error=dbError");
                 }
-            
-            } else {
-                header("location: ../view/listarServicios.php?error=emptyField");
-            }
+            /*} else {
+                header("location: ../view/listarServicios.php?error=numberFormat");
+            }*/
         } else {
-            header("location: ../view/listarServicios.php?error=error");
+            header("location: ../view/listarServicios.php?error=emptyField");
         }
+    } else {
+        header("location: ../view/listarServicios.php?error=error");
     }
 }
+
 
 if (isset($_POST['eliminar'])) {
     if (isset($_POST['idServicio'])) {
@@ -59,10 +60,10 @@ if (isset($_POST['actualizar'])) {
             $montoServicio = $_POST["montoServicio"];
 
             if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
-                //$tempMonto = str_replace("₡","",$montoServicio);
+                $tempMonto = str_replace("₡","",$montoServicio);
 
-                if (is_numeric($montoServicio)) {
-                    $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $montoServicio, 1);
+                //if (is_numeric($montoServicio)) {
+                    $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $tempMonto, 1);
                     $servicioBusiness = new servicioBusiness();
                     $result = $servicioBusiness->update($servicio, $anteriorMontoServicio);
 
@@ -71,9 +72,9 @@ if (isset($_POST['actualizar'])) {
                     } else {
                         header("location: ../view/listarServicios.php?error=dbError");
                     }
-                } else {
+                /*} else {
                     header("location: ../view/listarServicios.php?error=numberFormat");
-                }
+                }*/
             } else {
                 header("location: ../view/listarServicios.php?error=emptyField");
             }

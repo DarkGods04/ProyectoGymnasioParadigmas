@@ -37,7 +37,7 @@
     </div>
 
     <div>
-        <a href="./view/listarImpuestoVentas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Impuestos</a>
+        <a href="./view/listarImpuestoVentas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Impuestos de venta</a>
     </div>
 
     <div>
@@ -53,7 +53,7 @@
     </div>
 
     <div>
-        <a href="./view/listarModalidadfuncionalcriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de Modalidad Funcional</a>
+        <a href="./view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de Modalidad Funcional</a>
     </div>
 
 

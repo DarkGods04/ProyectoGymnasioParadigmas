@@ -5,18 +5,17 @@ require 'data.php';
 $con = new Data();
 $pdo = $con->Data();
 
-$colums = ['tbclientepesoid', 'tbclienteid'];
-
 $campo = $_POST["campo"];
 
-$sql = "SELECT " . implode(", ", $colums) . "
-FROM tbclientepeso WHERE tbclienteid  LIKE ? ORDER BY tbclienteid ASC LIMIT 0,10";
+$sql = "SELECT tbclienteid, tbclientenombre, tbclienteapellido1 FROM tbcliente 
+        WHERE tbclienteid LIKE ? OR (tbclientenombre LIKE ?) OR (tbclienteapellido1 LIKE ?)
+        ORDER BY tbclienteid ASC LIMIT 0, 10";
 $query = $pdo->prepare($sql);
-$query->execute([$campo. '%']);
+$query->execute([$campo . '%', $campo . '%', $campo . '%']);
 
 $html = "";
-while($row = $query-> fetch(PDO::FETCH_ASSOC)){
-    $html .= "<li onclick=\"mostrar('".$row["tbclienteid"] ."')\">" . $row["tbclientepesoid"] . " - " . $row["tbclienteid"] . "</li>";
+while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+    $html .= "<li onclick=\"mostrar('" . $row["tbclientenombre"] . "')\">" . $row["tbclientenombre"] . " " . $row["tbclienteapellido1"] . "</li>";
 }
 
 echo json_encode($html, JSON_UNESCAPED_UNICODE);

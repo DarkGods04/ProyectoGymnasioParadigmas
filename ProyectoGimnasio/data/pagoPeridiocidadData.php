@@ -77,7 +77,7 @@ class PagoPeridiocidadData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
-        $querySelect = "SELECT * FROM tbcatalogopagoperidiocidad Where tbcatalogopagoperidiocidadid LIKE '%$palabra%' OR tbcatalogopagoperidiocidadnombre LIKE '%$palabra%' OR tbcatalogopagoperidiocidaddescripcion LIKE '%$palabra%';";
+        $querySelect = "SELECT * FROM tbcatalogopagoperidiocidad WHERE tbcatalogopagoperidiocidadid LIKE '%$palabra%' OR tbcatalogopagoperidiocidadnombre LIKE '%$palabra%' OR tbcatalogopagoperidiocidaddescripcion LIKE '%$palabra%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         

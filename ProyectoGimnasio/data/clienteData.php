@@ -112,16 +112,39 @@ class ClienteData extends Data {
         
         $Clientes = [];
         while ($row = mysqli_fetch_array($result)) {
-            $currentDireccion = new Cliente($row['tbclienteid'], $row['tbclientenombre'], 
-            $row['tbclienteapellido1'], $row['tbclienteapellido2'], $row['tbclientetelefono'],
-            $row['tbclientefechanacimiento'], $row['tbclientegenero'], $row['tbclientepeso'],
-            $row['tbclientealtura'], $row['tbclientecorreo'], $row['tbclienteactivo']);
-            array_push($Clientes, $currentDireccion);
-            
+            if($row['tbclienteactivo'] == 1){
+                $currentDireccion = new Cliente($row['tbclienteid'], $row['tbclientenombre'], 
+                $row['tbclienteapellido1'], $row['tbclienteapellido2'], $row['tbclientetelefono'],
+                $row['tbclientefechanacimiento'], $row['tbclientegenero'], $row['tbclientepeso'],
+                $row['tbclientealtura'], $row['tbclientecorreo'], $row['tbclienteactivo']);
+                array_push($Clientes, $currentDireccion);
+            }
         }
         return $Clientes;
     }
 
+    public function buscarClientesDesactivados($palabra){
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('UTF8');
+
+        $querySelect = "SELECT * FROM tbcliente WHERE tbclienteid LIKE '%$palabra%' OR tbclientenombre LIKE '%$palabra%' OR tbclienteapellido1 LIKE '%$palabra%' OR
+        tbclienteapellido2 LIKE '%$palabra%' OR tbclientetelefono LIKE '%$palabra%' OR tbclientefechanacimiento LIKE '%$palabra%' OR tbclientegenero LIKE '%$palabra%' OR 
+        tbclientepeso LIKE '%$palabra%' OR tbclientealtura LIKE '%$palabra%' OR tbclientecorreo LIKE '%$palabra%';";
+        $result = mysqli_query($conn, $querySelect);
+        mysqli_close($conn);
+        
+        $Clientes = [];
+        while ($row = mysqli_fetch_array($result)) {
+            if($row['tbclienteactivo'] == 0){
+                $currentDireccion = new Cliente($row['tbclienteid'], $row['tbclientenombre'], 
+                $row['tbclienteapellido1'], $row['tbclienteapellido2'], $row['tbclientetelefono'],
+                $row['tbclientefechanacimiento'], $row['tbclientegenero'], $row['tbclientepeso'],
+                $row['tbclientealtura'], $row['tbclientecorreo'], $row['tbclienteactivo']);
+                array_push($Clientes, $currentDireccion);
+            }
+        }
+        return $Clientes;
+    }
    
     
 }

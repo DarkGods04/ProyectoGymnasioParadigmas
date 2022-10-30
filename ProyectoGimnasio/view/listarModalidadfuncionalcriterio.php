@@ -1,6 +1,6 @@
 <?php
-include '../business/modalidadfuncionalcriterioBusiness.php';
-include '../business/ModalidadFuncionalBusiness.php';
+include '../business/modalidadFuncionalCriterioBusiness.php';
+include '../business/modalidadFuncionalBusiness.php';
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ include '../business/ModalidadFuncionalBusiness.php';
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listaModalidadfuncionalcriterio"></ul>
+            <ul id="listaModalidadFuncionalCriterio"></ul>
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
@@ -47,7 +47,7 @@ include '../business/ModalidadFuncionalBusiness.php';
         }
         $campo = $_POST['campo'];
 
-        $modalidadfuncionalcriterioBusiness = new ModalidadfuncionalcriterioBusiness();
+        $modalidadfuncionalcriterioBusiness = new ModalidadFuncionalCriterioBusiness();
         $modalidadfuncionalcriterios = $modalidadfuncionalcriterioBusiness->buscar($campo);
         if (!empty($modalidadfuncionalcriterios)) {
         ?>
@@ -69,7 +69,7 @@ include '../business/ModalidadFuncionalBusiness.php';
                     foreach ($modalidadfuncionalcriterios as $row) {
                         if ($row->getActivoTBModalidadfuncionalcriterio() == 1) {
                         
-                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/modalidadfuncionalcriterioAction.php">';
+                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/modalidadFuncionalCriterioAction.php">';
                             echo '<tr>';
                             echo '<input  type="hidden" name="idModalidadfuncionalcriterio" id="id" value="' . $row->getIdTBModalidadfuncionalcriterio() . '"/>';
                             echo '<td>' . $row->getIdTBModalidadfuncionalcriterio() . '</td>';
@@ -95,7 +95,7 @@ include '../business/ModalidadFuncionalBusiness.php';
 
 
                        <?php
-                            echo '<td><input  type="text" name="nombre" id="nombre" value="' . $row->getNombreTBModalidadfuncionalcriterio() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBModalidadfuncionalcriterio() . '"/></td>';
                             echo '<td><input type="text" size="40" name="descripcion" id="descripcion" value="' . $row->getDescripcionTBModalidadfuncionalcriterio() .  '"/></td>';
                             echo '<td><input type="text" name="rangoValorMaximo" id="rangoValorMaximo" value="' . $row->getRangoValorMaximoTBModalidadfuncionalcriterio() .  '"/></td>';
                             echo '<td><input type="text" name="rangoValorMinimo" id="rangoValorMinimo" value="'. $row->getRangoValorMinimoTBModalidadfuncionalcriterio() . '"/></td>';
@@ -110,15 +110,15 @@ include '../business/ModalidadFuncionalBusiness.php';
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No hay criterios registrados!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron criterios!</p>';
         }
         ?>
     </div><br>
 
     <div>
-        <h3>Registrar un nuevo criterio funcional</h3>
+        <h3>Registrar un nuevo criterio para modalidad funcional</h3>
 
-        <form method="POST" id="direccionform" action="../business/modalidadfuncionalcriterioAction.php">
+        <form method="POST" id="direccionform" action="../business/modalidadFuncionalCriterioAction.php">
             <table border="1">
                 <thead style="text-align: left;">
                 <tr>
@@ -148,7 +148,7 @@ include '../business/ModalidadFuncionalBusiness.php';
                                 } endforeach ?>
                         </select>
                     </td>
-                    <td><input type="text" name="nombre" placeholder="Nombre"></td>
+                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombre" placeholder="Nombre"></td>
                     <td><input type="text" name="descripcion" placeholder="Descripcion"></td>
                     <td><input type="text" name="rangoValorMaximo" placeholder="Valor Máximo"></td>
                     <td><input type="text" name="rangoValorMinimo" placeholder="Valor Mínimo"></td>
@@ -160,7 +160,7 @@ include '../business/ModalidadFuncionalBusiness.php';
     </div>
 
     <div>
-        <form method="POST" enctype="multipart/form-data" action="../business/activoFijoAction.php">
+        <form method="POST" enctype="multipart/form-data" action="../business/modalidadFuncionalCriterioAction.php">
             <tr>
                 <td>
                     <?php
