@@ -109,6 +109,8 @@ include '../business/pagoMetodoBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        }else if($_GET['error'] == "existe"){
+                            echo '<center><p style="color: red">¡Este método de pago ya existe, intente de nuevo con otro nombre!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';

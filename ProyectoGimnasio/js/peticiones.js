@@ -341,4 +341,5 @@ function getNombresModalidadFuncionalCriterio(){
 
 function mostrar(valor){
     document.getElementById("campo").value = valor;
+    
 }
