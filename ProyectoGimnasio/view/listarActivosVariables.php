@@ -93,7 +93,7 @@
                             echo '<tr>';
                             echo '<input  type="hidden" name="idActivo" id="id" value="' . $row->getIdTBActivo() . '"/>';
                             echo '<td>' . $row->getIdTBActivo() . '</td>';
-                            echo '<td><input  type="text" name="name" id="name" value="' . $row->getNameTBActivo() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="name" id="name" value="' . $row->getNameTBActivo() . '"/></td>';
                             echo '<td><input  type="text" name="descripcion" id="descripcion" value="' . $row->getDescripcionTBActivo() . '"/></td>';
                             echo '<td><input class="mascaracantidad" type="text" name="cantidad" id="cantidad" value="' . $row->getCantidadTBActivo() . '"/></td>';
                             echo '<td><input type="text" class="mascaramonto" name="montoCompra" id="montoCompra" value="' . $row->getMontoCompraTBActivo() . '"/></td>';
@@ -127,7 +127,7 @@
                 </thead>
 
                 <tbody>
-                    <td><input type="text" name="name" class="form-control" placeholder="Nombre del activo" autofocus></td>
+                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="name" class="form-control" placeholder="Nombre del activo" autofocus></td>
                     <td><input type="text" name="descripcion" class="form-control" placeholder="Descripción del activo" autofocus></td>
                     <td><input type="text" class="mascaracantidad" name="cantidad" class="form-control" placeholder="Cantidad" autofocus></td>
                     <td><input type="text" class="mascaramonto" name="montoCompra" class="form-control" placeholder="Monto de compra" autofocus></td>

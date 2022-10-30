@@ -69,7 +69,7 @@ include '../business/modalidadFuncionalBusiness.php';
                             echo '<tr>';
                             echo '<input  type="hidden" name="idModalidadFuncional" id="idModalidadFuncional" value="' . $row->getIdTBModalidadFuncional() . '"/>';
                             echo '<td>' . $row->getIdTBModalidadFuncional() . '</td>';
-                            echo '<td><input  type="text" name="nombreModalidadFuncional" id="nombreModalidadFuncional" value="' . $row->getNombreTBModalidadFuncional() . '"/></td>';
+                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombreModalidadFuncional" id="nombreModalidadFuncional" value="' . $row->getNombreTBModalidadFuncional() . '"/></td>';
                             echo '<td><input  type="text" name="descripcionModalidadFuncional" id="descripcionModalidadFuncional" value="' . $row->getDescripcionTBModalidadFuncional() . '"/></td>';
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
                             echo '<input type="submit" name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
@@ -99,7 +99,7 @@ include '../business/modalidadFuncionalBusiness.php';
                 </thead>
 
                 <tbody>
-                    <td><input type="text" name="nombreModalidadFuncional" class="form-control" placeholder="Nombre de la modalidad funcional"></td>
+                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreModalidadFuncional" class="form-control" placeholder="Nombre de la modalidad funcional"></td>
                     <td><input type="text" name="descripcionModalidadFuncional" class="form-control" placeholder="Descripción de la modalidad funcional"></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                 </tbody>
