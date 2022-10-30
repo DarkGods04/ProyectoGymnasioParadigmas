@@ -69,7 +69,7 @@ include '../business/modalidadFuncionalBusiness.php';
                     foreach ($modalidadfuncionalcriterios as $row) {
                         if ($row->getActivoTBModalidadfuncionalcriterio() == 1) {
                         
-                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/modalidadfuncionalcriterioAction.php">';
+                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/modalidadFuncionalCriterioAction.php">';
                             echo '<tr>';
                             echo '<input  type="hidden" name="idModalidadfuncionalcriterio" id="id" value="' . $row->getIdTBModalidadfuncionalcriterio() . '"/>';
                             echo '<td>' . $row->getIdTBModalidadfuncionalcriterio() . '</td>';
@@ -110,7 +110,7 @@ include '../business/modalidadFuncionalBusiness.php';
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No hay criterios registrados!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron criterios!</p>';
         }
         ?>
     </div><br>
@@ -118,7 +118,7 @@ include '../business/modalidadFuncionalBusiness.php';
     <div>
         <h3>Registrar un nuevo criterio para modalidad funcional</h3>
 
-        <form method="POST" id="direccionform" action="../business/modalidadfuncionalcriterioAction.php">
+        <form method="POST" id="direccionform" action="../business/modalidadFuncionalCriterioAction.php">
             <table border="1">
                 <thead style="text-align: left;">
                 <tr>
@@ -160,7 +160,7 @@ include '../business/modalidadFuncionalBusiness.php';
     </div>
 
     <div>
-        <form method="POST" enctype="multipart/form-data" action="../business/activoFijoAction.php">
+        <form method="POST" enctype="multipart/form-data" action="../business/modalidadFuncionalCriterioAction.php">
             <tr>
                 <td>
                     <?php

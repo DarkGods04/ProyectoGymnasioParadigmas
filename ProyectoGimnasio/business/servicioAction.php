@@ -1,6 +1,5 @@
 <?php
 include 'servicioBusiness.php';
-//Arturo Elizondo
 
 if (isset($_POST["insertar"])) {
     if (isset($_POST["nombreServicio"]) && isset($_POST["descripcionServicio"]) && isset($_POST["montoServicio"])) {
@@ -22,15 +21,17 @@ if (isset($_POST["insertar"])) {
                 } else {
                     header("location: ../view/listarServicios.php?error=dbError");
                 }
-            
             /*} else {
-                header("location: ../view/listarServicios.php?error=emptyField");
+                header("location: ../view/listarServicios.php?error=numberFormat");
             }*/
         } else {
-            header("location: ../view/listarServicios.php?error=error");
+            header("location: ../view/listarServicios.php?error=emptyField");
         }
+    } else {
+        header("location: ../view/listarServicios.php?error=error");
     }
 }
+
 
 if (isset($_POST['eliminar'])) {
     if (isset($_POST['idServicio'])) {

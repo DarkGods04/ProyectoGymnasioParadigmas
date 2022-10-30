@@ -139,7 +139,7 @@
     </div>
 
     <div>
-        <form method="POST" enctype="multipart/form-data" action="../business/instructorAction.php">
+        <form method="POST" enctype="multipart/form-data" action="../business/clientePesoAction.php">
             <tr>
                 <td>
                     <?php

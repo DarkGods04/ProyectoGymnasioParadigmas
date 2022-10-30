@@ -369,7 +369,7 @@ include '../business/servicioBusiness.php';
                     if (isset($_GET['error'])) {
 
                         if ($_GET['error'] == "error") {
-                            echo "Error en formato de factura";
+                            echo '<p style="color: red">Error en formato de factura</p>';
                         } else
                         if ($_GET['error'] == "emptyField") {
                             echo '<p style="color: red">Campo(s) vacio(s)</p>';
