@@ -73,7 +73,7 @@ include '../business/servicioBusiness.php';
                             echo '<input  type="hidden" name="idServicio" id="idServicio" value="' . $row->getIdTBServicio() . '"/>';
                             echo '<input  type="hidden" name="anteriorMontoServicio" id="anteriorMontoServicio" value="' . $row->getMontoTBServicio() . '"/>';
                             echo '<td>' . $row->getIdTBServicio() . '</td>';
-                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombreServicio" id="nombreServicio" value="' . $row->getNombreTBServicio() . '"/></td>';
+                            echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="nombreServicio" id="nombreServicio" value="' . $row->getNombreTBServicio() . '"/></td>';
                             echo '<td><input  type="text" name="descripcionServicio" id="descripcionServicio" value="' . $row->getDescripcionTBServicio() . '"/></td>';
                             echo '<td><input  type="text" class="mascaramonto" name="montoServicio" id="montoServicio" value="' . $row->getMontoTBServicio() . '"/></td>';
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -106,7 +106,7 @@ include '../business/servicioBusiness.php';
                 </thead>
 
                 <tbody>
-                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreServicio" class="form-control" placeholder="Nombre del servicio" value="<?php if(isset($_GET['nombreServicio'])){ echo $_GET['nombreServicio']; }?>"></td>
+                    <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombreServicio" class="form-control" placeholder="Nombre del servicio" value="<?php if(isset($_GET['nombreServicio'])){ echo $_GET['nombreServicio']; }?>"></td>
                     <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio" value="<?php if(isset($_GET['descripcionServicio'])){ echo $_GET['descripcionServicio']; }?>"></td>
                     <td><input type="text" class="mascaramonto" name="montoServicio" class="form-control" placeholder="Monto del servicio" value="<?php if(isset($_GET['montoServicio'])){ echo $_GET['montoServicio']; }?>"></td>
                     <td><select name="periodicidad" required>

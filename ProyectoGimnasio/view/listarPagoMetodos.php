@@ -50,7 +50,7 @@ include '../business/pagoMetodoBusiness.php';
                             echo '<tr>';
                             echo '<input type="hidden" name="idPagoMetodo" id="idPagoMetodo" value="' . $row->getIDPagoMetodo() . '"/>';
                             echo '<td>' . $row->getIDPagoMetodo() . '</td>';
-                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="nombrePagoMetodo" value="' . $row->getNombreTBPagoMetodo() . '"/></td>';
+                            echo '<td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="nombrePagoMetodo" value="' . $row->getNombreTBPagoMetodo() . '"/></td>';
                             echo '<td><input type="text" name="descripcionPagoMetodo" id="descripcionPagoMetodo" value="' . $row->getDescripcionTBPagoMetodo() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -84,7 +84,7 @@ include '../business/pagoMetodoBusiness.php';
 
                 <tbody>
                     <tr>
-                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="campo" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoMetodo'])){ echo $_GET['nombrePagoMetodo']; }?>"></td>
+                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="campo" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoMetodo'])){ echo $_GET['nombrePagoMetodo']; }?>"></td>
                         <td><input type="text" name="descripcionPagoMetodo" placeholder="Descripción" value="<?php if(isset($_GET['descripcionPagoMetodo'])){ echo $_GET['descripcionPagoMetodo']; }?>"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                         <ul id="listarPagoMetodos"></ul>
