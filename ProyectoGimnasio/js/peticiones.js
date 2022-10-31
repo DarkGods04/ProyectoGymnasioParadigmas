@@ -12,6 +12,57 @@ document.getElementById("campo").addEventListener("keyup", getNombresFacturas)
 document.getElementById("campo").addEventListener("keyup", getNombresPagoMetodo)
 document.getElementById("campo").addEventListener("keyup", getNombresPeridiocidades)
 document.getElementById("campo2").addEventListener("keyup", getNombresPeridiocidades)
+document.getElementById("campo").addEventListener("keyup", getNombresGruposMusculares)
+document.getElementById("campo2").addEventListener("keyup", getNombresGruposMusculares)
+
+function getNombresGruposMusculares() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listarGruposMusculares")
+    let inputCP2 = document.getElementById("campo2").value
+    let lista2 = document.getElementById("listarGruposMusculares2")
+
+    if (inputCP2.length > 0) {
+
+        let url = "../data/prediccionGruposMusculares.php"
+        let formData = new FormData()
+
+        formData.append("campo2", inputCP2)
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista2.style.display = 'block'
+                lista2.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista2.style.display = 'none'
+    }
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionGruposMusculares.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+}
 
 
 function getNombresPeridiocidades() {
@@ -393,10 +444,8 @@ function getNombresModalidadFuncionalCriterio() {
 
 function mostrar(valor) {
     document.getElementById("campo").value = valor;
-    ventana.close();
 }
 
 function mostrarCampo2(valor) {
     document.getElementById("campo2").value = valor;
-    ventana.close();
 }

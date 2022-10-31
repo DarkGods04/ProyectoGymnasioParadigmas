@@ -24,7 +24,6 @@ include '../business/grupoMuscularBusiness.php';
 
 <body>
     <?php include 'header.php'; ?>
-
     <h1>Grupos musculares </h1>
     <form action="" method="post" autocomplete="off">
         <div>
@@ -89,7 +88,6 @@ include '../business/grupoMuscularBusiness.php';
         <form method="POST" id="direccionform" action="../business/grupoMuscularAction.php">
             <table border="1">
                 <thead style="text-align: left;">
-
                     <tr>
                         <th>Nombre</th>
                         <th>Descripción</th>
