@@ -30,7 +30,7 @@ include '../business/instructorBusiness.php';
     <?php
     include 'header.php';
     ?>
-    <h1>Instructores</h1>
+    <h1>Instructores 123</h1>
 
     <form action="" method="post" autocomplete="off">
         <div>
