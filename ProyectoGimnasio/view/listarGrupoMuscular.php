@@ -1,5 +1,5 @@
 <?php
-include '../business/pagoPeridiocidadBusiness.php';
+include '../business/grupoMuscularBusiness.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,27 +10,27 @@ include '../business/pagoPeridiocidadBusiness.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <title>Peridiocidades de pago</title>
+    <title>Grupos Musculares</title>
     <script>
         function confirmarAccionModificar() {
-            return confirm("¿Está seguro de que desea modificar esta peridiocidad de pago?");
+            return confirm("¿Está seguro de que desea modificar este grupo muscular?");
         }
+
         function confirmarAccionEliminar() {
-            return confirm("¿Está seguro de que desea eliminar esta peridiocidad de pago?");
+            return confirm("¿Está seguro de que desea eliminar este grupo muscular?");
         }
     </script>
 </head>
 
 <body>
     <?php include 'header.php'; ?>
-
-    <h1>Peridiocidades de pago </h1>
+    <h1>Grupos musculares </h1>
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listaPagoPeridiocidad"></ul>
+            <ul id="listarGruposMusculares"></ul>
         </div>
     </form></br></br>
     <div>
@@ -40,33 +40,32 @@ include '../business/pagoPeridiocidadBusiness.php';
             $campo = $_POST['campo'];
         }
         $campo = $_POST['campo'];
+        $grupoMuscularBusiness = new GrupoMuscularBusiness();
+        $gruposMuscularesLista = $grupoMuscularBusiness->buscar($campo);
 
-        $pagoPeridiocidadBusiness = new PagoPeridiocidadBusiness();
-        $pagoPeridiocidades = $pagoPeridiocidadBusiness->buscar($campo);
-
-        if (!empty($pagoPeridiocidades)) {
+        if (!empty($gruposMuscularesLista)) {
         ?>
             <table border="1">
                 <thead style="text-align: center;">
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
-                        <th>Descripcíon</th>
+                        <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     <?php
-                    foreach ($pagoPeridiocidades as $row) {
-                        if ($row->getActivoTBPagoPeridiocidad() == 1) {
+                    foreach ($gruposMuscularesLista as $row) {
+                        if ($row->getActivoTBGrupoMuscular() == 1) {
 
-                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/pagoPeridiocidadAction.php">';
+                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/grupoMuscularAction.php">';
                             echo '<tr>';
-                            echo '<input type="hidden" name="idPagoPeridiocidad" id="idPagoPeridiocidad" value="' . $row->getIdTBPagoPeridiocidad() . '"/>';
-                            echo '<td>' . $row->getIdTBPagoPeridiocidad() . '</td>';
-                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad" id="nombrePagoPeridiocidad" value="' . $row->getNombreTBPagoPeridiocidad() . '"/></td>';
-                            echo '<td><input type="text" name="descripcionPagoPeridiocidad" id="descripcionPagoPeridiocidad" value="' . $row->getDescripcionTBPagoPeridiocidad() . '"/></td>';
+                            echo '<input type="hidden" name="idGrupoMuscular" id="idGrupoMuscular" value="' . $row->getIDGrupoMuscular() . '"/>';
+                            echo '<td>' . $row->getIDGrupoMuscular() . '</td>';
+                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreGrupoMuscular" id="nombreGrupoMuscular" value="' . $row->getNombreTBGrupoMuscular() . '"/></td>';
+                            echo '<td><input type="text" name="descripcionGrupoMuscular" id="descripcionGrupoMuscular" value="' . $row->getDescripcionTBGrupoMuscular() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
                             echo '<input type="submit" name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
@@ -79,30 +78,27 @@ include '../business/pagoPeridiocidadBusiness.php';
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No se encontraron peridiocidades de pago!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron grupos musculares!</p>';
         }
         ?>
     </div></br>
 
     <div>
-        <h3>Registrar una nueva peridiocidad de pago </h3>
-
-        <form method="POST" id="direccionform" action="../business/pagoPeridiocidadAction.php">
+        <h3>Registrar un nuevo grupo muscular </h3>
+        <form method="POST" id="direccionform" action="../business/grupoMuscularAction.php">
             <table border="1">
                 <thead style="text-align: left;">
-
                     <tr>
                         <th>Nombre</th>
-                        <th>Descripcíon</th>
+                        <th>Descripción</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
-
                     <tr>
-                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad"  id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoPeridiocidad'])){ echo $_GET['nombrePagoPeridiocidad']; }?>"></td>
-                    <ul id="listarPagoPeridiocidad2"></ul>
-                        <td><input type="text" name="descripcionPagoPeridiocidad" placeholder="Descripción" value="<?php if(isset($_GET['descripcionPagoPeridiocidad'])){ echo $_GET['descripcionPagoPeridiocidad']; }?>"></td>
+                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreGrupoMuscular" id="campo2" placeholder="Nombre"></td>
+                        <ul id="listarGruposMusculares2"></ul>
+                        <td><input type="text" name="descripcionGrupoMuscular" placeholder="Descripción"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>
                 </tbody>
@@ -111,7 +107,7 @@ include '../business/pagoPeridiocidadBusiness.php';
     </div>
 
     <div>
-        <form method="POST" enctype="multipart/form-data" action="../business/pagoPeridiocidadAction.php">
+        <form method="POST" enctype="multipart/form-data" action="../business/grupoMuscularAction.php">
             <tr>
                 <td>
                     <?php
@@ -122,12 +118,9 @@ include '../business/pagoPeridiocidadBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
-                        } else if ($_GET['error'] == "relationError"){
-                            echo '<p style="color: red">Error al eliminar, el elemento tiene registros en otra(s) tabla(s)</p>';
                         } else if ($_GET['error'] == "existe") {
-                            echo '<center><p style="color: red">¡Esta periodicidad de pago ya existe, intente de nuevo con otro nombre!</p></center>';
+                            echo '<center><p style="color: red">¡Este grupo muscular ya existe, intente de nuevo con otro nombre!</p></center>';
                         }
-
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
                     }

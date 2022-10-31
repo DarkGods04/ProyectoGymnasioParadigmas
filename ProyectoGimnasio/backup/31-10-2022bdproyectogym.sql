@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2022 a las 09:03:58
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Tiempo de generación: 31-10-2022 a las 03:57:58
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -96,27 +97,6 @@ INSERT INTO `tbcatalogoejercicio` (`tbcatalogoejercicioid`, `tbcatalogoejercicio
 (4, 'prensa', 'repeticiones: 4 x 12 ', 1),
 (5, 'prensad', 'dfff', 0),
 (6, 'banca declinada', 'repeticiones: 4 x 12 ', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbcatalogogrupomuscular`
---
-
-CREATE TABLE `tbcatalogogrupomuscular` (
-  `tbcatalogogrupomuscularid` int(11) NOT NULL,
-  `tbcatalogogrupomuscularnombre` varchar(200) NOT NULL,
-  `tbcatalogogrupomusculardescripcion` varchar(1000) NOT NULL,
-  `tbcatalogogrupomuscularactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcatalogogrupomuscular`
---
-
-INSERT INTO `tbcatalogogrupomuscular` (`tbcatalogogrupomuscularid`, `tbcatalogogrupomuscularnombre`, `tbcatalogogrupomusculardescripcion`, `tbcatalogogrupomuscularactivo`) VALUES
-(1, 'Biceps', ' ni idea que es 1', 1),
-(2, 'hombros', 'fefr', 1);
 
 -- --------------------------------------------------------
 
@@ -413,12 +393,6 @@ ALTER TABLE `tbactivovariable`
 --
 ALTER TABLE `tbcatalogoejercicio`
   ADD PRIMARY KEY (`tbcatalogoejercicioid`);
-
---
--- Indices de la tabla `tbcatalogogrupomuscular`
---
-ALTER TABLE `tbcatalogogrupomuscular`
-  ADD PRIMARY KEY (`tbcatalogogrupomuscularid`);
 
 --
 -- Indices de la tabla `tbcatalogopagometodo`
