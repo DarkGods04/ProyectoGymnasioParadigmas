@@ -105,7 +105,7 @@ include '../business/clienteBusiness.php';
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No hay clientes registrados!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron clientes!</p>';
         }
         ?>
     </div></br>

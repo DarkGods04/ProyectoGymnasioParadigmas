@@ -23,9 +23,8 @@ include '../business/pagoMetodoBusiness.php';
 </head>
 
 <body>
-    <?php
-    include 'header.php';
-    ?>
+    <?php include 'header.php';?>
+
     <h1>Métodos de pago</h1>
     <div>
         <?php
