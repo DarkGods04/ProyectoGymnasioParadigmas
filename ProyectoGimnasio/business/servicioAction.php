@@ -2,17 +2,21 @@
 include 'servicioBusiness.php';
 
 if (isset($_POST["insertar"])) {
-    if (isset($_POST["nombreServicio"]) && isset($_POST["descripcionServicio"]) && isset($_POST["montoServicio"])) {
+    if (isset($_POST["nombreServicio"]) && isset($_POST["descripcionServicio"]) && isset($_POST["montoServicio"]) && isset($_POST["periodicidad"])) {
 
         $nombreServicio = $_POST["nombreServicio"];
         $descripcionServicio = $_POST["descripcionServicio"];
         $montoServicio = $_POST["montoServicio"];
+        $periodicidad =  $_POST["periodicidad"];
+        $fechaActualizacionProxima=new DateTime(date('Y-m-d'));
+        $fechaActualizacionProxima->modify('+'."$periodicidad".' day');
+        $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
 
-        if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
+        if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0 ) {
             $tempMonto = str_replace("₡","",$montoServicio);
 
-            //if (is_numeric($montoServicio)) {
-                $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $tempMonto, 1);
+            if (is_numeric($periodicidad)) {
+                $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $tempMonto, 1,$periodicidad,$fechaActualizacionProxima);
                 $servicioBusiness = new servicioBusiness();
                 $result = $servicioBusiness->insertar($servicio);
 
@@ -21,9 +25,9 @@ if (isset($_POST["insertar"])) {
                 } else {
                     header("location: ../view/listarServicios.php?error=dbError");
                 }
-            /*} else {
+            } else {
                 header("location: ../view/listarServicios.php?error=numberFormat");
-            }*/
+            }
         } else {
             header("location: ../view/listarServicios.php?error=emptyField");
         }
@@ -52,20 +56,22 @@ if (isset($_POST['eliminar'])) {
 
 if (isset($_POST['actualizar'])) {
     if (isset($_POST['idServicio']) && isset($_POST['nombreServicio']) && isset($_POST['descripcionServicio']) && isset($_POST['montoServicio'])) {
-
-            $anteriorMontoServicio = $_POST['anteriorMontoServicio'];
             $id = $_POST['idServicio'];
             $nombreServicio = $_POST['nombreServicio'];
             $descripcionServicio = $_POST['descripcionServicio'];
             $montoServicio = $_POST["montoServicio"];
+            $periodicidad = $_POST["periodicidad"];
+            $fechaActualizacionProxima=new DateTime(date('Y-m-d'));
+            $fechaActualizacionProxima->modify('+'."$periodicidad".' day');
+            $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
 
-            if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
+            if ($periodicidad > 0 && strlen($fechaActualizacionProxima) > 0 && strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
                 $tempMonto = str_replace("₡","",$montoServicio);
 
                 //if (is_numeric($montoServicio)) {
-                    $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $tempMonto, 1);
+                    $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $tempMonto, 1,$periodicidad,$fechaActualizacionProxima);
                     $servicioBusiness = new servicioBusiness();
-                    $result = $servicioBusiness->update($servicio, $anteriorMontoServicio);
+                    $result = $servicioBusiness->update($servicio);
 
                     if ($result == 1) {
                         header("location: ../view/listarServicios.php?success=updated");

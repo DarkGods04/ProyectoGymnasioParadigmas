@@ -60,6 +60,7 @@ include '../business/servicioBusiness.php';
                         <th>Nombre</th>
                         <th>Descripción</th>
                         <th>Monto</th>
+                        <th>Periodiocidad de actualización</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -67,22 +68,44 @@ include '../business/servicioBusiness.php';
                 <tbody>
                     <?php
                     foreach ($servicios as $row) {
+
                         if ($row->getActivoTBServicio() == 1) {
                             echo '<form  method="POST" enctype="multipart/form-data" action="../business/servicioAction.php">';
                             echo '<tr>';
                             echo '<input  type="hidden" name="idServicio" id="idServicio" value="' . $row->getIdTBServicio() . '"/>';
-                            echo '<input  type="hidden" name="anteriorMontoServicio" id="anteriorMontoServicio" value="' . $row->getMontoTBServicio() . '"/>';
                             echo '<td>' . $row->getIdTBServicio() . '</td>';
                             echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombreServicio" id="nombreServicio" value="' . $row->getNombreTBServicio() . '"/></td>';
                             echo '<td><input  type="text" name="descripcionServicio" id="descripcionServicio" value="' . $row->getDescripcionTBServicio() . '"/></td>';
                             echo '<td><input  type="text" class="mascaramonto" name="montoServicio" id="montoServicio" value="' . $row->getMontoTBServicio() . '"/></td>';
+                            echo '<td><select name="periodicidad" required>.';
+                            echo '<option selected value=""hidden>Seleccione periodicidad</option>.';
+                            if ($row->getPeriodicidadTBServicio() == 30) {
+                                echo '<option selected value="30">Cada 30 días</option>.';
+                            } else {
+                                echo '<option value="30">Cada 30 días</option>.';
+                            }
+                            if ($row->getPeriodicidadTBServicio() == 60) {
+                                echo '<option selected value="60">Cada 60 días</option>.';
+                            } else {
+                                echo '<option value="60">Cada 60 días</option>.';
+                            }
+                            if ($row->getPeriodicidadTBServicio() == 90) {
+                                echo '<option selected value="90">Cada 90 días</option>.';
+                            } else {
+                                echo '<option value="90">Cada 90 días</option>.';
+                            }
+                            echo '</select></td>.';
+                            echo '<input  type="hidden" name="fechaActualizacion" id="fechaActualizacion" value="' . $row->getFechaactualizacionTBServicio() . '"/>';
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
                             echo '<input type="submit" name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
                             echo '</tr>';
                             echo '</form>';
                         }
                     }
-                    ?>
+                    $a = "Hola Mundo!"; ?>
+                    <script type="text/javascript">
+                        alert("<?php echo $a; ?>");
+                    </script>
                 </tbody>
             </table>
         <?php
@@ -110,7 +133,7 @@ include '../business/servicioBusiness.php';
                     <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio"></td>
                     <td><input type="text" class="mascaramonto" name="montoServicio" class="form-control" placeholder="Monto del servicio"></td>
                     <td><select name="periodicidad" required>
-                            <option value=""hidden>Seleccione periodicidad</option>
+                            <option value="" hidden>Seleccione periodicidad</option>
                             <option value="30">Cada 30 días</option>
                             <option value="60">Cada 60 días</option>
                             <option value="90">Cada 90 días</option>
@@ -132,6 +155,8 @@ include '../business/servicioBusiness.php';
                         } else if ($_GET['error'] == "numberFormat") {
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
+                            echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "error") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {

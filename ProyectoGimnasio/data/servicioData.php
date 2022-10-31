@@ -39,18 +39,19 @@ class ServicioData extends Data{
         }
 
         $tbserviciotarifamonto = $Servicio->getMontoTBServicio();
+        $tbserviciotarifaperiodicidadactualizacion = $Servicio->getPeriodicidadTBServicio();
+        $tbserviciotarifaproximafechaactualizacion = $Servicio->getFechaactualizacionTBServicio();
         $tbserviciotarifaactivo = 1;
         date_default_timezone_set('America/Costa_Rica');
         $date = date('Y-m-d');
 
-        $queryInsert = "INSERT INTO tbserviciotarifa VALUES ('$nextId','$tbservicioid',' $date ','$tbserviciotarifamonto','$tbserviciotarifaactivo');";
-
+        $queryInsert = "INSERT INTO tbserviciotarifa VALUES ('$nextId','$tbservicioid','$date','$tbserviciotarifamonto','$tbserviciotarifaactivo','$tbserviciotarifaperiodicidadactualizacion','$tbserviciotarifaproximafechaactualizacion');";
         $result = mysqli_query($conn, $queryInsert);
         mysqli_close($conn);
         return $result;
     }
 
-    public function updateServicio($Servicio, $anteriorMontoServicio){
+    public function updateServicio($Servicio){
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
@@ -60,7 +61,7 @@ class ServicioData extends Data{
 
         $queryUpdate = "UPDATE tbservicio SET tbservicionombre='$tbservicionombre', tbserviciodescripcion='$tbserviciodescripcion'
             WHERE tbservicioid = $tbservicioid";
-        self::updateServicioTarifa($Servicio, $anteriorMontoServicio);
+        self::updateServicioTarifa($Servicio);
 
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
@@ -68,17 +69,14 @@ class ServicioData extends Data{
         return $result;
     }
 
-    public function updateServicioTarifa($Servicio, $anteriorMontoServicio){
+    public function updateServicioTarifa($Servicio){
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
         $tbservicioid = $Servicio->getIdTBServicio();
-        $tbserviciomonto = $Servicio->getMontoTBServicio();
-
-        if($anteriorMontoServicio != $tbserviciomonto){
             self::deleteServicioTarifa($tbservicioid);
             self::insertServicioTarifa($Servicio, $tbservicioid);
-        }
+        
     }
 
     public function deleteServicio($tbservicioid){
@@ -87,7 +85,7 @@ class ServicioData extends Data{
 
         $queryUpdate = "UPDATE tbservicio
             SET tbservicioactivo = 0 WHERE tbservicioid = $tbservicioid";
-        $result = mysqli_query($conn, $queryUpdate);
+            $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
 
         return $result;
@@ -153,18 +151,22 @@ class ServicioData extends Data{
         
         $Servicios = [];
         $tbserviciotarifamonto = 0;
+        $tbserviciotarifaperiodicidadactualizacion=0;
+        $tbserviciotarifaproximafechaactualizacion="";
         while ($row = mysqli_fetch_array($result)) {
             if($row['tbservicioactivo'] == 1){
                 while ($row2 = mysqli_fetch_array($serviciotarifaResult)) {
                     if($row['tbservicioid'] == $row2['tbservicioid'] && $row2['tbserviciotarifaactivo'] == 1){
                         $tbserviciotarifamonto = $row2['tbserviciotarifamonto'];
+                        $tbserviciotarifaperiodicidadactualizacion= $row2['tbserviciotarifaperiodicidadactualizacion'];
+                        $tbserviciotarifaproximafechaactualizacion=$row2['tbserviciotarifaproximafechaactualizacion'];
                         break;
                     }
                 }
                 mysqli_data_seek($serviciotarifaResult, 0);
 
                 $currentServicio = new Servicio($row['tbservicioid'], $row['tbservicionombre'], $row['tbserviciodescripcion'], 
-                $tbserviciotarifamonto, $row['tbservicioactivo']);
+                $tbserviciotarifamonto, $row['tbservicioactivo'],$tbserviciotarifaperiodicidadactualizacion,$tbserviciotarifaproximafechaactualizacion);
                 array_push($Servicios, $currentServicio);
                 $tbserviciotarifamonto = 0;
             }

@@ -7,17 +7,25 @@ class Servicio{
     private $descripcionTBServicio;
     private $montoTBServicio;
     private $activoTBServicio;
+    private $periodicidadTBServicio;
+    private $fechaactualizacionTBServicio;
 
-    function Servicio($idTBServicio, $nombreTBServicio, $descripcionTBServicio, $montoTBServicio, $activoTBServicio){
+    function Servicio($idTBServicio, $nombreTBServicio, $descripcionTBServicio, $montoTBServicio, $activoTBServicio, $periodicidadTBServicio,$fechaactualizacionTBServicio){
         $this->idTBServicio = $idTBServicio;
         $this->nombreTBServicio = $nombreTBServicio;
         $this->descripcionTBServicio = $descripcionTBServicio;
         $this->montoTBServicio = $montoTBServicio;
         $this->activoTBServicio = $activoTBServicio;
+        $this->periodicidadTBServicio = $periodicidadTBServicio;
+        $this->fechaactualizacionTBServicio = $fechaactualizacionTBServicio;
     }
 
     function setNombreTBServicio($nombreTBServicio){
         $this->nombreTBServicio = $nombreTBServicio;
+    }
+
+    function setFechaactualizacionTBServicio($fechaactualizacionTBServicio){
+        $this->fechaactualizacionTBServicio = $fechaactualizacionTBServicio;
     }
 
     function setDescripcionTBServicio($descripcionTBServicio){
@@ -30,6 +38,10 @@ class Servicio{
 
     function setActivoTBServicio($activoTBServicio){
         $this->activoTBServicio = $activoTBServicio;
+    }
+
+    function setPeriodicidadTBServicio($periodicidadTBServicio){
+        $this->periodicidadTBServicio = $periodicidadTBServicio;
     }
 
     function getIdTBServicio(){
@@ -52,4 +64,11 @@ class Servicio{
         return $this->activoTBServicio;
     }
 
+    function getPeriodicidadTBServicio(){
+        return $this->periodicidadTBServicio;
+    }
+
+    function getFechaactualizacionTBServicio(){
+        return $this->fechaactualizacionTBServicio;
+    }
 };
