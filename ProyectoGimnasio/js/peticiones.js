@@ -11,6 +11,7 @@ document.getElementById("campo").addEventListener("keyup",getNombresServicio)
 document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncional)
 document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncionalCriterio)
 document.getElementById("campo").addEventListener("keyup",getNombresFacturas)
+document.getElementById("campo").addEventListener("keyup",getNombresEjercicios)
 
 
 function getNombresCliente(){
@@ -362,6 +363,34 @@ function getNombresFacturas(){
         lista.style.display = 'none'
     }
 
+}
+
+
+function getNombresEjercicios(){
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaEjercicios")
+
+    if(inputCP.length > 0){
+
+        let url= "../data/prediccionEjercicio.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+        .then(data => {
+            lista.style.display = 'block'
+            lista.innerHTML = data
+        })
+        .catch(err => console.log(err))
+
+    }else {
+        lista.style.display = 'none'
+    }
 }
 
 
