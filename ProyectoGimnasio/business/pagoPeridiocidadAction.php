@@ -1,6 +1,7 @@
 
 <?php
 include 'pagoPeridiocidadBusiness.php';
+include 'facturaBusiness.php';
 
 if (isset($_POST['actualizar'])) {
     if (isset($_POST['idPagoPeridiocidad']) && isset($_POST['nombrePagoPeridiocidad']) && isset($_POST['descripcionPagoPeridiocidad'])) {
@@ -34,6 +35,14 @@ if (isset($_POST['actualizar'])) {
 
 
 if (isset($_POST['eliminar'])) {
+
+    $facturaBusiness = new FacturaBusiness();
+    $facturas = $facturaBusiness->obtener();
+    $flag = 0;
+    foreach ($facturas as $row) { if($row->getPagoModalidadTBFactura() == $_POST['idPagoPeridiocidad'] && $row->getActivoTBFactura() == 1 ){  $flag = 1; } }
+        
+    if($flag == 0){
+
     if (isset($_POST['idPagoPeridiocidad'])) {
 
         $id = $_POST['idPagoPeridiocidad'];
@@ -47,6 +56,10 @@ if (isset($_POST['eliminar'])) {
         }
     } else {
         header("location: ../view/listarPagoPeridiocidades.php?error=error");
+    }
+
+    } else {
+    header("location: ../view/listarPagoPeridiocidades.php?error=relationError");
     }
 }
 
@@ -74,18 +87,18 @@ if (isset($_POST['insertar'])) {
                     if ($result == 1) {
                         header("location: ../view/listarPagoPeridiocidades.php?success=inserted");
                     } else {
-                        header("location: ../view/listarPagoPeridiocidades.php?error=dbError");
+                        header("location: ../view/listarPagoPeridiocidades.php?error=dbError&nombrePagoPeridiocidad=$nombre&descripcionPagoPeridiocidad=$descripcion");
                     }
                 } else {
-                    header("location: ../view/listarPagoPeridiocidades.php?error=existe");
+                    header("location: ../view/listarPagoPeridiocidades.php?error=existe&nombrePagoPeridiocidad=$nombre&descripcionPagoPeridiocidad=$descripcion");
                 }
             } else {
-                header("location: ../view/listarPagoPeridiocidades.php?error=numberFormat");
+                header("location: ../view/listarPagoPeridiocidades.php?error=numberFormat&nombrePagoPeridiocidad=$nombre&descripcionPagoPeridiocidad=$descripcion");
             }
         } else {
-            header("location: ../view/listarPagoPeridiocidades.php?error=emptyField");
+            header("location: ../view/listarPagoPeridiocidades.php?error=emptyField&nombrePagoPeridiocidad=$nombre&descripcionPagoPeridiocidad=$descripcion");
         }
     } else {
-        header("location: ../view/listarPagoPeridiocidades.php?error=error");
+        header("location: ../view/listarPagoPeridiocidades.php?error=error&nombrePagoPeridiocidad=$nombre&descripcionPagoPeridiocidad=$descripcion");
     }
 }

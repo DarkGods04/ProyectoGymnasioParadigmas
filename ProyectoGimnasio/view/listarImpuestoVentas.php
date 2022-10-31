@@ -101,8 +101,8 @@ include '../business/impuestoVentaBusiness.php';
                     <th>Acción</th>
                 </thead>
                 <tbody>
-                    <td><input class="mascaraimpuesto" type="text" name="valor" placeholder="Valor porcentual"></td>
-                    <td><input type="text" name="descripcion" placeholder="Descripción"></td>
+                    <td><input class="mascaraimpuesto" type="text" name="valor" placeholder="Valor porcentual" value="<?php if(isset($_GET['valor'])){ echo $_GET['valor']; }?>"></td>
+                    <td><input type="text" name="descripcion" placeholder="Descripción" value="<?php if(isset($_GET['descripcion'])){ echo $_GET['descripcion']; }?>"></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                 </tbody>
             </table>
@@ -121,6 +121,8 @@ include '../business/impuestoVentaBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "relationError"){
+                            echo '<p style="color: red">Error al eliminar, el elemento tiene registros en otra(s) tabla(s)</p>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
