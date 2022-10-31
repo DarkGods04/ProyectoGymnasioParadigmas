@@ -10,7 +10,7 @@ include '../business/impuestoVentaBusiness.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="../css/style.css">
-    <title>Impuesto ventas</title>
+    <title>Impuestos de venta</title>
     <script>
         function confirmarAccionModificar() {
             return confirm("¿Está seguro de que desea modificar este impuesto?");
@@ -57,7 +57,7 @@ include '../business/impuestoVentaBusiness.php';
                 <thead style="text-align: left;">
                     <tr>
                         <th>ID</th>
-                        <th>Valor de impuesto</th>
+                        <th>Valor del impuesto (%)</th>
                         <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
@@ -91,18 +91,18 @@ include '../business/impuestoVentaBusiness.php';
     </div><br>
 
     <div>
-        <h3>Registrar un nuevo impuesto</h3>
+        <h3>Registrar un nuevo impuesto de venta</h3>
 
         <form method="POST" id="direccionform" action="../business/impuestoVentaAction.php">
             <table border="1">
                 <thead style="text-align: left;">
-                    <th>Valor de impuesto</th>
+                    <th>Valor del impuesto (%)</th>
                     <th>Descripción</th>
                     <th>Acción</th>
                 </thead>
                 <tbody>
-                    <td><input class="mascaraimpuesto" type="text" name="valor" placeholder="Valor"></td>
-                    <td><input type="text" name="descripcion" placeholder="Descripcion"></td>
+                    <td><input class="mascaraimpuesto" type="text" name="valor" placeholder="Valor porcentual"></td>
+                    <td><input type="text" name="descripcion" placeholder="Descripción"></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                 </tbody>
             </table>

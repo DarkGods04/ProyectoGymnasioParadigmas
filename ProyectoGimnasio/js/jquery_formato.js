@@ -1,8 +1,8 @@
 
     $(document).ready(function(){
         $(".mascaratelefono").mask("0000-0000");
-        $(".mascarapeso").mask("00.0kg");
-        $(".mascaraaltura").mask("0.00cm");
+        $(".mascarapeso").mask("999.9kg");
+        $(".mascaraaltura").mask("9.99cm");
         $(".mascaramonto").mask("₡0000000000000000");
         $(".mascaraimpuesto").mask("00.00%");
         $(".mascaranumcuenta").mask("AA00000000000000000000");
@@ -13,5 +13,3 @@
         $("").mask("");
         */
     });
-        
-    

@@ -18,23 +18,27 @@ if (isset($_POST['insertar'])) {
             $tempTelefono = str_replace("-", "", $telefono);
 
             if (!is_numeric($nombre) && !is_numeric($apellido)) {
-                $instructor = new Instructor(0, $nombre, $apellido, $correo, $tempTelefono, $numCuenta, $tipoinstructor, 1);
-                $instructorBusiness = new InstructorBusiness();
-                $resultado = $instructorBusiness->insertar($instructor);
+                if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
+                    $instructor = new Instructor(0, $nombre, $apellido, $correo, $tempTelefono, $numCuenta, $tipoinstructor, 1);
+                    $instructorBusiness = new InstructorBusiness();
+                    $resultado = $instructorBusiness->insertar($instructor);
 
-                if ($resultado == 1) {
-                    Header("Location: ../view/listarInstructores.php?success=inserted");
+                    if ($resultado == 1) {
+                        Header("Location: ../view/listarInstructores.php?success=inserted");
+                    } else {
+                        Header("Location: ../view/listarInstructores.php?error=dbError&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
+                    }
                 } else {
-                    Header("Location: ../view/listarInstructores.php?error=dbError");
+                    header("location: ../view/listarInstructores.php?error=emailError&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
                 }
             } else {
-                header("location: ../view/listarInstructores.php?error=numberFormat");
+                header("location: ../view/listarInstructores.php?error=numberFormat&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
             }
         } else {
-            header("location: ../view/listarInstructores.php?error=emptyField");
+            header("location: ../view/listarInstructores.php?error=emptyField&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
         }
     } else {
-        header("location: ../view/listarInstructores.php?error=error");
+        header("location: ../view/listarInstructores.php?error=error&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
     }
 }
 
@@ -75,15 +79,18 @@ if (isset($_POST['actualizar'])) {
             $tempTelefono = str_replace("-", "", $telefono);
 
             if (!is_numeric($nombre) && !is_numeric($apellido)) {
+                if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
+                    $instructor = new Instructor($id, $nombre, $apellido, $correo, $tempTelefono, $numCuenta, $tipoinstructor, 1);
+                    $instructorBusiness = new InstructorBusiness();
+                    $resultado = $instructorBusiness->update($instructor);
 
-                $instructor = new Instructor($id, $nombre, $apellido, $correo, $tempTelefono, $numCuenta, $tipoinstructor, 1);
-                $instructorBusiness = new InstructorBusiness();
-                $resultado = $instructorBusiness->update($instructor);
-
-                if ($resultado == 1) {
-                    Header("Location: ../view/listarInstructores.php?success=update");
+                    if ($resultado == 1) {
+                        Header("Location: ../view/listarInstructores.php?success=update");
+                    } else {
+                        Header("Location: ../view/listarInstructores.php?error=dbError");
+                    }
                 } else {
-                    Header("Location: ../view/listarInstructores.php?error=dbError");
+                    header("location: ../view/listarInstructores.php?error=emailError");
                 }
             } else {
                 header("location: ../view/listarInstructores.php?error=numberFormat");

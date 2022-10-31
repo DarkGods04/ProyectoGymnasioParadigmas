@@ -98,7 +98,7 @@ class ServicioData extends Data{
         $conn->set_charset('UTF8');
 
         $queryUpdate = "UPDATE tbserviciotarifa
-            SET tbserviciotarifaactivo = 0 WHERE tbserviciotarifaservicioid = $tbservicioid";
+            SET tbserviciotarifaactivo = 0 WHERE tbservicioid = $tbservicioid";
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
 
@@ -122,7 +122,7 @@ class ServicioData extends Data{
         while ($row = mysqli_fetch_array($result)) {
             if($row['tbservicioactivo'] == 1){
                 while ($row2 = mysqli_fetch_array($serviciotarifaResult)) {
-                    if($row['tbservicioid'] == $row2['tbserviciotarifaservicioid'] && $row2['tbserviciotarifaactivo'] == 1){
+                    if($row['tbservicioid'] == $row2['tbservicioid'] && $row2['tbserviciotarifaactivo'] == 1){
                         $tbserviciotarifamonto = $row2['tbserviciotarifamonto'];
                         break;
                     }
@@ -156,7 +156,7 @@ class ServicioData extends Data{
         while ($row = mysqli_fetch_array($result)) {
             if($row['tbservicioactivo'] == 1){
                 while ($row2 = mysqli_fetch_array($serviciotarifaResult)) {
-                    if($row['tbservicioid'] == $row2['tbserviciotarifaservicioid'] && $row2['tbserviciotarifaactivo'] == 1){
+                    if($row['tbservicioid'] == $row2['tbservicioid'] && $row2['tbserviciotarifaactivo'] == 1){
                         $tbserviciotarifamonto = $row2['tbserviciotarifamonto'];
                         break;
                     }

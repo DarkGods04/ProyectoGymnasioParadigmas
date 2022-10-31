@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2022 a las 18:03:26
+-- Tiempo de generación: 27-10-2022 a las 07:46:14
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -70,7 +70,8 @@ INSERT INTO `tbactivovariable` (`tbactivovariableid`, `tbactivovariablenombre`, 
 (1, 'Mancuernas', 24, 150000, 'Mancuernas de 10Lbs', 1),
 (2, 'Cuerda', 10, 15000, 'Cuerda de 20 mtrs', 1),
 (3, 'Pesa', 24, 5000, 'Pesa de 20 kilos', 1),
-(4, 'Mancuernas', 10, 513206, 'Mancuernas de 10Lbs', 1);
+(4, 'Mancuerna doble', 12, 35000, 'Mancuerna doble de 30kilos', 1),
+(5, 'Mancuernas', 10, 25000, 'Mancuernas de 10Lbs', 1);
 
 -- --------------------------------------------------------
 
@@ -130,8 +131,8 @@ CREATE TABLE `tbcliente` (
   `tbclientetelefono` varchar(50) NOT NULL,
   `tbclientefechanacimiento` date NOT NULL,
   `tbclientegenero` varchar(50) NOT NULL,
-  `tbclientepeso` float NOT NULL,
-  `tbclientealtura` float NOT NULL,
+  `tbclientepeso` varchar(50) NOT NULL,
+  `tbclientealtura` varchar(50) NOT NULL,
   `tbclientecorreo` varchar(50) NOT NULL,
   `tbclienteactivo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -141,10 +142,9 @@ CREATE TABLE `tbcliente` (
 --
 
 INSERT INTO `tbcliente` (`tbclienteid`, `tbclientenombre`, `tbclienteapellido1`, `tbclienteapellido2`, `tbclientetelefono`, `tbclientefechanacimiento`, `tbclientegenero`, `tbclientepeso`, `tbclientealtura`, `tbclientecorreo`, `tbclienteactivo`) VALUES
-(1, 'Juan', 'Jiménez', 'Mora', '99999999', '2003-02-14', 'Masculino', 88, 1.7, 'juannmora7@gmail.com', 1),
-(2, 'Mario', 'Lopez', 'Juarez', '88760901', '2015-02-19', 'Masculino', 68, 1.82, ' juare333@gmail.com', 0),
-(3, 'Sergio', 'Andrade', 'Villalobos', '87878787', '2022-09-07', 'Masculino', 77, 1.9, 'sergio@gmail.com', 1),
-(4, 'Jafet David', 'González', 'García', '84585370', '2022-10-28', 'Masculino', 58.6, 1.63, 'jafet.jdgg@gmail.com', 0);
+(1, 'Juan', 'Jiménez', 'Mora', '99999999', '2003-02-14', 'Masculino', '88', '1.70', 'juannmora7@gmail.com', 1),
+(2, 'Mario', 'Lopez', 'Juarez', '88760901', '2015-02-19', 'Masculino', '68', '1.82', ' juare333@gmail.com', 1),
+(3, 'Sergio', 'Andrade', 'Villalobos', '87878787', '2022-09-07', 'Masculino', '77', '1.90', 'sergio@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -156,7 +156,7 @@ CREATE TABLE `tbclientepeso` (
   `tbclientepesoid` int(11) NOT NULL,
   `tbclienteid` int(11) NOT NULL,
   `tbclientepesofecha` date NOT NULL,
-  `tbclientepesopeso` float NOT NULL,
+  `tbclientepesopeso` int(10) NOT NULL,
   `tbclientepesoinstructorid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -180,10 +180,10 @@ CREATE TABLE `tbfactura` (
   `tbclienteid` int(11) NOT NULL,
   `tbinstructorid` int(11) NOT NULL,
   `tbfacturafechapago` date NOT NULL,
-  `tbcatalogopagoperidiocidadid` varchar(200) NOT NULL,
-  `tbservicioid` varchar(200) NOT NULL,
+  `tbcatalogopagoperidiocidadnombre` varchar(200) NOT NULL,
+  `tbfacturaservicios` varchar(200) NOT NULL,
   `tbfacturamontobruto` float NOT NULL,
-  `tbimpuestoventaid` int(11) NOT NULL,
+  `tbfacturaimpuestoventaid` int(11) NOT NULL,
   `tbfacturamontoneto` float NOT NULL,
   `tbfacturaactivo` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -192,12 +192,10 @@ CREATE TABLE `tbfactura` (
 -- Volcado de datos para la tabla `tbfactura`
 --
 
-INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfacturafechapago`, `tbcatalogopagoperidiocidadid`, `tbservicioid`, `tbfacturamontobruto`, `tbimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`) VALUES
+INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfacturafechapago`, `tbcatalogopagoperidiocidadnombre`, `tbfacturaservicios`, `tbfacturamontobruto`, `tbfacturaimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`) VALUES
 (1, 1, 1, '2022-10-01', '1', '1;2', 6500, 1, 7345, 1),
 (2, 3, 2, '2022-10-20', '2', '1;2', 5800, 2, 6380, 1),
-(3, 2, 3, '2022-10-21', '3', '2;3', 6800, 1, 7718, 1),
-(4, 1, 1, '2022-10-21', '1', '3', 3600, 2, 3960, 1),
-(5, 4, 1, '2022-10-28', '2', '1', 2600, 1, 2951, 1);
+(3, 2, 3, '2022-10-21', '3', '2;3', 6800, 1, 7718, 1);
 
 -- --------------------------------------------------------
 
@@ -279,7 +277,7 @@ INSERT INTO `tbmodalidadfuncional` (`tbmodalidadfuncionalid`, `tbmodalidadfuncio
 
 CREATE TABLE `tbmodalidadfuncionalcriterio` (
   `tbmodalidadfuncionalcriterioid` int(11) NOT NULL,
-  `tbmodalidadfuncionalid` int(11) NOT NULL,
+  `tbmodalidadfuncionalcriteriomodalidadfuncionalid` int(11) NOT NULL,
   `tbmodalidadfuncionalcriterionombre` varchar(50) NOT NULL,
   `tbmodalidadfuncionalcriteriodescripcion` varchar(1000) NOT NULL,
   `tbmodalidadfuncionalcriteriorangomaximo` int(11) NOT NULL,
@@ -291,10 +289,10 @@ CREATE TABLE `tbmodalidadfuncionalcriterio` (
 -- Volcado de datos para la tabla `tbmodalidadfuncionalcriterio`
 --
 
-INSERT INTO `tbmodalidadfuncionalcriterio` (`tbmodalidadfuncionalcriterioid`, `tbmodalidadfuncionalid`, `tbmodalidadfuncionalcriterionombre`, `tbmodalidadfuncionalcriteriodescripcion`, `tbmodalidadfuncionalcriteriorangomaximo`, `tbmodalidadfuncionalcriteriorangominimo`, `tbmodalidadfuncionalcriterioactivo`) VALUES
-(1, 3, 'Resistencia tiempo', 'Mantener su esfuerzo de manera eficaz durante el mayor tiempo posible', 45, 15, 1),
+INSERT INTO `tbmodalidadfuncionalcriterio` (`tbmodalidadfuncionalcriterioid`, `tbmodalidadfuncionalcriteriomodalidadfuncionalid`, `tbmodalidadfuncionalcriterionombre`, `tbmodalidadfuncionalcriteriodescripcion`, `tbmodalidadfuncionalcriteriorangomaximo`, `tbmodalidadfuncionalcriteriorangominimo`, `tbmodalidadfuncionalcriterioactivo`) VALUES
+(1, 3, 'Resistencia tiempo', 'Mantener su esfuerzo de manera eficaz durante el mayor tiempo posible', 15, 45, 1),
 (2, 1, 'Fuerza del corazón', 'Cantidad de pulsaciones por minuto', 50, 10, 1),
-(3, 2, 'RM', 'Máximo de repeticiones ejecutadas por ejercicio', 30, 10, 1);
+(3, 2, 'RM', 'Máximo de repeticiones ejecutadas por ejercicio', 10, 30, 1);
 
 -- --------------------------------------------------------
 
@@ -316,9 +314,7 @@ CREATE TABLE `tbservicio` (
 INSERT INTO `tbservicio` (`tbservicioid`, `tbservicionombre`, `tbserviciodescripcion`, `tbservicioactivo`) VALUES
 (1, 'Spinning', 'Cardio haciendo spinning', 1),
 (2, 'Zumba', 'Cardio haciendo zumba', 1),
-(3, 'Yoga', 'Meditación mediante el yoga', 1),
-(4, 'aeróbicos', 'aeróbicos ', 1),
-(5, 'aeróbicos', 'aeróbicos ', 1);
+(3, 'Yoga', 'Meditación mediante el yoga', 1);
 
 -- --------------------------------------------------------
 
@@ -341,10 +337,10 @@ CREATE TABLE `tbserviciotarifa` (
 INSERT INTO `tbserviciotarifa` (`tbserviciotarifaid`, `tbservicioid`, `tbserviciotarifafechamodificacion`, `tbserviciotarifamonto`, `tbserviciotarifaactivo`) VALUES
 (1, 1, '2022-10-25', 2500, 0),
 (2, 1, '2022-10-25', 2600, 1),
-(3, 2, '2022-10-25', 3000, 1),
-(4, 3, '2022-10-25', 3200, 1),
-(5, 4, '2022-10-28', 3000, 1),
-(6, 5, '2022-10-29', 3000, 1);
+(3, 2, '2022-10-25', 3000, 0),
+(4, 3, '2022-10-25', 3200, 0),
+(5, 2, '2022-10-25', 3200, 1),
+(6, 3, '2022-10-25', 3600, 1);
 
 --
 -- Índices para tablas volcadas
