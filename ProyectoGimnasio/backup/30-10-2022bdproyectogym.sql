@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-10-2022 a las 03:57:58
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.3
+-- Tiempo de generación: 29-10-2022 a las 18:03:26
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -72,31 +71,6 @@ INSERT INTO `tbactivovariable` (`tbactivovariableid`, `tbactivovariablenombre`, 
 (2, 'Cuerda', 10, 15000, 'Cuerda de 20 mtrs', 1),
 (3, 'Pesa', 24, 5000, 'Pesa de 20 kilos', 1),
 (4, 'Mancuernas', 10, 513206, 'Mancuernas de 10Lbs', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbcatalogoejercicio`
---
-
-CREATE TABLE `tbcatalogoejercicio` (
-  `tbcatalogoejercicioid` int(11) NOT NULL,
-  `tbcatalogoejercicionombre` varchar(50) NOT NULL,
-  `tbcatalogoejerciciodescripcion` varchar(300) NOT NULL,
-  `tbcatalogoejercicioactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcatalogoejercicio`
---
-
-INSERT INTO `tbcatalogoejercicio` (`tbcatalogoejercicioid`, `tbcatalogoejercicionombre`, `tbcatalogoejerciciodescripcion`, `tbcatalogoejercicioactivo`) VALUES
-(1, 'press militar', 'repeticiones: 4 x 12 ', 0),
-(2, 'banca scott', 'repeticiones: 4 x 12 ', 1),
-(3, 'prensa', 'repeticiones: 4 x 12 ', 0),
-(4, 'prensa', 'repeticiones: 4 x 12 ', 1),
-(5, 'prensad', 'dfff', 0),
-(6, 'banca declinada', 'repeticiones: 4 x 12 ', 1);
 
 -- --------------------------------------------------------
 
@@ -389,12 +363,6 @@ ALTER TABLE `tbactivovariable`
   ADD PRIMARY KEY (`tbactivovariableid`);
 
 --
--- Indices de la tabla `tbcatalogoejercicio`
---
-ALTER TABLE `tbcatalogoejercicio`
-  ADD PRIMARY KEY (`tbcatalogoejercicioid`);
-
---
 -- Indices de la tabla `tbcatalogopagometodo`
 --
 ALTER TABLE `tbcatalogopagometodo`
@@ -475,12 +443,6 @@ ALTER TABLE `tbactivofijo`
 --
 ALTER TABLE `tbactivovariable`
   MODIFY `tbactivovariableid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de la tabla `tbcatalogoejercicio`
---
-ALTER TABLE `tbcatalogoejercicio`
-  MODIFY `tbcatalogoejercicioid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tbcatalogopagometodo`
