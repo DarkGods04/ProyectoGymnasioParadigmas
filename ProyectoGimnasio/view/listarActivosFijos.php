@@ -121,14 +121,14 @@ include '../business/activoFijoBusiness.php';
                 </thead>
 
                 <tbody>
-                    <td><input type="text" name="placa" placeholder="Placa del activo"></td>
-                    <td><input type="text" name="serie" placeholder="Número de serie"></td>
-                    <td><input type="text" name="modelo" placeholder="Modelo del equipo"></td>
-                    <td><input type="date" name="fechaCompra"></td>
-                    <td><input type="text" class="mascaramonto" name="montoCompra" placeholder="Monto de compra"></td>
+                    <td><input type="text" name="placa" placeholder="Placa del activo" value="<?php if(isset($_GET['placa'])){ echo $_GET['placa']; }?>"></td>
+                    <td><input type="text" name="serie" placeholder="Número de serie" value="<?php if(isset($_GET['serie'])){ echo $_GET['serie']; }?>"></td>
+                    <td><input type="text" name="modelo" placeholder="Modelo del equipo" value="<?php if(isset($_GET['modelo'])){ echo $_GET['modelo']; }?>"></td>
+                    <td><input type="date" name="fechaCompra" value="<?php if(isset($_GET['fechaCompra'])){ echo $_GET['fechaCompra']; }?>"></td>
+                    <td><input type="text" class="mascaramonto" name="montoCompra" placeholder="Monto de compra" value="<?php if(isset($_GET['montoCompra'])){ echo $_GET['montoCompra']; }?>"></td>
                     <td>
                         <select name="estadoUso">
-                            <option value="" selected disabled hidden>Estado de uso</option>
+                        <option value="<?php if(isset($_GET['estadoUso'])){ echo $_GET['estadoUso']; }?>"><?php if(isset($_GET['estadoUso'])){ echo $_GET['estadoUso']; }?></option>
                             <option value="En uso">En uso</option>
                             <option value="Fuera de uso">Fuera de uso</option>
                         </select>

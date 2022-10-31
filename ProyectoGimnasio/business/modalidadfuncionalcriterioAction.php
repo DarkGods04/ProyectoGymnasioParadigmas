@@ -23,16 +23,16 @@ if (isset($_POST['insertarModalidadfuncionalcriterio'])) {
                 if ($resultado == 1) {
                     Header("Location: ../view/listarModalidadFuncionalCriterio.php?success=inserted");
                 } else {
-                    Header("Location: ../view/listarModalidadFuncionalCriterio.php?error=dbError");
+                    Header("Location: ../view/listarModalidadFuncionalCriterio.php?error=dbError&idModalidadfuncional=$idModalidadfuncional&nombre=$nombre&descripcion=$descripcion&rangoValorMinimo=$rangoValorMinimo&rangoValorMaximo=$rangoValorMaximo");
                 }
             } else {
-                header("location: ../view/listarModalidadFuncionalCriterio.php?error=numberFormat");
+                header("location: ../view/listarModalidadFuncionalCriterio.php?error=numberFormat&idModalidadfuncional=$idModalidadfuncional&nombre=$nombre&descripcion=$descripcion&rangoValorMinimo=$rangoValorMinimo&rangoValorMaximo=$rangoValorMaximo");
             }
         } else {
-            header("location: ../view/listarModalidadFuncionalCriterio.php?error=emptyField");
+            header("location: ../view/listarModalidadFuncionalCriterio.php?error=emptyField&idModalidadfuncional=$idModalidadfuncional&nombre=$nombre&descripcion=$descripcion&rangoValorMinimo=$rangoValorMinimo&rangoValorMaximo=$rangoValorMaximo");
         }
     } else {
-        header("location: ../view/listarModalidadFuncionalCriterio.php?error=error");
+        header("location: ../view/listarModalidadFuncionalCriterio.php?error=error&idModalidadfuncional=$idModalidadfuncional&nombre=$nombre&descripcion=$descripcion&rangoValorMinimo=$rangoValorMinimo&rangoValorMaximo=$rangoValorMaximo");
     }
 }
 

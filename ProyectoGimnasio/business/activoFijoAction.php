@@ -24,16 +24,16 @@ if (isset($_POST['insertar'])) {
                 if ($resultado == 1) {
                     Header("Location: ../view/listarActivosFijos.php?success=inserted");
                 } else {
-                    Header("Location: ../view/listarActivosFijos.php?error=dbError");
+                    Header("Location: ../view/listarActivosFijos.php?error=dbError&placa=$placa&serie=$serie&modelo=$modelo&fechaCompra=$fechaCompra&montoCompra=$montoCompra&estadoUso=$estadoUso");
                 }
             } else {
-                header("location: ../view/listarActivosFijos.php?error=numberFormat");
+                header("location: ../view/listarActivosFijos.php?error=numberFormat&placa=$placa&serie=$serie&modelo=$modelo&fechaCompra=$fechaCompra&montoCompra=$montoCompra&estadoUso=$estadoUso");
             }
         } else {
-            header("location: ../view/listarActivosFijos.php?error=emptyField");
+            header("location: ../view/listarActivosFijos.php?error=emptyField&placa=$placa&serie=$serie&modelo=$modelo&fechaCompra=$fechaCompra&montoCompra=$montoCompra&estadoUso=$estadoUso");
         }
     } else {
-        header("location: ../view/listarActivosFijos.php?error=error");
+        header("location: ../view/listarActivosFijos.php?error=error&placa=$placa&serie=$serie&modelo=$modelo&fechaCompra=$fechaCompra&montoCompra=$montoCompra&estadoUso=$estadoUso");
     }
 }
 

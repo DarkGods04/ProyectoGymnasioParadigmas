@@ -23,15 +23,15 @@ if (isset($_POST['btnregistrar'])) {
                 if ($resultado == 1) {
                     Header("Location: ../view/listarClientePeso.php?success=inserted");
                 } else {
-                    Header("Location: ../view/listarClientePeso.php?error=dbError");
+                    Header("Location: ../view/listarClientePeso.php?error=dbError&clienteid=$clienteid&clientepesofecha=$clientepesofecha&clientepesopeso=$clientepeso&instructorid=$instructorid");
                 }
             } else {
-                header("location: ../view/listarClientePeso.php?error=numberFormat");
+                header("location: ../view/listarClientePeso.php?error=numberFormat&clienteid=$clienteid&clientepesofecha=$clientepesofecha&clientepesopeso=$clientepeso&instructorid=$instructorid");
             }
         } else {
-            header("location: ../view/listarClientePeso.php?error=emptyField");
+            header("location: ../view/listarClientePeso.php?error=emptyField&clienteid=$clienteid&clientepesofecha=$clientepesofecha&clientepesopeso=$clientepeso&instructorid=$instructorid");
         }
     } else {
-        header("location: ../view/listarClientePeso.php?error=error");
+        header("location: ../view/listarClientePeso.php?error=error&clienteid=$clienteid&clientepesofecha=$clientepesofecha&clientepesopeso=$clientepeso&instructorid=$instructorid");
     }
 }
