@@ -72,7 +72,7 @@ if (isset($_POST['actualizar'])) {
         if (strlen($nombre) > 0 && strlen($descripcion) > 0) {
             $tempNombre = str_replace("%", "", $nombre);
 
-            if (!is_numeric($descripcion)) {
+           
                 $ejercicio = new Ejercicio($id, $tempNombre, $descripcion, 1);
                 $ejercicioBusiness = new ejercicioBusiness();
                 $resultado = $ejercicioBusiness->update($ejercicio);
@@ -82,9 +82,7 @@ if (isset($_POST['actualizar'])) {
                 } else {
                     Header("Location: ../view/listarEjercicios.php?error=dbError");
                 }
-            } else {
-                header("location: ../view/listarEjercicios.php?error=numberFormat");
-            }
+           
         } else {
             header("location: ../view/listarEjercicios.php?error=emptyField");
         }
