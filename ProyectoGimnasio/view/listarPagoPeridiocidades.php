@@ -9,9 +9,9 @@ include '../business/pagoPeridiocidadBusiness.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">    
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Peridiocidades de pago</title>
-   <script>
+    <script>
         function confirmarAccionModificar() {
             return confirm("¿Está seguro de que desea modificar esta peridiocidad de pago?");
         }
@@ -23,9 +23,9 @@ include '../business/pagoPeridiocidadBusiness.php';
 </head>
 
 <body>
-    <?php include 'header.php';?>
+    <?php include 'header.php'; ?>
 
-    <h1>Peridiocidades de pago (falta autocompletado)</h1>
+    <h1>Peridiocidades de pago </h1>
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
@@ -34,12 +34,9 @@ include '../business/pagoPeridiocidadBusiness.php';
             <ul id="listarPagoPeridiocidad"></ul>
         </div>
     </form></br></br>
-
-    <script src="../js/peticiones.js"></script>
-
-    <div>        
+    <div>
         <?php
-       if (!isset($_POST['campo'])) {
+        if (!isset($_POST['campo'])) {
             $_POST['campo'] = "";
             $campo = $_POST['campo'];
         }
@@ -51,13 +48,13 @@ include '../business/pagoPeridiocidadBusiness.php';
         ?>
             <table border="1">
                 <thead style="text-align: center;">
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Descripcíon</th>
-                    <th>Acciones</th>
-                </tr>
-               </thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Descripcíon</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
 
                 <tbody>
                     <?php
@@ -96,13 +93,14 @@ include '../business/pagoPeridiocidadBusiness.php';
 
                     <tr>
                         <th>Nombre</th>
-                        <th>Descripcíon</th >
+                        <th>Descripcíon</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad" placeholder="Nombre"></td>
+                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad" id="campo2" placeholder="Nombre"></td>
+                        <ul id="listarPagoPeridiocidad2"></ul>
                         <td><input type="text" name="descripcionPagoPeridiocidad" placeholder="Descripción"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>
@@ -123,6 +121,8 @@ include '../business/pagoPeridiocidadBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "existe") {
+                            echo '<center><p style="color: red">¡Esta periodicidad de pago ya existe, intente de nuevo con otro nombre!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
@@ -132,6 +132,7 @@ include '../business/pagoPeridiocidadBusiness.php';
             </tr>
         </form>
     </div>
+    <script src="../js/peticiones.js"></script>
 </body>
 
 </html>

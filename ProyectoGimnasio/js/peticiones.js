@@ -1,23 +1,75 @@
-document.getElementById("campo").addEventListener("keyup",getNombresCliente)
-document.getElementById("campo").addEventListener("keyup",getNombresClienteDesactivados)
-document.getElementById("campo").addEventListener("keyup",getNombresIns)
-document.getElementById("campo").addEventListener("keyup",getNombresActivosVariables)
-document.getElementById("campo").addEventListener("keyup",getNombresClientePeso)
-document.getElementById("campo").addEventListener("keyup",getNombresActivosFijos)
-document.getElementById("campo").addEventListener("keyup",getNombresImpuestoVenta)
-document.getElementById("campo").addEventListener("keyup",getNombresServicio)
-document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncional)
-document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncionalCriterio)
-document.getElementById("campo").addEventListener("keyup",getNombresFacturas)
-document.getElementById("campo").addEventListener("keyup",getNombresPagoMetodo)
+document.getElementById("campo").addEventListener("keyup", getNombresCliente)
+document.getElementById("campo").addEventListener("keyup", getNombresClienteDesactivados)
+document.getElementById("campo").addEventListener("keyup", getNombresIns)
+document.getElementById("campo").addEventListener("keyup", getNombresActivosVariables)
+document.getElementById("campo").addEventListener("keyup", getNombresClientePeso)
+document.getElementById("campo").addEventListener("keyup", getNombresActivosFijos)
+document.getElementById("campo").addEventListener("keyup", getNombresImpuestoVenta)
+document.getElementById("campo").addEventListener("keyup", getNombresServicio)
+document.getElementById("campo").addEventListener("keyup", getNombresModalidadFuncional)
+document.getElementById("campo").addEventListener("keyup", getNombresModalidadFuncionalCriterio)
+document.getElementById("campo").addEventListener("keyup", getNombresFacturas)
+document.getElementById("campo").addEventListener("keyup", getNombresPagoMetodo)
+document.getElementById("campo").addEventListener("keyup", getNombresPeridiocidades)
+document.getElementById("campo2").addEventListener("keyup", getNombresPeridiocidades)
 
-function getNombresPagoMetodo(){
+
+function getNombresPeridiocidades() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listarPagoPeridiocidad")
+    let inputCP2 = document.getElementById("campo2").value
+    let lista2 = document.getElementById("listarPagoPeridiocidad2")
+
+    if (inputCP2.length > 0) {
+
+        let url = "../data/prediccionPagoPeridiocidad.php"
+        let formData = new FormData()
+
+        formData.append("campo2", inputCP2)
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista2.style.display = 'block'
+                lista2.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista2.style.display = 'none'
+    }
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionPagoPeridiocidad.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+}
+
+function getNombresPagoMetodo() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listarPagoMetodos")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionPagoMetodo.php"
+        let url = "../data/prediccionPagoMetodo.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
@@ -26,24 +78,24 @@ function getNombresPagoMetodo(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
+    } else {
         lista.style.display = 'none'
     }
 }
 
-function getNombresFacturas(){
+function getNombresFacturas() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaFacturas")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionFactura.php"
+        let url = "../data/prediccionFactura.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
@@ -52,25 +104,25 @@ function getNombresFacturas(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
+    } else {
         lista.style.display = 'none'
     }
 
 }
 
-function getNombresCliente(){
+function getNombresCliente() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaClientes")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionCliente.php"
+        let url = "../data/prediccionCliente.php"
         let formData = new FormData()
         formData.append("campo", inputCP)
 
@@ -79,24 +131,24 @@ function getNombresCliente(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
+    } else {
         lista.style.display = 'none'
     }
 }
 
-function getNombresClienteDesactivados(){
+function getNombresClienteDesactivados() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaClientesDesactivados")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionRecuperarCliente.php"
+        let url = "../data/prediccionRecuperarCliente.php"
         let formData = new FormData()
         formData.append("campo", inputCP)
 
@@ -105,24 +157,24 @@ function getNombresClienteDesactivados(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
+    } else {
         lista.style.display = 'none'
     }
 }
 
-function getNombresIns(){
+function getNombresIns() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaInstructor")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionInstructor.php"
+        let url = "../data/prediccionInstructor.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
@@ -132,25 +184,25 @@ function getNombresIns(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
-    lista.style.display = 'none'
+    } else {
+        lista.style.display = 'none'
     }
 }
 
 
-function getNombresActivosVariables(){
+function getNombresActivosVariables() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaActivosVariables")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionActivosVariables.php"
+        let url = "../data/prediccionActivosVariables.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
@@ -160,25 +212,25 @@ function getNombresActivosVariables(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
+    } else {
         lista.style.display = 'none'
     }
 }
 
 
-function getNombresClientePeso(){
+function getNombresClientePeso() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaClientePeso")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionClientePeso.php"
+        let url = "../data/prediccionClientePeso.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
@@ -188,24 +240,24 @@ function getNombresClientePeso(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
+    } else {
         lista.style.display = 'none'
     }
 }
 
 
-function getNombresActivosFijos(){
+function getNombresActivosFijos() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaActivosFijos")
 
-    if(inputCP.length > 0){
-        let url= "../data/prediccionActivosFijos.php"
+    if (inputCP.length > 0) {
+        let url = "../data/prediccionActivosFijos.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
@@ -215,24 +267,24 @@ function getNombresActivosFijos(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
+    } else {
         lista.style.display = 'none'
     }
 }
 
-function getNombresImpuestoVenta(){
+function getNombresImpuestoVenta() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaImpuestoVenta")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionImpuestoVenta.php"
+        let url = "../data/prediccionImpuestoVenta.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
@@ -242,24 +294,24 @@ function getNombresImpuestoVenta(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
+    } else {
         lista.style.display = 'none'
     }
 }
 
-function getNombresServicio(){
+function getNombresServicio() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaServicio")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionServicio.php"
+        let url = "../data/prediccionServicio.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
@@ -269,24 +321,24 @@ function getNombresServicio(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
-    lista.style.display = 'none'
+    } else {
+        lista.style.display = 'none'
     }
 }
 
-function getNombresModalidadFuncional(){
+function getNombresModalidadFuncional() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaModalidadFuncional")
 
-    if(inputCP.length > 0){
+    if (inputCP.length > 0) {
 
-        let url= "../data/prediccionModalidadFuncional.php"
+        let url = "../data/prediccionModalidadFuncional.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
@@ -296,50 +348,55 @@ function getNombresModalidadFuncional(){
             body: formData,
             mode: "cors"
         }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
 
-    }else {
-    lista.style.display = 'none'
-    }
-
-}
-
-
-
-function getNombresModalidadFuncionalCriterio(){
-    let inputCP = document.getElementById("campo").value
-    let lista = document.getElementById("listaModalidadFuncionalCriterio")
-
-    if(inputCP.length > 0){
-
-        let url= "../data/prediccionModalidadFuncionalCriterio.php"
-        let formData = new FormData()
-
-        formData.append("campo", inputCP)
-
-        fetch(url, {
-            method: "POST",
-            body: formData,
-            mode: "cors"
-        }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
-
-    }else {
+    } else {
         lista.style.display = 'none'
     }
 
 }
 
 
-function mostrar(valor){
+
+function getNombresModalidadFuncionalCriterio() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaModalidadFuncionalCriterio")
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionModalidadFuncionalCriterio.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+
+}
+
+
+function mostrar(valor) {
     document.getElementById("campo").value = valor;
-    
+    ventana.close();
+}
+
+function mostrarCampo2(valor) {
+    document.getElementById("campo2").value = valor;
+    ventana.close();
 }
