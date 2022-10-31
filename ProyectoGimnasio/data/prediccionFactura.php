@@ -6,6 +6,8 @@ $pdo = $con->Data();
 $campo = $_POST["campo"];
 $html = "";
 
+
+
 $sqlCliente = "SELECT  tbclienteid, tbclientenombre, tbclienteapellido1,tbclienteapellido2 FROM tbcliente WHERE (tbclienteactivo=1) AND tbclientenombre LIKE ?  OR tbclienteapellido1 LIKE ?  OR
 tbclienteapellido2 LIKE ? ORDER BY tbclienteid ASC LIMIT 0, 10";
 $query = $pdo->prepare($sqlCliente);
