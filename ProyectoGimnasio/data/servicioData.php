@@ -117,18 +117,22 @@ class ServicioData extends Data{
         
         $Servicios = [];
         $tbserviciotarifamonto = 0;
+        $tbserviciotarifaperiodicidadactualizacion =0;
+        $tbserviciotarifaproximafechaactualizacion ="";
         while ($row = mysqli_fetch_array($result)) {
             if($row['tbservicioactivo'] == 1){
                 while ($row2 = mysqli_fetch_array($serviciotarifaResult)) {
                     if($row['tbservicioid'] == $row2['tbservicioid'] && $row2['tbserviciotarifaactivo'] == 1){
                         $tbserviciotarifamonto = $row2['tbserviciotarifamonto'];
+                        $tbserviciotarifaperiodicidadactualizacion = $row2['tbserviciotarifaperiodicidadactualizacion'];
+                        $tbserviciotarifaproximafechaactualizacion = $row2['tbserviciotarifaproximafechaactualizacion'];
                         break;
                     }
                 }
                 mysqli_data_seek($serviciotarifaResult, 0);
 
                 $currentServicio = new Servicio($row['tbservicioid'], $row['tbservicionombre'], $row['tbserviciodescripcion'],
-                $tbserviciotarifamonto, $row['tbservicioactivo']);
+                $tbserviciotarifamonto, $row['tbservicioactivo'],$tbserviciotarifaperiodicidadactualizacion, $tbserviciotarifaproximafechaactualizacion);
                 array_push($Servicios, $currentServicio);
                 $tbserviciotarifamonto = 0;
             }

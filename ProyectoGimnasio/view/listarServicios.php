@@ -104,7 +104,8 @@ include '../business/servicioBusiness.php';
                     }
                     $a = "Hola Mundo!"; ?>
                     <script type="text/javascript">
-                        alert("<?php echo $a; ?>");
+                        confirm("<?php echo $a; ?>");
+                        location.href="../view/listarGrupoMuscular.php";
                     </script>
                 </tbody>
             </table>

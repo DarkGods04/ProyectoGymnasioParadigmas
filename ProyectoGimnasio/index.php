@@ -1,17 +1,41 @@
+
+<?php include("business/servicioBusiness.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
+<?php
+$servicioBusiness = new servicioBusiness();
+$servicios = $servicioBusiness->obtener();
+$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
+$fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
+?>
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú principal</title>
+    <script>
+        function confirmarActualizacionServicio() {
+            return confirm("¿Está seguro de que desea modificar este servicio?");
+        }
+    </script>
 </head>
 
 <body>
     <h1>Proyecto Gimnasio</h1>
     <h2>Menú principal</h2>
-
+    <?php
+    foreach ($servicios as $row) {
+        if ($row->getActivoTBServicio() == 1) {
+            if ($row->getFechaactualizacionTBServicio() == $fechaActualizacionProxima) {
+    ?> <script>
+                    confirmarActualizacionServicio();
+                </script>
+    <?php }
+        }
+    }
+    ?>
     <div>
         <a href="./view/listarInstructores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Instructores</a>
     </div>
@@ -59,7 +83,7 @@
     <div>
         <a href="./view/listarEjercicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Ejercicios</a>
     </div>
-    
+
     <div>
         <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupo Muscular</a>
     </div>
