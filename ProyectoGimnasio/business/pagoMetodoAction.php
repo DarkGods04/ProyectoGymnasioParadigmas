@@ -25,19 +25,19 @@ if (isset($_POST['insertar'])) {
                     if ($resultado == 1) {
                         Header("Location: ../view/listarPagoMetodos.php?success=inserted");
                     } else {
-                        Header("Location: ../view/listarPagoMetodos.php?error=dbError");
+                        Header("Location: ../view/listarPagoMetodos.php?error=dbError&nombrePagoMetodo=$nombrePagoMetodo&descripcionPagoMetodo=$descripcionPagoMetodo");
                     }
-                } else { 
-                    Header("Location: ../view/listarPagoMetodos.php?error=existe");
+                 } else { 
+                    Header("Location: ../view/listarPagoMetodos.php?error=existe&nombrePagoMetodo=$nombrePagoMetodo&descripcionPagoMetodo=$descripcionPagoMetodo");
                 }
             } else {
-                header("location: ../view/listarPagoMetodos.php?error=numberFormat");
+                header("location: ../view/listarPagoMetodos.php?error=numberFormat&nombrePagoMetodo=$nombrePagoMetodo&descripcionPagoMetodo=$descripcionPagoMetodo");
             }
         } else {
-            header("location: ../view/listarPagoMetodos.php?error=emptyField");
+            header("location: ../view/listarPagoMetodos.php?error=emptyField&nombrePagoMetodo=$nombrePagoMetodo&descripcionPagoMetodo=$descripcionPagoMetodo");
         }
     } else {
-        header("location: ../view/listarPagoMetodos.php?error=error");
+        header("location: ../view/listarPagoMetodos.php?error=error&nombrePagoMetodo=$nombrePagoMetodo&descripcionPagoMetodo=$descripcionPagoMetodo");
     }
 }
 

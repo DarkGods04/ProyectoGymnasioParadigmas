@@ -130,9 +130,9 @@ include '../business/servicioBusiness.php';
                 </thead>
 
                 <tbody>
-                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreServicio" class="form-control" placeholder="Nombre del servicio"></td>
-                    <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio"></td>
-                    <td><input type="text" class="mascaramonto" name="montoServicio" class="form-control" placeholder="Monto del servicio"></td>
+                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreServicio" class="form-control" placeholder="Nombre del servicio" value="<?php if(isset($_GET['nombreServicio'])){ echo $_GET['nombreServicio']; }?>"></td>
+                    <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio" value="<?php if(isset($_GET['descripcionServicio'])){ echo $_GET['descripcionServicio']; }?>"></td>
+                    <td><input type="text" class="mascaramonto" name="montoServicio" class="form-control" placeholder="Monto del servicio" value="<?php if(isset($_GET['montoServicio'])){ echo $_GET['montoServicio']; }?>"></td>
                     <td><select name="periodicidad" required>
                             <option value="" hidden>Seleccione periodicidad</option>
                             <option value="30">Cada 30 días</option>
@@ -157,8 +157,8 @@ include '../business/servicioBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
-                        } else if ($_GET['error'] == "error") {
-                            echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "relationError"){
+                            echo '<p style="color: red">Error al eliminar, el elemento tiene registros en otra(s) tabla(s)</p>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';

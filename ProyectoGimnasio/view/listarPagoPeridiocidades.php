@@ -98,10 +98,11 @@ include '../business/pagoPeridiocidadBusiness.php';
                     </tr>
                 </thead>
                 <tbody>
+
                     <tr>
-                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad" id="campo2" placeholder="Nombre"></td>
-                        <ul id="listarPagoPeridiocidad2"></ul>
-                        <td><input type="text" name="descripcionPagoPeridiocidad" placeholder="Descripción"></td>
+                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad"  id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoPeridiocidad'])){ echo $_GET['nombrePagoPeridiocidad']; }?>"></td>
+                    <ul id="listarPagoPeridiocidad2"></ul>
+                        <td><input type="text" name="descripcionPagoPeridiocidad" placeholder="Descripción" value="<?php if(isset($_GET['descripcionPagoPeridiocidad'])){ echo $_GET['descripcionPagoPeridiocidad']; }?>"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>
                 </tbody>
@@ -121,9 +122,12 @@ include '../business/pagoPeridiocidadBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "relationError"){
+                            echo '<p style="color: red">Error al eliminar, el elemento tiene registros en otra(s) tabla(s)</p>';
                         } else if ($_GET['error'] == "existe") {
                             echo '<center><p style="color: red">¡Esta periodicidad de pago ya existe, intente de nuevo con otro nombre!</p></center>';
                         }
+
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
                     }

@@ -1,5 +1,6 @@
 <?php
 include 'instructorBusiness.php';
+include 'facturaBusiness.php';
 
 if (isset($_POST['insertar'])) {
     if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['correo']) &&
@@ -44,6 +45,14 @@ if (isset($_POST['insertar'])) {
 
 
 if (isset($_POST['eliminar'])) {
+
+    $facturaBusiness = new FacturaBusiness();
+    $facturas = $facturaBusiness->obtener();
+    $flag = 0;
+    foreach ($facturas as $row) { if($row->getInstructoridTBFactura() == $_POST['idInstructor'] && $row->getActivoTBFactura() == 1 ){  $flag = 1; } }
+        
+    if($flag == 0){
+
     if (isset($_POST['idInstructor'])) {
         $id = $_POST['idInstructor'];
 
@@ -58,6 +67,11 @@ if (isset($_POST['eliminar'])) {
     } else {
         header("location: ../view/listarInstructores.php?error=error");
     }
+
+    } else {
+    header("location: ../view/listarInstructores.php?error=relationError");
+    }
+
 }
 
 

@@ -1,6 +1,6 @@
 <?php
 include 'servicioBusiness.php';
-
+include 'facturaBusiness.php';
 if (isset($_POST["insertar"])) {
     if (isset($_POST["nombreServicio"]) && isset($_POST["descripcionServicio"]) && isset($_POST["montoServicio"]) && isset($_POST["periodicidad"])) {
 
@@ -23,21 +23,32 @@ if (isset($_POST["insertar"])) {
                 if ($result == 1) {
                     header("location: ../view/listarServicios.php?success=updated");
                 } else {
-                    header("location: ../view/listarServicios.php?error=dbError");
+                    header("location: ../view/listarServicios.php?error=dbError&nombreServicio=$nombreServicio&descripcionServicio=$descripcionServicio&montoServicio=$montoServicio");
                 }
             } else {
                 header("location: ../view/listarServicios.php?error=numberFormat");
             }
         } else {
-            header("location: ../view/listarServicios.php?error=emptyField");
+            header("location: ../view/listarServicios.php?error=emptyField&nombreServicio=$nombreServicio&descripcionServicio=$descripcionServicio&montoServicio=$montoServicio");
         }
     } else {
-        header("location: ../view/listarServicios.php?error=error");
+        header("location: ../view/listarServicios.php?error=error&nombreServicio=$nombreServicio&descripcionServicio=$descripcionServicio&montoServicio=$montoServicio");
     }
 }
 
 
 if (isset($_POST['eliminar'])) {
+    $facturaBusiness = new FacturaBusiness();
+    $facturas = $facturaBusiness->obtener();
+    $flag = 0;
+    foreach ($facturas as $row) {  $array = explode(";", $row->getServiciosTBFactura());
+       
+    foreach ($array as $selected) {  if(  $_POST['idServicio'] == $selected  && $row->getActivoTBFactura() == 1 ){  $flag = 1; } }
+        
+}
+
+    if($flag == 0){
+
     if (isset($_POST['idServicio'])) {
 
         $id = $_POST['idServicio'];
@@ -52,6 +63,11 @@ if (isset($_POST['eliminar'])) {
     } else {
         header("location: ../view/listarServicios.php?error=error");
     }
+
+} else {
+    header("location: ../view/listarServicios.php?error=relationError");
+}
+
 }
 
 if (isset($_POST['actualizar'])) {
