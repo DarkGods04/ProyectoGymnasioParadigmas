@@ -1,12 +1,13 @@
-
-<?php include("business/servicioBusiness.php"); ?>
+<?php
+//include 'business/servicioBusiness.php';
+?>
 
 <!DOCTYPE html>
-<html lang="en">
-<?php
-$servicioBusiness = new servicioBusiness();
+<html>
+<?php /*
+$servicioBusiness = new ServicioBusiness();
 $servicios = $servicioBusiness->obtener();
-$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
+*/$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
 $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
 ?>
 
@@ -16,8 +17,8 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú principal</title>
     <script>
-        function confirmarActualizacionServicio() {
-            return confirm("¿Está seguro de que desea modificar este servicio?");
+        function confirmarActualizacionServicio(dat,dias) {
+            return confirm("El servicio con el nombre  y monto = "+dat+" le corresponde una actualización el día de hoy\n ¿desea realizar esta actualización en caso contrario se aplazara "+dias+" días más?");
         }
     </script>
 </head>
@@ -29,10 +30,16 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
     foreach ($servicios as $row) {
         if ($row->getActivoTBServicio() == 1) {
             if ($row->getFechaactualizacionTBServicio() == $fechaActualizacionProxima) {
-    ?> <script>
-                    confirmarActualizacionServicio();
+                $id = $row->getIdTBServicio();
+                $nom = $row->setNombreTBServicio();
+                $monto = $row->getMontoTBServicio();
+                $dias =$row->getPeriodicidadTBServicio();
+                ?><script>
+                    if (confirmarActualizacionServicio("<?php echo $id . "'$nom'" . "'$monto'"; ?>","<?php echo $dias; ?>")) {
+                        location.href = "../view/listarServicios.php";
+                    }
                 </script>
-    <?php }
+                <?php }
         }
     }
     ?>

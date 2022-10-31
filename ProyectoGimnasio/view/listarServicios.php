@@ -49,7 +49,7 @@ include '../business/servicioBusiness.php';
         }
         $campo = $_POST['campo'];
 
-        $servicioBusiness = new servicioBusiness();
+        $servicioBusiness = new ServicioBusiness();
         $servicios = $servicioBusiness->buscar($campo);
         if (!empty($servicios)) {
         ?>
@@ -102,11 +102,7 @@ include '../business/servicioBusiness.php';
                             echo '</form>';
                         }
                     }
-                    $a = "Hola Mundo!"; ?>
-                    <script type="text/javascript">
-                        confirm("<?php echo $a; ?>");
-                        location.href="../view/listarGrupoMuscular.php";
-                    </script>
+                   ?>
                 </tbody>
             </table>
         <?php
