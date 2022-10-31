@@ -55,8 +55,10 @@
     <div>
         <a href="./view/listarModalidadfuncionalcriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de Modalidad Funcional</a>
     </div>
-
-
+    
+    <div>
+        <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupo Muscular</a>
+    </div>
 </body>
 
 </html>
