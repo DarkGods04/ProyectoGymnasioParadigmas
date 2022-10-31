@@ -10,7 +10,7 @@ class Servicio{
     private $periodicidadTBServicio;
     private $fechaactualizacionTBServicio;
 
-    function Servicio($idTBServicio, $nombreTBServicio, $descripcionTBServicio, $montoTBServicio, $activoTBServicio, $periodicidadTBServicio,$fechaactualizacionTBServicio){
+    function __construct($idTBServicio, $nombreTBServicio, $descripcionTBServicio, $montoTBServicio, $activoTBServicio, $periodicidadTBServicio,$fechaactualizacionTBServicio){
         $this->idTBServicio = $idTBServicio;
         $this->nombreTBServicio = $nombreTBServicio;
         $this->descripcionTBServicio = $descripcionTBServicio;

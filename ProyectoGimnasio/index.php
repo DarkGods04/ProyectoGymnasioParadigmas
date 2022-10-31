@@ -1,13 +1,10 @@
-<?php
-//include 'business/servicioBusiness.php';
-?>
-
+<?php include 'business/servicioBusiness.php'; ?>
 <!DOCTYPE html>
 <html>
-<?php /*
+<?php 
 $servicioBusiness = new ServicioBusiness();
 $servicios = $servicioBusiness->obtener();
-*/$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
+$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
 $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
 ?>
 
@@ -31,12 +28,12 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
         if ($row->getActivoTBServicio() == 1) {
             if ($row->getFechaactualizacionTBServicio() == $fechaActualizacionProxima) {
                 $id = $row->getIdTBServicio();
-                $nom = $row->setNombreTBServicio();
+                $nom = $row->getNombreTBServicio();
                 $monto = $row->getMontoTBServicio();
                 $dias =$row->getPeriodicidadTBServicio();
                 ?><script>
                     if (confirmarActualizacionServicio("<?php echo $id . "'$nom'" . "'$monto'"; ?>","<?php echo $dias; ?>")) {
-                        location.href = "../view/listarServicios.php";
+                        location.href = "view/listarServicios.php";
                     }
                 </script>
                 <?php }

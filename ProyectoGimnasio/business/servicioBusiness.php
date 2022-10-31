@@ -6,7 +6,7 @@ class ServicioBusiness {
 
     private $servicioData;
 
-    public function ServicioBusiness() {
+    public function __construct() {
         $this->servicioData = new ServicioData();
     }
 

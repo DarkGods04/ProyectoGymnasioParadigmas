@@ -1,6 +1,6 @@
 <?php
 include_once 'data.php';
-include '../domain/Servicio.php';
+include '../domain/servicio.php';
 
 class ServicioData extends Data{
 
