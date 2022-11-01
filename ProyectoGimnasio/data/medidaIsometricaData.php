@@ -79,8 +79,29 @@ class MedidaIsometricaData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
+        $querySelectGrupoMuscular = "SELECT * FROM tbcatalogogrupomuscular WHERE tbcatalogogrupomuscularnombre LIKE '%$palabra%';";
+        
+        $resultGrupoMuscular = mysqli_query($conn, $querySelectGrupoMuscular);
+        $idGrupoMuscular = 0;
+        while ($rowGrupoMuscular = mysqli_fetch_array($resultGrupoMuscular)) {
+            if ($rowGrupoMuscular['tbcatalogogrupomuscularactivo'] == 1) {
+                $idGrupoMuscular = $rowGrupoMuscular['tbcatalogogrupomuscularid'];
+            }
+        }
+
+        $querySelectCliente = "SELECT * FROM tbcliente WHERE tbclientenombre LIKE '%$palabra%' OR tbclienteapellido1 LIKE '%$palabra%' OR
+        tbclienteapellido2 LIKE '%$palabra%';";
+        
+        $resultCliente = mysqli_query($conn, $querySelectCliente);
+        $idCliente = 0;
+        while ($rowCliente = mysqli_fetch_array($resultCliente)) {
+            if ($rowCliente['tbclienteactivo'] == 1) {
+                $idCliente = $rowCliente['tbclienteid'];
+            }
+        }
+
         $querySelect = "SELECT * FROM tbmedidaisometrica WHERE tbmedidaisometricaid LIKE '%$palabra%' 
-                  OR tbgrupomuscularid LIKE '%$palabra%' OR tbclienteid LIKE '%$palabra%' OR tbmedidaisometricafechamedicion LIKE '%$palabra%' OR tbmedidaisometricamedida LIKE '%$palabra%';";
+                  OR tbgrupomuscularid LIKE '%$idGrupoMuscular%' OR tbclienteid LIKE '%$idCliente%'  OR tbmedidaisometricamedida LIKE '%$palabra%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         
