@@ -16,8 +16,7 @@ if (isset($_POST['insertar'])) {
 
         if (strlen($idGrupoMuscular) > 0 && strlen($idCliente) > 0 && strlen($medida) > 0 && strlen($fechaMedicion) > 0) {
 
-                $tempMedida = str_replace("%", "", $medida);
-
+                $tempMedida = str_replace("cmm","",$medida);
                 $medidaIsometrica = new MedidaIsometrica(0,$idGrupoMuscular,$idCliente,$fechaMedicion, $tempMedida, 1);
 
                 $resultado = $medidaBusiness->insertar($medidaIsometrica);
