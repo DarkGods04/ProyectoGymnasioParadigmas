@@ -99,7 +99,7 @@ if (isset($_POST['insertarFactura'])) {
                     $resultado = $facturaBusiness->insertar($factura);
 
                     if ($resultado == 1) {
-                        Header("Location: ../view/listarFacturas.php?success=inserted");
+                        Header("Location: ../view/imprimirPDF.php?success=inserted&MontoBruto=$MontoBruto&cliente=$clienteid&instructor=$instructorid&fechaPago=$fechaPago&impuestoVenta=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&montoNeto=$montoNeto");
                     } else {
                         Header("Location: ../view/listarFacturas.php?error=dbError");
                     }
