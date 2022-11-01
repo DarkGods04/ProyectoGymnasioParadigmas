@@ -14,7 +14,7 @@ if (isset($_POST['insertar'])) {
         $medidaBusiness = new MedidaIsometricaBusiness();
 
 
-        if (strlen($idGrupoMuscular) > 0 && strlen($idCliente) > 0 && strlen($medida) > 0) {
+        if (strlen($idGrupoMuscular) > 0 && strlen($idCliente) > 0 && strlen($medida) > 0 && strlen($fechaMedicion) > 0) {
 
                 $tempMedida = str_replace("%", "", $medida);
 
@@ -65,12 +65,12 @@ if (isset($_POST['actualizar'])) {
         $medida = $_POST['medida'];
          
 
-
         if (strlen($idGrupoMuscular) > 0 && strlen($idCliente) > 0 && strlen($fechaMedicion) > 0 && strlen($medida) > 0) {
-            $tempMedida = str_replace("₡", "", $medida);
+           
+           // $tempMedida = str_replace("₡", "", $medida);
 
-            if (is_numeric($tempMedida)) {
-                $medidaIsometrica = new MedidaIsometrica($id, $idGrupoMuscular, $idCliente,$fechaMedicion,$tempMedida, 1);
+            if (is_numeric($medida)) {
+                $medidaIsometrica = new MedidaIsometrica($id, $idGrupoMuscular, $idCliente,$fechaMedicion,$medida, 1);
                 $medidaIsometricaBusiness = new MedidaIsometricaBusiness();
                 $resultado = $medidaIsometricaBusiness->update($medidaIsometrica);
 

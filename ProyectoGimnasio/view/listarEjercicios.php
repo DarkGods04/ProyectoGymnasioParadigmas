@@ -51,6 +51,7 @@ include '../business/ejercicioBusiness.php';
 
         $ejercicioBusiness = new EjercicioBusiness();
         $ejercicios = $ejercicioBusiness->buscar($campo);
+        
         if (!empty($ejercicios)) {
         ?>
             <table border="1">

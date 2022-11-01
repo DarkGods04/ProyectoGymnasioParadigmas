@@ -59,6 +59,15 @@
     <div>
         <a href="./view/listarEjercicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Ejercicios</a>
     </div>
+
+    <div>
+        <a href="./view/listarMedidasIsometricas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Medidas isometricas</a>
+    </div>
+
+    <div>
+        <a href="./view/listarMedidasIsometricasPrueba.php" style="text-decoration: none; color: blue; font-size: 150%;">- Medidas isometricas prueba</a>
+    </div>
+
     
     <div>
         <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupo Muscular</a>
