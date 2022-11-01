@@ -1,5 +1,9 @@
 <?php
 require_once '../business/servicioBusiness.php';
+$servicioBusiness = new ServicioBusiness();
+$serviciosss = $servicioBusiness->obtener();
+$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
+$fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +23,9 @@ require_once '../business/servicioBusiness.php';
         function confirmarAccionEliminar() {
             return confirm("¿Está seguro de que desea eliminar este servicio?");
         }
+        function confirmarActualizacionServicio(nombre,monto,dias) {
+            return confirm("El servicio con el nombre "+nombre+" y monto = "+monto+" le corresponde una actualización el día de hoy\n ¿Desea realizar esta actualización en caso contrario se aplazara "+dias+" días más?");
+        }
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -29,8 +36,30 @@ require_once '../business/servicioBusiness.php';
     <?php
     include 'header.php';
     ?>
+    <script>
+    confirmarActualizacionServicio("<?php echo $nom; ?>", "<?php echo $monto; ?>","<?php echo $dias; ?>");
+    </script>
     <h1>Servicios</h1>
-
+    <?php 
+    
+    foreach ($serviciosss as $row) {
+        if ($row->getActivoTBServicio() == 0) {
+            if ($row->getFechaactualizacionTBServicio() == $fechaActualizacionProxima) {
+                $id = $row->getIdTBServicio();
+                $nom = $row->getNombreTBServicio();
+                $monto = $row->getMontoTBServicio();
+                $dias =$row->getPeriodicidadTBServicio();
+                ?><script>
+                    if (!confirmarActualizacionServicio("<?php echo $nom?>", "<?php echo $monto?>","<?php echo $dias?>")) {
+                       <?php
+                        $servicioBusiness->aplazarActualizacion($id, $dias);
+                        ?>
+                    }
+                </script>
+                <?php }
+        }
+    }
+    ?>
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
@@ -48,8 +77,6 @@ require_once '../business/servicioBusiness.php';
             $campo = $_POST['campo'];
         }
         $campo = $_POST['campo'];
-
-        $servicioBusiness = new ServicioBusiness();
         $servicios = $servicioBusiness->buscar($campo);
         if (!empty($servicios)) {
         ?>

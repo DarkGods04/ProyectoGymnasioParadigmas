@@ -2,7 +2,8 @@
 require_once 'data.php';
 require_once '../domain/servicio.php';
 
-class ServicioData extends Data{
+class ServicioData extends Data
+{
 
     public function insertServicio($Servicio)
     {
@@ -71,6 +72,25 @@ class ServicioData extends Data{
 
         return $result;
     }
+    public function aplazarActuali($id, $dias)
+    {
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('UTF8');
+
+        $fechaActualizacionProxima = new DateTime(date('Y-m-d'));
+        $fechaActualizacionProxima->modify('+' . "$dias" . ' day');
+        $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
+
+        $fechaActual = new DateTime(date('Y-m-d'));
+        $fechaActual = $fechaActual->format('Y-m-d');
+        
+        $queryUpdate = "UPDATE tbserviciotarifa SET tbserviciotarifafechamodificacion='$fechaActual', tbserviciotarifaproximafechaactualizacion='$fechaActualizacionProxima'
+            WHERE tbserviciotarifaid = $id";
+        $result = mysqli_query($conn, $queryUpdate);
+        mysqli_close($conn);
+
+        return $result;
+    }
 
     public function updateServicioTarifa($Servicio)
     {
@@ -109,7 +129,8 @@ class ServicioData extends Data{
     }
 
 
-    public function getServicios(){
+    public function getServicios()
+    {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
