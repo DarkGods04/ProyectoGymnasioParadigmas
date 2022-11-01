@@ -22,12 +22,11 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
     $html .= "<li onclick=\"mostrar('" . $row["tbinstructornombre"] . "')\">" . $row["tbinstructornombre"] . " " . $row["tbinstructorapellido"] . "</li>";
 }
 
-$sqlModalidad = "SELECT tbpagomodalidadid, tbpagomodalidadnombre FROM tbpagomodalidad 
-WHERE (tbpagomodalidadactivo=1) AND (tbpagomodalidadnombre LIKE ?) ORDER BY tbpagomodalidadid ASC LIMIT 0, 10";
-$query = $pdo->prepare($sqlModalidad);
-$query->execute([$campo . '%']);
+$sql = "SELECT tbcatalogopagoperidiocidadid, tbcatalogopagoperidiocidadnombre FROM tbcatalogopagoperidiocidad WHERE (tbcatalogopagoperidiocidadactivo=1) AND (tbcatalogopagoperidiocidadid LIKE ? OR tbcatalogopagoperidiocidadnombre LIKE ?) ORDER BY tbcatalogopagoperidiocidadid ASC LIMIT 0, 10";
+$query = $pdo->prepare($sql);
+$query->execute([$campo . '%', $campo . '%']);
 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-    $html .= "<li onclick=\"mostrar('" . $row["tbpagomodalidadnombre"] . "')\">" . $row["tbpagomodalidadnombre"] . "</li>";
+        $html .= "<li onclick=\"mostrar('" . $row["tbcatalogopagoperidiocidadnombre"] . "')\">" . $row["tbcatalogopagoperidiocidadid"] . " - " . $row["tbcatalogopagoperidiocidadnombre"] . "</li>";
 }
 
 $sqlServicio = "SELECT tbservicioid, tbservicionombre FROM tbservicio WHERE (tbservicioactivo=1) AND 

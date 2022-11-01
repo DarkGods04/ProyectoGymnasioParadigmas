@@ -28,5 +28,8 @@ class ServicioBusiness {
     public function buscar($palabra) {
         return $this->servicioData->buscarServicios($palabra);
     }
+    public function aplazarActualizacion($servicio) {
+        return $this->servicioData->updateServicioTarifa($servicio);
+    }
 
 };
