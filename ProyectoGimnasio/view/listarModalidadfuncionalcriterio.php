@@ -95,7 +95,7 @@ include '../business/modalidadFuncionalBusiness.php';
 
 
                        <?php
-                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBModalidadfuncionalcriterio() . '"/></td>';
+                            echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBModalidadfuncionalcriterio() . '"/></td>';
                             echo '<td><input type="text" size="40" name="descripcion" id="descripcion" value="' . $row->getDescripcionTBModalidadfuncionalcriterio() .  '"/></td>';
                             echo '<td><input type="text" name="rangoValorMaximo" id="rangoValorMaximo" value="' . $row->getRangoValorMaximoTBModalidadfuncionalcriterio() .  '"/></td>';
                             echo '<td><input type="text" name="rangoValorMinimo" id="rangoValorMinimo" value="'. $row->getRangoValorMinimoTBModalidadfuncionalcriterio() . '"/></td>';
@@ -148,7 +148,7 @@ include '../business/modalidadFuncionalBusiness.php';
                                 } endforeach ?>
                         </select>
                     </td>
-                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombre" placeholder="Nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"></td>
+                    <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombre" placeholder="Nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"></td>
                     <td><input type="text" name="descripcion" placeholder="Descripcion" value="<?php if(isset($_GET['descripcion'])){ echo $_GET['descripcion']; }?>"></td>
                     <td><input type="text" name="rangoValorMaximo" placeholder="Valor Máximo" value="<?php if(isset($_GET['rangoValorMaximo'])){ echo $_GET['rangoValorMaximo']; }?>"></td>
                     <td><input type="text" name="rangoValorMinimo" placeholder="Valor Mínimo" value="<?php if(isset($_GET['rangoValorMinimo'])){ echo $_GET['rangoValorMinimo']; }?>"></td>

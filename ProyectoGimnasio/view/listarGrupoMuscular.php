@@ -64,7 +64,7 @@ include '../business/grupoMuscularBusiness.php';
                             echo '<tr>';
                             echo '<input type="hidden" name="idGrupoMuscular" id="idGrupoMuscular" value="' . $row->getIDGrupoMuscular() . '"/>';
                             echo '<td>' . $row->getIDGrupoMuscular() . '</td>';
-                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreGrupoMuscular" id="nombreGrupoMuscular" value="' . $row->getNombreTBGrupoMuscular() . '"/></td>';
+                            echo '<td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombreGrupoMuscular" id="nombreGrupoMuscular" value="' . $row->getNombreTBGrupoMuscular() . '"/></td>';
                             echo '<td><input type="text" name="descripcionGrupoMuscular" id="descripcionGrupoMuscular" value="' . $row->getDescripcionTBGrupoMuscular() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -96,7 +96,7 @@ include '../business/grupoMuscularBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreGrupoMuscular" id="campo2" placeholder="Nombre"></td>
+                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombreGrupoMuscular" id="campo2" placeholder="Nombre"></td>
                         <ul id="listarGruposMusculares2"></ul>
                         <td><input type="text" name="descripcionGrupoMuscular" placeholder="Descripción"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>

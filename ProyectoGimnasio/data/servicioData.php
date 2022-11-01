@@ -2,7 +2,8 @@
 require_once 'data.php';
 require_once '../domain/servicio.php';
 
-class ServicioData extends Data{
+class ServicioData extends Data
+{
 
     public function insertServicio($Servicio)
     {
@@ -71,7 +72,7 @@ class ServicioData extends Data{
 
         return $result;
     }
-
+    
     public function updateServicioTarifa($Servicio)
     {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
@@ -109,7 +110,8 @@ class ServicioData extends Data{
     }
 
 
-    public function getServicios(){
+    public function getServicios()
+    {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 

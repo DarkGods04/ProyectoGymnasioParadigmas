@@ -1,5 +1,9 @@
 <?php
 require_once '../business/servicioBusiness.php';
+$servicioBusiness = new ServicioBusiness();
+$serviciosss = $servicioBusiness->obtener();
+$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
+$fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +23,10 @@ require_once '../business/servicioBusiness.php';
         function confirmarAccionEliminar() {
             return confirm("¿Está seguro de que desea eliminar este servicio?");
         }
+
+        function confirmarActualizacionServicio(nombre, monto, dias) {
+            return confirm("El servicio con el nombre " + nombre + " y monto = " + monto + " le corresponde una actualización el día de hoy\n ¿Desea realizar esta actualización en caso contrario se aplazara " + dias + " días más?");
+        }
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -26,11 +34,40 @@ require_once '../business/servicioBusiness.php';
 </head>
 
 <body>
-    <?php
-    include 'header.php';
-    ?>
+    <?php include 'header.php'; ?>
     <h1>Servicios</h1>
+    <?php
+    foreach ($serviciosss as $row) {
+        if ($row->getActivoTBServicio() == 1) {
+            if ($row->getFechaactualizacionTBServicio() == $fechaActualizacionProxima) {
+                $id = $row->getIdTBServicio();
+                $nom = $row->getNombreTBServicio();
+                $descip = $row->getDescripcionTBServicio();
+                $monto = $row->getMontoTBServicio();
+                $dias = $row->getPeriodicidadTBServicio();
 
+                $servicio = new Servicio(
+                    $id,
+                    $nom,
+                    $descip,
+                    $monto,
+                    $row->getActivoTBServicio(),
+                    $dias,
+                    $row->getFechaactualizacionTBServicio()
+                );
+    ?>
+                <script>
+                    if (confirmarActualizacionServicio("<?php echo $nom ?>", "<?php echo $monto ?>", "<?php echo $dias ?>")) {
+                        <?php
+                        $servicioBusiness->aplazarActualizacion($servicio);
+                        ?>
+                    }
+                </script>
+    <?php
+            }
+        }
+    }
+    ?>
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
@@ -48,8 +85,6 @@ require_once '../business/servicioBusiness.php';
             $campo = $_POST['campo'];
         }
         $campo = $_POST['campo'];
-
-        $servicioBusiness = new ServicioBusiness();
         $servicios = $servicioBusiness->buscar($campo);
         if (!empty($servicios)) {
         ?>
@@ -74,7 +109,7 @@ require_once '../business/servicioBusiness.php';
                             echo '<tr>';
                             echo '<input  type="hidden" name="idServicio" id="idServicio" value="' . $row->getIdTBServicio() . '"/>';
                             echo '<td>' . $row->getIdTBServicio() . '</td>';
-                            echo '<td><input pattern="^[a-zA-Z\u00c0-\u017F]+" type="text" name="nombreServicio" id="nombreServicio" value="' . $row->getNombreTBServicio() . '"/></td>';
+                            echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="nombreServicio" id="nombreServicio" value="' . $row->getNombreTBServicio() . '"/></td>';
                             echo '<td><input  type="text" name="descripcionServicio" id="descripcionServicio" value="' . $row->getDescripcionTBServicio() . '"/></td>';
                             echo '<td><input  type="text" class="mascaramonto" name="montoServicio" id="montoServicio" value="' . $row->getMontoTBServicio() . '"/></td>';
                             echo '<td><select name="periodicidad" required>.';
@@ -102,7 +137,7 @@ require_once '../business/servicioBusiness.php';
                             echo '</form>';
                         }
                     }
-                   ?>
+                    ?>
                 </tbody>
             </table>
         <?php
@@ -126,9 +161,15 @@ require_once '../business/servicioBusiness.php';
                 </thead>
 
                 <tbody>
-                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreServicio" class="form-control" placeholder="Nombre del servicio" value="<?php if(isset($_GET['nombreServicio'])){ echo $_GET['nombreServicio']; }?>"></td>
-                    <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio" value="<?php if(isset($_GET['descripcionServicio'])){ echo $_GET['descripcionServicio']; }?>"></td>
-                    <td><input type="text" class="mascaramonto" name="montoServicio" class="form-control" placeholder="Monto del servicio" value="<?php if(isset($_GET['montoServicio'])){ echo $_GET['montoServicio']; }?>"></td>
+                    <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombreServicio" class="form-control" placeholder="Nombre del servicio" value="<?php if (isset($_GET['nombreServicio'])) {
+                                                                                                                                                                        echo $_GET['nombreServicio'];
+                                                                                                                                                                    } ?>"></td>
+                    <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio" value="<?php if (isset($_GET['descripcionServicio'])) {
+                                                                                                                                                echo $_GET['descripcionServicio'];
+                                                                                                                                            } ?>"></td>
+                    <td><input type="text" class="mascaramonto" name="montoServicio" class="form-control" placeholder="Monto del servicio" value="<?php if (isset($_GET['montoServicio'])) {
+                                                                                                                                                        echo $_GET['montoServicio'];
+                                                                                                                                                    } ?>"></td>
                     <td><select name="periodicidad" required>
                             <option value="" hidden>Seleccione periodicidad</option>
                             <option value="30">Cada 30 días</option>
@@ -153,7 +194,7 @@ require_once '../business/servicioBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
-                        } else if ($_GET['error'] == "relationError"){
+                        } else if ($_GET['error'] == "relationError") {
                             echo '<p style="color: red">Error al eliminar, el elemento tiene registros en otra(s) tabla(s)</p>';
                         }
                     } else if (isset($_GET['success'])) {
