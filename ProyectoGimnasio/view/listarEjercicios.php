@@ -71,7 +71,7 @@ include '../business/ejercicioBusiness.php';
                             echo '<tr>';
                             echo '<input  type="hidden" name="idEjercicio" id="id" value="' . $row->getIdEjercicio() . '"/>';
                             echo '<td>' . $row->getIdEjercicio() . '</td>';
-                            echo '<td><input class="mascaraejercicio" type="text" name="nombre" id="nombre" value="' . $row->getNombreEjercicio() . '"/></td>';
+                            echo '<td><input class="mascaraejercicio" type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombre" id="nombre" value="' . $row->getNombreEjercicio() . '"/></td>';
                             echo '<td><input  type="text" name="descripcion" id="descripcion" value="' . $row->getDescripcionEjercicio() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -101,7 +101,7 @@ include '../business/ejercicioBusiness.php';
                     <th>Acción</th>
                 </thead>
                 <tbody>
-                    <td><input class="mascaraejercicio" type="text" name="nombre" placeholder="nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"></td>
+                    <td><input class="mascaraejercicio" pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="nombre" placeholder="nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"></td>
                     <td><input type="text" name="descripcion" placeholder="Descripción" value="<?php if(isset($_GET['descripcion'])){ echo $_GET['descripcion']; }?>"></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                 </tbody>
