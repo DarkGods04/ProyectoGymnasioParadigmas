@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2022 a las 05:21:18
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.3
+-- Tiempo de generación: 01-11-2022 a las 04:33:29
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -298,21 +297,6 @@ INSERT INTO `tbinstructor` (`tbinstructorid`, `tbinstructornombre`, `tbinstructo
 (3, 'Cindy', 'Fernández', 'cindylf@gmail.com', 87234093, 'CR123456789', 'Nutricionista', 1),
 (4, 'María', 'Cordero', 'maria@gmail.com', 45677332, 'CR222323333', 'Fisioterapeuta', 1),
 (5, 'Isaí', 'Ríos', 'isairios@gmail.com', 65123123, 'CR987659999', 'Nutricionista', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbmedidaisometrica`
---
-
-CREATE TABLE `tbmedidaisometrica` (
-  `tbmedidaisometricaid` int(11) NOT NULL,
-  `tbgrupomuscularid` int(11) NOT NULL,
-  `tbclienteid` int(11) NOT NULL,
-  `tbmedidaisometricafechamedicion` date NOT NULL,
-  `tbmedidaisometricamedida` int(11) NOT NULL,
-  `tbmedidaisometricaactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 

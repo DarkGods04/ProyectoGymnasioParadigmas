@@ -185,7 +185,7 @@ include '../business/grupoMuscularBusiness.php';
                                                         echo $_GET['cliente'];
                                                     }
                                                 }
-                                            } ?>" require><?php if (isset($_GET['cliente'])) {
+                                            } ?>" ><?php if (isset($_GET['cliente'])) {
                                         foreach ($clientes as $row) {
                                             if ($_GET['cliente'] == $row->getIDTBCliente()) {
                                                 
