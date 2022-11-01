@@ -16,6 +16,7 @@ document.getElementById("campo").addEventListener("keyup", getNombresPeridiocida
 document.getElementById("campo2").addEventListener("keyup", getNombresPeridiocidades)
 document.getElementById("campo").addEventListener("keyup", getNombresGruposMusculares)
 document.getElementById("campo2").addEventListener("keyup", getNombresGruposMusculares)
+document.getElementById("campo").addEventListener("keyup", getNombresMedidasIsometricas)
 
 function getNombresGruposMusculares() {
     let inputCP = document.getElementById("campo").value
@@ -632,6 +633,34 @@ function getNombresModalidadFuncionalCriterio() {
         lista.style.display = 'none'
     }
 
+}
+
+
+function getNombresMedidasIsometricas(){
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaMedida")
+
+    if(inputCP.length > 0){
+
+        let url= "../data/prediccionMedidaIsometrica.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+        .then(data => {
+            lista.style.display = 'block'
+            lista.innerHTML = data
+        })
+        .catch(err => console.log(err))
+
+    }else {
+        lista.style.display = 'none'
+    }
 }
 
 

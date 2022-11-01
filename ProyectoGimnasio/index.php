@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -12,6 +11,7 @@
 <body>
     <h1>Proyecto Gimnasio</h1>
     <h2>Menú principal</h2>
+
     <div>
         <a href="./view/listarInstructores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Instructores</a>
     </div>
@@ -41,7 +41,7 @@
     </div>
 
     <div>
-        <a href="view/listarServicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Servicios</a>
+        <a href="./view/listarServicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Servicios</a>
     </div>
 
     <div>
@@ -60,6 +60,11 @@
         <a href="./view/listarEjercicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Ejercicios</a>
     </div>
 
+    <div>
+        <a href="./view/listarMedidasIsometricas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Medidas isometricas</a>
+    </div>
+
+    
     <div>
         <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupo Muscular</a>
     </div>
