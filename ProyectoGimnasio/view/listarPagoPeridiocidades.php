@@ -65,7 +65,7 @@ include '../business/pagoPeridiocidadBusiness.php';
                             echo '<tr>';
                             echo '<input type="hidden" name="idPagoPeridiocidad" id="idPagoPeridiocidad" value="' . $row->getIdTBPagoPeridiocidad() . '"/>';
                             echo '<td>' . $row->getIdTBPagoPeridiocidad() . '</td>';
-                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad" id="nombrePagoPeridiocidad" value="' . $row->getNombreTBPagoPeridiocidad() . '"/></td>';
+                            echo '<td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad" id="nombrePagoPeridiocidad" value="' . $row->getNombreTBPagoPeridiocidad() . '"/></td>';
                             echo '<td><input type="text" name="descripcionPagoPeridiocidad" id="descripcionPagoPeridiocidad" value="' . $row->getDescripcionTBPagoPeridiocidad() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -100,7 +100,7 @@ include '../business/pagoPeridiocidadBusiness.php';
                 <tbody>
 
                     <tr>
-                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad"  id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoPeridiocidad'])){ echo $_GET['nombrePagoPeridiocidad']; }?>"></td>
+                    <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombrePagoPeridiocidad"  id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoPeridiocidad'])){ echo $_GET['nombrePagoPeridiocidad']; }?>"></td>
                     <ul id="listarPagoPeridiocidad2"></ul>
                         <td><input type="text" name="descripcionPagoPeridiocidad" placeholder="Descripción" value="<?php if(isset($_GET['descripcionPagoPeridiocidad'])){ echo $_GET['descripcionPagoPeridiocidad']; }?>"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
