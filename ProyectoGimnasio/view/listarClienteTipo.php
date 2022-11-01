@@ -30,7 +30,7 @@ include '../business/clienteTipoBusiness.php';
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listarGlienteTipos"></ul>
+            <ul id="listarClienteTipos"></ul>
         </div>
     </form></br></br>
     <div>
@@ -64,7 +64,7 @@ include '../business/clienteTipoBusiness.php';
                             echo '<tr>';
                             echo '<input type="hidden" name="idClienteTipo" id="idClienteTipo" value="' . $row->getIDClienteTipo() . '"/>';
                             echo '<td>' . $row->getIDClienteTipo() . '</td>';
-                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreClienteTipo" id="nombreClienteTipo" value="' . $row->getNombreTBClienteTipo() . '"/></td>';
+                            echo '<td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombreClienteTipo" id="nombreClienteTipo" value="' . $row->getNombreTBClienteTipo() . '"/></td>';
                             echo '<td><input type="text" name="descripcionClienteTipo" id="descripcionClienteTipo" value="' . $row->getDescripcionTBClienteTipo() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -96,7 +96,7 @@ include '../business/clienteTipoBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreClienteTipo" id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombreClienteTipo'])){ echo $_GET['nombreClienteTipo']; }?>"></td>
+                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombreClienteTipo" id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombreClienteTipo'])){ echo $_GET['nombreClienteTipo']; }?>"></td>
                         <ul id="listarClienteTipos2"></ul>
                         <td><input type="text" name="descripcionClienteTipo" placeholder="Descripción" value="<?php if(isset($_GET['descripcionClienteTipo'])){ echo $_GET['descripcionClienteTipo']; }?>"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
