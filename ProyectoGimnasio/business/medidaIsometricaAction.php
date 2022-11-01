@@ -25,14 +25,14 @@ if (isset($_POST['insertar'])) {
                 if ($resultado == 1) {
                     Header("Location: ../view/listarMedidasIsometricas.php?success=inserted");
                 } else {
-                    Header("Location: ../view/listarMedidasIsometricas.php?error=dbError");
+                    Header("Location: ../view/listarMedidasIsometricas.php?error=dbError&&grupoMuscular=$idGrupoMuscular&&cliente=$idCliente&&fecha=$fechaMedicion&&medidaIsometrica=$medida");
                 }
            
         } else {
-            header("location: ../view/listarMedidasIsometricas.php?error=emptyField");
+            header("location: ../view/listarMedidasIsometricas.php?error=emptyField&&grupoMuscular=$idGrupoMuscular&&cliente=$idCliente&&fecha=$fechaMedicion&&medidaIsometrica=$medida");
         }
     } else {
-        header("location: ../view/listarMedidasIsometricas.php?error=error");
+        header("location: ../view/listarMedidasIsometricas.php?error=error&&grupoMuscular=$idGrupoMuscular&&cliente=$idCliente&&fecha=$fechaMedicion&&medidaIsometrica=$medida");
     }
 }
 

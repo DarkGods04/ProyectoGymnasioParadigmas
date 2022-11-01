@@ -77,7 +77,7 @@ include '../business/grupoMuscularBusiness.php';
                 <tbody>
                     <?php
 
-                   
+
                     foreach ($medidas as $row) {
                         if ($row->getActivo() == 1) {
 
@@ -141,18 +141,33 @@ include '../business/grupoMuscularBusiness.php';
                     $gruposMusculares = $grupoMuscularBusiness->obtener();
                     ?>
                     <td>
-                        <select name="idGrupoMuscular" id="idGrupoMuscular">
-                            <option value="">Grupo muscular</option>
+
+                    <select name="idGrupoMuscular">
+                   
+                            <option value="<?php if (isset($_GET['grupoMuscular'])) {
+                                                foreach ($gruposMusculares as $row) {
+                                                    if ($_GET['grupoMuscular'] == $row->getIDGrupoMuscular()) {
+                                                        echo $_GET['grupoMuscular'];
+                                                    }
+                                                }
+                                            } ?>"><?php if (isset($_GET['grupoMuscular'])) {
+                                        foreach ($gruposMusculares as $row) {
+                                            if ($_GET['grupoMuscular'] == $row->getIDGrupoMuscular()) {
+                                                
+                                                echo $row->getNombreTBGrupoMuscular();
+                                            }
+                                        }
+                                    } ?></option>
                             <?php foreach ($gruposMusculares as $row) : ?>
-                                <?php
-                                if ($row->getActivoTBGrupoMuscular() == 1) {
-                                    echo '<option value="' . $row->getIDGrupoMuscular() . '">' . $row->getNombreTBGrupoMuscular() . '</option>';
-                                }
-                                ?>
-
-                            <?php endforeach ?>
-
+                                <?php 
+                                     if ($row->getActivoTBGrupoMuscular() == 1) {
+                                    echo '<option value="' . $row->getIDGrupoMuscular() . '">' . $row->getNombreTBGrupoMuscular()  . '</option>'; } ?>
+                          
+                          <?php endforeach ?>
                         </select>
+
+
+                       
 
                     </td>
 
@@ -161,23 +176,42 @@ include '../business/grupoMuscularBusiness.php';
                     $clientes = $clienteBusiness->obtener();
                     ?>
                     <td>
-                        <select name="idCliente" id="idCliente">
-                            <option value="">Cliente</option>
-                            <?php foreach ($clientes as $row) : ?>
-                                <?php
-                                if ($row->getActivoTBCliente() == 1) {
-                                    echo '<option value="' . $row->getIDTBCliente() . '">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . '</option>';
-                                }
-                                ?>
 
-                            <?php endforeach ?>
+                        <select name="idCliente">
+
+                            <option value="<?php if (isset($_GET['cliente'])) {
+                                                foreach ($clientes as $row) {
+                                                    if ($_GET['cliente'] == $row->getIDTBCliente()) {
+                                                        echo $_GET['cliente'];
+                                                    }
+                                                }
+                                            } ?>" require><?php if (isset($_GET['cliente'])) {
+                                        foreach ($clientes as $row) {
+                                            if ($_GET['cliente'] == $row->getIDTBCliente()) {
+                                                
+                                                echo $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente();
+                                            }
+                                        }
+                                    } ?></option>
+                            <?php foreach ($clientes as $row) : ?>
+                                <?php 
+                                     if ($row->getActivoTBCliente() == 1) {
+                                    echo '<option value="' . $row->getIDTBCliente() . '">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . '</option>'; } ?>
+                          
+                          <?php endforeach ?>
                         </select>
+
+
+
+
+
+                       
 
                     </td>
 
-                    <td><input type="date" name="fechaMedicion" id="fechaMedicion" /></td>
+                    <td><input type="date" name="fechaMedicion" id="fechaMedicion" value="<?php if (isset($_GET['fecha']))  echo $_GET['fecha']; ?>"  /></td>
 
-                    <td><input type="text" class="mascaramedida" name="medida" class="form-control" placeholder="medida en centimetros"></td>
+                    <td><input type="text" class="mascaramedida" name="medida" value="<?php if (isset($_GET['medidaIsometrica']))  echo $_GET['medidaIsometrica']; ?>"  class="form-control" placeholder="medida en centimetros" require></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                 </tbody>
             </table>
