@@ -66,7 +66,7 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($idGrupoMuscular) > 0 && strlen($idCliente) > 0 && strlen($fechaMedicion) > 0 && strlen($medida) > 0) {
            
-           // $tempMedida = str_replace("₡", "", $medida);
+            $tempMedida = str_replace("cmm","",$medida);
 
             if (is_numeric($medida)) {
                 $medidaIsometrica = new MedidaIsometrica($id, $idGrupoMuscular, $idCliente,$fechaMedicion,$medida, 1);
