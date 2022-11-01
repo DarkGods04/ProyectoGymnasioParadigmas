@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2022 a las 04:33:29
+-- Tiempo de generación: 31-10-2022 a las 09:03:58
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -138,8 +138,7 @@ CREATE TABLE `tbcatalogopagometodo` (
 INSERT INTO `tbcatalogopagometodo` (`tbcatalogopagometodoid`, `tbcatalogopagometodonombre`, `tbcatalogopagometododescripcion`, `tbcatalogopagometodoactivo`) VALUES
 (1, 'Contado', 'Pagos que se realizan antes de la fecha de pago', 1),
 (2, 'Transferencia', 'Pagos mediante transferencia', 1),
-(3, 'SinpeMovil', 'Pagos por la plataforma SINPE Movil', 1),
-(4, 'con', 'hh', 0);
+(3, 'SinpeMovil', 'Pagos por la plataforma SINPE Movil', 1);
 
 -- --------------------------------------------------------
 
@@ -189,9 +188,9 @@ CREATE TABLE `tbcliente` (
 
 INSERT INTO `tbcliente` (`tbclienteid`, `tbclientenombre`, `tbclienteapellido1`, `tbclienteapellido2`, `tbclientetelefono`, `tbclientefechanacimiento`, `tbclientegenero`, `tbclientepeso`, `tbclientealtura`, `tbclientecorreo`, `tbclienteactivo`) VALUES
 (1, 'Juan', 'Jiménez', 'Mora', '99999999', '2003-02-14', 'Masculino', 88, 1.7, 'juannmora7@gmail.com', 1),
-(2, 'Mario', 'Lopez', 'Juarez', '88760901', '2015-02-19', 'Masculino', 68, 1.82, ' juare333@gmail.com', 1),
+(2, 'Mario', 'Lopez', 'Juarez', '88760901', '2015-02-19', 'Masculino', 68, 1.82, ' juare333@gmail.com', 0),
 (3, 'Sergio', 'Andrade', 'Villalobos', '87878787', '2022-09-07', 'Masculino', 77, 1.9, 'sergio@gmail.com', 1),
-(4, 'Jafet David', 'González', 'García', '84585370', '2022-10-28', 'Masculino', 58.6, 1.63, 'jafet.jdgg@gmail.com', 1);
+(4, 'Jafet David', 'González', 'García', '84585370', '2022-10-28', 'Masculino', 58.6, 1.63, 'jafet.jdgg@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -244,9 +243,7 @@ INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfact
 (2, 3, 2, '2022-10-20', '2', '1;2', 5800, 2, 6380, 1),
 (3, 2, 3, '2022-10-21', '3', '2;3', 6800, 1, 7718, 1),
 (4, 1, 1, '2022-10-21', '1', '3', 3600, 2, 3960, 1),
-(5, 4, 1, '2022-10-28', '2', '1', 2600, 1, 2951, 1),
-(6, 3, 1, '2022-10-12', '1', '2;4', 5600, 3, 6048, 1),
-(7, 3, 2, '2022-10-27', '2', '2', 2600, 1, 2951, 1);
+(5, 4, 1, '2022-10-28', '2', '1', 2600, 1, 2951, 1);
 
 -- --------------------------------------------------------
 
@@ -367,7 +364,7 @@ INSERT INTO `tbservicio` (`tbservicioid`, `tbservicionombre`, `tbserviciodescrip
 (2, 'Zumba', 'Cardio haciendo zumba', 1),
 (3, 'Yoga', 'Meditación mediante el yoga', 1),
 (4, 'aeróbicos', 'aeróbicos ', 1),
-(5, 'ewfew', 'wgerg', 1);
+(5, 'aeróbicos', 'aeróbicos ', 1);
 
 -- --------------------------------------------------------
 
@@ -380,39 +377,20 @@ CREATE TABLE `tbserviciotarifa` (
   `tbservicioid` int(11) NOT NULL,
   `tbserviciotarifafechamodificacion` date NOT NULL,
   `tbserviciotarifamonto` float NOT NULL,
-  `tbserviciotarifaactivo` tinyint(4) NOT NULL,
-  `tbserviciotarifaperiodicidadactualizacion` int(11) DEFAULT NULL,
-  `tbserviciotarifaproximafechaactualizacion` date DEFAULT NULL
+  `tbserviciotarifaactivo` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbserviciotarifa`
 --
 
-INSERT INTO `tbserviciotarifa` (`tbserviciotarifaid`, `tbservicioid`, `tbserviciotarifafechamodificacion`, `tbserviciotarifamonto`, `tbserviciotarifaactivo`, `tbserviciotarifaperiodicidadactualizacion`, `tbserviciotarifaproximafechaactualizacion`) VALUES
-(1, 1, '2022-10-25', 2500, 1, 30, '2022-10-31'),
-(2, 2, '2022-11-01', 2600, 1, 60, '2022-12-31'),
-(4, 3, '2022-10-25', 3200, 0, 30, '2022-10-31'),
-(5, 4, '2022-11-01', 3000, 0, 30, '2022-12-31'),
-(6, 4, '2022-10-31', 30000, 1, 30, '2022-12-01'),
-(7, 4, '2022-10-31', 30000, 0, 60, '2022-12-31'),
-(8, 3, '2022-10-31', 3200, 1, 60, '2022-12-30'),
-(9, 4, '2022-10-31', 30000, 1, 90, '2022-11-01'),
-(10, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(11, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(12, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(13, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(14, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(15, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(16, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(17, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(18, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(19, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(20, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(21, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(22, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
-(23, 5, '2022-10-31', 456543, 0, 60, '2022-12-31'),
-(24, 5, '2022-10-31', 45654, 1, 60, '2022-12-31');
+INSERT INTO `tbserviciotarifa` (`tbserviciotarifaid`, `tbservicioid`, `tbserviciotarifafechamodificacion`, `tbserviciotarifamonto`, `tbserviciotarifaactivo`) VALUES
+(1, 1, '2022-10-25', 2500, 0),
+(2, 1, '2022-10-25', 2600, 1),
+(3, 2, '2022-10-25', 3000, 1),
+(4, 3, '2022-10-25', 3200, 1),
+(5, 4, '2022-10-28', 3000, 1),
+(6, 5, '2022-10-29', 3000, 1);
 
 --
 -- Índices para tablas volcadas
