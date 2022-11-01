@@ -7,6 +7,7 @@ document.getElementById("campo").addEventListener("keyup",getNombresActivosVaria
 document.getElementById("campo").addEventListener("keyup",getNombresImpuestoVenta)
 document.getElementById("campo").addEventListener("keyup",getNombresPagoPeridiocidad)
 document.getElementById("campo").addEventListener("keyup",getNombresPagoMetodo)
+document.getElementById("campo2").addEventListener("keyup",getNombresPagoMetodo)
 document.getElementById("campo").addEventListener("keyup",getNombresServicio)
 document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncional)
 document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncionalCriterio)
@@ -120,6 +121,29 @@ function getNombresPeridiocidades() {
 function getNombresPagoMetodo() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listarPagoMetodos")
+    let inputCP2 = document.getElementById("campo2").value
+    let lista2 = document.getElementById("listarPagoMetodos2")
+
+    if (inputCP2.length > 0) {
+
+        let url = "../data/prediccionPagoMetodo.php"
+        let formData = new FormData()
+
+        formData.append("campo2", inputCP2)
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista2.style.display = 'block'
+                lista2.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista2.style.display = 'none'
+    }
 
     if (inputCP.length > 0) {
 
@@ -418,33 +442,6 @@ function getNombresPagoPeridiocidad(){
     if(inputCP.length > 0){
 
         let url= "../data/prediccionPagoPeridiocidad.php"
-        let formData = new FormData()
-
-        formData.append("campo", inputCP)
-
-        fetch(url, {
-            method: "POST",
-            body: formData,
-            mode: "cors"
-        }).then(Response => Response.json())
-        .then(data => {
-            lista.style.display = 'block'
-            lista.innerHTML = data
-        })
-        .catch(err => console.log(err))
-
-    }else {
-        lista.style.display = 'none'
-    }
-}
-
-function getNombresPagoMetodo(){
-    let inputCP = document.getElementById("campo").value
-    let lista = document.getElementById("listaPagoMetodo")
-
-    if(inputCP.length > 0){
-
-        let url= "../data/prediccionPagoMetodo.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)

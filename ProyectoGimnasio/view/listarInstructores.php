@@ -78,7 +78,7 @@ include '../business/instructorBusiness.php';
                             echo '<td>' . $row->getIdTBInstructor() . '</td>';
                             echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBInstructor() . '"/></td>';
                             echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="apellido" id="apellido" value="' . $row->getApellidoTBInstructor() . '"/></td>';
-                            echo '<td><input type="text" pattern="\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+" name="correo" id="correo" value="' . $row->getCorreoTBInstructor() .  '"/></td>';
+                            echo '<td><input type="text" pattern="\w.+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+" name="correo" id="correo" value="' . $row->getCorreoTBInstructor() .  '"/></td>';
                             echo '<td><input type="text" class="mascaratelefono" name="telefono" id="telefono" value="' . $row->getTelefonoTBInstructor() .  '"/></td>';
                             echo '<td><input type="text" class="mascaranumcuenta" name="numcuenta" id="numcuenta" value="' . $row->getNumCuentaTBInstructor() .  '"/></td>';
                             echo '<td><select name="tipoinstructor" id="tipoinstructor">
@@ -124,7 +124,7 @@ include '../business/instructorBusiness.php';
                     <tr>
                         <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="nombre" placeholder="Nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"></td>
                         <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="apellido" placeholder="Apellido(s)" value="<?php if(isset($_GET['apellido'])){ echo $_GET['apellido']; }?>"></td>
-                        <td><input type="text" pattern="\w+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+" name="correo" placeholder="micorreo@gmail.com" value="<?php if(isset($_GET['correo'])){ echo $_GET['correo']; }?>"></td>
+                        <td><input type="text" pattern="\w.+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+" name="correo" placeholder="micorreo@gmail.com" value="<?php if(isset($_GET['correo'])){ echo $_GET['correo']; }?>"></td>
                         <td><input type="tel" class="mascaratelefono" name="telefono" placeholder="Número de teléfono" value="<?php if(isset($_GET['telefono'])){ echo $_GET['telefono']; }?>"></td>
                         <td><input type="text" class="mascaranumcuenta" name="numcuenta" placeholder="Número de cuenta bancaria" value="<?php if(isset($_GET['numcuenta'])){ echo $_GET['numcuenta']; }?>"></td>
                         <td>
