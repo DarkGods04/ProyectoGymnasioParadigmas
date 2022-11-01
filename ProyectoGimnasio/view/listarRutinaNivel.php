@@ -64,7 +64,7 @@ include '../business/rutinaNivelBusiness.php';
                             echo '<tr>';
                             echo '<input type="hidden" name="idRutinaNivel" id="idRutinaNivel" value="' . $row->getIDRutinaNivel() . '"/>';
                             echo '<td>' . $row->getIDRutinaNivel() . '</td>';
-                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreRutinaNivel" id="nombreRutinaNivel" value="' . $row->getNombreTBRutinaNivel() . '"/></td>';
+                            echo '<td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombreRutinaNivel" id="nombreRutinaNivel" value="' . $row->getNombreTBRutinaNivel() . '"/></td>';
                             echo '<td><input type="text" name="descripcionRutinaNivel" id="descripcionRutinaNivel" value="' . $row->getDescripcionTBRutinaNivel() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -96,7 +96,7 @@ include '../business/rutinaNivelBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreRutinaNivel" id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombreRutinaNivel'])){ echo $_GET['nombreRutinaNivel']; }?>"></td>
+                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombreRutinaNivel" id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombreRutinaNivel'])){ echo $_GET['nombreRutinaNivel']; }?>"></td>
                         <ul id="listarRutinaNiveles2"></ul>
                         <td><input type="text" name="descripcionRutinaNivel" placeholder="Descripción" value="<?php if(isset($_GET['descripcionRutinaNivel'])){ echo $_GET['descripcionRutinaNivel']; }?>"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>

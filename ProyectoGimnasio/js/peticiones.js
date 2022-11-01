@@ -18,6 +18,8 @@ document.getElementById("campo2").addEventListener("keyup", getNombresPeridiocid
 document.getElementById("campo").addEventListener("keyup", getNombresGruposMusculares)
 document.getElementById("campo2").addEventListener("keyup", getNombresGruposMusculares)
 document.getElementById("campo").addEventListener("keyup", getNombresMedidasIsometricas)
+document.getElementById("campo").addEventListener("keyup", getNombresTipoClientes)
+document.getElementById("campo").addEventListener("keyup", getNombresRutinaNiveles)
 
 function getNombresGruposMusculares() {
     let inputCP = document.getElementById("campo").value
@@ -640,6 +642,61 @@ function getNombresMedidasIsometricas(){
     if(inputCP.length > 0){
 
         let url= "../data/prediccionMedidaIsometrica.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+        .then(data => {
+            lista.style.display = 'block'
+            lista.innerHTML = data
+        })
+        .catch(err => console.log(err))
+
+    }else {
+        lista.style.display = 'none'
+    }
+}
+
+function getNombresTipoClientes(){
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listarClienteTipos")
+
+    if(inputCP.length > 0){
+
+        let url= "../data/prediccionClienteTipo.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+        .then(data => {
+            lista.style.display = 'block'
+            lista.innerHTML = data
+        })
+        .catch(err => console.log(err))
+
+    }else {
+        lista.style.display = 'none'
+    }
+}
+
+
+function getNombresRutinaNiveles(){
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listarRutinaNiveles")
+
+    if(inputCP.length > 0){
+
+        let url= "../data/prediccionRutinaNivel.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)
