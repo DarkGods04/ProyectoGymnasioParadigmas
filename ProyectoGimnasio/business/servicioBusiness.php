@@ -1,12 +1,11 @@
 <?php
 
-include '../data/servicioData.php';
+require_once '../data/servicioData.php';
 
 class ServicioBusiness {
-
     private $servicioData;
 
-    public function __construct() {
+    public function ServicioBusiness() {
         $this->servicioData = new ServicioData();
     }
 

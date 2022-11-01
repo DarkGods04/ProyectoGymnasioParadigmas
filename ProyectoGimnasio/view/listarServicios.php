@@ -1,5 +1,5 @@
 <?php
-include '../business/servicioBusiness.php';
+require_once '../business/servicioBusiness.php';
 ?>
 
 <!DOCTYPE html>

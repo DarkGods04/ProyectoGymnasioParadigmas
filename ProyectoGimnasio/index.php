@@ -1,11 +1,12 @@
-<?php include 'business/servicioBusiness.php'; ?>
+<?php //require_once '../data/servicioData.php'; ?>
 <!DOCTYPE html>
 <html>
 <?php 
-$servicioBusiness = new ServicioBusiness();
-$servicios = $servicioBusiness->obtener();
-$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
-$fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
+//por favor no tocar lo qu esta comentado 
+//$servicioBusiness = new ServicioData();
+//$servicios = $servicioBusiness->getServicios();
+//$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
+//$fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
 ?>
 
 <head>
@@ -23,7 +24,7 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
 <body>
     <h1>Proyecto Gimnasio</h1>
     <h2>Menú principal</h2>
-    <?php
+    <?php /*
     foreach ($servicios as $row) {
         if ($row->getActivoTBServicio() == 1) {
             if ($row->getFechaactualizacionTBServicio() == $fechaActualizacionProxima) {
@@ -34,11 +35,13 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
                 ?><script>
                     if (confirmarActualizacionServicio("<?php echo $id . "'$nom'" . "'$monto'"; ?>","<?php echo $dias; ?>")) {
                         location.href = "view/listarServicios.php";
+                    }else{
+
                     }
                 </script>
                 <?php }
         }
-    }
+    }*/
     ?>
     <div>
         <a href="./view/listarInstructores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Instructores</a>
@@ -69,7 +72,7 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
     </div>
 
     <div>
-        <a href="./view/listarServicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Servicios</a>
+        <a href="view/listarServicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Servicios</a>
     </div>
 
     <div>
