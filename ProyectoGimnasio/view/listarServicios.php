@@ -23,8 +23,9 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
         function confirmarAccionEliminar() {
             return confirm("¿Está seguro de que desea eliminar este servicio?");
         }
-        function confirmarActualizacionServicio(nombre,monto,dias) {
-            return confirm("El servicio con el nombre "+nombre+" y monto = "+monto+" le corresponde una actualización el día de hoy\n ¿Desea realizar esta actualización en caso contrario se aplazara "+dias+" días más?");
+
+        function confirmarActualizacionServicio(nombre, monto, dias) {
+            return confirm("El servicio con el nombre " + nombre + " y monto = " + monto + " le corresponde una actualización el día de hoy\n ¿Desea realizar esta actualización en caso contrario se aplazara " + dias + " días más?");
         }
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -33,30 +34,37 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
 </head>
 
 <body>
-    <?php
-    include 'header.php';
-    ?>
-    <script>
-    confirmarActualizacionServicio("<?php echo $nom; ?>", "<?php echo $monto; ?>","<?php echo $dias; ?>");
-    </script>
+    <?php include 'header.php'; ?>
     <h1>Servicios</h1>
-    <?php 
-    
+    <?php
     foreach ($serviciosss as $row) {
-        if ($row->getActivoTBServicio() == 0) {
+        if ($row->getActivoTBServicio() == 1) {
             if ($row->getFechaactualizacionTBServicio() == $fechaActualizacionProxima) {
                 $id = $row->getIdTBServicio();
                 $nom = $row->getNombreTBServicio();
+                $descip = $row->getDescripcionTBServicio();
                 $monto = $row->getMontoTBServicio();
-                $dias =$row->getPeriodicidadTBServicio();
-                ?><script>
-                    if (!confirmarActualizacionServicio("<?php echo $nom?>", "<?php echo $monto?>","<?php echo $dias?>")) {
-                       <?php
-                        $servicioBusiness->aplazarActualizacion($id, $dias);
+                $dias = $row->getPeriodicidadTBServicio();
+
+                $servicio = new Servicio(
+                    $id,
+                    $nom,
+                    $descip,
+                    $monto,
+                    $row->getActivoTBServicio(),
+                    $dias,
+                    $row->getFechaactualizacionTBServicio()
+                );
+    ?>
+                <script>
+                    if (confirmarActualizacionServicio("<?php echo $nom ?>", "<?php echo $monto ?>", "<?php echo $dias ?>")) {
+                        <?php
+                        $servicioBusiness->aplazarActualizacion($servicio);
                         ?>
                     }
                 </script>
-                <?php }
+    <?php
+            }
         }
     }
     ?>
@@ -129,7 +137,7 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
                             echo '</form>';
                         }
                     }
-                   ?>
+                    ?>
                 </tbody>
             </table>
         <?php
@@ -153,9 +161,15 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
                 </thead>
 
                 <tbody>
-                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreServicio" class="form-control" placeholder="Nombre del servicio" value="<?php if(isset($_GET['nombreServicio'])){ echo $_GET['nombreServicio']; }?>"></td>
-                    <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio" value="<?php if(isset($_GET['descripcionServicio'])){ echo $_GET['descripcionServicio']; }?>"></td>
-                    <td><input type="text" class="mascaramonto" name="montoServicio" class="form-control" placeholder="Monto del servicio" value="<?php if(isset($_GET['montoServicio'])){ echo $_GET['montoServicio']; }?>"></td>
+                    <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombreServicio" class="form-control" placeholder="Nombre del servicio" value="<?php if (isset($_GET['nombreServicio'])) {
+                                                                                                                                                                        echo $_GET['nombreServicio'];
+                                                                                                                                                                    } ?>"></td>
+                    <td><input type="text" name="descripcionServicio" class="form-control" placeholder="Descripción del servicio" value="<?php if (isset($_GET['descripcionServicio'])) {
+                                                                                                                                                echo $_GET['descripcionServicio'];
+                                                                                                                                            } ?>"></td>
+                    <td><input type="text" class="mascaramonto" name="montoServicio" class="form-control" placeholder="Monto del servicio" value="<?php if (isset($_GET['montoServicio'])) {
+                                                                                                                                                        echo $_GET['montoServicio'];
+                                                                                                                                                    } ?>"></td>
                     <td><select name="periodicidad" required>
                             <option value="" hidden>Seleccione periodicidad</option>
                             <option value="30">Cada 30 días</option>
@@ -180,7 +194,7 @@ $fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
-                        } else if ($_GET['error'] == "relationError"){
+                        } else if ($_GET['error'] == "relationError") {
                             echo '<p style="color: red">Error al eliminar, el elemento tiene registros en otra(s) tabla(s)</p>';
                         }
                     } else if (isset($_GET['success'])) {
