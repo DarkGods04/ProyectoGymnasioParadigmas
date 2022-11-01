@@ -81,7 +81,6 @@ include '../business/pagoMetodoBusiness.php';
                         <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
-
                 <tbody>
                     <tr>
                         <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="campo" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoMetodo'])){ echo $_GET['nombrePagoMetodo']; }?>"></td>
