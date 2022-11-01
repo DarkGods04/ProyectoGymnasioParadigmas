@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2022 a las 07:07:11
+-- Tiempo de generación: 01-11-2022 a las 05:21:18
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.3
 
@@ -72,19 +72,6 @@ INSERT INTO `tbactivovariable` (`tbactivovariableid`, `tbactivovariablenombre`, 
 (2, 'Cuerda', 10, 15000, 'Cuerda de 20 mtrs', 1),
 (3, 'Pesa', 24, 5000, 'Pesa de 20 kilos', 1),
 (4, 'Mancuernas', 10, 513206, 'Mancuernas de 10Lbs', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbcatalogoclientetipo`
---
-
-CREATE TABLE `tbcatalogoclientetipo` (
-  `tbcatalogoclientetipoid` int(11) NOT NULL,
-  `tbcatalogoclientetiponombre` varchar(50) NOT NULL,
-  `tbcatalogoclientetipodescripcion` varchar(200) NOT NULL,
-  `tbcatalogoclientetipoactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -176,19 +163,6 @@ INSERT INTO `tbcatalogopagoperidiocidad` (`tbcatalogopagoperidiocidadid`, `tbcat
 (1, 'Diario', 'Pagos diarios', 1),
 (2, 'Semanal', 'Pagos semanales', 1),
 (3, 'Mensual', 'Pagos mensuales', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbcatalogorutinanivel`
---
-
-CREATE TABLE `tbcatalogorutinanivel` (
-  `tbcatalogorutinanivelid` int(11) NOT NULL,
-  `tbcatalogorutinanivelnombre` varchar(50) NOT NULL,
-  `tbcatalogorutinaniveldescripcion` varchar(200) NOT NULL,
-  `tbcatalogorutinanivelactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -473,12 +447,6 @@ ALTER TABLE `tbactivovariable`
   ADD PRIMARY KEY (`tbactivovariableid`);
 
 --
--- Indices de la tabla `tbcatalogoclientetipo`
---
-ALTER TABLE `tbcatalogoclientetipo`
-  ADD PRIMARY KEY (`tbcatalogoclientetipoid`);
-
---
 -- Indices de la tabla `tbcatalogoejercicio`
 --
 ALTER TABLE `tbcatalogoejercicio`
@@ -501,12 +469,6 @@ ALTER TABLE `tbcatalogopagometodo`
 --
 ALTER TABLE `tbcatalogopagoperidiocidad`
   ADD PRIMARY KEY (`tbcatalogopagoperidiocidadid`);
-
---
--- Indices de la tabla `tbcatalogorutinanivel`
---
-ALTER TABLE `tbcatalogorutinanivel`
-  ADD PRIMARY KEY (`tbcatalogorutinanivelid`);
 
 --
 -- Indices de la tabla `tbcliente`
