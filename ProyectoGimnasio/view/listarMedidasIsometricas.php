@@ -114,7 +114,7 @@ include '../business/grupoMuscularBusiness.php';
             </table>
         <?php
         } else {
-            echo '<p style="color: red">SIN RESULTADOS: No se encontraron servicios!</p>';
+            echo '<p style="color: red">SIN RESULTADOS: No se encontraron medidas isométricas!</p>';
         }
         ?>
     </div><br>
