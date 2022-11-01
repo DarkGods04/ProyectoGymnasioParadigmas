@@ -1,6 +1,7 @@
 <?php
 include '../business/medidaIsometricaBusiness.php';
 include '../business/clienteBusiness.php';
+include '../business/grupoMuscularBusiness.php';
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +55,10 @@ include '../business/clienteBusiness.php';
         $medidas = $medidaBusiness->buscar($campo);
         $clienteBusiness = new ClienteBusiness();
         $clientes = $clienteBusiness->obtener();
-        
+        $grupoMuscularBusiness = new GrupoMuscularBusiness();
+        $gruposMusculares = $grupoMuscularBusiness->obtener();
+
+
 
         if (!empty($medidas)) {
         ?>
@@ -66,33 +70,41 @@ include '../business/clienteBusiness.php';
                         <th>Cliente</th>
                         <th>Fecha medida</th>
                         <th>Medida(cm)</th>
-                        <th>Acciones</th>
+
                     </tr>
                 </thead>
 
                 <tbody>
                     <?php
+
+                   
                     foreach ($medidas as $row) {
                         if ($row->getActivo() == 1) {
-                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/medidaIsometricaAction.php">';
+
+                            echo '<form method="POST" id="direccionform" action="../business/medidaIsometricaAction.php">';
                             echo '<tr>';
                             echo '<input  type="hidden" name="idMedida" id="idMedida" value="' . $row->getIdMedida() . '"/>';
                             echo '<td>' . $row->getIdMedida() . '</td>';
                             echo '<input  type="hidden" name="idGrupoMuscular" id="idGrupoMuscular" value="' . $row->getIdGrupoMuscular() . '"/>';
-                            echo '<td>' . $row->getIdGrupoMuscular() . '</td>';
-                            // echo '<td>' . $row->getIdTBServicio() . '</td>';
-                            foreach ($clientes as $rowCliente) {
-                              if($rowCliente->getIdTBCliente() == $row->getIdCliente()){
-                                echo '<input  type="hidden" name="idCliente" id="idCliente" value="' . $row->getIdCliente() . '"/>';
-                                echo '<td>' . $rowCliente->getNombreTBCliente() . " "  . $rowCliente->getApellido1TBCliente() . '</td>';
-                              }
+
+                            foreach ($gruposMusculares as $rowGrupoMuscular) {
+                                if ($rowGrupoMuscular->getIDGrupoMuscular() == $row->getIdGrupoMuscular()) {
+                                    echo '<td>' . $rowGrupoMuscular->getNombreTBGrupoMuscular() . '</td>';
+                                }
                             }
-                            
-                            echo '<td><input  type="date" name="fechaMedicion" id="fechaMedicion" value="' . $row->getFechaMedicion() . '"/></td>';
-                           // echo '<td>' . $row->getFechaMedicion() . '</td>';
-                            echo '<td><input  type="text" class="mascaramedida" name="medida" id="medida" value="' . $row->getMedida() . '"/></td>';
-                            echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
-                            echo '<input type="submit" name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
+
+                            echo '<input  type="hidden" name="idCliente" id="idCliente" value="' . $row->getIdCliente() . '"/>';
+                            foreach ($clientes as $rowCliente) {
+
+                                if ($rowCliente->getIdTBCliente() == $row->getIdCliente()) {
+                                    //  echo '<input  type="hidden" name="idCliente" id="idCliente" value="' . $row->getIdCliente() . '"/>';
+                                    echo '<td>' . $rowCliente->getNombreTBCliente() . " "  . $rowCliente->getApellido1TBCliente() . '</td>';
+                                }
+                            }
+
+                            echo '<td><input  type="date" name="fechaMedicion" id="fechaMedicion" value="' . $row->getFechaMedicion() . '" readonly/></td>';
+                            echo '<input  type="hidden" class="mascaramedida" name="medida" id="medida" value="' . $row->getMedida() . '"/>';
+                            echo '<td>' . $row->getMedida() . '</td>';
                             echo '</tr>';
                             echo '</form>';
                         }
@@ -125,22 +137,21 @@ include '../business/clienteBusiness.php';
 
 
                     <?php
-                    //$clienteBusiness = new ClienteBusiness();
-                    //$clientes = $clienteBusiness->obtener();
+                    $grupoMuscularBusiness = new GrupoMuscularBusiness();
+                    $gruposMusculares = $grupoMuscularBusiness->obtener();
                     ?>
                     <td>
                         <select name="idGrupoMuscular" id="idGrupoMuscular">
                             <option value="">Grupo muscular</option>
-                            <?php foreach ($idGrupoMuscular as $row) : ?>
+                            <?php foreach ($gruposMusculares as $row) : ?>
                                 <?php
-                                // if($row->getActivoTBCliente() == 1){
-                                // echo '<option value="' . $row->getIDTBCliente() . '">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . '</option>' ;
-                                // }
+                                if ($row->getActivoTBGrupoMuscular() == 1) {
+                                    echo '<option value="' . $row->getIDGrupoMuscular() . '">' . $row->getNombreTBGrupoMuscular() . '</option>';
+                                }
                                 ?>
 
                             <?php endforeach ?>
-                            <option value="1">Biceps</option>
-                            <option value="2">Triceps</option>
+
                         </select>
 
                     </td>
@@ -164,7 +175,7 @@ include '../business/clienteBusiness.php';
 
                     </td>
 
-                    <td><input type="date" name="fechaMedicion" id="fechaMedicion"  /></td>
+                    <td><input type="date" name="fechaMedicion" id="fechaMedicion" /></td>
 
                     <td><input type="text" class="mascaramedida" name="medida" class="form-control" placeholder="medida en centimetros"></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
@@ -184,6 +195,8 @@ include '../business/clienteBusiness.php';
                         } else if ($_GET['error'] == "numberFormat") {
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
+                            echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "error") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
