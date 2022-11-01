@@ -1,5 +1,6 @@
 <?php
 include 'modalidadFuncionalBusiness.php';
+include 'modalidadfuncionalcriterioBusiness.php';
 
 if (isset($_POST["insertar"])) {
     if (isset($_POST["nombreModalidadFuncional"]) && isset($_POST["descripcionModalidadFuncional"])) {
@@ -15,22 +16,30 @@ if (isset($_POST["insertar"])) {
                 $result = $modalidadFuncionalBusiness->insertar($modalidadFuncional);
 
                 if ($result == 1) {
-                    header("location: ../view/listarModalidadFuncional.php?success=updated");
+                    header("location: ../view/listarModalidadFuncional.php?success=inserted");
                 } else {
-                    header("location: ../view/listarModalidadFuncional.php?error=dbError");
+                    header("location: ../view/listarModalidadFuncional.php?error=dbError&nombreModalidadFuncional=$nombreModalidadFuncional&descripcionModalidadFuncional=$descripcionModalidadFuncional");
                 }
             } else {
-                header("location: ../view/listarModalidadFuncional.php?error=numberFormat");
+                header("location: ../view/listarModalidadFuncional.php?error=numberFormat&nombreModalidadFuncional=$nombreModalidadFuncional&descripcionModalidadFuncional=$descripcionModalidadFuncional");
             }
         } else {
-            header("location: ../view/listarModalidadFuncional.php?error=emptyField");
+            header("location: ../view/listarModalidadFuncional.php?error=emptyField&nombreModalidadFuncional=$nombreModalidadFuncional&descripcionModalidadFuncional=$descripcionModalidadFuncional");
         }
     } else {
-        header("location: ../view/listarModalidadFuncional.php?error=error");
+        header("location: ../view/listarModalidadFuncional.php?error=error&nombreModalidadFuncional=$nombreModalidadFuncional&descripcionModalidadFuncional=$descripcionModalidadFuncional");
     }
 }
 
 if (isset($_POST['eliminar'])) {
+
+    $modalidadfuncionalcriterioBusiness = new ModalidadFuncionalCriterioBusiness();
+    $modalidadfuncionalcriterios = $modalidadfuncionalcriterioBusiness->obtener();
+    $flag = 0;
+    foreach ($modalidadfuncionalcriterios as $row) { if($row->getIdModalidadfuncionalTBModalidadfuncionalcriterio() == $_POST['idModalidadFuncional'] && $row->getActivoTBModalidadfuncionalcriterio() == 1 ){  $flag = 1; } }
+       
+    if($flag == 0){
+
     if (isset($_POST['idModalidadFuncional'])) {
 
         $id = $_POST['idModalidadFuncional'];
@@ -44,6 +53,10 @@ if (isset($_POST['eliminar'])) {
         }
     } else {
         header("location: ../view/listarModalidadFuncional.php?error=error");
+    }
+
+    } else {
+    header("location: ../view/listarModalidadFuncional.php?error=relationError");
     }
 }
 

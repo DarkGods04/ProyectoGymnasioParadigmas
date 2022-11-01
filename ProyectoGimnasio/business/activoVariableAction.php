@@ -78,15 +78,15 @@ if (isset($_POST['insertar'])) {
                 if ($result == 1) {
                     header("location: ../view/listarActivosVariables.php?success=inserted");
                 } else {
-                    header("location: ../view/listarActivosVariables.php?error=dbError");
+                    header("location: ../view/listarActivosVariables.php?error=dbError&name=$name&descripcion=$descripcion&cantidad=$cantidad&montoCompra=$montoCompra");
                 }
             } else {
-                header("location: ../view/listarActivosVariables.php?error=numberFormat");
+                header("location: ../view/listarActivosVariables.php?error=numberFormat&name=$name&descripcion=$descripcion&cantidad=$cantidad&montoCompra=$montoCompra");
             }
         } else {
-            header("location: ../view/listarActivosVariables.php?error=emptyField");
+            header("location: ../view/listarActivosVariables.php?error=emptyField&name=$name&descripcion=$descripcion&cantidad=$cantidad&montoCompra=$montoCompra");
         }
     } else {
-        header("location: ../view/listarActivosVariables.php?error=error");
+        header("location: ../view/listarActivosVariables.php?error=error&name=$name&descripcion=$descripcion&cantidad=$cantidad&montoCompra=$montoCompra");
     }
 }

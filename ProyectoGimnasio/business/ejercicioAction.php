@@ -30,16 +30,16 @@ if (isset($_POST['insertar'])) {
                 if ($resultado == 1) {
                     Header("Location: ../view/listarEjercicios.php?success=inserted");
                 } else {
-                    Header("Location: ../view/listarEjercicios.php?error=dbError");
+                    Header("Location: ../view/listarEjercicios.php?error=dbError&nombre=$nombre&descripcion=$descripcion");
                 }
             } else {
-                header("location: ../view/listarEjercicios.php?error=existe");
+                header("location: ../view/listarEjercicios.php?error=existe&nombre=$nombre&descripcion=$descripcion");
             }
         } else {
-            header("location: ../view/listarEjercicios.php?error=emptyField");
+            header("location: ../view/listarEjercicios.php?error=emptyField&nombre=$nombre&descripcion=$descripcion");
         }
     } else {
-        header("location: ../view/listarEjercicios.php?error=error");
+        header("location: ../view/listarEjercicios.php?error=error&nombre=$nombre&descripcion=$descripcion");
     }
 }
 

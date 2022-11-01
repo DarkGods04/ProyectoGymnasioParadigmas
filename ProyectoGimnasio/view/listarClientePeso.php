@@ -116,17 +116,17 @@
                 <tbody>
                     <td>
                         <select name="clienteid">
-                            <option value="">Cliente</option>
+                        <option value="<?php if(isset($_GET['clienteid'])){foreach ($cliente as $row4){ if($_GET['clienteid'] == $row4->getIDTBCliente()){echo $_GET['clienteid'];}}}?>"><?php if(isset($_GET['clienteid'])){foreach ($cliente as $row4){ if($_GET['clienteid'] == $row4->getIDTBCliente()){echo $row4->getNombreTBCliente() . ' ' . $row4->getApellido1TBCliente();}}}?></option>
                             <?php foreach ($cliente as $row): ?>
                                 <?php echo '<option value="'. $row->getIDTBCliente().'">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . '</option>' ?> 
                             <?php endforeach ?>
                         </select>
                     </td>
-                    <td><input type="date" name="clientepesofecha"></td>
-                    <td><input type="text" class="mascarapeso" name="clientepesopeso" placeholder="Peso del cliente"></td>
+                    <td><input type="date" name="clientepesofecha" value="<?php if(isset($_GET['clientepesofecha'])){ echo $_GET['clientepesofecha']; }?>"></td>
+                    <td><input type="text" class="mascarapeso" name="clientepesopeso" placeholder="Peso del cliente" value="<?php if(isset($_GET['clientepesopeso'])){ echo $_GET['clientepesopeso']; }?>"></td>
                     <td>
                         <select name="instructorid">
-                            <option value="">Instructor</option>
+                        <option value="<?php if(isset($_GET['instructorid'])){foreach ($instructor as $row5){ if($_GET['instructorid'] == $row5->getIdTBInstructor()){echo $_GET['instructorid'];}}}?>"><?php if(isset($_GET['instructorid'])){foreach ($instructor as $row5){ if($_GET['instructorid'] == $row5->getIdTBInstructor()){echo $row5->getNombreTBInstructor();}}}?></option>
                             <?php foreach ($instructor as $row): ?>
                                 <?php echo '<option value="'. $row->getIdTBInstructor() .'">'. $row->getNombreTBInstructor() . '</option>' ?>
                             <?php endforeach ?>

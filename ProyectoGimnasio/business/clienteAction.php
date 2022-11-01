@@ -1,5 +1,6 @@
 <?php
 include 'clienteBusiness.php';
+include 'facturaBusiness.php';
 
 if (isset($_POST['insertarCliente'])) {
     if (isset($_POST['nombre']) && isset($_POST['apellido1']) && isset($_POST['apellido2']) && isset($_POST['telefono']) &&
@@ -49,6 +50,13 @@ if (isset($_POST['insertarCliente'])) {
 
 
 if (isset($_POST['eliminarCliente'])) {
+    $facturaBusiness = new FacturaBusiness();
+    $facturas = $facturaBusiness->obtener();
+    $flag = 0;
+    foreach ($facturas as $row) { if($row->getClienteidTBFactura() == $_POST['idCliente'] && $row->getActivoTBFactura() == 1 ){  $flag = 1; } }
+        
+    if($flag == 0){
+        
     if (isset($_POST['idCliente'])) {
         $id = $_POST['idCliente'];
 
@@ -60,9 +68,13 @@ if (isset($_POST['eliminarCliente'])) {
         } else {
             header("Location: ../view/listarClientes.php?error=dbError");
         }
-    } else {
+         } else {
         header("location: ../view/listarClientes.php?error=error");
-    }
+         }
+
+        } else {
+            header("location: ../view/listarClientes.php?error=relationError");
+        }
 }
 
 if (isset($_POST['recuperarCliente'])) {

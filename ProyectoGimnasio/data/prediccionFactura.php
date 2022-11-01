@@ -6,8 +6,6 @@ $pdo = $con->Data();
 $campo = $_POST["campo"];
 $html = "";
 
-
-
 $sqlCliente = "SELECT  tbclienteid, tbclientenombre, tbclienteapellido1,tbclienteapellido2 FROM tbcliente WHERE (tbclienteactivo=1) AND tbclientenombre LIKE ?  OR tbclienteapellido1 LIKE ?  OR
 tbclienteapellido2 LIKE ? ORDER BY tbclienteid ASC LIMIT 0, 10";
 $query = $pdo->prepare($sqlCliente);
@@ -31,7 +29,6 @@ $query->execute([$campo . '%']);
 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
     $html .= "<li onclick=\"mostrar('" . $row["tbpagomodalidadnombre"] . "')\">" . $row["tbpagomodalidadnombre"] . "</li>";
 }
-
 
 $sqlServicio = "SELECT tbservicioid, tbservicionombre FROM tbservicio WHERE (tbservicioactivo=1) AND 
 (tbservicionombre LIKE ?) ORDER BY tbservicioid ASC LIMIT 0, 10";

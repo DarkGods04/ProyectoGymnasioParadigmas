@@ -10,7 +10,6 @@ class Data{
     public $hostname;
     public $charset;
 
-
     public function Data(){
         $hostName = gethostname();
 
