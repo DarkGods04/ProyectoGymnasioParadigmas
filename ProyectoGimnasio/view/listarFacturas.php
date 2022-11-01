@@ -32,7 +32,6 @@ include '../business/servicioBusiness.php';
     include 'header.php';
     ?>
     <h1>Facturas</h1>
-
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
@@ -42,7 +41,7 @@ include '../business/servicioBusiness.php';
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
-
+    
     <div>
         <?php
         if (!isset($_POST['campo'])) {

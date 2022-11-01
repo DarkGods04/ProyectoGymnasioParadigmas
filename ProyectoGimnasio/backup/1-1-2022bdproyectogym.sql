@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-11-2022 a las 16:18:30
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Tiempo de generación: 01-11-2022 a las 05:21:18
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -75,29 +76,6 @@ INSERT INTO `tbactivovariable` (`tbactivovariableid`, `tbactivovariablenombre`, 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbcatalogoclientetipo`
---
-
-CREATE TABLE `tbcatalogoclientetipo` (
-  `tbcatalogoclientetipoid` int(11) NOT NULL,
-  `tbcatalogoclientetiponombre` varchar(50) NOT NULL,
-  `tbcatalogoclientetipodescripcion` varchar(200) NOT NULL,
-  `tbcatalogoclientetipoactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcatalogoclientetipo`
---
-
-INSERT INTO `tbcatalogoclientetipo` (`tbcatalogoclientetipoid`, `tbcatalogoclientetiponombre`, `tbcatalogoclientetipodescripcion`, `tbcatalogoclientetipoactivo`) VALUES
-(1, 'El retrasado ', 'no paga ', 1),
-(2, 'El billetado ', 'pago mucho', 1),
-(3, 'El perfecto ', 'da propina y paga bien ', 1),
-(4, 'La bonita ', 'la que todos miran ', 1);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbcatalogoejercicio`
 --
 
@@ -139,9 +117,7 @@ CREATE TABLE `tbcatalogogrupomuscular` (
 
 INSERT INTO `tbcatalogogrupomuscular` (`tbcatalogogrupomuscularid`, `tbcatalogogrupomuscularnombre`, `tbcatalogogrupomusculardescripcion`, `tbcatalogogrupomuscularactivo`) VALUES
 (1, 'Biceps', ' ni idea que es 1', 1),
-(2, 'hombros', 'son musculos', 1),
-(3, 'Grupo abdominal ', 'toda la pansa bagos ', 1),
-(4, 'Zona baja de las nalgas  ', 'glúteos y mas', 1);
+(2, 'hombros', 'fefr', 1);
 
 -- --------------------------------------------------------
 
@@ -191,31 +167,6 @@ INSERT INTO `tbcatalogopagoperidiocidad` (`tbcatalogopagoperidiocidadid`, `tbcat
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbcatalogorutinanivel`
---
-
-CREATE TABLE `tbcatalogorutinanivel` (
-  `tbcatalogorutinanivelid` int(11) NOT NULL,
-  `tbcatalogorutinanivelnombre` varchar(50) NOT NULL,
-  `tbcatalogorutinaniveldescripcion` varchar(200) NOT NULL,
-  `tbcatalogorutinanivelactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcatalogorutinanivel`
---
-
-INSERT INTO `tbcatalogorutinanivel` (`tbcatalogorutinanivelid`, `tbcatalogorutinanivelnombre`, `tbcatalogorutinaniveldescripcion`, `tbcatalogorutinanivelactivo`) VALUES
-(1, 'Intenso ', 'Cardio mas fuerte 2', 1),
-(2, 'medio ', 'para personas de 1 a 2 años ', 1),
-(3, 'bajo ', 'para las lombrices ', 1),
-(4, 'Destruye hombres ', 'solo espartanos ', 1),
-(5, 'Inferno ', 'ya ni el diablo ', 1),
-(6, 'la muerte ', 'que miedo ', 1);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbcliente`
 --
 
@@ -241,9 +192,7 @@ INSERT INTO `tbcliente` (`tbclienteid`, `tbclientenombre`, `tbclienteapellido1`,
 (1, 'Juan', 'Jiménez', 'Mora', '99999999', '2003-02-14', 'Masculino', 88, 1.7, 'juannmora7@gmail.com', 1),
 (2, 'Mario', 'Lopez', 'Juarez', '88760901', '2015-02-19', 'Masculino', 68, 1.82, ' juare333@gmail.com', 1),
 (3, 'Sergio', 'Andrade', 'Villalobos', '87878787', '2022-09-07', 'Masculino', 77, 1.9, 'sergio@gmail.com', 1),
-(4, 'Jafet David', 'González', 'García', '84585370', '2022-10-28', 'Masculino', 58.6, 1.63, 'jafet.jdgg@gmail.com', 1),
-(5, 'yahir', 'Umaña', 'Arroyo', '85989164', '2001-05-13', 'Masculino', 76, 1.75, 'yairu4439@gmail.com', 1),
-(6, 'mendez', 'morales', 'vestían ', '57463533', '2003-07-18', 'Masculino', 56, 2, 'solano@gmail.com', 0);
+(4, 'Jafet David', 'González', 'García', '84585370', '2022-10-28', 'Masculino', 58.6, 1.63, 'jafet.jdgg@gmail.com', 1);
 
 -- --------------------------------------------------------
 
@@ -365,18 +314,6 @@ CREATE TABLE `tbmedidaisometrica` (
   `tbmedidaisometricaactivo` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Volcado de datos para la tabla `tbmedidaisometrica`
---
-
-INSERT INTO `tbmedidaisometrica` (`tbmedidaisometricaid`, `tbgrupomuscularid`, `tbclienteid`, `tbmedidaisometricafechamedicion`, `tbmedidaisometricamedida`, `tbmedidaisometricaactivo`) VALUES
-(1, 2, 3, '2022-11-17', 43, 1),
-(2, 2, 3, '2022-11-16', 54, 1),
-(3, 1, 4, '2022-11-19', 43, 1),
-(4, 4, 3, '2022-11-24', 66, 1),
-(5, 3, 3, '2022-11-26', 53, 1),
-(6, 4, 5, '2022-11-25', 43, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -446,7 +383,7 @@ INSERT INTO `tbservicio` (`tbservicioid`, `tbservicionombre`, `tbserviciodescrip
 (2, 'Zumba', 'Cardio haciendo zumba', 1),
 (3, 'Yoga', 'Meditación mediante el yoga', 1),
 (4, 'aeróbicos', 'aeróbicos ', 1),
-(5, 'ewfew', 'wgerg', 0);
+(5, 'ewfew', 'wgerg', 1);
 
 -- --------------------------------------------------------
 
@@ -510,12 +447,6 @@ ALTER TABLE `tbactivovariable`
   ADD PRIMARY KEY (`tbactivovariableid`);
 
 --
--- Indices de la tabla `tbcatalogoclientetipo`
---
-ALTER TABLE `tbcatalogoclientetipo`
-  ADD PRIMARY KEY (`tbcatalogoclientetipoid`);
-
---
 -- Indices de la tabla `tbcatalogoejercicio`
 --
 ALTER TABLE `tbcatalogoejercicio`
@@ -538,12 +469,6 @@ ALTER TABLE `tbcatalogopagometodo`
 --
 ALTER TABLE `tbcatalogopagoperidiocidad`
   ADD PRIMARY KEY (`tbcatalogopagoperidiocidadid`);
-
---
--- Indices de la tabla `tbcatalogorutinanivel`
---
-ALTER TABLE `tbcatalogorutinanivel`
-  ADD PRIMARY KEY (`tbcatalogorutinanivelid`);
 
 --
 -- Indices de la tabla `tbcliente`
