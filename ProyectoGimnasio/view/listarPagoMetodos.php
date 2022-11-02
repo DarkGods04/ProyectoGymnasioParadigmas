@@ -26,10 +26,24 @@ include '../business/pagoMetodoBusiness.php';
     <?php include 'header.php';?>
 
     <h1>Métodos de pago</h1>
+    <form action="" method="post" autocomplete="off">
+        <div>
+            <label for="campo"> Buscar: </label>
+            <input type="text" name="campo" id="campo" placeholder="Buscar">
+            <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
+            <ul id="listarPagoMetodos"></ul>
+        </div>
+    </form></br></br>
     <div>
-        <?php
+        
+    <?php
+        if (!isset($_POST['campo'])) {
+            $_POST['campo'] = "";
+            $campo = $_POST['campo'];
+        }
+        $campo = $_POST['campo'];
         $pagoMetodoBusiness = new PagoMetodoBusiness();
-        $pagoMetodos = $pagoMetodoBusiness->obtener();
+        $pagoMetodos = $pagoMetodoBusiness->buscar($campo);
         if (!empty($pagoMetodos)) {
         ?>
             <table border="1">
@@ -81,14 +95,13 @@ include '../business/pagoMetodoBusiness.php';
                         <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
-
                 <tbody>
                     <tr>
-                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="campo" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoMetodo'])){ echo $_GET['nombrePagoMetodo']; }?>"></td>
+
+                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoMetodo'])){ echo $_GET['nombrePagoMetodo']; }?>"></td>
                         <td><input type="text" name="descripcionPagoMetodo" placeholder="Descripción" value="<?php if(isset($_GET['descripcionPagoMetodo'])){ echo $_GET['descripcionPagoMetodo']; }?>"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
-                        <ul id="listarPagoMetodos"></ul>
-                        <script src="../js/peticiones.js"></script>
+                        <ul id="listarPagoMetodos2"></ul>
                        
                     </tr>
                 </tbody>
@@ -119,6 +132,7 @@ include '../business/pagoMetodoBusiness.php';
             </tr>
         </form>
     </div>
+    <script src="../js/peticiones.js"></script>
 </body>
 
 </html>

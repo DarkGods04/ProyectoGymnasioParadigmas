@@ -14,7 +14,7 @@ $query->execute([$campo .'%', $campo .'%']);
 
 $html = "";
 while($row = $query-> fetch(PDO::FETCH_ASSOC)){
-    $html .= "<li onclick=\"mostrar('" . $row["tbcatalogoejercicioid"] . "')\">" . $row["tbcatalogoejercicioid"] . " - "  . $row["tbcatalogoejercicionombre"] . "</li>";
+    $html .= "<li onclick=\"mostrar('" . $row["tbcatalogoejercicionombre"] . "')\">" . $row["tbcatalogoejercicioid"] . " - "  . $row["tbcatalogoejercicionombre"] . "</li>";
 }
 
 echo json_encode($html, JSON_UNESCAPED_UNICODE);

@@ -7,6 +7,7 @@
         $(".mascaraimpuesto").mask("00.00%");
         $(".mascaranumcuenta").mask("AA00000000000000000000");
         $(".mascaracantidad").mask("9999");
+        $(".mascaramedida").mask("99cm");
         /*
         $(".mascaranombre").mask("AAAAAAAAAAAAAAAAAA");
         $(".mascaracorreo").mask("@gmail.com @hotmail.com @est.una.ac.cr");

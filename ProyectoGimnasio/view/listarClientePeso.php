@@ -1,8 +1,6 @@
-<?php
-    include '../business/clientePesoBusiness.php';
+<?php include '../business/clientePesoBusiness.php';
     include '../business/instructorBusiness.php';
-    include '../business/clienteBusiness.php';
-?>
+    include '../business/clienteBusiness.php'; ?>
 
 <!DOCTYPE html>
 <html>

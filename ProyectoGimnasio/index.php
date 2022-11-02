@@ -1,48 +1,17 @@
-<?php //require_once '../data/servicioData.php'; ?>
 <!DOCTYPE html>
-<html>
-<?php 
-//por favor no tocar lo qu esta comentado 
-//$servicioBusiness = new ServicioData();
-//$servicios = $servicioBusiness->getServicios();
-//$fechaActualizacionProxima = new DateTime(date('Y-m-d'));
-//$fechaActualizacionProxima = $fechaActualizacionProxima->format('Y-m-d');
-?>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú principal</title>
-    <script>
-        function confirmarActualizacionServicio(dat,dias) {
-            return confirm("El servicio con el nombre  y monto = "+dat+" le corresponde una actualización el día de hoy\n ¿desea realizar esta actualización en caso contrario se aplazara "+dias+" días más?");
-        }
-    </script>
 </head>
 
 <body>
     <h1>Proyecto Gimnasio</h1>
     <h2>Menú principal</h2>
-    <?php /*
-    foreach ($servicios as $row) {
-        if ($row->getActivoTBServicio() == 1) {
-            if ($row->getFechaactualizacionTBServicio() == $fechaActualizacionProxima) {
-                $id = $row->getIdTBServicio();
-                $nom = $row->getNombreTBServicio();
-                $monto = $row->getMontoTBServicio();
-                $dias =$row->getPeriodicidadTBServicio();
-                ?><script>
-                    if (confirmarActualizacionServicio("<?php echo $id . "'$nom'" . "'$monto'"; ?>","<?php echo $dias; ?>")) {
-                        location.href = "view/listarServicios.php";
-                    }else{
 
-                    }
-                </script>
-                <?php }
-        }
-    }*/
-    ?>
     <div>
         <a href="./view/listarInstructores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Instructores</a>
     </div>
@@ -72,7 +41,7 @@
     </div>
 
     <div>
-        <a href="view/listarServicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Servicios</a>
+        <a href="./view/listarServicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Servicios</a>
     </div>
 
     <div>
@@ -92,7 +61,16 @@
     </div>
 
     <div>
+        <a href="./view/listarMedidasIsometricas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Medidas isometricas</a>
+    </div>
+    <div>
         <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupo Muscular</a>
+    </div>
+     <div>
+        <a href="./view/listarClienteTipo.php" style="text-decoration: none; color: blue; font-size: 150%;">- Tipos de clientes</a>
+    </div>
+    <div>
+        <a href="./view/listarRutinaNivel.php" style="text-decoration: none; color: blue; font-size: 150%;">- Niveles de rutina</a>
     </div>
 </body>
 

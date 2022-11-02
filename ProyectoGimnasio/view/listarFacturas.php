@@ -32,7 +32,6 @@ include '../business/servicioBusiness.php';
     include 'header.php';
     ?>
     <h1>Facturas</h1>
-
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
@@ -42,7 +41,7 @@ include '../business/servicioBusiness.php';
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
-
+    
     <div>
         <?php
         if (!isset($_POST['campo'])) {
@@ -165,7 +164,7 @@ include '../business/servicioBusiness.php';
     <div>
         <h3>Crear nueva factura</h3>
 
-        <script src="../js/app.js"></script>
+        <script src="../js/jquery_formato.js"></script>
         <form name="formulario" method="POST" id="direccionform" action="../business/facturaAction.php">
             <table border="1">
                 <thead style="text-align: left;">
@@ -316,7 +315,7 @@ include '../business/servicioBusiness.php';
                             </select>
                             <button name="añadirServicios" id="añadirServicios" value="añadirServicios">Añadir</button>
                         </td>
-                        <td><input type="text" name="MontoBruto" readonly value="<?php if (isset($_GET['MontoBruto'])) {
+                        <td><input type="text"class="mascaramonto" name="MontoBruto" readonly value="<?php if (isset($_GET['MontoBruto'])) {
                                                                                         echo $_GET['MontoBruto'];
                                                                                     }else{echo "";} ?>"required>
                         <td>
@@ -351,10 +350,10 @@ include '../business/servicioBusiness.php';
                             <button name="calcularImpuesto" id="calcularImpuesto" value="calcularImpuesto">Calcular monto neto</button>
 
                         </td>
-                        <td><input type="text" name="MontoNeto" value="<?php if (isset($_GET['MontoNeto'])) {
+                        <td><input type="text" class="mascaramonto" name="MontoNeto" value="<?php if (isset($_GET['MontoNeto'])) {
                                                                             echo $_GET['MontoNeto'];
-                                                                        }else{echo "";} ?>" readonly>
-                        <td><button type="submit" name="insertarFactura" id="insertarFactura" value="insertarFactura">Registrar factura</button></td>
+                                                                        } ?>" readonly>
+                        <td><button type="submit" name="insertarFactura"  id="insertarFactura" value="insertarFactura">Registrar factura</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -393,7 +392,7 @@ include '../business/servicioBusiness.php';
             </tr>
         </form>
     </div>
-    <script src="app.js"></script>
+    <script src="../js/jquery_formato.js"></script>
 </body>
 
 </html>
