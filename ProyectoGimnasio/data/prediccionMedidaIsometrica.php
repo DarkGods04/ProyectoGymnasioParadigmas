@@ -8,7 +8,7 @@ $pdo = $con->Data();
 $campo = $_POST["campo"];
 
 
-$sql = "SELECT tbclienteid, tbclientenombre FROM tbcliente 
+$sql = "SELECT tbclienteid, tbclientenombre,tbclienteapellido1 FROM tbcliente 
 WHERE (tbclienteactivo=1) AND (tbclienteid LIKE ? OR tbclientenombre LIKE ? OR tbclienteapellido1 LIKE ?) ORDER BY tbclienteid ASC LIMIT 0, 10";
 $query = $pdo->prepare($sql);
 $query->execute([$campo . '%', $campo . '%', $campo . '%']);
@@ -22,12 +22,8 @@ $sql = "SELECT tbcatalogogrupomuscularid, tbcatalogogrupomuscularnombre FROM tbc
 $query = $pdo->prepare($sql);
 $query->execute([$campo . '%', $campo . '%']);
 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
-    if ($valor == true) {
         $html .= "<li onclick=\"mostrar('" . $row["tbcatalogogrupomuscularnombre"] . "')\">" . $row["tbcatalogogrupomuscularid"] . " - " . $row["tbcatalogogrupomuscularnombre"] . "</li>";
-    }
 }
-
-
 
 $sql = "SELECT tbmedidaisometricaid, tbmedidaisometricafechamedicion  FROM tbmedidaisometrica WHERE (tbmedidaisometricaactivo=1) AND 
 (tbmedidaisometricafechamedicion LIKE ? OR tbmedidaisometricaid LIKE ? ) ORDER BY tbmedidaisometricaid ASC LIMIT 0, 10";

@@ -63,12 +63,10 @@
     <div>
         <a href="./view/listarMedidasIsometricas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Medidas isometricas</a>
     </div>
-
-    
     <div>
         <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupo Muscular</a>
     </div>
-    <div>
+     <div>
         <a href="./view/listarClienteTipo.php" style="text-decoration: none; color: blue; font-size: 150%;">- Tipos de clientes</a>
     </div>
     <div>
