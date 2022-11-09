@@ -19,21 +19,21 @@ class Data{
                 $this->server = "127.0.0.1";
                 $this->user = "root";
                 $this->password = "";
-                $this->db = "bdproyectogym";
+                $this->db = "bdgym";
                 break;
             case "admin": //laptop's PC
                 $this->isActive = false;
                 $this->server = "127.0.0.1";
                 $this->user = "root";
                 $this->password = "";
-                $this->db = "bdproyectogym";
+                $this->db = "bdgym";
                 break;
             default: //Hosting
                 $this->isActive = false;
                 $this->server = "127.0.0.1";
                 $this->user = "root";
                 $this->password = "";
-                $this->db = "bdproyectogym";
+                $this->db = "bdgym";
                 $this->hostname = "localhost";
                 $this->charset = "utf8";
 
