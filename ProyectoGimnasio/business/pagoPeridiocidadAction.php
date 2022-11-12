@@ -1,4 +1,3 @@
-
 <?php
 include 'pagoPeridiocidadBusiness.php';
 include 'facturaBusiness.php';
@@ -68,8 +67,10 @@ if (isset($_POST['insertar'])) {
         $existe = false;
         $nombre = $_POST['nombrePagoPeridiocidad'];
         $descripcion = $_POST['descripcionPagoPeridiocidad'];
+        
         $pagoPeridiocidadBusiness = new PagoPeridiocidadBusiness();
         $pagoPeridiocidades = $pagoPeridiocidadBusiness->obtener();
+        
         foreach ($pagoPeridiocidades as $row) {
             if ($row->getNombreTBPagoPeridiocidad() == $nombre) {
                 $existe = true;
