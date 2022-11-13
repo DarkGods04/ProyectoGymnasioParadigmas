@@ -10,9 +10,7 @@ if (isset($_POST['insertar'])) {
         $fechaMedicion = $_POST['fechaMedicion'];
         $medida = $_POST['medida'];
         
-
         $medidaBusiness = new MedidaIsometricaBusiness();
-
 
         if (strlen($idGrupoMuscular) > 0 && strlen($idCliente) > 0 && strlen($medida) > 0 && strlen($fechaMedicion) > 0) {
 
