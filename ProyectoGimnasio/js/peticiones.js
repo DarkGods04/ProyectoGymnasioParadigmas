@@ -29,6 +29,9 @@ document.getElementById("campo").addEventListener("keyup", getNombresRutinaNivel
 document.getElementById("campo").addEventListener("keyup", getNombresLineaProductos)
 document.getElementById("campo2").addEventListener("keyup", getNombresLineaProductos)
 
+document.getElementById("campo").addEventListener("keyup", getNombresProveedores)
+document.getElementById("campo2").addEventListener("keyup", getNombresProveedores)
+
 function getNombresGruposMusculares() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listarGruposMusculares")
@@ -131,9 +134,9 @@ function getNombresPeridiocidades() {
 
 function getNombresLineaProductos() {
     let inputCP = document.getElementById("campo").value
-    let lista = document.getElementById("listarLineaProductos")
+    let lista = document.getElementById("listaLineaProductos")
     let inputCP2 = document.getElementById("campo2").value
-    let lista2 = document.getElementById("listarLineaProductos2")
+    let lista2 = document.getElementById("listaLineaProductos2")
 
     if (inputCP2.length > 0) {
 
@@ -159,6 +162,33 @@ function getNombresLineaProductos() {
     if (inputCP.length > 0) {
 
         let url = "../data/prediccionLineaProductos.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+}
+
+
+function getNombresProveedores() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaProveedor")
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionProveedor.php"
         let formData = new FormData()
 
         formData.append("campo", inputCP)

@@ -1,7 +1,7 @@
 
 <?php
 include 'lineaProductosBusiness.php';
-//include 'proveedorBusiness.php';
+include 'proveedorBusiness.php';
 
 if (isset($_POST['actualizar'])) {
     if (isset($_POST['idLineaProductos']) && isset($_POST['nombreLineaProductos']) && isset($_POST['descripcionLineaProductos'])) {
@@ -36,13 +36,13 @@ if (isset($_POST['actualizar'])) {
 
 if (isset($_POST['eliminar'])) {
 
-   /* $proveedorBusiness = new ProveedorBusiness();
+    $proveedorBusiness = new ProveedorBusiness();
     $proveedor = $proveedorBusiness->obtener();
     $flag = 0;
-    foreach ($proveedor as $row) { if($row->getLineaProductosTBProveedor() == $_POST['idLineaProductos'] && $row->getActivoTBProveedor() == 1 ){  $flag = 1; } }
+    foreach ($proveedor as $row) { if($row->getIdLineaProductosTBCatalogoLineaProductos() == $_POST['idLineaProductos'] && $row->getActivoTBProveedor() == 1 ){  $flag = 1; } }
         
     if($flag == 0){
-*/
+
         if (isset($_POST['idLineaProductos'])) {
 
             $id = $_POST['idLineaProductos'];
@@ -58,9 +58,9 @@ if (isset($_POST['eliminar'])) {
             header("location: ../view/listarLineasProductos.php?error=error");
         }
 
-    /*} else {
+    } else {
         header("location: ../view/listarLineasProductos.php?error=relationError");
-    }*/
+    }
 }
 
 if (isset($_POST['insertar'])) {
@@ -70,20 +70,20 @@ if (isset($_POST['insertar'])) {
         $nombre = $_POST['nombreLineaProductos'];
         $descripcion = $_POST['descripcionLineaProductos'];
 
-        /*$lineaProductosBusiness = new LineaProductosBusiness();
+        $lineaProductosBusiness = new LineaProductosBusiness();
         $lineaProductos = $lineaProductosBusiness->obtener();
 
         foreach ($lineaProductos as $row) {
             if ($row->getNombreTBCatalogoLineaProductos() == $nombre) {
                 $existe = true;
             }
-        }*/
+        }
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0) {
             
             if (!is_numeric($nombre)) {
 
-                //if ($existe == false) {
+                if ($existe == false) {
                     $lineaProductos = new LineaProductos(0, $nombre, $descripcion, 1);
                     $lineaProductosBusiness = new LineaProductosBusiness();
                     $result = $lineaProductosBusiness->insertar($lineaProductos);
@@ -93,9 +93,9 @@ if (isset($_POST['insertar'])) {
                     } else {
                         header("location: ../view/listarLineasProductos.php?error=dbError&nombreLineaProductos=$nombre&descripcionLineaProductos=$descripcion");
                     }
-                /*} else {
+                } else {
                     header("location: ../view/listarLineasProductos.php?error=existe&nombreLineaProductos=$nombre&descripcionLineaProductos=$descripcion");
-                }*/
+                }
             } else {
                 header("location: ../view/listarLineasProductos.php?error=numberFormat&nombreLineaProductos=$nombre&descripcionLineaProductos=$descripcion");
             }

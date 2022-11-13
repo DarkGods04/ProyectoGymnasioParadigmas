@@ -66,8 +66,10 @@ class LineaProductosData extends Data {
         
         $lineaProductos = [];
         while ($row = mysqli_fetch_array($result)) {
-            $current = new LineaProductos($row['tbcatalogolineaproductosid'],$row['tbcatalogolineaproductosnombre'],$row['tbcatalogolineaproductosdescripcion'],$row['tbcatalogolineaproductosactivo']);
-            array_push($lineaProductos, $current);
+            if($row['tbcatalogolineaproductosactivo'] == 1){
+                $current = new LineaProductos($row['tbcatalogolineaproductosid'],$row['tbcatalogolineaproductosnombre'],$row['tbcatalogolineaproductosdescripcion'],$row['tbcatalogolineaproductosactivo']);
+                array_push($lineaProductos, $current);
+            }
         }
         return $lineaProductos;
     }

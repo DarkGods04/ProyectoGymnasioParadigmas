@@ -30,9 +30,11 @@ include '../business/lineaProductosBusiness.php';
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listarLineaProductos"></ul>
+            <ul id="listaLineaProductos"></ul>
         </div>
     </form></br></br>
+    <script src="../js/peticiones.js"></script>
+    
     <div>
         <?php
         if (!isset($_POST['campo'])) {
@@ -101,7 +103,7 @@ include '../business/lineaProductosBusiness.php';
 
                     <tr>
                     <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombreLineaProductos"  id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombreLineaProductos'])){ echo $_GET['nombreLineaProductos']; }?>"></td>
-                    <ul id="listarLineaProductos2"></ul>
+                    <ul id="listaLineaProductos2"></ul>
                         <td><input type="text" name="descripcionLineaProductos" placeholder="Descripción" value="<?php if(isset($_GET['descripcionLineaProductos'])){ echo $_GET['descripcionLineaProductos']; }?>"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
                     </tr>
@@ -123,7 +125,7 @@ include '../business/lineaProductosBusiness.php';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         } else if ($_GET['error'] == "relationError"){
-                            echo '<p style="color: red">Error al eliminar, el elemento tiene registros en otra(s) tabla(s)</p>';
+                            echo '<p style="color: red">Error al eliminar, el elemento se encuentra registrado en otra(s) tabla(s)</p>';
                         } else if ($_GET['error'] == "existe") {
                             echo '<center><p style="color: red">¡Esta línea de productos ya existe, intente de nuevo con otro nombre!</p></center>';
                         }
