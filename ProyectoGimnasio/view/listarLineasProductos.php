@@ -127,7 +127,7 @@ include '../business/lineaProductosBusiness.php';
                         } else if ($_GET['error'] == "relationError"){
                             echo '<p style="color: red">Error al eliminar, el elemento se encuentra registrado en otra(s) tabla(s)</p>';
                         } else if ($_GET['error'] == "existe") {
-                            echo '<center><p style="color: red">¡Esta línea de productos ya existe, intente de nuevo con otro nombre!</p></center>';
+                            echo '<center><p style="color: red">¡Esta línea de productos ya se encuentra registrada en el sistema!</p></center>';
                         }
 
                     } else if (isset($_GET['success'])) {

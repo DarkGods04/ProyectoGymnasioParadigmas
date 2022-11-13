@@ -65,14 +65,12 @@ if (isset($_POST['eliminar'])) {
 
 if (isset($_POST['insertar'])) {
     if (isset($_POST['nombreLineaProductos']) && isset($_POST['descripcionLineaProductos'])) {
-
         $existe = false;
         $nombre = $_POST['nombreLineaProductos'];
         $descripcion = $_POST['descripcionLineaProductos'];
 
         $lineaProductosBusiness = new LineaProductosBusiness();
         $lineaProductos = $lineaProductosBusiness->obtener();
-
         foreach ($lineaProductos as $row) {
             if ($row->getNombreTBCatalogoLineaProductos() == $nombre) {
                 $existe = true;

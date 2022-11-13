@@ -3,22 +3,35 @@ include 'proveedorBusiness.php';
 
 if (isset($_POST['insertar'])) {
     if (isset($_POST['nombreProveedor']) && isset($_POST['casaComercialProveedor']) && isset($_POST['idLineaProductos'])) {
-
+        $existe = false;
         $nombre = $_POST['nombreProveedor'];
         $casaComercial = $_POST['casaComercialProveedor'];
         $idLineaProductos = $_POST['idLineaProductos'];
 
+        $proveedorBusiness = new ProveedorBusiness();
+        $proveedores = $proveedorBusiness->obtener();
+        foreach ($proveedores as $row) {
+            if ($row->getNombreCompletoTBProveedor() == $nombre && $row->getCasaComercialTBProveedor() == $casaComercial) {
+                $existe = true;
+            }
+        }
+
         if (strlen($nombre) > 0 && strlen($casaComercial) > 0 && strlen($idLineaProductos) > 0) {
 
             if (!is_numeric($nombre) && is_numeric($idLineaProductos)) {
-                $proveedor = new Proveedor(0, $nombre, $casaComercial, $idLineaProductos,1);
-                $proveedorBusiness = new ProveedorBusiness();
-                $resultado = $proveedorBusiness->insertar($proveedor);
 
-                if ($resultado == 1) {
-                    Header("Location: ../view/listarProveedores.php?success=inserted");
-                } else {
-                    Header("Location: ../view/listarProveedores.php?error=dbError&nombreProveedor=$nombre&casaComercialProveedor=$casaComercial&idLineaProductos=$idLineaProductos");
+                if($existe == false){
+                    $proveedor = new Proveedor(0, $nombre, $casaComercial, $idLineaProductos,1);
+                    $proveedorBusiness = new ProveedorBusiness();
+                    $resultado = $proveedorBusiness->insertar($proveedor);
+
+                    if ($resultado == 1) {
+                        Header("Location: ../view/listarProveedores.php?success=inserted");
+                    } else {
+                        Header("Location: ../view/listarProveedores.php?error=dbError&nombreProveedor=$nombre&casaComercialProveedor=$casaComercial&idLineaProductos=$idLineaProductos");
+                    }
+                }else{
+                    header("location: ../view/listarProveedores.php?error=existe&nombreProveedor=$nombre&casaComercialProveedor=$casaComercial&idLineaProductos=$idLineaProductos");
                 }
             } else {
                 header("location: ../view/listarProveedores.php?error=numberFormat&nombreProveedor=$nombre&casaComercialProveedor=$casaComercial&idLineaProductos=$idLineaProductos");
