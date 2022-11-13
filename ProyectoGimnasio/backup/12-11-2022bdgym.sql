@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-11-2022 a las 02:33:47
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 7.4.30
+-- Tiempo de generación: 01-11-2022 a las 16:18:30
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -68,9 +68,9 @@ CREATE TABLE `tbactivovariable` (
 
 INSERT INTO `tbactivovariable` (`tbactivovariableid`, `tbactivovariablenombre`, `tbactivovariablecantidad`, `tbactivovariablemontocompra`, `tbactivovariabledescripcion`, `tbactivovariableactivo`) VALUES
 (1, 'Mancuernas', 24, 150000, 'Mancuernas de 10Lbs', 1),
-(2, 'Cuerda', 10, 25000, 'Cuerda de 20 mtrs', 1),
-(3, 'Pesa', 24, 175000, 'Pesa de 20 kilos', 1),
-(4, 'Ligas rojas', 10, 20000, 'Ligas de gran resistencia', 1);
+(2, 'Cuerda', 10, 15000, 'Cuerda de 20 mtrs', 1),
+(3, 'Pesa', 24, 5000, 'Pesa de 20 kilos', 1),
+(4, 'Mancuernas', 10, 513206, 'Mancuernas de 10Lbs', 1);
 
 -- --------------------------------------------------------
 
@@ -90,10 +90,10 @@ CREATE TABLE `tbcatalogoclientetipo` (
 --
 
 INSERT INTO `tbcatalogoclientetipo` (`tbcatalogoclientetipoid`, `tbcatalogoclientetiponombre`, `tbcatalogoclientetipodescripcion`, `tbcatalogoclientetipoactivo`) VALUES
-(1, 'Plata', 'Menos de 3 meses', 1),
-(2, 'Oro', 'Más de 3 meses', 1),
-(3, 'Platino', 'Más de 6 meses ', 1),
-(4, 'Diamante', 'Más de 1 año', 1);
+(1, 'El retrasado ', 'no paga ', 1),
+(2, 'El billetado ', 'pago mucho', 1),
+(3, 'El perfecto ', 'da propina y paga bien ', 1),
+(4, 'La bonita ', 'la que todos miran ', 1);
 
 -- --------------------------------------------------------
 
@@ -113,12 +113,12 @@ CREATE TABLE `tbcatalogoejercicio` (
 --
 
 INSERT INTO `tbcatalogoejercicio` (`tbcatalogoejercicioid`, `tbcatalogoejercicionombre`, `tbcatalogoejerciciodescripcion`, `tbcatalogoejercicioactivo`) VALUES
-(1, 'Press de banca', 'repeticiones: 4 x 12 ', 1),
-(2, 'Press militar', 'repeticiones: 4 x 12 ', 1),
-(3, 'Sentadilla búlgara', 'repeticiones: 4 x 12 ', 1),
-(4, 'Sentadilla goblet', 'repeticiones: 4x10', 1),
-(5, 'Abdominales', 'repeticiones: 4x20', 1),
-(6, 'Lagartijas', 'repeticiones: 4x12', 1);
+(1, 'press militar', 'repeticiones: 4 x 12 ', 0),
+(2, 'banca scott', 'repeticiones: 4 x 12 ', 1),
+(3, 'prensa', 'repeticiones: 4 x 12 ', 0),
+(4, 'prensa', 'repeticiones: 4 x 12 ', 1),
+(5, 'prensad', 'dfff', 0),
+(6, 'banca declinada', 'repeticiones: 4 x 12 ', 1);
 
 -- --------------------------------------------------------
 
@@ -138,33 +138,10 @@ CREATE TABLE `tbcatalogogrupomuscular` (
 --
 
 INSERT INTO `tbcatalogogrupomuscular` (`tbcatalogogrupomuscularid`, `tbcatalogogrupomuscularnombre`, `tbcatalogogrupomusculardescripcion`, `tbcatalogogrupomuscularactivo`) VALUES
-(1, 'Biceps', 'Biceps del brazo', 1),
-(2, 'Hombros', 'Parte superior del brazo', 1),
-(3, 'Oblicuos', 'Músculos que cubren el abdomen', 1),
-(4, 'Cuadriceps', 'Musculo frontal de la pierna alta', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbcatalogolineaproductos`
---
-
-CREATE TABLE `tbcatalogolineaproductos` (
-  `tbcatalogolineaproductosid` int(11) NOT NULL,
-  `tbcatalogolineaproductosnombre` varchar(50) NOT NULL,
-  `tbcatalogolineaproductosdescripcion` varchar(100) NOT NULL,
-  `tbcatalogolineaproductosactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcatalogolineaproductos`
---
-
-INSERT INTO `tbcatalogolineaproductos` (`tbcatalogolineaproductosid`, `tbcatalogolineaproductosnombre`, `tbcatalogolineaproductosdescripcion`, `tbcatalogolineaproductosactivo`) VALUES
-(1, 'Cosméticos', 'Productos de belleza', 1),
-(2, 'Detergentes', 'Para lavar ropa', 1),
-(3, 'Abarrotes', 'Productos alimenticios', 1),
-(4, 'Proteínas', 'Suplemento proteínico', 1);
+(1, 'Biceps', ' ni idea que es 1', 1),
+(2, 'hombros', 'son musculos', 1),
+(3, 'Grupo abdominal ', 'toda la pansa bagos ', 1),
+(4, 'Zona baja de las nalgas  ', 'glúteos y mas', 1);
 
 -- --------------------------------------------------------
 
@@ -186,7 +163,8 @@ CREATE TABLE `tbcatalogopagometodo` (
 INSERT INTO `tbcatalogopagometodo` (`tbcatalogopagometodoid`, `tbcatalogopagometodonombre`, `tbcatalogopagometododescripcion`, `tbcatalogopagometodoactivo`) VALUES
 (1, 'Contado', 'Pagos que se realizan antes de la fecha de pago', 1),
 (2, 'Transferencia', 'Pagos mediante transferencia', 1),
-(3, 'SinpeMovil', 'Pagos por la plataforma SINPE Movil', 1);
+(3, 'SinpeMovil', 'Pagos por la plataforma SINPE Movil', 1),
+(4, 'con', 'hh', 0);
 
 -- --------------------------------------------------------
 
@@ -228,11 +206,12 @@ CREATE TABLE `tbcatalogorutinanivel` (
 --
 
 INSERT INTO `tbcatalogorutinanivel` (`tbcatalogorutinanivelid`, `tbcatalogorutinanivelnombre`, `tbcatalogorutinaniveldescripcion`, `tbcatalogorutinanivelactivo`) VALUES
-(1, 'Bajo', 'Para principiantes', 1),
-(2, 'Medio', 'Ejercicios regulares', 1),
-(3, 'Moderada', 'Ejercicios intermedios', 1),
-(4, 'Alto', 'Ejercicios avanzados', 1),
-(5, 'Militar', 'Nivel súper avanzado', 1);
+(1, 'Intenso ', 'Cardio mas fuerte 2', 1),
+(2, 'medio ', 'para personas de 1 a 2 años ', 1),
+(3, 'bajo ', 'para las lombrices ', 1),
+(4, 'Destruye hombres ', 'solo espartanos ', 1),
+(5, 'Inferno ', 'ya ni el diablo ', 1),
+(6, 'la muerte ', 'que miedo ', 1);
 
 -- --------------------------------------------------------
 
@@ -259,10 +238,12 @@ CREATE TABLE `tbcliente` (
 --
 
 INSERT INTO `tbcliente` (`tbclienteid`, `tbclientenombre`, `tbclienteapellido1`, `tbclienteapellido2`, `tbclientetelefono`, `tbclientefechanacimiento`, `tbclientegenero`, `tbclientepeso`, `tbclientealtura`, `tbclientecorreo`, `tbclienteactivo`) VALUES
-(1, 'Yahir', 'Umaña', 'Arroyo', '87868584', '2000-01-12', 'Masculino', 78.5, 1.75, 'yahiru@gmail.com', 1),
-(2, 'Jafet', 'González', 'García', '89888822', '2001-02-12', 'Masculino', 68.6, 1.7, 'jffgg@gmail.com', 1),
-(3, 'Jimmy', 'Fonseca', 'Alvarado', '68717860', '1994-03-12', 'Masculino', 70, 1.72, 'jimmyfa@gmail.com', 1),
-(4, 'María', 'Jiménez', 'Sánchez', '86456798', '2002-04-12', 'Femenino', 62, 1.62, 'mariajs@gmail.com', 1);
+(1, 'Juan', 'Jiménez', 'Mora', '99999999', '2003-02-14', 'Masculino', 88, 1.7, 'juannmora7@gmail.com', 1),
+(2, 'Mario', 'Lopez', 'Juarez', '88760901', '2015-02-19', 'Masculino', 68, 1.82, ' juare333@gmail.com', 1),
+(3, 'Sergio', 'Andrade', 'Villalobos', '87878787', '2022-09-07', 'Masculino', 77, 1.9, 'sergio@gmail.com', 1),
+(4, 'Jafet David', 'González', 'García', '84585370', '2022-10-28', 'Masculino', 58.6, 1.63, 'jafet.jdgg@gmail.com', 1),
+(5, 'yahir', 'Umaña', 'Arroyo', '85989164', '2001-05-13', 'Masculino', 76, 1.75, 'yairu4439@gmail.com', 1),
+(6, 'mendez', 'morales', 'vestían ', '57463533', '2003-07-18', 'Masculino', 56, 2, 'solano@gmail.com', 0);
 
 -- --------------------------------------------------------
 
@@ -283,10 +264,9 @@ CREATE TABLE `tbclientepeso` (
 --
 
 INSERT INTO `tbclientepeso` (`tbclientepesoid`, `tbclienteid`, `tbclientepesofecha`, `tbclientepesopeso`, `tbclientepesoinstructorid`) VALUES
-(1, 1, '2022-11-01', 76, 1),
-(2, 2, '2022-11-01', 69.5, 2),
-(3, 3, '2022-11-02', 71, 3),
-(4, 4, '2022-11-03', 63, 2);
+(1, 1, '2022-10-10', 55, 2),
+(2, 2, '2022-10-01', 90, 1),
+(3, 1, '2022-10-27', 56, 1);
 
 -- --------------------------------------------------------
 
@@ -315,7 +295,10 @@ INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfact
 (1, 1, 1, '2022-10-01', '1', '1;2', 6500, 1, 7345, 1),
 (2, 3, 2, '2022-10-20', '2', '1;2', 5800, 2, 6380, 1),
 (3, 2, 3, '2022-10-21', '3', '2;3', 6800, 1, 7718, 1),
-(4, 4, 2, '2022-11-02', '1', '1', 2600, 1, 2951, 1);
+(4, 1, 1, '2022-10-21', '1', '3', 3600, 2, 3960, 1),
+(5, 4, 1, '2022-10-28', '2', '1', 2600, 1, 2951, 1),
+(6, 3, 1, '2022-10-12', '1', '2;4', 5600, 3, 6048, 1),
+(7, 3, 2, '2022-10-27', '2', '2', 2600, 1, 2951, 1);
 
 -- --------------------------------------------------------
 
@@ -364,7 +347,8 @@ INSERT INTO `tbinstructor` (`tbinstructorid`, `tbinstructornombre`, `tbinstructo
 (1, 'Arturo', 'Elizondo', 'arturo1998@gmail.com', 87234090, 'CR123456789', 'Entrenador personal', 1),
 (2, 'Cristian', 'Brenes', 'cristianbr@gmail.com', 87687678, 'BN123456789', 'Fisioterapeuta', 1),
 (3, 'Cindy', 'Fernández', 'cindylf@gmail.com', 87234093, 'CR123456789', 'Nutricionista', 1),
-(4, 'María', 'Cordero', 'maria@gmail.com', 45677332, 'CR222323333', 'Fisioterapeuta', 1);
+(4, 'María', 'Cordero', 'maria@gmail.com', 45677332, 'CR222323333', 'Fisioterapeuta', 1),
+(5, 'Isaí', 'Ríos', 'isairios@gmail.com', 65123123, 'CR987659999', 'Nutricionista', 1);
 
 -- --------------------------------------------------------
 
@@ -386,13 +370,12 @@ CREATE TABLE `tbmedidaisometrica` (
 --
 
 INSERT INTO `tbmedidaisometrica` (`tbmedidaisometricaid`, `tbgrupomuscularid`, `tbclienteid`, `tbmedidaisometricafechamedicion`, `tbmedidaisometricamedida`, `tbmedidaisometricaactivo`) VALUES
-(1, 1, 1, '2022-11-01', 20, 1),
-(2, 2, 1, '2022-11-01', 24, 1),
-(3, 4, 1, '2022-11-01', 38, 1),
-(4, 1, 3, '2022-11-02', 22, 1),
-(5, 4, 3, '2022-11-02', 40, 1),
-(6, 1, 4, '2022-11-02', 16, 1),
-(7, 4, 4, '2022-11-02', 36, 1);
+(1, 2, 3, '2022-11-17', 43, 1),
+(2, 2, 3, '2022-11-16', 54, 1),
+(3, 1, 4, '2022-11-19', 43, 1),
+(4, 4, 3, '2022-11-24', 66, 1),
+(5, 3, 3, '2022-11-26', 53, 1),
+(6, 4, 5, '2022-11-25', 43, 1);
 
 -- --------------------------------------------------------
 
@@ -444,29 +427,6 @@ INSERT INTO `tbmodalidadfuncionalcriterio` (`tbmodalidadfuncionalcriterioid`, `t
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbproveedor`
---
-
-CREATE TABLE `tbproveedor` (
-  `tbproveedorid` int(11) NOT NULL,
-  `tbproveedornombrecompleto` varchar(50) NOT NULL,
-  `tbproveedorcasacomercial` varchar(50) NOT NULL,
-  `tbcatalogolineaproductosid` int(11) NOT NULL,
-  `tbproveedoractivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbproveedor`
---
-
-INSERT INTO `tbproveedor` (`tbproveedorid`, `tbproveedornombrecompleto`, `tbproveedorcasacomercial`, `tbcatalogolineaproductosid`, `tbproveedoractivo`) VALUES
-(1, 'Allan Quesada', 'Mini súper QM', 3, 1),
-(2, 'Guillermo López', 'Pañalera López', 2, 1),
-(3, 'Bryan Quesada', 'Isolate proteínas', 4, 1);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbservicio`
 --
 
@@ -485,7 +445,7 @@ INSERT INTO `tbservicio` (`tbservicioid`, `tbservicionombre`, `tbserviciodescrip
 (1, 'Spinning', 'Cardio haciendo spinning', 1),
 (2, 'Zumba', 'Cardio haciendo zumba', 1),
 (3, 'Yoga', 'Meditación mediante el yoga', 1),
-(4, 'Aeróbicos', 'Ejercicios aeróbicos', 1),
+(4, 'aeróbicos', 'aeróbicos ', 1),
 (5, 'ewfew', 'wgerg', 0);
 
 -- --------------------------------------------------------
@@ -509,12 +469,29 @@ CREATE TABLE `tbserviciotarifa` (
 --
 
 INSERT INTO `tbserviciotarifa` (`tbserviciotarifaid`, `tbservicioid`, `tbserviciotarifafechamodificacion`, `tbserviciotarifamonto`, `tbserviciotarifaactivo`, `tbserviciotarifaperiodicidadactualizacion`, `tbserviciotarifaproximafechaactualizacion`) VALUES
-(1, 1, '2022-10-25', 2500, 0, 30, '2022-10-31'),
-(2, 2, '2022-11-01', 2600, 0, 60, '2022-12-31'),
-(4, 3, '2022-10-25', 3200, 1, 30, '2022-10-31'),
-(5, 4, '2022-11-01', 3000, 1, 30, '2022-12-31'),
-(6, 2, '2022-11-12', 2800, 1, 60, '2023-01-12'),
-(7, 1, '2022-11-12', 2600, 1, 30, '2022-12-13');
+(1, 1, '2022-10-25', 2500, 1, 30, '2022-10-31'),
+(2, 2, '2022-11-01', 2600, 1, 60, '2022-12-31'),
+(4, 3, '2022-10-25', 3200, 0, 30, '2022-10-31'),
+(5, 4, '2022-11-01', 3000, 0, 30, '2022-12-31'),
+(6, 4, '2022-10-31', 30000, 1, 30, '2022-12-01'),
+(7, 4, '2022-10-31', 30000, 0, 60, '2022-12-31'),
+(8, 3, '2022-10-31', 3200, 1, 60, '2022-12-30'),
+(9, 4, '2022-10-31', 30000, 1, 90, '2022-11-01'),
+(10, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(11, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(12, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(13, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(14, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(15, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(16, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(17, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(18, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(19, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(20, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(21, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(22, 5, '2022-10-31', 45654, 0, 60, '2022-11-01'),
+(23, 5, '2022-10-31', 456543, 0, 60, '2022-12-31'),
+(24, 5, '2022-10-31', 45654, 1, 60, '2022-12-31');
 
 --
 -- Índices para tablas volcadas
@@ -549,12 +526,6 @@ ALTER TABLE `tbcatalogoejercicio`
 --
 ALTER TABLE `tbcatalogogrupomuscular`
   ADD PRIMARY KEY (`tbcatalogogrupomuscularid`);
-
---
--- Indices de la tabla `tbcatalogolineaproductos`
---
-ALTER TABLE `tbcatalogolineaproductos`
-  ADD PRIMARY KEY (`tbcatalogolineaproductosid`);
 
 --
 -- Indices de la tabla `tbcatalogopagometodo`
@@ -605,12 +576,6 @@ ALTER TABLE `tbinstructor`
   ADD PRIMARY KEY (`tbinstructorid`);
 
 --
--- Indices de la tabla `tbmedidaisometrica`
---
-ALTER TABLE `tbmedidaisometrica`
-  ADD PRIMARY KEY (`tbmedidaisometricaid`);
-
---
 -- Indices de la tabla `tbmodalidadfuncional`
 --
 ALTER TABLE `tbmodalidadfuncional`
@@ -621,12 +586,6 @@ ALTER TABLE `tbmodalidadfuncional`
 --
 ALTER TABLE `tbmodalidadfuncionalcriterio`
   ADD PRIMARY KEY (`tbmodalidadfuncionalcriterioid`);
-
---
--- Indices de la tabla `tbproveedor`
---
-ALTER TABLE `tbproveedor`
-  ADD PRIMARY KEY (`tbproveedorid`);
 
 --
 -- Indices de la tabla `tbservicio`
