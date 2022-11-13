@@ -49,11 +49,11 @@
     </div>
 
     <div>
-        <a href="./view/listarModalidadFuncional.php" style="text-decoration: none; color: blue; font-size: 150%;">- Modalidades Funcionales</a>
+        <a href="./view/listarModalidadFuncional.php" style="text-decoration: none; color: blue; font-size: 150%;">- Modalidades funcionales</a>
     </div>
 
     <div>
-        <a href="./view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de Modalidad Funcional</a>
+        <a href="./view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de modalidad funcional</a>
     </div>
 
     <div>
@@ -65,7 +65,7 @@
     </div>
 
     <div>
-        <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupos Musculares</a>
+        <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupos musculares</a>
     </div>
 
      <div>
