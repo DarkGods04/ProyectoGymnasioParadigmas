@@ -21,7 +21,7 @@ class FacturaData extends Data{
             $factura->getInstructoridTBFactura() . "','" .  $factura->getFechaPagoTBFactura() . "','" .
             $factura->getPagoModalidadTBFactura() . "','" . $factura->getServiciosTBFactura() . "','" .
             $factura->getMontoBrutoTBFactura() . "','" . $factura->getImpuestoVentaidTBFactura() . "','" .
-            $factura->getMontoNetoTBFactura() . "','" .
+            $factura->getMontoNetoTBFactura() . "','" . $factura->getMetodoDePagoidTBFactura() . "','" .
             $factura->getActivoTBFactura() . "');";
 
         $result = mysqli_query($conn, $queryInsert);
@@ -40,30 +40,7 @@ class FacturaData extends Data{
 
         return $result;
     }
-/*
-    public function updateFactura($factura){
-        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
-        $conn->set_charset('UTF8');
 
-        $id = $factura->getIdTBFactura();
-        $clienteid = $factura->getClienteidTBFactura();
-        $instructorid = $factura->getInstructoridTBFactura();
-        $fechaPago = $factura->getFechaPagoTBFactura();
-        $pagoModalidad = $factura->getPagoModalidadTBFactura();
-        $servicios = $factura->getServiciosTBFactura();
-        $montoBruto = $factura->getMontoBrutoTBFactura();
-        $impuestoVentaid = $factura->getImpuestoVentaidTBFactura();
-        $montoNeto = $factura->getMontoNetoTBFactura();
-
-        $queryUpdate = "UPDATE tbfactura SET tbfacturaclienteid='$clienteid', tbfacturainstructorid='$instructorid',
-             tbfacturafechapago='$fechaPago', tbfacturapagomodalidad='$pagoModalidad', tbservicioid='$servicios',
-             tbfacturamontobruto='$montoBruto', tbimpuestoventaid='$impuestoVentaid', tbfacturamontoneto='$montoNeto' WHERE tbfacturaid=$id";
-
-        $result = mysqli_query($conn, $queryUpdate);
-        mysqli_close($conn);
-        return $result;
-    }
-*/
     public function getFacturas(){
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
@@ -84,6 +61,7 @@ class FacturaData extends Data{
                 $row['tbfacturamontobruto'],
                 $row['tbimpuestoventaid'],
                 $row['tbfacturamontoneto'],
+                $row['tbcatalogopagometodoid'],
                 $row['tbfacturaactivo']
             );
             array_push($Facturas, $current);
@@ -159,6 +137,7 @@ class FacturaData extends Data{
                     $row['tbfacturamontobruto'],
                     $row['tbimpuestoventaid'],
                     $row['tbfacturamontoneto'],
+                    $row['tbcatalogopagometodoid'],
                     $row['tbfacturaactivo']
                 );
                 array_push($Facturas, $currentDireccion);

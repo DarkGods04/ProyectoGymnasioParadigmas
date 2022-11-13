@@ -5,6 +5,7 @@ include '../business/instructorBusiness.php';
 include '../business/impuestoVentaBusiness.php';
 include '../business/pagoPeridiocidadBusiness.php';
 include '../business/servicioBusiness.php';
+include '../business/pagoMetodoBusiness.php';
 ?>
 
 <!DOCTYPE html>
@@ -66,6 +67,7 @@ include '../business/servicioBusiness.php';
                         <th>Monto bruto</th>
                         <th>Impuesto de venta</th>
                         <th>Monto neto</th>
+                        <th>Método de pago</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -146,6 +148,18 @@ include '../business/servicioBusiness.php';
 
                         <?php
                         echo '<td><input type="text" name="montoNeto" id="montoNeto" value="₡ ' . $row->getMontoNetoTBFactura() .  '"readonly /></td>';
+                        ?>
+                         <td>
+                            <?php
+                            $pagoMetodoBusiness = new PagoMetodoBusiness();
+                            $metodoPago = $pagoMetodoBusiness->obtener();
+                            foreach ($metodoPago as $pago) {
+                                if ($pago->getIDPagoMetodo() == $row->getMetodoDePagoidTBFactura()) {
+                                    echo  '  <input type="text" value="' . $pago->getNombreTBPagoMetodo() . '"readonly />';
+                                }
+                            } ?>
+                        </td>
+                        <?php
                         echo '<td><input type="submit" name="eliminarFactura" id="eliminarFactura" value="Anular" onclick="return confirmarAccionEliminar()"/></td>';
                         echo '</tr>';
                         echo '</form>';
@@ -177,6 +191,7 @@ include '../business/servicioBusiness.php';
                         <th>Monto bruto</th>
                         <th>Impuesto de venta</th>
                         <th>Monto neto</th>
+                        <th>Método de pago</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -350,9 +365,37 @@ include '../business/servicioBusiness.php';
                             <button name="calcularImpuesto" id="calcularImpuesto" value="calcularImpuesto">Calcular monto neto</button>
 
                         </td>
-                        <td><input type="text" class="mascaramonto" name="MontoNeto" value="<?php if (isset($_GET['MontoNeto'])) {
-                                                                            echo $_GET['MontoNeto'];
-                                                                        } ?>" readonly>
+                        <td><input type="text" class="mascaramonto" name="MontoNeto" value="<?php if (isset($_GET['MontoNeto'])) { echo $_GET['MontoNeto']; } ?>" readonly>
+                         <td>
+                            <?php
+                            $pagoMetodoBusiness = new PagoMetodoBusiness();
+                            $metodoPago = $pagoMetodoBusiness->obtener();
+                            ?>
+                            <select name="pagoMetodoId" id="pagoMetodoId" required>
+                                <?php
+                                if (isset($_GET['pagoMetodoId']) && strlen($_GET['pagoMetodoId']) > 0) {
+                                    foreach ($metodoPago as $pagoM) :
+                                        if ($pagoM->getActivoTBPagoMetodo() == 1) {
+                                            if ($_GET['pagoMetodoId'] == $pagoM->getIDPagoMetodo()) {
+                                                echo '<option value="' . $pagoM->getIDPagoMetodo() . '">' . $pagoM->getNombreTBPagoMetodo() . '</option>';
+                                            }
+                                        }
+
+                                    endforeach;
+                                } else { ?>
+                                    <option value="" required>Método pago</option>
+                                <?php }
+
+                                foreach ($metodoPago as $pagoM) :
+                                    if ($pagoM->getActivoTBPagoMetodo() == 1) {
+                                        if ($_GET['pagoMetodoId'] != $pagoM->getIDPagoMetodo()) {
+                                            echo '<option value="' . $pagoM->getIDPagoMetodo() . '">' . $pagoM->getNombreTBPagoMetodo() . '</option>';
+                                        }
+                                    }
+                                endforeach;
+                                ?>
+                            </select>
+                        </td>                                                                                                
                         <td><button type="submit" name="insertarFactura"  id="insertarFactura" value="insertarFactura">Registrar factura</button></td>
                     </tr>
                 </tbody>
