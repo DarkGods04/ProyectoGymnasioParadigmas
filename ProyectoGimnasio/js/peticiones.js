@@ -30,7 +30,6 @@ document.getElementById("campo").addEventListener("keyup", getNombresLineaProduc
 document.getElementById("campo2").addEventListener("keyup", getNombresLineaProductos)
 
 document.getElementById("campo").addEventListener("keyup", getNombresProveedores)
-document.getElementById("campo2").addEventListener("keyup", getNombresProveedores)
 
 function getNombresGruposMusculares() {
     let inputCP = document.getElementById("campo").value
