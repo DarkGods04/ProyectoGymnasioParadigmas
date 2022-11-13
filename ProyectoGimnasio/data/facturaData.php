@@ -93,7 +93,16 @@ class FacturaData extends Data{
             }
         }
 
-        $querySelectModalidad = "SELECT * FROM tbcatalogopagoperidiocidad Where tbcatalogopagoperidiocidadid LIKE '%$palabra%';";
+        $querySelectMetodoPago = "SELECT * FROM tbcatalogopagometodo WHERE tbcatalogopagometodonombre LIKE '%$palabra%';";
+        $resultMetodPago = mysqli_query($conn, $querySelectMetodoPago);
+        $pagoMetodoid = 0;
+        while ($row = mysqli_fetch_array($resultMetodPago)) {
+            if($row['tbcatalogopagometodoactivo'] == 1){
+                $pagoMetodoid = $row['tbcatalogopagometodoid'];
+            }
+        }
+
+        $querySelectModalidad = "SELECT * FROM tbcatalogopagoperidiocidad Where tbcatalogopagoperidiocidadnombre LIKE '%$palabra%';";
         $resultModalidad = mysqli_query($conn, $querySelectModalidad);
         $idModalidad = 0;
         while ($rowModalidad = mysqli_fetch_array($resultModalidad)) {

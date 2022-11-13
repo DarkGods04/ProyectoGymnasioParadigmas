@@ -5,6 +5,7 @@ include '../business/instructorBusiness.php';
 include '../business/impuestoVentaBusiness.php';
 include '../business/pagoPeridiocidadBusiness.php';
 include '../business/servicioBusiness.php';
+include '../business/pagoMetodoBusiness.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -133,12 +134,30 @@ include '../business/servicioBusiness.php';
                             echo "";
                         } ?>
                     </p>
+
+                    <p id=pagoMetodoId>
+                        <?php
+                        $pagoMetodoBusiness = new PagoMetodoBusiness();
+                        $metodoPago = $pagoMetodoBusiness->obtener();
+                        if (isset($_GET['pagoMetodoId'])) {
+
+                            foreach ($metodoPago as $row) :
+                                if ($row->getActivoTBPagoMetodo() == 1) {
+                                    if ($_GET['pagoMetodoId'] == $row->getIDPagoMetodo()) {
+
+                                        echo "Método de pago aplicado: " . $row->getNombreTBPagoMetodo();
+                                    }
+                                }
+                            endforeach;
+                        }
+                        ?>
+                    </p>
                 </thead>
                 <script>
                     window.print()
-                    </script>
+                </script>
                 <div>
-                    <a href="listarFacturas.php?success=success" style="text-decoration: none; color: blue; font-size: 150%;">- Volver a factura</a>
+                    <a href="listarFactura.php?success=success" style="text-decoration: none; color: blue; font-size: 150%;">- Volver a factura</a>
                 </div>
             </tr>
         </table>

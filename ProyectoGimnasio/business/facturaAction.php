@@ -22,13 +22,13 @@ if (isset($_POST['calcularImpuesto'])) {
             $calculoImpuesto = ($valorImpuesto * $_POST['MontoBruto']) / 100;
             $montoNeto = $_POST['MontoBruto'] + $calculoImpuesto;
 
-            header("Location: ../view/listarFacturas.php?MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&MontoNeto=$montoNeto&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+            header("Location: ../view/listarFactura.php?MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&MontoNeto=$montoNeto&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
             exit();
         } else {
-            header("location: ../view/listarFacturas.php?error=unselectedTax&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+            header("location: ../view/listarFactura.php?error=unselectedTax&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
         }
     } else {
-        header("Location: ../view/listarFacturas.php?error=noServiceSelection&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+        header("Location: ../view/listarFactura.php?error=noServiceSelection&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
     }
 }
 
@@ -44,10 +44,10 @@ if (isset($_POST['añadirServicios'])) {
                 }
             }
         }
-        header("Location: ../view/listarFacturas.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+        header("Location: ../view/listarFactura.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
         exit();
     } else {
-        header("Location: ../view/listarFacturas.php?error=noServiceSelection&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+        header("Location: ../view/listarFactura.php?error=noServiceSelection&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
     }
 }
 
@@ -65,10 +65,10 @@ if (isset($_POST['actualizarServicios'])) {
         }
         $serviciosMult = serialize($serviciosMult);
         $serviciosMult = urlencode($serviciosMult);
-        header("Location: ../view/listarFacturas.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+        header("Location: ../view/listarFactura.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
         exit();
     } else {
-        header("location: ../view/listarFacturas.php?error=emptyField");
+        header("location: ../view/listarFactura.php?error=emptyField");
     }
 }
 
@@ -102,19 +102,19 @@ if (isset($_POST['insertarFactura'])) {
                     if ($resultado == 1) {
                         Header("Location: ../view/imprimirPDF.php?success=inserted&MontoBruto=$MontoBruto&cliente=$clienteid&instructor=$instructorid&fechaPago=$fechaPago&impuestoVenta=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&montoNeto=$montoNeto&pagoMetodoId=$pagoMetodoId");
                     } else {
-                        Header("Location: ../view/listarFacturas.php?error=dbError");
+                        Header("Location: ../view/listarFactura.php?error=dbError");
                     }
                 } else {
-                    header("location: ../view/listarFacturas.php?error=numberFormat");
+                    header("location: ../view/listarFactura.php?error=numberFormat");
                 }
             } else {
-                header("Location: ../view/listarFacturas.php?error=emptyField&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+                header("Location: ../view/listarFactura.php?error=emptyField&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
             }
         } else {
-            header("Location: ../view/listarFacturas.php?error=error&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+            header("Location: ../view/listarFactura.php?error=error&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
         }
     } else {
-        header("Location: ../view/listarFacturas.php?error=serviceTaxnotSelected&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+        header("Location: ../view/listarFactura.php?error=serviceTaxnotSelected&MontoBruto=$MontoBruto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&impuestoVentaid=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
     }
 }
 
@@ -126,11 +126,11 @@ if (isset($_POST['eliminarFactura'])) {
         $result = $facturaBusiness->delete($id);
 
         if ($result == 1) {
-            header("Location: ../view/listarFacturas.php?success=deleted");
+            header("Location: ../view/listarHistorialFactura.php?success=deleted");
         } else {
-            header("Location: ../view/listarFacturas.php?error=dbError");
+            header("Location: ../view/listarHistorialFactura.php?error=dbError");
         }
     } else {
-        header("location: ../view/listarFacturas.php?error=error");
+        header("location: ../view/listarHistorialFactura.php?error=error");
     }
 }
