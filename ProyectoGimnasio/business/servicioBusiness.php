@@ -1,9 +1,8 @@
 <?php
 
-include '../data/servicioData.php';
+require_once '../data/servicioData.php';
 
 class ServicioBusiness {
-
     private $servicioData;
 
     public function ServicioBusiness() {
@@ -14,8 +13,8 @@ class ServicioBusiness {
         return $this->servicioData->insertServicio($servicio);
     }
 
-    public function update($servicio, $anteriorMontoServicio) {
-        return $this->servicioData->updateServicio($servicio, $anteriorMontoServicio);
+    public function update($servicio) {
+        return $this->servicioData->updateServicio($servicio);
     }
 
     public function delete($id) {
@@ -28,6 +27,9 @@ class ServicioBusiness {
 
     public function buscar($palabra) {
         return $this->servicioData->buscarServicios($palabra);
+    }
+    public function aplazarActualizacion($servicio) {
+        return $this->servicioData->updateServicioTarifa($servicio);
     }
 
 };

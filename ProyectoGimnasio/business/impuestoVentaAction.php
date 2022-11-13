@@ -1,5 +1,6 @@
 <?php
 include 'impuestoVentaBusiness.php';
+include 'facturaBusiness.php';
 
 if (isset($_POST['insertar'])) {
     if (isset($_POST['valor']) && isset($_POST['descripcion'])) {
@@ -18,19 +19,26 @@ if (isset($_POST['insertar'])) {
             if ($resultado == 1) {
                 Header("Location: ../view/listarImpuestoVentas.php?success=inserted");
             } else {
-                Header("Location: ../view/listarImpuestoVentas.php?error=dbError");
+                Header("Location: ../view/listarImpuestoVentas.php?error=dbError&valor=$valor&descripcion=$descripcion");
             }
             
         } else {
-            header("location: ../view/listarImpuestoVentas.php?error=emptyField");
+            header("location: ../view/listarImpuestoVentas.php?error=emptyField&valor=$valor&descripcion=$descripcion");
         }
     } else {
-        header("location: ../view/listarImpuestoVentas.php?error=error");
+        header("location: ../view/listarImpuestoVentas.php?error=error&valor=$valor&descripcion=$descripcion");
     }
 }
 
 
 if (isset($_POST['eliminar'])) {
+    $facturaBusiness = new FacturaBusiness();
+    $facturas = $facturaBusiness->obtener();
+    $flag = 0;
+    foreach ($facturas as $row) { if($row->getImpuestoVentaidTBFactura() == $_POST['idImpuesto'] && $row->getActivoTBFactura() == 1 ){  $flag = 1; } }
+        
+    if($flag == 0){
+
     if (isset($_POST['idImpuesto'])) {
         $id = $_POST['idImpuesto'];
 
@@ -44,6 +52,9 @@ if (isset($_POST['eliminar'])) {
         }
     } else {
         header("location: ../view/listarImpuestoVentas.php?error=error");
+    }
+    } else {
+    header("location: ../view/listarImpuestoVentas.php?error=relationError");
     }
 }
 

@@ -15,6 +15,7 @@ include '../business/pagoMetodoBusiness.php';
         function confirmarAccionModificar() {
             return confirm("¿Está seguro de que desea modificar este método de pago?");
         }
+
         function confirmarAccionEliminar() {
             return confirm("¿Está seguro de que desea eliminar este método de pago?");
         }
@@ -30,22 +31,19 @@ include '../business/pagoMetodoBusiness.php';
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listaPagoMetodo"></ul>
+            <ul id="listarPagoMetodos"></ul>
         </div>
     </form></br></br>
-    <script src="../js/peticiones.js"></script>
-    
     <div>
-        <?php 
+        
+    <?php
         if (!isset($_POST['campo'])) {
             $_POST['campo'] = "";
             $campo = $_POST['campo'];
         }
         $campo = $_POST['campo'];
-
-        $pagoMetodoBusiness = new PagoMetodoBusiness(); 
+        $pagoMetodoBusiness = new PagoMetodoBusiness();
         $pagoMetodos = $pagoMetodoBusiness->buscar($campo);
-
         if (!empty($pagoMetodos)) {
         ?>
             <table border="1">
@@ -57,16 +55,16 @@ include '../business/pagoMetodoBusiness.php';
                         <th>Acciones</th>
                     </tr>
                 </thead>
-            
+
                 <tbody>
                     <?php
                     foreach ($pagoMetodos as $row) {
-                        if ($row->getActivoTBPagoMetodo() == 1){
+                        if ($row->getActivoTBPagoMetodo() == 1) {
                             echo '<form  method="POST" enctype="multipart/form-data" action="../business/pagoMetodoAction.php">';
                             echo '<tr>';
                             echo '<input type="hidden" name="idPagoMetodo" id="idPagoMetodo" value="' . $row->getIDPagoMetodo() . '"/>';
                             echo '<td>' . $row->getIDPagoMetodo() . '</td>';
-                            echo '<td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="nombrePagoMetodo" value="' . $row->getNombreTBPagoMetodo() . '"/></td>';
+                            echo '<td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="nombrePagoMetodo" value="' . $row->getNombreTBPagoMetodo() . '"/></td>';
                             echo '<td><input type="text" name="descripcionPagoMetodo" id="descripcionPagoMetodo" value="' . $row->getDescripcionTBPagoMetodo() . '"/></td>';
 
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -76,7 +74,7 @@ include '../business/pagoMetodoBusiness.php';
                         }
                     }
                     ?>
-                
+
                 </tbody>
             </table>
         <?php
@@ -88,7 +86,7 @@ include '../business/pagoMetodoBusiness.php';
 
     <div>
         <h3>Registrar un nuevo método de pago</h3>
-        
+
         <form method="POST" id="direccionform" action="../business/pagoMetodoAction.php">
             <table border="1">
                 <thead style="text-align: left;">
@@ -97,12 +95,13 @@ include '../business/pagoMetodoBusiness.php';
                         <th>Descripción</th>
                         <th>Acciones</th>
                     </tr>
-                </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" pattern="^[a-zA-Z\u00c0-\u017F]+" name="nombrePagoMetodo" placeholder="Nombre"></td>
-                        <td><input type="text" name="descripcionPagoMetodo" placeholder="Descripción"></td>
+                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="nombrePagoMetodo" id="campo2" placeholder="Nombre" value="<?php if(isset($_GET['nombrePagoMetodo'])){ echo $_GET['nombrePagoMetodo']; }?>"></td>
+                        <td><input type="text" name="descripcionPagoMetodo" placeholder="Descripción" value="<?php if(isset($_GET['descripcionPagoMetodo'])){ echo $_GET['descripcionPagoMetodo']; }?>"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar</button></td>
+                        <ul id="listarPagoMetodos2"></ul>
+                       
                     </tr>
                 </tbody>
             </table>
@@ -121,6 +120,8 @@ include '../business/pagoMetodoBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        }else if($_GET['error'] == "existe"){
+                            echo '<center><p style="color: red">¡Este método de pago ya existe, intente de nuevo con otro nombre!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
@@ -130,5 +131,7 @@ include '../business/pagoMetodoBusiness.php';
             </tr>
         </form>
     </div>
+    <script src="../js/peticiones.js"></script>
 </body>
+
 </html>

@@ -26,12 +26,12 @@ include '../business/servicioBusiness.php';
         }
     </script>
 </head>
+
 <body>
     <?php
     include 'header.php';
     ?>
     <h1>Facturas</h1>
-
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>
@@ -41,7 +41,7 @@ include '../business/servicioBusiness.php';
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
-
+    
     <div>
         <?php
         if (!isset($_POST['campo'])) {
@@ -164,7 +164,7 @@ include '../business/servicioBusiness.php';
     <div>
         <h3>Crear nueva factura</h3>
 
-        <script src="../js/app.js"></script>
+        <script src="../js/jquery_formato.js"></script>
         <form name="formulario" method="POST" id="direccionform" action="../business/facturaAction.php">
             <table border="1">
                 <thead style="text-align: left;">
@@ -315,7 +315,7 @@ include '../business/servicioBusiness.php';
                             </select>
                             <button name="añadirServicios" id="añadirServicios" value="añadirServicios">Añadir</button>
                         </td>
-                        <td><input type="text" name="MontoBruto" readonly value="<?php if (isset($_GET['MontoBruto'])) {
+                        <td><input type="text"class="mascaramonto" name="MontoBruto" readonly value="<?php if (isset($_GET['MontoBruto'])) {
                                                                                         echo $_GET['MontoBruto'];
                                                                                     }else{echo "";} ?>"required>
                         <td>
@@ -325,7 +325,7 @@ include '../business/servicioBusiness.php';
                             ?>
                             <select name="impuestoVentaid" id="impuestoVentaid" method="POST">
                                 <?php
-                                if (isset($_GET['impuestoVentaid'])) {
+                                if (isset($_GET['impuestoVentaid']) && strlen($_GET['impuestoVentaid']) > 0) {
                                     foreach ($impuestoVentas as $row) :
                                         if ($row->getActivoImpuestoVenta() == 1) {
 
@@ -350,10 +350,10 @@ include '../business/servicioBusiness.php';
                             <button name="calcularImpuesto" id="calcularImpuesto" value="calcularImpuesto">Calcular monto neto</button>
 
                         </td>
-                        <td><input type="text" name="MontoNeto" value="<?php if (isset($_GET['MontoNeto'])) {
+                        <td><input type="text" class="mascaramonto" name="MontoNeto" value="<?php if (isset($_GET['MontoNeto'])) {
                                                                             echo $_GET['MontoNeto'];
-                                                                        }else{echo "";} ?>" readonly>
-                        <td><button type="submit" name="insertarFactura" id="insertarFactura" value="insertarFactura">Registrar factura</button></td>
+                                                                        } ?>" readonly>
+                        <td><button type="submit" name="insertarFactura"  id="insertarFactura" value="insertarFactura">Registrar factura</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -369,28 +369,30 @@ include '../business/servicioBusiness.php';
                     if (isset($_GET['error'])) {
 
                         if ($_GET['error'] == "error") {
-                            echo '<p style="color: red">Error en formato de factura</p>';
-                        } else
-                        if ($_GET['error'] == "emptyField") {
-                            echo '<p style="color: red">Campo(s) vacio(s)</p>';
+                            echo '<center><p style="color: red">Error en formato de factura</p></center>';
+                        } else if ($_GET['error'] == "emptyField") {
+                            echo '<center><p style="color: red">Campo(s) vacio(s)</p></center>';
                         } else if ($_GET['error'] == "numberFormat") {
-                            echo '<p style="color: red">Error, formato de numero!</p>';
+                            echo '<center><p style="color: red">Error, formato de numero!</p></center>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         }else if ($_GET['error'] == "noServiceSelection") {
                             echo '<center><p style="color: red">Servicio no agregado, seleccione un servicio y marque donde dice añadir!</p></center>';
                         }else if ($_GET['error'] == "unselectedTax") {
                             echo '<center><p style="color: red">Impuesto no seleccionado!</p></center>';
+                        }else if($_GET['error'] == "serviceTaxnotSelected"){
+                            echo '<center><p style="color: red">Servicio e impuestos no agregados!</p></center>';
                         }
+                        
                     } else if (isset($_GET['success'])) {
-                        echo '<p style="color: green">Transacción realizada!</p>';
+                        echo '<center><p style="color: green">Transacción realizada!</p></center>';
                     }
                     ?>
                 </td>
             </tr>
         </form>
     </div>
-    <script src="app.js"></script>
+    <script src="../js/jquery_formato.js"></script>
 </body>
 
 </html>
