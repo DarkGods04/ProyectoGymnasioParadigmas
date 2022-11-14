@@ -120,7 +120,7 @@
                             <?php endforeach ?>
                         </select>
                     </td>
-                    <td><input type="date" name="clientepesofecha" value="<?php if(isset($_GET['clientepesofecha'])){ echo $_GET['clientepesofecha']; }?>"></td>
+                    <td><input type="date" id="clientepesofecha" name="clientepesofecha" value="<?php if(isset($_GET['clientepesofecha'])){ echo $_GET['clientepesofecha']; }?>"></td>
                     <td><input type="text" class="mascarapeso" name="clientepesopeso" placeholder="Peso del cliente" value="<?php if(isset($_GET['clientepesopeso'])){ echo $_GET['clientepesopeso']; }?>"></td>
                     <td>
                         <select name="instructorid">
@@ -135,6 +135,21 @@
             </table>
         </form>
     </div>
+
+    <script>
+        var todayDate = new Date();
+        var mes = todayDate.getMonth();
+        var anio = todayDate.getUTCFullYear() - 0;
+        var dia = todayDate.getDate();
+        if (mes < 10) {
+            mes = "0" + mes
+        }
+        if (dia < 10) {
+            dia = "0" + dia;
+        }
+        var maxDate = anio + "-" + mes + "-" + dia;
+        document.getElementById("clientepesofecha").setAttribute("max", maxDate);
+    </script>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/clientePesoAction.php">
