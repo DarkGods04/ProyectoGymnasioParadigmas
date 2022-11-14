@@ -88,6 +88,15 @@ if (isset($_POST['actualizar'])) {
 
                 $tempMonto = str_replace("₡","",$montoCompra);
 
+
+                
+                $activoFijoBusiness = new ActivoFijoBusiness();
+                $activos = $activoFijoBusiness->obtener();
+                $flag = 0;
+                foreach ($activos as $row) { if($row->getplaca() == $_POST['placa'] && $row->getActivo() == 1 && $row->getserie() == $_POST['serie'] ){  $flag = 1; } }
+                    
+        if($flag == 0){
+
             if (!is_numeric($estadoUso)) {
 
                 $activo = new ActivoFijo($id, $placa, $serie, $modelo, $fechaCompra, $tempMonto, $estadoUso, 1);
@@ -102,6 +111,11 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarActivosFijos.php?error=numberFormat");
             }
+
+        } else {
+            Header("Location: ../view/listarActivosFijos.php?error=dublicate");
+        }
+
         } else {
             header("location: ../view/listarActivosFijos.php?error=emptyField");
         }

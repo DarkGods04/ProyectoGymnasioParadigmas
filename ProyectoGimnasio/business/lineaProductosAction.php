@@ -12,6 +12,13 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0) {
 
+            $lineaProductosBusiness = new LineaProductosBusiness();
+            $elementos = $lineaProductosBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBCatalogoLineaProductos() == $_POST['nombreLineaProductos'] && $row->getActivoTBGrupoMuscular() == 1 && $row->getDescripcionTBCatalogoLineaProductos() == $_POST['descripcionLineaProductos']  ){  $flag = 1; } }
+                
+    if($flag == 0){
+
             if (!is_numeric($nombre)) {
                 $lineaProductos = new LineaProductos($id, $nombre, $descripcion, 1);
                 $lineaProductosBusiness = new LineaProductosBusiness();
@@ -25,6 +32,10 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarLineasProductos.php?error=numberFormat");
             }
+
+        } else {
+            header("location: ../view/listarLineasProductos.php?error=duplicate");
+        }
         } else {
             header("location: ../view/listarLineasProductos.php?error=emptyField");
         }
@@ -69,19 +80,19 @@ if (isset($_POST['insertar'])) {
         $nombre = $_POST['nombreLineaProductos'];
         $descripcion = $_POST['descripcionLineaProductos'];
 
-        $lineaProductosBusiness = new LineaProductosBusiness();
-        $lineaProductos = $lineaProductosBusiness->obtener();
-        foreach ($lineaProductos as $row) {
-            if ($row->getNombreTBCatalogoLineaProductos() == $nombre) {
-                $existe = true;
-            }
-        }
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0) {
+
+            $lineaProductosBusiness = new LineaProductosBusiness();
+            $elementos = $lineaProductosBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBCatalogoLineaProductos() == $_POST['nombreLineaProductos'] && $row->getActivoTBGrupoMuscular() == 1 && $row->getDescripcionTBCatalogoLineaProductos() == $_POST['descripcionLineaProductos']  ){  $flag = 1; } }
+                
+    if($flag == 0){
             
             if (!is_numeric($nombre)) {
 
-                if ($existe == false) {
+               
                     $lineaProductos = new LineaProductos(0, $nombre, $descripcion, 1);
                     $lineaProductosBusiness = new LineaProductosBusiness();
                     $result = $lineaProductosBusiness->insertar($lineaProductos);
@@ -91,12 +102,14 @@ if (isset($_POST['insertar'])) {
                     } else {
                         header("location: ../view/listarLineasProductos.php?error=dbError&nombreLineaProductos=$nombre&descripcionLineaProductos=$descripcion");
                     }
-                } else {
-                    header("location: ../view/listarLineasProductos.php?error=existe&nombreLineaProductos=$nombre&descripcionLineaProductos=$descripcion");
-                }
+                    
             } else {
                 header("location: ../view/listarLineasProductos.php?error=numberFormat&nombreLineaProductos=$nombre&descripcionLineaProductos=$descripcion");
             }
+
+        } else {
+            header("location: ../view/listarLineasProductos.php?error=duplicate&nombreLineaProductos=$nombre&descripcionLineaProductos=$descripcion");
+        }
         } else {
             header("location: ../view/listarLineasProductos.php?error=emptyField&nombreLineaProductos=$nombre&descripcionLineaProductos=$descripcion");
         }
