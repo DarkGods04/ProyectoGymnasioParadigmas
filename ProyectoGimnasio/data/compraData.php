@@ -34,7 +34,7 @@ class CompraData extends Data
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
-        $queryUpdate = "UPDATE tbcompra SET tbcompraactivo=0  WHERE tbcompraid=$idCompra";
+        $queryUpdate = "UPDATE tbcompra SET tbcompraactivo=0  WHERE tbcompraid=$idCompra;";
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
 
@@ -53,7 +53,7 @@ class CompraData extends Data
         $Compras = [];
         while ($row = mysqli_fetch_array($result)) {
             $current = new Compra(
-                $row['tbcompraid '],
+                $row['tbcompraid'],
                 $row['tbcomprafecha'],
                 $row['tbproveedorid'],
                 $row['tbcompramontoneto'],

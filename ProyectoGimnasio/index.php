@@ -85,6 +85,10 @@
     </div>
 
     <div>
+        <a href="./view/listarProducto.php" style="text-decoration: none; color: blue; font-size: 150%;">- Productos</a>
+    </div>
+
+    <div>
         <a href="./view/listarCompras.php" style="text-decoration: none; color: blue; font-size: 150%;">- Compras</a>
     </div>
 </body>

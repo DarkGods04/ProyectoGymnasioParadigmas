@@ -72,7 +72,7 @@ class ProductoData extends Data {
         
         $productos = [];
         while ($row = mysqli_fetch_array($result)) {
-            $currentDireccion = new Producto($row['tbproductoid '], $row['tbproductonombre'], $row['tbproductodescripcion'], $row['tbproductopreciocompra'], $row['tbproductoprecioventa'], $row['tbproductocantidad'], $row['tbproductoactivo']);
+            $currentDireccion = new Producto($row['tbproductoid'], $row['tbproductonombre'], $row['tbproductodescripcion'], $row['tbproductopreciocompra'], $row['tbproductoprecioventa'], $row['tbproductocantidad'], $row['tbproductoactivo']);
             array_push($productos, $currentDireccion);
         }
         return $productos;

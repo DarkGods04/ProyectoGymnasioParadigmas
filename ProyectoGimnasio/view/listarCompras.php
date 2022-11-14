@@ -1,7 +1,7 @@
 <?php
 include '../business/compraBusiness.php';
 include '../business/compraDetalleBusiness.php';
-include '../business/lineaProductosBusiness.php';
+include '../business/productoBusiness.php';
 
 include '../business/proveedorBusiness.php';
 
@@ -41,6 +41,7 @@ include '../business/proveedorBusiness.php';
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
+    <script type="text/javascript" src="../js/jquery_formato.js"></script>    
 
     <div>
 
@@ -51,13 +52,26 @@ include '../business/proveedorBusiness.php';
         }
         $campo = $_POST['campo'];
 
+      
         $compraBusiness = new CompraBusiness();
         $compras = $compraBusiness->buscar($campo);
 
         $compraDetalleBusiness = new CompraDetalleBusiness();
         $comprasDetalle = $compraDetalleBusiness->buscar($campo);
+       
+     
+        
+        // $compraBusiness = new CompraBusiness();
+        // $compras = $compraBusiness->buscar($campo);
+
+        // $compraDetalleBusiness = new CompraDetalleBusiness();
+        // $comprasDetalle = $compraDetalleBusiness->buscar($campo);
+
+        
+     
 
         if (!empty($compras) && !empty($comprasDetalle)) {
+            
         ?>
             <table border="1">
                 <thead style="text-align: left;">
@@ -76,107 +90,114 @@ include '../business/proveedorBusiness.php';
                 <tbody>
                     <?php
                     foreach ($compras as $row) {
-                      //  foreach ($comprasDetalle as $row2) {
-                            if ($row->getActivo() == 1) {
-                                echo '<form  method="POST" enctype="multipart/form-data" action="../business/compraAction.php">';
-                                echo '<tr>';
-                                echo '<input  type="hidden" name="idCompra" id="id" value="' . $row->getIdCompra() . '"/>';
-                                echo '<td>' . $row->getIdCompra() . '</td>';
+                        
+                      
+
+                        if ($row->getActivo() == 1) {
+                            echo '<form  method="POST" enctype="multipart/form-data" action="../business/compraAction.php">';
+                            echo '<tr>';
+                            echo '<input  type="hidden" name="idCompra" id="id" value="' . $row->getIdCompra() . '"/>';
+                            echo '<td>' . $row->getIdCompra() . '</td>';
                     ?>
 
-                                <?php echo '<td><input type="date" name="fechaPago"  id="fechaPago" value="' . $row->getFechaCompra() . '"readonly /></td>'; ?>
+                            <?php echo '<td><input type="date" name="fechaPago"  id="fechaPago" value="' . $row->getFechaCompra() . '"readonly /></td>'; ?>
 
-                                <td>
-                                    <?php
-                                    $proveedorBusiness = new ProveedorBusiness();
-                                    $proveedores = $proveedorBusiness->obtener();
-                                    foreach ($proveedores as $row1) {
-                                        if ($row1->getActivoTBProveedor() == 1) {
-                                            if ($row1->getIdTBProveedor() == $row->getProveedorId()) {
-                                                echo  '<input type="text" value="' .  $row1->getNombreCompletoTBProveedor() .  '"readonly />';
-                                            }
-                                        }
-                                    } ?>
-                                </td>
-
-
-
-
-
+                            <td>
                                 <?php
-                                $productoBusiness = new LineaProductosBusiness();
-                                $productos = $productoBusiness->obtener();
-
-
-                                foreach ($comprasDetalle as $row2) {
-                                foreach ($productos as $row1){
-                                    if ($row1->getActivoTBCatalogoLineaProductos() == 1) {
-                                        if ($row1->getIdTBCatalogoLineaProductos() == $row2->getIdProducto()) {
-                                            if ($row->getIdCompra() == $row2->getIdCompra()) {
-                                                echo '<td>' . $row1->getNombreTBCatalogoLineaProductos() . '</td>';
-                                            }
+                                $proveedorBusiness = new ProveedorBusiness();
+                                $proveedores = $proveedorBusiness->obtener();
+                                foreach ($proveedores as $row1) {
+                                    if ($row1->getActivoTBProveedor() == 1) {
+                                        if ($row1->getIdTBProveedor() == $row->getProveedorId()) {
+                                            echo  '<input type="text" value="' .  $row1->getNombreCompletoTBProveedor() .  '"readonly />';
+                                            
                                         }
                                     }
-                                }
-                                }
-                                ?>
+                                } ?>
+                            </td>
 
 
 
-                                <?php
-                                $productoBusiness = new LineaProductosBusiness();
-                                $productos = $productoBusiness->obtener();
 
-                                foreach ($comprasDetalle as $row2) {
+                           <td>
+                            <?php
+                            $productoBusiness = new ProductoBusiness();
+                            $productos = $productoBusiness->obtener();
+                            
+
+                            foreach ($comprasDetalle as $row2) {
                                 foreach ($productos as $row1) {
-                                   
-                                    if ($row1->getActivoTBCatalogoLineaProductos() == 1) {
-                                        if ($row1->getIdTBCatalogoLineaProductos() == $row2->getIdProducto()) {
+                                    if ($row1->getActivoTBProducto() == 1) {
+                                        if ($row1->getIdTBProducto() == $row2->getIdProducto()) {
                                             if ($row->getIdCompra() == $row2->getIdCompra()) {
-                                                echo '<td>' . $row2->getCantidadProducto() . '</td>';
+                                                
+                                                echo  '<input type="text" value="' .  $row1->getNombreTBProducto() .  '"readonly />';
                                             }
                                         }
-                                    }
-                                }
-                                }
-                                ?>
-
-
-
-                                <td>
-                                    <?php
-                              foreach ($comprasDetalle as $row2) {
-                              if ($row->getIdCompra() == $row2->getIdCompra()) {
-                                    if ($row->getModoPagoCompra() == 1) {
-
-                                        echo  '<input type="text" value="' .  "Credito" .  '"readonly />';
-                                    } else {
-                                        echo  '<input type="text" value="' .  "Contado" .  '"readonly />';
                                     }
                                 }
                             }
-                                    ?>
-                                </td>
+                            ?>
 
-                                <?php foreach ($comprasDetalle as $row2) {
-                                     if ($row->getIdCompra() == $row2->getIdCompra()) {
-                                 echo '<td><input type="text" name="montoBruto" id="montoBruto" value="₡ ' . $row2->getPrecioBrutoProducto() .  '"readonly /></td>';
-                                     }
+                           </td>
+
+                           <td>
+                            <?php
+                            $productoBusiness = new ProductoBusiness();
+                            $productos = $productoBusiness->obtener();
+
+                            foreach ($comprasDetalle as $row2) {
+                                foreach ($productos as $row1) {
+
+                                    if ($row1->getActivoTBProducto() == 1) {
+                                        if ($row1->getIdTBProducto() == $row2->getIdProducto()) {
+                                            if ($row->getIdCompra() == $row2->getIdCompra()) {
+                                                
+                                                echo  '<input type="text" value="' .  $row2->getCantidadProducto() .  '"readonly />';
+                                            }
+                                        }
+                                    }
                                 }
-                                  ?>
+                            }
+                            ?>
+                           </td>
 
-                                <?php echo '<td><input type="text" name="montoNeto" id="montoNeto" value="₡ ' . $row->getMontoNetoCompra() .  '"readonly /></td>'; ?>
+
+                            <td>
+                                <?php
+                                foreach ($comprasDetalle as $row2) {
+                                    if ($row->getIdCompra() == $row2->getIdCompra()) {
+                                        if ($row->getModoPagoCompra() == 1) {
+
+                                            echo  '<input type="text" value="' .  "Credito" .  '"readonly />';
+                                        } else {
+                                            echo  '<input type="text" value="' .  "Contado" .  '"readonly />';
+                                        }
+                                    }
+                                }
+                                ?>
+                            </td>
+
+                            <?php foreach ($comprasDetalle as $row2) {
+                                if ($row->getIdCompra() == $row2->getIdCompra()) {
+                                    echo '<td><input type="text" name="montoBruto" id="montoBruto" value="₡ ' . $row2->getPrecioBrutoProducto() .  '"readonly /></td>';
+                                }
+                            }
+                            ?>
+
+                            <?php echo '<td><input type="text" name="montoNeto" id="montoNeto" value="₡ ' . $row->getMontoNetoCompra() .  '"readonly /></td>'; ?>
 
 
 
                     <?php
 
-                                echo '<td><input type="submit" name="anular" id="anular" value="anular" onclick="return confirmarAccionEliminar()"/></td>';
-                                echo '</tr>';
-                                echo '</form>';
-                            }
-                      //  }
+                            echo '<td><input type="submit" name="anular" id="anular" value="anular" onclick="return confirmarAccionEliminar()"/></td>';
+                            echo '</tr>';
+                            echo '</form>';
+                        }
                     }
+                    
+                
                     ?>
                 </tbody>
             </table>
@@ -198,9 +219,9 @@ include '../business/proveedorBusiness.php';
 
                         <th>Fecha de Compra</th>
                         <th>Proveedor</th>
+                        <th>Modo de pago</th>
                         <th>Producto</th>
                         <th>Cantidad</th>
-                        <th>Modo de pago</th>
                         <th>Precio bruto producto(C/U)</th>
                         <th>Monto neto</th>
                         <th>Acción</th>
@@ -251,56 +272,6 @@ include '../business/proveedorBusiness.php';
                             </select>
                         </td>
 
-                        <td>
-                            <?php
-                            //instancia de producto
-                            ?>
-                            <select name="idProducto" id="idProducto" required>
-                                <?php
-                                if (isset($_GET['idProducto']) && strlen($_GET['idProducto']) > 0) {
-                                    //foreach ($proveedores as $row) :
-                                    // if ($row->getActivoTBProveedor() == 1) {
-
-                                    // if ($_GET['proveedorid'] == $row->getIdTBProveedor()) {
-
-                                    //    }
-                                    //  }
-
-                                    //   endforeach;
-                                }/* else { ?>
-                                    <option value="">Proveedores</option>
-                                <?php }
-
-                                foreach ($proveedores as $row) :
-                                    if ($row->getActivoTBProveedor() == 1) {
-                                        if ($_GET['proveedorid'] != $row->getIdTBProveedor()) {
-                                            echo '<option value="' . $row->getIdTBProveedor() . '">' . $row->getNombreCompletoTBProveedor() . '</option>';
-                                        }
-                                    }
-                                 endforeach;*/
-                                ?>
-                                <option value="">Producto</option>';
-                                <option value="1">Proteina</option>';
-                                <option value="2">Creatina</option>';
-                            </select>
-                        </td>
-
-
-
-
-                        <td><input type="text" name="cantidadProducto" value="<?php if (isset($_GET['cantidadProducto'])) {
-                                                                                    echo $_GET['cantidadProducto'];
-                                                                                } ?>">
-
-                            <input class="button" type="button" id="btnCalcularMontoNeto" onclick="res()" value="Calcular">
-
-                        </td>
-
-
-
-
-
-
 
                         <td>
 
@@ -326,12 +297,65 @@ include '../business/proveedorBusiness.php';
                             </select>
 
                         </td>
-                        <td><input type="text" class="mascaramonto" name="precioBrutoProducto" value="<?php if (isset($_GET['precioBrutoProducto'])) {
-                                                                                                            echo $_GET['precioBrutoProducto'];
-                                                                                                        } ?>"></td>
-                        <td><input type="text" class="mascaramonto" name="montoNeto" value="<?php if (isset($_GET['montoNeto'])) {
-                                                                                                echo $_GET['montoNeto'];
-                                                                                            } ?>"></td>
+
+                        <td>
+                            <?php
+                            $productoBusiness = new ProductoBusiness();
+                            $productos = $productoBusiness->obtener();
+                            ?>
+                            <select name="idProducto" id="idProducto" required>
+                                <?php
+                                if (isset($_GET['idProducto']) && strlen($_GET['idProducto']) > 0) {
+                                    foreach ($productos as $row) :
+                                        if ($row->getActivoTBProducto() == 1) {
+
+                                            if ($_GET['idProducto'] == $row->getIdTBProducto()) {
+                                                echo '<option value="' . $row->getIdTBProducto() . '">' . $row->getNombreTBProducto() . '</option>';
+                                            }
+                                        }
+
+                                    endforeach;
+                                } else { ?>
+                                    <option value="">Productos</option>
+                                <?php }
+
+                                foreach ($productos as $row) :
+                                    if ($row->getActivoTBProducto() == 1) {
+                                        if ($_GET['idProducto'] != $row->getIdTBProducto()) {
+                                            echo '<option value="' . $row->getIdTBProducto() . '">' . $row->getNombreTBProducto() . '</option>';
+                                        }
+                                    }
+                                endforeach;
+                                ?>
+                            </select>
+                        </td>
+
+
+
+
+
+                        <td><input type="number" min="0" max="15" name="cantidadProducto" value="<?php if (isset($_GET['cantidadProducto'])) {
+                                                                                    echo $_GET['cantidadProducto'];
+                                                                                } ?>"required>
+
+                            <input class="button" type="submit" name="calcularProductos" id="calcularProductos" onclick="res()" value="Calcular">
+
+                        </td>
+
+
+
+
+
+
+
+
+
+                        <td><input type="text"  name="precioBrutoProducto" value="<?php if (isset($_GET['precioBrutoProducto'])) {
+                                                                                                            echo "₡" . $_GET['precioBrutoProducto'];
+                                                                                                        } ?>"readonly></td>
+                        <td><input type="text"  name="montoNeto" value="<?php if (isset($_GET['montoNeto'])) {
+                                                                                                echo "₡" . $_GET['montoNeto'];
+                                                                                            } ?>"readonly></td>
 
 
 
@@ -364,20 +388,14 @@ include '../business/proveedorBusiness.php';
                     if (isset($_GET['error'])) {
 
                         if ($_GET['error'] == "error") {
-                            echo '<center><p style="color: red">Error en formato de factura</p></center>';
+                            echo '<center><p style="color: red">Error en formato de compra</p></center>';
                         } else if ($_GET['error'] == "emptyField") {
                             echo '<center><p style="color: red">Campo(s) vacio(s)</p></center>';
                         } else if ($_GET['error'] == "numberFormat") {
                             echo '<center><p style="color: red">Error, formato de numero!</p></center>';
-                        } else if ($_GET['error'] == "dbError") {
+                        } /*else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
-                        } else if ($_GET['error'] == "noServiceSelection") {
-                            echo '<center><p style="color: red">Servicio no agregado, seleccione un servicio y marque donde dice añadir!</p></center>';
-                        } else if ($_GET['error'] == "unselectedTax") {
-                            echo '<center><p style="color: red">Impuesto no seleccionado!</p></center>';
-                        } else if ($_GET['error'] == "serviceTaxnotSelected") {
-                            echo '<center><p style="color: red">Servicio e impuestos no agregados!</p></center>';
-                        }
+                        } */
                     } else if (isset($_GET['success'])) {
                         echo '<center><p style="color: green">Transacción realizada!</p></center>';
                     }
