@@ -176,6 +176,8 @@ include '../business/clienteBusiness.php';
                             echo '<p style="color: red">Error de formato en correo!</p>';
                         } else if ($_GET['error'] == "relationError"){
                         echo '<p style="color: red">Error al eliminar, el usuario tiene registros en otra(s) tabla(s)</p>';
+                    } else if ($_GET['error'] == "dublicate") {
+                        echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
                     }
 
                     } else if (isset($_GET['success'])) {

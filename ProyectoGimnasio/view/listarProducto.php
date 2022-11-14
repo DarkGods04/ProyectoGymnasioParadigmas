@@ -77,8 +77,8 @@ include '../business/productoBusiness.php';
                             echo '<td>' . $row->getIdTBProducto() . '</td>';
                             echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBProducto() . '"/></td>';
                             echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="descripcion" id="descripcion" value="' . $row->getDescripcionTBProducto() . '"/></td>';
-                            echo '<td><input type="text" name="preciocompra" id="preciocompra" value="' . $row->getPrecioCompraTBProducto() .  '"/></td>';
-                            echo '<td><input type="text"  name="precioventa" id="precioventa" value="' . $row->getPrecioVentaTBProducto() .  '"/></td>';
+                            echo '<td><input type="text"  class="mascaramonto" name="preciocompra" id="preciocompra" value="' . $row->getPrecioCompraTBProducto() .  '"/></td>';
+                            echo '<td><input type="text"  class="mascaramonto"   name="precioventa" id="precioventa" value="' . $row->getPrecioVentaTBProducto() .  '"/></td>';
                             echo '<td><input type="text"  name="cantidad" id="cantidad" value="' . $row->getCantidadTBProducto() .  '"/></td>';
                            
                             echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
@@ -116,8 +116,8 @@ include '../business/productoBusiness.php';
                     <tr>
                         <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="nombre" placeholder="Nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"></td>
                         <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="descripcion" placeholder="Descripcion" value="<?php if(isset($_GET['descripcion'])){ echo $_GET['descripcion']; }?>"></td>
-                        <td><input type="number" name="preciocompra" placeholder="Precio de compra" value="<?php if(isset($_GET['preciocompra'])){ echo $_GET['preciocompra']; }?>"></td>
-                        <td><input type="number" name="precioventa" placeholder="Precio de venta" value="<?php if(isset($_GET['precioventa'])){ echo $_GET['precioventa']; }?>"></td>
+                        <td><input type="text"  class="mascaramonto" name="preciocompra" placeholder="Precio de compra" value="<?php if(isset($_GET['preciocompra'])){ echo $_GET['preciocompra']; }?>"></td>
+                        <td><input type="text"  class="mascaramonto" name="precioventa" placeholder="Precio de venta" value="<?php if(isset($_GET['precioventa'])){ echo $_GET['precioventa']; }?>"></td>
                         <td><input type="number" name="cantidad" placeholder="Cantidad de producto" value="<?php if(isset($_GET['cantidad'])){ echo $_GET['cantidad']; }?>"></td>
                         <td><button type="submit" name="insertar" id="insertar" value="insertar" onclick="validarEspacios()">Registrar producto</button></td>
                     </tr>
@@ -140,7 +140,9 @@ include '../business/productoBusiness.php';
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         } else if ($_GET['error'] == "relationError"){
                         echo '<p style="color: red">Error al eliminar, el elemento tiene registros en otra(s) tabla(s)</p>';
-                         }
+                         } else if ($_GET['error'] == "dublicate") {
+                            echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
+                        }
 
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';

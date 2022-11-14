@@ -232,6 +232,8 @@ include '../business/grupoMuscularBusiness.php';
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         } else if ($_GET['error'] == "error") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "dublicate") {
+                            echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';

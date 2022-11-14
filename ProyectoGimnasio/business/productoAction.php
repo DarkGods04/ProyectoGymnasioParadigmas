@@ -15,27 +15,40 @@ if (isset($_POST['insertar'])) {
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0 && strlen($preciocompra) > 0 && strlen($precioventa) > 0 && strlen($cantidad) > 0 ) {
 
+            $tempPreciocompra = str_replace("₡","",$preciocompra);
+            $tempPrecioventa = str_replace("₡","",$precioventa);
+
+            $productoBusiness = new ProductoBusiness();
+            $elementos = $productoBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBProducto() == $_POST['nombre'] && $row->getActivoTBProducto() == 1 && $row->getDescripcionTBProducto() == $_POST['descripcion'] ){  $flag = 1; } }
+                
+    if($flag == 0){
        
-            if (!is_numeric($nombre) && !is_numeric($descripcion) && is_numeric($preciocompra) && is_numeric($precioventa) && is_numeric($cantidad)) {
+            if (!is_numeric($nombre) && !is_numeric($descripcion) && is_numeric($tempPreciocompra) && is_numeric($tempPrecioventa) && is_numeric($cantidad)) {
               
-                    $producto = new Producto(0, $nombre, $descripcion, $preciocompra, $precioventa, $cantidad, 1);
+                    $producto = new Producto(0, $nombre, $descripcion, $tempPreciocompra, $tempPrecioventa, $cantidad, 1);
                     $productoBusiness = new ProductoBusiness();
                     $resultado = $productoBusiness->insertar($producto);
 
                     if ($resultado == 1) {
                         Header("Location: ../view/listarProducto.php?success=inserted");
                     } else {
-                        Header("Location: ../view/listarProducto.php?error=dbError&nombre=$nombre&descripcion=$descripcion&preciocompra=$preciocompra&precioventa=$precioventa&cantidad=$cantidad");
+                        Header("Location: ../view/listarProducto.php?error=dbError&nombre=$nombre&descripcion=$descripcion&preciocompra=$tempPreciocompra&precioventa=$tempPrecioventa&cantidad=$cantidad");
                     }
                
             } else {
-                header("location: ../view/listarProducto.php?error=numberFormat&nombre=$nombre&descripcion=$descripcion&preciocompra=$preciocompra&precioventa=$precioventa&cantidad=$cantidad");
+                header("location: ../view/listarProducto.php?error=numberFormat&nombre=$nombre&descripcion=$descripcion&preciocompra=$tempPreciocompra&precioventa=$tempPrecioventa&cantidad=$cantidad");
             }
+
         } else {
-            header("location: ../view/listarProducto.php?error=emptyField&nombre=$nombre&descripcion=$descripcion&preciocompra=$preciocompra&precioventa=$precioventa&cantidad=$cantidad");
+            header("location: ../view/listarProducto.php?error=duplicate&nombre=$nombre&descripcion=$descripcion&preciocompra=$tempPreciocompra&precioventa=$tempPrecioventa&cantidad=$cantidad");
+        }
+        } else {
+            header("location: ../view/listarProducto.php?error=emptyField&nombre=$nombre&descripcion=$descripcion&preciocompra=$tempPreciocompra&precioventa=$tempPrecioventa&cantidad=$cantidad");
         }
     } else {
-        header("location: ../view/listarProducto.php?error=error&nombre=$nombre&descripcion=$descripcion&preciocompra=$preciocompra&precioventa=$precioventa&cantidad=$cantidad");
+        header("location: ../view/listarProducto.php?error=error&nombre=$nombre&descripcion=$descripcion&preciocompra=$tempPreciocompra&precioventa=$tempPrecioventa&cantidad=$cantidad");
     }
 }
 
@@ -75,10 +88,20 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0 && strlen($preciocompra) > 0 && strlen($precioventa) > 0
             && strlen($cantidad) > 0 ) {
+
+                $tempPreciocompra = str_replace("₡","",$preciocompra);
+                $tempPrecioventa = str_replace("₡","",$precioventa);
+
+                $productoBusiness = new ProductoBusiness();
+                $elementos = $productoBusiness->obtener();
+                $flag = 0;
+                foreach ($elementos as $row) { if($row->getNombreTBProducto() == $_POST['nombre'] && $row->getActivoTBProducto() == 1 && $row->getDescripcionTBProducto() == $_POST['descripcion'] ){  $flag = 1; } }
+                    
+        if($flag == 0){
         
-            if (!is_numeric($nombre) && !is_numeric($apellido)) {
+            if (!is_numeric($nombre) && !is_numeric($descripcion)) {
                
-                    $producto = new Producto($id, $nombre, $descripcion, $preciocompra, $precioventa, $cantidad, 1);
+                    $producto = new Producto($id, $nombre, $descripcion, $tempPreciocompra, $tempPrecioventa, $cantidad, 1);
                     $productoBusiness = new ProductoBusiness();
                     $resultado = $productoBusiness->update($producto);
 
@@ -91,6 +114,10 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarProducto.php?error=numberFormat");
             }
+
+        } else {
+            header("location: ../view/listarProducto.php?error=duplicate");
+        }
         } else {
             header("location: ../view/listarProducto.php?error=emptyField");
         }
