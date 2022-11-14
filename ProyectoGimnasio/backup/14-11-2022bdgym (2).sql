@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-11-2022 a las 23:46:03
+-- Tiempo de generación: 14-11-2022 a las 10:35:27
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.3
 
@@ -293,54 +293,6 @@ INSERT INTO `tbclientepeso` (`tbclientepesoid`, `tbclienteid`, `tbclientepesofec
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbcompra`
---
-
-CREATE TABLE `tbcompra` (
-  `tbcompraid` int(11) NOT NULL,
-  `tbcomprafecha` date NOT NULL,
-  `tbproveedorid` int(11) NOT NULL,
-  `tbcompramontoneto` int(11) NOT NULL,
-  `tbcompramodopago` tinyint(4) NOT NULL,
-  `tbcompraactivo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcompra`
---
-
-INSERT INTO `tbcompra` (`tbcompraid`, `tbcomprafecha`, `tbproveedorid`, `tbcompramontoneto`, `tbcompramodopago`, `tbcompraactivo`) VALUES
-(1, '2022-11-02', 2, 30000, 0, 0),
-(2, '2022-11-09', 3, 7700, 1, 1),
-(3, '2022-11-13', 2, 80000, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbcompradetalle`
---
-
-CREATE TABLE `tbcompradetalle` (
-  `tbcompradetalleid` int(11) NOT NULL,
-  `tbcompraid` int(11) NOT NULL,
-  `tbproductoid` int(11) NOT NULL,
-  `tbproductocantidad` int(11) NOT NULL,
-  `tbproductopreciobruto` int(11) NOT NULL,
-  `tbcompradetalleactivo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcompradetalle`
---
-
-INSERT INTO `tbcompradetalle` (`tbcompradetalleid`, `tbcompraid`, `tbproductoid`, `tbproductocantidad`, `tbproductopreciobruto`, `tbcompradetalleactivo`) VALUES
-(1, 1, 2, 3, 10000, 0),
-(2, 2, 1, 7, 1100, 1),
-(3, 3, 2, 8, 10000, 1);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbfactura`
 --
 
@@ -512,7 +464,7 @@ CREATE TABLE `tbproducto` (
 --
 
 INSERT INTO `tbproducto` (`tbproductoid`, `tbproductonombre`, `tbproductodescripcion`, `tbproductopreciocompra`, `tbproductoprecioventa`, `tbproductocantidad`, `tbproductoactivo`) VALUES
-(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 1100, 1200, 5, 1),
+(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 890, 120, 5, 1),
 (2, 'Suplementos', 'suplementos con carboidartos necesarios para subir de peso rapidamente', 10000, 13300, 7, 1);
 
 -- --------------------------------------------------------
@@ -659,18 +611,6 @@ ALTER TABLE `tbcliente`
 --
 ALTER TABLE `tbclientepeso`
   ADD PRIMARY KEY (`tbclientepesoid`);
-
---
--- Indices de la tabla `tbcompra`
---
-ALTER TABLE `tbcompra`
-  ADD PRIMARY KEY (`tbcompraid`);
-
---
--- Indices de la tabla `tbcompradetalle`
---
-ALTER TABLE `tbcompradetalle`
-  ADD PRIMARY KEY (`tbcompradetalleid`);
 
 --
 -- Indices de la tabla `tbfactura`

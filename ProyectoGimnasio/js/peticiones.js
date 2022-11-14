@@ -32,6 +32,8 @@ document.getElementById("campo2").addEventListener("keyup", getNombresLineaProdu
 
 document.getElementById("campo").addEventListener("keyup", getNombresProveedores)
 
+document.getElementById("campo").addEventListener("keyup", getNombresCompras)
+
 function getNombresProductos() {
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaProductos")
@@ -860,6 +862,34 @@ function getNombresRutinaNiveles(){
     }else {
         lista.style.display = 'none'
     }
+}
+
+function getNombresCompras(){
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaCompras")
+
+    if(inputCP.length > 0){
+
+        let url= "../data/prediccionCompra.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+        .then(data => {
+            lista.style.display = 'block'
+            lista.innerHTML = data
+        })
+        .catch(err => console.log(err))
+
+    }else {
+        lista.style.display = 'none'
+    }
+
 }
 
 
