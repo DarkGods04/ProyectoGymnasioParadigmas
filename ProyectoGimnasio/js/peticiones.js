@@ -6,6 +6,7 @@ document.getElementById("campo").addEventListener("keyup",getNombresActivosFijos
 document.getElementById("campo").addEventListener("keyup",getNombresActivosVariables)
 document.getElementById("campo").addEventListener("keyup",getNombresImpuestoVenta)
 document.getElementById("campo").addEventListener("keyup",getNombresPagoPeridiocidad)
+document.getElementById("campo").addEventListener("keyup",getNombresProductos)
 
 document.getElementById("campo").addEventListener("keyup",getNombresPagoMetodo)
 document.getElementById("campo2").addEventListener("keyup",getNombresPagoMetodo)
@@ -30,6 +31,33 @@ document.getElementById("campo").addEventListener("keyup", getNombresLineaProduc
 document.getElementById("campo2").addEventListener("keyup", getNombresLineaProductos)
 
 document.getElementById("campo").addEventListener("keyup", getNombresProveedores)
+
+function getNombresProductos() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaProductos")
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionProducto.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+}
 
 function getNombresGruposMusculares() {
     let inputCP = document.getElementById("campo").value
@@ -524,6 +552,35 @@ function getNombresImpuestoVenta() {
         lista.style.display = 'none'
     }
 }
+
+
+function getNombresProductos() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaProductos")
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionProducto.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+}
+
 
 function getNombresPagoPeridiocidad(){
     let inputCP = document.getElementById("campo").value
