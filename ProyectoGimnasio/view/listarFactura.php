@@ -22,6 +22,9 @@ include '../business/pagoMetodoBusiness.php';
     include 'header.php';
     ?>
     <h2>Crear nueva factura</h2>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="../js/jquery_formato.js"></script>
 </head>
 
 <body>
@@ -29,7 +32,6 @@ include '../business/pagoMetodoBusiness.php';
 
         <h3>Selcciones los Servicios</h3>
 
-        <script src="../js/jquery_formato.js"></script>
         <form name="formulario" method="POST" id="direccionform" action="../business/facturaAction.php">
             <?php
             $servicioBusiness = new ServicioBusiness();
@@ -51,18 +53,18 @@ include '../business/pagoMetodoBusiness.php';
                             }
                         }
                         if ($flag == false) {
-                            echo '<option  value="' . $row->getIdTBServicio() . '">' . $row->getNombreTBServicio() . ' </option>';
+                            echo '<option  value="' . $row->getIdTBServicio() . '">' . $row->getNombreTBServicio() . " : " . $row->getDescripcionTBServicio() . ' </option>';
                         }
                     }
                 } else {
                     foreach ($servicios as $row) {
-                        echo '<option value="' . $row->getIdTBServicio() . '">' . $row->getNombreTBServicio() . ' </option>';
+                        echo '<option value="' . $row->getIdTBServicio() . '">' . $row->getNombreTBServicio() . " : " . $row->getDescripcionTBServicio() . ' </option>';
                     }
                 } ?>
             </select>
             <button name="añadirServicio" id="añadirServicio" value="añadirServicio">Añadir servicio</button>
-
             <br>
+
             <?php
             $servicioBusiness = new ServicioBusiness();
             $servicios = $servicioBusiness->obtener();
@@ -78,7 +80,7 @@ include '../business/pagoMetodoBusiness.php';
 
                                 echo '<input type="hidden" name="idServicio[]" required  value="' . $row->getIdTBServicio() . '">' . $row->getNombreTBServicio() . ': ';
             ?>
-                                <input type="number" name="cantidadServicio[]" min="1" value="<?php echo $arrayCantidad[$i];?>">
+                                <input type="number" name="cantidadServicio[]" min="1" value="<?php echo $arrayCantidad[$i]; ?>">
                                 <button name="eliminarServicio" id="eliminarServicio" value="<?php echo $row->getIdTBServicio() ?>">Eliminar</button>
                                 <br>
             <?php
@@ -126,7 +128,7 @@ include '../business/pagoMetodoBusiness.php';
                                         if ($row->getActivoTBCliente() == 1) {
 
                                             if ($_GET['clienteid'] == $row->getIdTBCliente()) {
-                                                echo '<option value="' . $row->getIdTBCliente() . '">' . $row->getNombreTBCliente() . " " . $row->getApellido1TBCliente() . " " . $row->getApellido2TBCliente() . '</option>';
+                                                echo '<option value="' . $row->getIdTBCliente() . '">' . $row->getNombreTBCliente() . " " . $row->getApellido1TBCliente() . " " . $row->getApellido2TBCliente() . ", Num: " . $row->getTelefonoTBCliente() . '</option>';
                                             }
                                         }
 
@@ -138,7 +140,7 @@ include '../business/pagoMetodoBusiness.php';
                                 foreach ($clientes as $row) :
                                     if ($row->getActivoTBCliente() == 1) {
                                         if ($_GET['clienteid'] != $row->getIdTBCliente()) {
-                                            echo '<option value="' . $row->getIdTBCliente() . '">' . $row->getNombreTBCliente() . " " . $row->getApellido1TBCliente() . " " . $row->getApellido2TBCliente() . '</option>';
+                                            echo '<option value="' . $row->getIdTBCliente() . '">' . $row->getNombreTBCliente() . " " . $row->getApellido1TBCliente() . " " . $row->getApellido2TBCliente()  . ", Num: " . $row->getTelefonoTBCliente() . '</option>';
                                         }
                                     }
                                 endforeach;
@@ -157,7 +159,7 @@ include '../business/pagoMetodoBusiness.php';
                                     foreach ($instructores as $row) :
                                         if ($row->getActivoTBInstructor() == 1) {
                                             if ($_GET['instructorid'] == $row->getIdTBInstructor()) {
-                                                echo '<option value="' . $row->getIdTBInstructor() . '">' . $row->getNombreTBInstructor() . " " . $row->getApellidoTBInstructor() . '</option>';
+                                                echo '<option value="' . $row->getIdTBInstructor() . '">' . $row->getNombreTBInstructor() . " " . $row->getApellidoTBInstructor() . ", Num: " . $row->getTelefonoTBInstructor() . '</option>';
                                             }
                                         }
 
@@ -169,7 +171,7 @@ include '../business/pagoMetodoBusiness.php';
                                 foreach ($instructores as $row) :
                                     if ($row->getActivoTBInstructor() == 1) {
                                         if ($_GET['instructorid'] != $row->getIdTBInstructor()) {
-                                            echo '<option value="' . $row->getIdTBInstructor() . '">' . $row->getNombreTBInstructor() . " " . $row->getApellidoTBInstructor() . '</option>';
+                                            echo '<option value="' . $row->getIdTBInstructor() . '">' . $row->getNombreTBInstructor() . " " . $row->getApellidoTBInstructor() . ", Num: " . $row->getTelefonoTBInstructor() . '</option>';
                                         }
                                     }
                                 endforeach;
@@ -196,7 +198,7 @@ include '../business/pagoMetodoBusiness.php';
                                         if ($row->getActivoTBPagoPeridiocidad() == 1) {
 
                                             if ($_GET['modalidadPago'] == $row->getIdTBPagoPeridiocidad()) {
-                                                echo '<option value="' . $row->getIdTBPagoPeridiocidad() . '" >' . $row->getNombreTBPagoPeridiocidad() . '</option>';
+                                                echo '<option value="' . $row->getIdTBPagoPeridiocidad() . '" >' . $row->getNombreTBPagoPeridiocidad() . ": " . $row->getDescripcionTBPagoPeridiocidad() . '</option>';
                                             }
                                         }
 
@@ -208,7 +210,7 @@ include '../business/pagoMetodoBusiness.php';
                                 foreach ($pagosModalidades as $row) :
                                     if ($row->getActivoTBPagoPeridiocidad() == 1) {
                                         if ($_GET['modalidadPago'] != $row->getIdTBPagoPeridiocidad()) {
-                                            echo '<option value="' . $row->getIdTBPagoPeridiocidad() . '">' . $row->getNombreTBPagoPeridiocidad() . '</option>';
+                                            echo '<option value="' . $row->getIdTBPagoPeridiocidad() . '">' . $row->getNombreTBPagoPeridiocidad() . ": " . $row->getDescripcionTBPagoPeridiocidad() . '</option>';
                                         }
                                     }
                                 endforeach;

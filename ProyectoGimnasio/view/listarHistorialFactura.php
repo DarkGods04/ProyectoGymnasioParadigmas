@@ -6,6 +6,7 @@ include '../business/impuestoVentaBusiness.php';
 include '../business/pagoPeridiocidadBusiness.php';
 include '../business/servicioBusiness.php';
 include '../business/pagoMetodoBusiness.php';
+include '../business/facturaDetalleBusiness.php';
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +69,7 @@ include '../business/pagoMetodoBusiness.php';
                 </thead>
                 <tbody>
                     <?php
+
                     foreach ($facturas as $row) {
                         if ($row->getActivoTBFactura() == 1) {
                             echo '<form  method="POST" enctype="multipart/form-data" action="../business/facturaAction.php">';
@@ -103,6 +105,9 @@ include '../business/pagoMetodoBusiness.php';
 
                             <td>
                                 <?php
+                                $array = null;
+                                $arrayCantidad = null;
+                                $montoBruto = 0;
                                 $modalidadPagoBusiness = new PagoPeridiocidadBusiness();
                                 $modalidadesPago = $modalidadPagoBusiness->obtener();
                                 foreach ($modalidadesPago as $modalidades) {
@@ -114,22 +119,32 @@ include '../business/pagoMetodoBusiness.php';
 
                             <td>
                                 <?php
+                                $facturaDetalleBusiness = new FacturaDetalleBusiness();
+                                $facturaDetalle = $facturaDetalleBusiness->obtener();
+                                // print_r($facturaDetalle);
+                                foreach ($facturaDetalle as $rr) {
+                                    if ($rr->getIdTBFactura() == $row->getIdTBFactura()) {
+                                        $array[] = $rr->getIdServicioTBFacturaDetalle();
+                                        $arrayCantidad[] = $rr->getCantidadTBServicioFacturaDetalle();
+                                        $montoBruto = $montoBruto + $rr->getMontoBrutoTBFacturaDetalle();
+                                    }
+                                }
                                 $servicioBusiness = new ServicioBusiness();
                                 $servicios = $servicioBusiness->obtener();
-                                $array = explode(";", $row->getServiciosTBFactura());
-                                $serviciosExist = "";
-                                foreach ($servicios as $rr) {
-                                    foreach ($array as $selected) {
-                                        if ($rr->getIdTBServicio() == $selected) {
-                                            $serviciosExist = $rr->getNombreTBServicio() . "." . $serviciosExist;
+                                foreach ($servicios as $serv) {
+                                    for ($i = 0; $i < count($array); $i++) {
+
+                                        if ($serv->getIdTBServicio() == $array[$i]) {
+                                            
+                                        echo  '<input type="text" value="' .$serv->getNombreTBServicio() ." Cantidad: ". $arrayCantidad[$i]. '"readonly />';
                                         }
                                     }
                                 }
-                                echo '<input type="text" readonly value="' . $serviciosExist . '" />';
+                               // print_r($array);
+                            //print_r($arrayCantidad);
                                 ?>
                             </td>
-                            <?php echo '<td><input type="text" name="montoBruto" id="montoBruto" value="₡ ' . $row->getMontoBrutoTBFactura() .  '"readonly /></td>'; ?>
-
+                            <td><input type="text" name="MontoBruto" id="MontoBruto" value="<?php echo $montoBruto; ?>" /></td>
                             <td>
                                 <?php
                                 $impuestoVentaBusiness = new ImpuestoVentaBusiness();

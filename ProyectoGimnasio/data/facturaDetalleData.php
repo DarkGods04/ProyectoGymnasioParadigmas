@@ -17,7 +17,7 @@ class FacturaDetalleData extends Data{
         if ($row = mysqli_fetch_row($idCont)) {
             $nextId = trim($row[0]) + 1;
         }
-                           
+
         $queryInsert = "INSERT INTO tbfacturadetalle VALUES (" . $nextId . ",'" . $facturaDetalle->getIdTBFactura() . "','" .  $facturaDetalle->getIdServicioTBFacturaDetalle() . "','" .
             $facturaDetalle->getMontoBrutoTBFacturaDetalle() . "','" . $facturaDetalle->getActivoTBFacturaDetalle() . "','" .
             $facturaDetalle->getCantidadTBServicioFacturaDetalle() . "');";
@@ -28,11 +28,11 @@ class FacturaDetalleData extends Data{
     }
 
 
-    public function deleteFacturaDetalle($idFacturaDetalle){
+    public function deleteFacturaDetalle($tbfacturaid){
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
-        $queryUpdate = "UPDATE tbfacturadetalle SET tbfacturadetalleactivo=0  WHERE tbfacturadetalleid=$idFacturaDetalle";
+        $queryUpdate = "UPDATE tbfacturadetalle SET tbfacturadetalleactivo=0  WHERE tbfacturaid=$tbfacturaid";
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
 
@@ -49,10 +49,11 @@ class FacturaDetalleData extends Data{
 
         $FacturaDetalle = [];
         while ($row = mysqli_fetch_array($result)) {
-            $current = new Factura(
+	
+            $current = new FacturaDetalle(
                 $row['tbfacturadetalleid'],
-                $row['tbfacturaid'],
                 $row['tbservicioid'],
+                $row['tbfacturaid'],
                 $row['tbfacturadetallemontobruto'],
                 $row['tbfacturadetalleactivo'],
                 $row['tbserviciocantidad']

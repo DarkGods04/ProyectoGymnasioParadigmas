@@ -83,20 +83,24 @@ include '../business/pagoMetodoBusiness.php';
                     <?php
                     $servicioBusiness = new ServicioBusiness();
                     $servicios = $servicioBusiness->obtener();
-
-                    if (isset($_GET['serviciosMult'])) {
-                        $array = unserialize($_GET['serviciosMult']);
-                        echo " Servicios adquiridos: ";
+                    $array = urldecode($_GET['idServicio']);
+                    $array = unserialize($array);
+                    $arrayCantidad = urldecode($_GET['cantidadServicio']);
+                    $arrayCantidad = unserialize($arrayCantidad);
+                    if (count($array) > 0) {
                         foreach ($servicios as $row) {
-                            $foo = True;
-                            foreach ($array as $selected) {
-                                if ($row->getIdTBServicio() == $selected) {
-                                    $foo = false;
-                                    echo $row->getNombreTBServicio() . "-";
+                            for ($i = 0; $i < count($array); $i++) {
+
+                                if ($row->getIdTBServicio() == $array[$i]) {
+                                    echo "Servicio seleccionado: " .  $row->getNombreTBServicio();
+                                    echo "  Cantidad: " . $arrayCantidad[$i]; ?>
+                                    <br>
+                    <?php
                                 }
                             }
                         }
                     }
+
                     ?>
                     </p>
                     <p id=montoBruto>
