@@ -78,11 +78,7 @@ include '../business/pagoMetodoBusiness.php';
 
                                 echo '<input type="hidden" name="idServicio[]" required  value="' . $row->getIdTBServicio() . '">' . $row->getNombreTBServicio() . ': ';
             ?>
-                                <input type="number" name="cantidadServicio[]" min="1" value="<?php if ($arrayCantidad[$i] != null) {
-                                                                                                    echo $arrayCantidad[$i];
-                                                                                                } else {
-                                                                                                    echo "1";
-                                                                                                } ?>">
+                                <input type="number" name="cantidadServicio[]" min="1" value="<?php echo $arrayCantidad[$i];?>">
                                 <button name="eliminarServicio" id="eliminarServicio" value="<?php echo $row->getIdTBServicio() ?>">Eliminar</button>
                                 <br>
             <?php

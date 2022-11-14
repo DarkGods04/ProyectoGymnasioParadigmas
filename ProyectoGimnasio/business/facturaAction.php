@@ -1,6 +1,7 @@
 <?php
 include 'facturaBusiness.php';
 include '../business/servicioBusiness.php';
+include '../business/facturaDetalleBusiness.php';
 
 $clienteid = $_POST['clienteid'];
 $instructorid = $_POST['instructorid'];
@@ -57,15 +58,23 @@ if (isset($_POST['añadirServicio'])) {
         $array = unserialize($datos);
         $cantidad = urldecode($cantidadServic);
         $arrayCantidad = unserialize($cantidad);
+
         for ($i = 0; $i < count($array); $i++) {
             foreach ($servicios as $row) {
+
                 if ($row->getIdTBServicio() == $array[$i]) {
-                    $val = $row->getMontoTBServicio() * $arrayCantidad[$i];
-                    $sumaMonto = $sumaMonto + $val;
+                    if ($arrayCantidad[$i] == null) {
+                        $arrayCantidad[$i] = 1;
+                    }
+                    $sumaMonto = $sumaMonto + $row->getMontoTBServicio() * $arrayCantidad[$i];
                 }
             }
         }
-        header("Location: ../view/listarFactura.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId&idServicio=$serviciosSelec&cantidadServicio=$cantidadServic");
+
+        $vetor = serialize($arrayCantidad);
+        $vetor = urlencode($vetor);
+
+        header("Location: ../view/listarFactura.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId&idServicio=$serviciosSelec&cantidadServicio=$vetor");
         exit();
     } else {
         header("Location: ../view/listarFactura.php?error=noServiceSelection&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId&idServicio=$serviciosSelec&cantidadServicio=$cantidadServic");
@@ -76,16 +85,19 @@ if (isset($_POST['eliminarServicio'])) {
 
     if (!empty($_POST['eliminarServicio'])) {
         $id = $_POST['eliminarServicio'];
+
         $datos = urldecode($serviciosSelec);
         $array = unserialize($datos);
         $cantidad = urldecode($cantidadServic);
         $arrayCantidad = unserialize($cantidad);
         $servicioBusiness = new ServicioBusiness();
         $servicios = $servicioBusiness->obtener();
-        foreach ($array as $selected) {
+        $sumaMonto = $_POST['MontoBruto'];
+
+        for ($i = 0; $i < count($array); $i++) {
             foreach ($servicios as $row) {
-                if ($row->getIdTBServicio() == $selected) {
-                    $sumaMonto = $_POST['MontoBruto'] - $row->getMontoTBServicio();
+                if ($row->getIdTBServicio() == $id && $id == $array[$i]) {
+                    $sumaMonto = $sumaMonto - $row->getMontoTBServicio() * $arrayCantidad[$i];
                 }
             }
         }
@@ -136,12 +148,16 @@ if (isset($_POST['insertarFactura'])) {
             $instructorid = $_POST['instructorid'];
             $fechaPago = $_POST['fechaPago'];
             $pagoModalidad = $_POST['modalidadPago'];
-            $servicios = $_POST['serviciosMult'];
-            $cadenaServ = implode(";", $servicios);
+            $servicioBusiness = new ServicioBusiness();
+            $servicios = $servicioBusiness->obtener();
+
+            //$servicios = $_POST['serviciosMult'];
+            // $cadenaServ = implode(";", $servicios);
             $montoBruto = $_POST['MontoBruto'];
             $impuestoVentaid = $_POST['impuestoVentaid'];
             $pagoMetodoId = $_POST['pagoMetodoId'];
             $montoNeto = $_POST['MontoNeto'];
+            $resultado1 = 0;
 
             if (
                 strlen($clienteid) > 0 && strlen($instructorid) > 0  && strlen($fechaPago) > 0 && strlen($pagoModalidad) > 0 && sizeof($servicios) > 0
@@ -158,21 +174,34 @@ if (isset($_POST['insertarFactura'])) {
                     $array = unserialize($datos);
                     $cantidad = urldecode($cantidadServic);
                     $arrayCantidad = unserialize($cantidad);
+                    $val = 0;
 
                     for ($i = 0; $i < count($array); $i++) {
                         foreach ($servicios as $row) {
                             if ($row->getIdTBServicio() == $array[$i]) {
-                                $val = $row->getMontoTBServicio() * $arrayCantidad[$i];
+                                if ($arrayCantidad[$i] == null) {
+                                    $arrayCantidad[$i] = 1;
+                                }
+                                if ($resultado == 0) {
+                                    Header("Location: ../view/listarFactura.php?error=dbError");
+                                } else {
+                                    $val = $row->getMontoTBServicio() * $arrayCantidad[$i];
+                                    $sumaMonto = $sumaMonto + $val;
 
-                                $facturaDetalle = new FacturaDetalle(0, $array[$i], $resultado, $val, 1, $arrayCantidad[$i]);
-                                $facturaDetalleBusiness = new FacturaDetalleBusiness();
-                                $resultado1 = $facturaDetalleBusiness->insertar($facturaDetalle);
+                                    $facturaDetalle = new FacturaDetalle(0, $array[$i], $resultado, $val, 1, $arrayCantidad[$i]);
+                                    $facturaDetalleBusiness = new FacturaDetalleBusiness();
+                                    $resultado1 = $facturaDetalleBusiness->insertar($facturaDetalle);
+                                }
                             }
                         }
                     }
-
-                    if ($resultado > 0) {
-                        Header("Location: ../view/imprimirPDF.php?success=inserted&MontoBruto=$MontoBruto&cliente=$clienteid&instructor=$instructorid&fechaPago=$fechaPago&impuestoVenta=$impuestoVentaid&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&montoNeto=$montoNeto&pagoMetodoId=$pagoMetodoId");
+                    $vetor = serialize($arrayCantidad);
+                    $vetor = urlencode($vetor);
+                    $array = serialize($array);
+                    $array = urlencode($array);
+                    
+                    if ($resultado1 == 1) {
+                        Header("Location: ../view/imprimirPDF.php?success=inserted&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&montoNeto=$montoNeto&pagoMetodoId=$pagoMetodoId&idServicio=$array&cantidadServicio=$vetor");
                     } else {
                         Header("Location: ../view/listarFactura.php?error=dbError");
                     }

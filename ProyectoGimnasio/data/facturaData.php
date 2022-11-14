@@ -1,7 +1,6 @@
 <?php
 include_once 'data.php';
 include '../domain/factura.php';
-include '../business/facturaDetalleBusiness.php';
 class FacturaData extends Data
 {
 
@@ -22,9 +21,9 @@ class FacturaData extends Data
         $queryInsert = "INSERT INTO tbfactura VALUES (" . $nextId . ",'" . $factura->getClienteidTBFactura() . "','" .
             $factura->getInstructoridTBFactura() . "','" .  $factura->getFechaPagoTBFactura() . "','" .
             $factura->getPagoModalidadTBFactura() . "','" . $factura->getImpuestoVentaidTBFactura() . "','" .
-            $factura->getMontoNetoTBFactura() . "','" . $factura->getMetodoDePagoidTBFactura() . "','" .
-            $factura->getActivoTBFactura() . "');";
-
+            $factura->getMontoNetoTBFactura() . "','" . $factura->getActivoTBFactura() . "','" .
+            $factura->getMetodoDePagoidTBFactura() . "');";
+            
         $result = mysqli_query($conn, $queryInsert);
         if ($result == 1) {
             $result = $nextId;

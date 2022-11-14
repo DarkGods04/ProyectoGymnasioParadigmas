@@ -5,6 +5,7 @@ include '../domain/facturaDetalle.php';
 class FacturaDetalleData extends Data{
 
     public function insertFacturaDetalle($facturaDetalle){
+   
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
@@ -16,9 +17,8 @@ class FacturaDetalleData extends Data{
         if ($row = mysqli_fetch_row($idCont)) {
             $nextId = trim($row[0]) + 1;
         }
-
-        $queryInsert = "INSERT INTO tbfacturadetalle VALUES (" . $nextId . ",'" . $facturaDetalle->getIdTBFacturaDetalle() . "','" .
-            $facturaDetalle->getIdServicioTBFacturaDetalle() . "','" .  $facturaDetalle->getIdTBFactura() . "','" .
+                           
+        $queryInsert = "INSERT INTO tbfacturadetalle VALUES (" . $nextId . ",'" . $facturaDetalle->getIdTBFactura() . "','" .  $facturaDetalle->getIdServicioTBFacturaDetalle() . "','" .
             $facturaDetalle->getMontoBrutoTBFacturaDetalle() . "','" . $facturaDetalle->getActivoTBFacturaDetalle() . "','" .
             $facturaDetalle->getCantidadTBServicioFacturaDetalle() . "');";
 
