@@ -7,11 +7,26 @@ $instructorid = $_POST['instructorid'];
 $fechaPago = $_POST['fechaPago'];
 $idModalidad = $_POST['modalidadPago'];
 $MontoBruto = $_POST['MontoBruto'];
-$pagoMetodoId =$_POST['pagoMetodoId'];
+$pagoMetodoId = $_POST['pagoMetodoId'];
 $impuestoVentaid =  $_POST['impuestoVentaid'];
-$serviciosMult = $_POST['serviciosMult'];
-$serviciosMult = serialize($serviciosMult);
-$serviciosMult = urlencode($serviciosMult);
+$serviciosMult;
+
+
+if (!empty($_POST['serviciosMult'])) {
+    $serviciosMult = $_POST['serviciosMult'];
+}
+if (!empty($_POST['idServicio'])) {
+    $serviciosSelec = $_POST['idServicio'];
+}
+if (!empty($_POST['serviciosMult'])) {
+    $serviciosSelec[] = $serviciosMult;
+}
+
+$cantidadServic = $_POST['cantidadServicio'];
+$serviciosSelec = serialize($serviciosSelec);
+$serviciosSelec = urlencode($serviciosSelec);
+$cantidadServic = serialize($cantidadServic);
+$cantidadServic = urlencode($cantidadServic);
 
 if (isset($_POST['calcularImpuesto'])) {
 
@@ -32,7 +47,7 @@ if (isset($_POST['calcularImpuesto'])) {
     }
 }
 
-if (isset($_POST['añadirServicios'])) {
+if (isset($_POST['añadirServicio'])) {
     if (!empty($_POST['serviciosMult'])) {
         $servicioBusiness = new ServicioBusiness();
         $servicios = $servicioBusiness->obtener();
@@ -44,10 +59,35 @@ if (isset($_POST['añadirServicios'])) {
                 }
             }
         }
-        header("Location: ../view/listarFactura.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+        header("Location: ../view/listarFactura.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId&idServicio=$serviciosSelec&cantidadServicio=$cantidadServic");
         exit();
     } else {
-        header("Location: ../view/listarFactura.php?error=noServiceSelection&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
+        header("Location: ../view/listarFactura.php?error=noServiceSelection&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId&idServicio=$serviciosSelec&cantidadServicio=$cantidadServic");
+    }
+}
+
+if (isset($_POST['eliminarServicio'])) {
+
+    if (!empty($_POST['eliminarServicio'])) {
+        $id = $_POST['eliminarServicio'];
+        $datos = urldecode($serviciosSelec);
+        $array = unserialize($datos);
+        $cantidad = urldecode($cantidadServic);
+        $arrayCantidad = unserialize($cantidad);
+
+        for ($i = 0; $i < count($array); $i++) {
+            if($id == $array[$i]){
+                unset($array[$i]);
+                unset($arrayCantidad[$i]);
+            }
+        }
+        $array = array_values($array);
+        $arrayCantidad = array_values($arrayCantidad);
+        $array = serialize($array);
+        $array = urlencode($array);
+        $arrayCantidad = serialize($arrayCantidad);
+        $arrayCantidad = urlencode($arrayCantidad);
+        header("Location: ../view/listarFactura.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId&idServicio=$array&cantidadServicio=$arrayCantidad");
     }
 }
 
@@ -63,8 +103,6 @@ if (isset($_POST['actualizarServicios'])) {
                 }
             }
         }
-        $serviciosMult = serialize($serviciosMult);
-        $serviciosMult = urlencode($serviciosMult);
         header("Location: ../view/listarFactura.php?MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&serviciosMult=$serviciosMult&pagoMetodoId=$pagoMetodoId");
         exit();
     } else {
@@ -87,15 +125,16 @@ if (isset($_POST['insertarFactura'])) {
             $cadenaServ = implode(";", $servicios);
             $montoBruto = $_POST['MontoBruto'];
             $impuestoVentaid = $_POST['impuestoVentaid'];
-            $pagoMetodoId= $_POST['pagoMetodoId'];
+            $pagoMetodoId = $_POST['pagoMetodoId'];
             $montoNeto = $_POST['MontoNeto'];
 
             if (
                 strlen($clienteid) > 0 && strlen($instructorid) > 0  && strlen($fechaPago) > 0 && strlen($pagoModalidad) > 0 && sizeof($servicios) > 0
-                && strlen($montoBruto) > 0 && strlen($impuestoVentaid) > 0  && strlen($montoNeto) > 0 && strlen($pagoMetodoId) > 0) {
+                && strlen($montoBruto) > 0 && strlen($impuestoVentaid) > 0  && strlen($montoNeto) > 0 && strlen($pagoMetodoId) > 0
+            ) {
 
                 if (is_numeric($clienteid)) {
-                    $factura = new Factura(0, $clienteid, $instructorid, $fechaPago, $pagoModalidad, $cadenaServ, $montoBruto, $impuestoVentaid, $montoNeto,$pagoMetodoId, 1);
+                    $factura = new Factura(0, $clienteid, $instructorid, $fechaPago, $pagoModalidad, $cadenaServ, $montoBruto, $impuestoVentaid, $montoNeto, $pagoMetodoId, 1);
                     $facturaBusiness = new FacturaBusiness();
                     $resultado = $facturaBusiness->insertar($factura);
 
