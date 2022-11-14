@@ -1,10 +1,12 @@
 <?php
 include_once 'data.php';
 include '../domain/factura.php';
+include '../business/facturaDetalleBusiness.php';
+class FacturaData extends Data
+{
 
-class FacturaData extends Data{
-
-    public function insertFactura($factura){
+    public function insertFactura($factura)
+    {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
@@ -19,18 +21,21 @@ class FacturaData extends Data{
 
         $queryInsert = "INSERT INTO tbfactura VALUES (" . $nextId . ",'" . $factura->getClienteidTBFactura() . "','" .
             $factura->getInstructoridTBFactura() . "','" .  $factura->getFechaPagoTBFactura() . "','" .
-            $factura->getPagoModalidadTBFactura() . "','" . $factura->getServiciosTBFactura() . "','" .
-            $factura->getMontoBrutoTBFactura() . "','" . $factura->getImpuestoVentaidTBFactura() . "','" .
+            $factura->getPagoModalidadTBFactura() . "','" . $factura->getImpuestoVentaidTBFactura() . "','" .
             $factura->getMontoNetoTBFactura() . "','" . $factura->getMetodoDePagoidTBFactura() . "','" .
             $factura->getActivoTBFactura() . "');";
 
         $result = mysqli_query($conn, $queryInsert);
+        if ($result == 1) {
+            $result = $nextId;
+        }
         mysqli_close($conn);
         return $result;
     }
 
 
-    public function deleteFactura($idFactura){
+    public function deleteFactura($idFactura)
+    {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
@@ -41,7 +46,8 @@ class FacturaData extends Data{
         return $result;
     }
 
-    public function getFacturas(){
+    public function getFacturas()
+    {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
@@ -57,8 +63,6 @@ class FacturaData extends Data{
                 $row['tbinstructorid'],
                 $row['tbfacturafechapago'],
                 $row['tbcatalogopagoperidiocidadid'],
-                $row['tbservicioid'],
-                $row['tbfacturamontobruto'],
                 $row['tbimpuestoventaid'],
                 $row['tbfacturamontoneto'],
                 $row['tbcatalogopagometodoid'],
@@ -69,13 +73,14 @@ class FacturaData extends Data{
         return $Facturas;
     }
 
-    public function buscarFactura($palabra){
+    public function buscarFactura($palabra)
+    {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
         $querySelectCliente = "SELECT * FROM tbcliente WHERE tbclientenombre LIKE '%$palabra%' OR tbclienteapellido1 LIKE '%$palabra%' OR
         tbclienteapellido2 LIKE '%$palabra%';";
-        
+
         $resultCliente = mysqli_query($conn, $querySelectCliente);
         $idCliente = 0;
         while ($rowCliente = mysqli_fetch_array($resultCliente)) {
@@ -97,7 +102,7 @@ class FacturaData extends Data{
         $resultMetodPago = mysqli_query($conn, $querySelectMetodoPago);
         $pagoMetodoid = 0;
         while ($row = mysqli_fetch_array($resultMetodPago)) {
-            if($row['tbcatalogopagometodoactivo'] == 1){
+            if ($row['tbcatalogopagometodoactivo'] == 1) {
                 $pagoMetodoid = $row['tbcatalogopagometodoid'];
             }
         }
@@ -110,7 +115,7 @@ class FacturaData extends Data{
                 $idModalidad = $rowModalidad['tbcatalogopagoperidiocidadid'];
             }
         }
-
+/*
         $querySelectServicio = "SELECT * FROM tbservicio WHERE tbservicionombre LIKE '%$palabra%';";
         $idServicio = 0;
         $resultServicio = mysqli_query($conn, $querySelectServicio);
@@ -119,18 +124,18 @@ class FacturaData extends Data{
                 $idServicio = $rowServicio['tbservicioid'];
             }
         }
+*/
 
-        
         $querySelectImpuesto = "SELECT * FROM tbimpuestoventa WHERE tbimpuestoventadescripcion LIKE '%$palabra%';";
         $resultImpuesto = mysqli_query($conn, $querySelectImpuesto);
-        $idImpuesto=0;
+        $idImpuesto = 0;
         while ($rowimpuesto = mysqli_fetch_array($resultImpuesto)) {
             if ($rowimpuesto['tbimpuestoventaactivo'] == 1) {
                 $idImpuesto = $rowimpuesto['tbimpuestoventaid'];
             }
         }
 
-        $querySelect = "SELECT * FROM tbfactura WHERE tbfacturaid LIKE '%$palabra%' OR tbclienteid LIKE '%$idCliente%' OR tbinstructorid LIKE '%$idInstructor%' OR tbfacturafechapago LIKE '%$palabra%' OR tbcatalogopagoperidiocidadid LIKE '%$idModalidad%' OR tbservicioid LIKE '%$idServicio%' OR tbimpuestoventaid LIKE '%$idImpuesto%' OR tbfacturamontobruto LIKE '%$palabra%' OR tbfacturamontoneto LIKE '%$palabra%' OR tbcatalogopagometodoid LIKE '%$pagoMetodoid%';";
+        $querySelect = "SELECT * FROM tbfactura WHERE tbfacturaid LIKE '%$palabra%' OR tbclienteid LIKE '%$idCliente%' OR tbinstructorid LIKE '%$idInstructor%' OR tbfacturafechapago LIKE '%$palabra%' OR tbcatalogopagoperidiocidadid LIKE '%$idModalidad%' OR tbimpuestoventaid LIKE '%$idImpuesto%' OR tbfacturamontoneto LIKE '%$palabra%' OR tbcatalogopagometodoid LIKE '%$pagoMetodoid%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         $Facturas = [];
@@ -142,8 +147,6 @@ class FacturaData extends Data{
                     $row['tbinstructorid'],
                     $row['tbfacturafechapago'],
                     $row['tbcatalogopagoperidiocidadid'],
-                    $row['tbservicioid'],
-                    $row['tbfacturamontobruto'],
                     $row['tbimpuestoventaid'],
                     $row['tbfacturamontoneto'],
                     $row['tbcatalogopagometodoid'],
@@ -155,7 +158,8 @@ class FacturaData extends Data{
         return $Facturas;
     }
 
-    public function obtenerValorImpuesto($id){
+    public function obtenerValorImpuesto($id)
+    {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 

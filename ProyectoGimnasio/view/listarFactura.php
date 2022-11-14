@@ -38,19 +38,19 @@ include '../business/pagoMetodoBusiness.php';
 
 
             <select id="serviciosMult" name="serviciosMult" method="POST">
-           
-                 <option value="">Servicios</option>
-                 <?php
+
+                <option value="">Servicios</option>
+                <?php
                 if (isset($_GET['idServicio'])) {
                     $array = unserialize($_GET['idServicio']);
                     foreach ($servicios as $row) {
-                        $flag=false;
+                        $flag = false;
                         foreach ($array as $selected) {
                             if ($row->getIdTBServicio() == $selected) {
-                                $flag=true;
+                                $flag = true;
                             }
                         }
-                        if($flag==false){
+                        if ($flag == false) {
                             echo '<option  value="' . $row->getIdTBServicio() . '">' . $row->getNombreTBServicio() . ' </option>';
                         }
                     }
@@ -68,20 +68,31 @@ include '../business/pagoMetodoBusiness.php';
             $servicios = $servicioBusiness->obtener();
 
             if (isset($_GET['idServicio']) && isset($_GET['cantidadServicio'])) {
-                $array = unserialize($_GET['idServicio']);
+                $array[] = unserialize($_GET['idServicio']);
                 $arrayCantidad = unserialize($_GET['cantidadServicio']);
-                foreach ($servicios as $row) {
-                    for ($i = 0; $i < count($array); $i++) {
-                       
-                        if ($row->getIdTBServicio() == $array[$i]) {
-                  
-                            echo '<input type="hidden" name="idServicio[]" required  value="' . $row->getIdTBServicio() . '">' . $row->getNombreTBServicio() . ': ';
-                             ?>
-                            <input type="number" name="cantidadServicio[]"  min="1" value="<?php if($arrayCantidad[$i]!=null){echo $arrayCantidad[$i];}else{echo "1";} ?>">
-                            <button name="eliminarServicio" id="eliminarServicio" value="<?php echo $row->getIdTBServicio()?>">Eliminar</button>
-                            <br>
+                if (count($array) > 0) {
+                    foreach ($servicios as $row) {
+                        for ($i = 0; $i < count($array); $i++) {
+
+                            if ($row->getIdTBServicio() == $array[$i]) {
+
+                                echo '<input type="hidden" name="idServicio[]" required  value="' . $row->getIdTBServicio() . '">' . $row->getNombreTBServicio() . ': ';
+            ?>
+                                <input type="number" name="cantidadServicio[]" min="1" value="<?php if ($arrayCantidad[$i] != null) {
+                                                                                                    echo $arrayCantidad[$i];
+                                                                                                } else {
+                                                                                                    echo "1";
+                                                                                                } ?>">
+                                <button name="eliminarServicio" id="eliminarServicio" value="<?php echo $row->getIdTBServicio() ?>">Eliminar</button>
+                                <br>
             <?php
-                        }         
+                            }
+                        }
+                    }
+                }
+                if (isset($_GET['error'])) {
+                    if ($_GET['error'] == "noServiceSelection") {
+                        echo '<center><p style="color: red">No existe el servicio seleccionado !</p></center>';
                     }
                 }
             } else {
