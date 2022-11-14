@@ -83,6 +83,9 @@
     <div>
         <a href="./view/listarProveedores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Proveedores</a>
     </div>
+    <div>
+        <a href="./view/listarProducto.php" style="text-decoration: none; color: blue; font-size: 150%;">- Productos</a>
+    </div>
 </body>
 
 </html>
