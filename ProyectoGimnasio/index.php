@@ -45,7 +45,7 @@
     </div>
 
     <div>
-        <a href="./view/menulistaFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">- Facturación</a>
+        <a href="./view/menuListaFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">- Facturación</a>
     </div>
 
     <div>
