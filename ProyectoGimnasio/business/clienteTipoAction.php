@@ -78,13 +78,7 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombreClienteTipo) > 0 && strlen($descripcionClienteTipo) > 0) {
 
-            $clienteTipoBusiness = new ClienteTipoBusiness();
-            $elementos = $clienteTipoBusiness->obtener();
-            $flag = 0;
-            foreach ($elementos as $row) { if($row->getNombreTBClienteTipo() == $_POST['nombreClienteTipo'] && $row->getActivoTBClienteTipo() == 1 && $row->getDescripcionTBClienteTipo() == $_POST['descripcionClienteTipo'] ){  $flag = 1; } }
-                
-    if($flag == 0){
-
+          
             if (!is_numeric($nombreClienteTipo)) {
                 $clienteTipo = new ClienteTipo($idClienteTipo, $nombreClienteTipo, $descripcionClienteTipo, 1);
                 $clienteTipoBusiness = new ClienteTipoBusiness();
@@ -99,9 +93,7 @@ if (isset($_POST['actualizar'])) {
                 header("location: ../view/listarClienteTipo.php?error=numberFormat");
             }
 
-        } else {
-            header("location: ../view/listarClienteTipo.php?error=duplicate");
-        }
+       
         } else {
             header("location: ../view/listarClienteTipo.php?error=emptyField");
         }

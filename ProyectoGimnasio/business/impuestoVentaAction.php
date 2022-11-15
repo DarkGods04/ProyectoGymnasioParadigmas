@@ -82,12 +82,7 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($valor) > 0 && strlen($descripcion) > 0 ) {
             $tempValor = str_replace("%", "", $valor);
-            $impuestoBusiness = new ImpuestoVentaBusiness();
-            $elementos = $impuestoBusiness->obtener();
-            $flag = 0;
-            foreach ($elementos as $row) { if($row->getValorImpuestoVenta() == $tempValor && $row->getActivoImpuestoVenta() == 1 && $row->getDescripcionImpuestoVenta() == $_POST['descripcion']  ){  $flag = 1; } }
-                
-    if($flag == 0){
+          
 
 
 
@@ -107,10 +102,6 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarImpuestoVentas.php?error=numberFormat");
             }
-
-        } else {
-            header("location: ../view/listarImpuestoVentas.php?error=duplicate");
-        }
 
         } else {
             header("location: ../view/listarImpuestoVentas.php?error=emptyField");

@@ -17,12 +17,7 @@ if (isset($_POST['actualizar'])) {
 
                 $tempMonto = str_replace("₡","",$montoCompra);
 
-                $activoVariableBusiness = new ActivoVariableBusiness();
-                $activos = $activoVariableBusiness->obtener();
-                $flag = 0;
-                foreach ($activos as $row) { if($row->getNameTBActivo() == $_POST['name'] && $row->getActivoTBActivo() == 1 && $row->getDescripcionTBActivo() == $_POST['descripcion'] && $row->getCantidadTBActivo() == $_POST['cantidad'] ){  $flag = 1; } }
-                    
-        if($flag == 0){
+              
 
             if (is_numeric($cantidad)) {
                 $activo = new ActivoVariable($id, $name, $descripcion, $cantidad, $tempMonto, 1);
@@ -38,9 +33,6 @@ if (isset($_POST['actualizar'])) {
                 header("location: ../view/listarActivosVariables.php?error=numberFormat");
             }
 
-        } else {
-            header("location: ../view/listarActivosVariables.php?error=duplicate");
-        }
         } else {
             header("location: ../view/listarActivosVariables.php?error=emptyField");
         }
