@@ -5,6 +5,7 @@ include '../business/instructorBusiness.php';
 include '../business/impuestoVentaBusiness.php';
 include '../business/pagoPeridiocidadBusiness.php';
 include '../business/servicioBusiness.php';
+include '../business/pagoMetodoBusiness.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,10 +27,10 @@ include '../business/servicioBusiness.php';
                                 $clienteBusiness = new ClienteBusiness();
                                 $clientes = $clienteBusiness->obtener();
 
-                                if (isset($_GET['cliente'])) {
+                                if (isset($_GET['clienteid'])) {
                                     foreach ($clientes as $row) :
                                         if ($row->getActivoTBCliente() == 1) {
-                                            if ($_GET['cliente'] == $row->getIdTBCliente()) {
+                                            if ($_GET['clienteid'] == $row->getIdTBCliente()) {
 
                                                 echo " Cliente: " . $row->getNombreTBCliente() . " " . $row->getApellido1TBCliente();
                                             }
@@ -41,11 +42,11 @@ include '../business/servicioBusiness.php';
                                         $instructorBusiness = new InstructorBusiness();
                                         $instructores = $instructorBusiness->obtener();
 
-                                        if (isset($_GET['instructor'])) {
+                                        if (isset($_GET['instructorid'])) {
 
                                             foreach ($instructores as $row) :
                                                 if ($row->getActivoTBInstructor() == 1) {
-                                                    if ($_GET['instructor'] == $row->getIdTBInstructor()) {
+                                                    if ($_GET['instructorid'] == $row->getIdTBInstructor()) {
 
                                                         echo " Instructor: " . $row->getNombreTBInstructor() . " " . $row->getApellidoTBInstructor();
                                                     }
@@ -82,20 +83,24 @@ include '../business/servicioBusiness.php';
                     <?php
                     $servicioBusiness = new ServicioBusiness();
                     $servicios = $servicioBusiness->obtener();
-
-                    if (isset($_GET['serviciosMult'])) {
-                        $array = unserialize($_GET['serviciosMult']);
-                        echo " Servicios adquiridos: ";
+                    $array = urldecode($_GET['idServicio']);
+                    $array = unserialize($array);
+                    $arrayCantidad = urldecode($_GET['cantidadServicio']);
+                    $arrayCantidad = unserialize($arrayCantidad);
+                    if (count($array) > 0) {
                         foreach ($servicios as $row) {
-                            $foo = True;
-                            foreach ($array as $selected) {
-                                if ($row->getIdTBServicio() == $selected) {
-                                    $foo = false;
-                                    echo $row->getNombreTBServicio() . "-";
+                            for ($i = 0; $i < count($array); $i++) {
+
+                                if ($row->getIdTBServicio() == $array[$i]) {
+                                    echo "Servicio seleccionado: " .  $row->getNombreTBServicio();
+                                    echo "  Cantidad: " . $arrayCantidad[$i]; ?>
+                                    <br>
+                    <?php
                                 }
                             }
                         }
                     }
+
                     ?>
                     </p>
                     <p id=montoBruto>
@@ -133,12 +138,30 @@ include '../business/servicioBusiness.php';
                             echo "";
                         } ?>
                     </p>
+
+                    <p id=pagoMetodoId>
+                        <?php
+                        $pagoMetodoBusiness = new PagoMetodoBusiness();
+                        $metodoPago = $pagoMetodoBusiness->obtener();
+                        if (isset($_GET['pagoMetodoId'])) {
+
+                            foreach ($metodoPago as $row) :
+                                if ($row->getActivoTBPagoMetodo() == 1) {
+                                    if ($_GET['pagoMetodoId'] == $row->getIDPagoMetodo()) {
+
+                                        echo "Método de pago aplicado: " . $row->getNombreTBPagoMetodo();
+                                    }
+                                }
+                            endforeach;
+                        }
+                        ?>
+                    </p>
                 </thead>
                 <script>
                     window.print()
-                    </script>
+                </script>
                 <div>
-                    <a href="listarFacturas.php?success=success" style="text-decoration: none; color: blue; font-size: 150%;">- Volver a factura</a>
+                    <a href="listarFactura.php?success=success" style="text-decoration: none; color: blue; font-size: 150%;">- Volver a factura</a>
                 </div>
             </tr>
         </table>
