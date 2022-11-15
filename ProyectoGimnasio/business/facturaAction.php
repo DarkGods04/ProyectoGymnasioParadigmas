@@ -3,16 +3,28 @@ include 'facturaBusiness.php';
 include '../business/servicioBusiness.php';
 include '../business/facturaDetalleBusiness.php';
 
-$clienteid = $_POST['clienteid'];
-$instructorid = $_POST['instructorid'];
-$fechaPago = $_POST['fechaPago'];
-$idModalidad = $_POST['modalidadPago'];
-$MontoBruto = str_replace("₡", "", $_POST['MontoBruto']);
-$pagoMetodoId = $_POST['pagoMetodoId'];
-$impuestoVentaid =  $_POST['impuestoVentaid'];
+if (!empty($_POST['clienteid'])) {
+    $clienteid = $_POST['clienteid'];
+}
+if (!empty($_POST['instructorid'])) {
+    $instructorid = $_POST['instructorid'];
+}
+if (!empty($_POST['fechaPago'])) {
+    $fechaPago = $_POST['fechaPago'];
+}
+if (!empty($_POST['modalidadPago'])) {
+    $idModalidad = $_POST['modalidadPago'];
+}
+if (!empty($_POST['MontoBruto'])) {
+    $MontoBruto = str_replace("₡", "", $_POST['MontoBruto']);
+}
+if (!empty($_POST['pagoMetodoId'])) {
+    $pagoMetodoId = $_POST['pagoMetodoId'];
+}
+if (!empty($_POST['modalidadPago'])) {
+    $impuestoVentaid =  $_POST['impuestoVentaid'];
+}
 $serviciosMult;
-
-
 if (!empty($_POST['serviciosMult'])) {
     $serviciosMult = $_POST['serviciosMult'];
 }
@@ -22,12 +34,18 @@ if (!empty($_POST['idServicio'])) {
 if (!empty($_POST['serviciosMult'])) {
     $serviciosSelec[] = $serviciosMult;
 }
+if (!empty($_POST['cantidadServicio'])) {
+    $cantidadServic = $_POST['cantidadServicio'];
+}
+if (!empty($serviciosSelec)) {
+    $serviciosSelec = serialize($serviciosSelec);
+    $serviciosSelec = urlencode($serviciosSelec);
+}
+if (!empty($cantidadServic)) {
+    $cantidadServic = serialize($cantidadServic);
+    $cantidadServic = urlencode($cantidadServic);
+}
 
-$cantidadServic = $_POST['cantidadServicio'];
-$serviciosSelec = serialize($serviciosSelec);
-$serviciosSelec = urlencode($serviciosSelec);
-$cantidadServic = serialize($cantidadServic);
-$cantidadServic = urlencode($cantidadServic);
 
 if (isset($_POST['calcularImpuesto'])) {
     $servicioBusiness = new ServicioBusiness();
@@ -252,6 +270,62 @@ if (isset($_POST['eliminarFactura'])) {
         } else {
             header("Location: ../view/listarHistorialFactura.php?error=dbError");
         }
+    } else {
+        header("location: ../view/listarHistorialFactura.php?error=error");
+    }
+}
+
+if (isset($_POST['reimprimirFactura'])) {
+
+    $sumaMonto;
+    $clienteid;
+    $instructorid;
+    $fechaPago;
+    $idModalidad;
+    $impuestoVentaid;
+    $serviciosMult;
+    $montoNeto;
+    $pagoMetodoId;
+
+    $array = null;
+    $arrayCantidad = null;
+
+    if (isset($_POST['idFactura'])) {
+        $id = $_POST['idFactura'];
+
+        $facturaBusiness = new FacturaBusiness();
+        $facturas = $facturaBusiness->obtener();
+        $facturaDetalleBusiness = new FacturaDetalleBusiness();
+        $detalle = $facturaDetalleBusiness->obtener();
+
+        foreach ($facturas as $row) {
+            if ($id == $row->getIdTBFactura() && $row->getActivoTBFactura()==1) {
+                $clienteid = $row->getClienteidTBFactura();
+                $instructorid = $row->getInstructoridTBFactura();
+                $fechaPago = $row->getFechaPagoTBFactura();
+                $idModalidad = $row->getPagoModalidadTBFactura();
+                $impuestoVentaid = $row->getImpuestoVentaidTBFactura();
+                $montoNeto = $row->getMontoNetoTBFactura();
+                $pagoMetodoId = $row->getMetodoDePagoidTBFactura();
+            }
+        }
+
+        foreach ($detalle as $rr) {
+            if ($rr->getIdTBFactura() == $id) {
+                if($rr->getActivoTBFacturaDetalle()==1){
+                $array[] = $rr->getIdServicioTBFacturaDetalle();
+                $arrayCantidad[] = $rr->getCantidadTBServicioFacturaDetalle();
+                $sumaMonto=$sumaMonto + $rr->getMontoBrutoTBFacturaDetalle();
+                }
+            }
+        }
+
+        $vetor = serialize($arrayCantidad);
+        $vetor = urlencode($vetor);
+        $array = serialize($array);
+        $array = urlencode($array);
+
+        Header("Location: ../view/imprimirPDF.php?success=imprimir&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&montoNeto=$montoNeto&pagoMetodoId=$pagoMetodoId&idServicio=$array&cantidadServicio=$vetor");
     } else {
         header("location: ../view/listarHistorialFactura.php?error=error");
     }

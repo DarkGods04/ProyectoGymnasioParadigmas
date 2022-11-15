@@ -161,7 +161,11 @@ include '../business/pagoMetodoBusiness.php';
                     window.print()
                 </script>
                 <div>
-                    <a href="listarFactura.php?success=success" style="text-decoration: none; color: blue; font-size: 150%;">- Volver a factura</a>
+                    <?php if (isset($_GET['success']) && $_GET['success'] == "imprimir") { ?>
+                        <a href="listarHistorialFactura.php?success=success" style="text-decoration: none; color: blue; font-size: 150%;">- Volver a historial de factura</a>
+                    <?php } else { ?>
+                        <a href="listarFactura.php?success=success" style="text-decoration: none; color: blue; font-size: 150%;">- Volver a generar factura</a>
+                    <?php } ?>
                 </div>
             </tr>
         </table>
