@@ -15,7 +15,7 @@ if (isset($_POST['actualizar'])) {
             $lineaProductosBusiness = new LineaProductosBusiness();
             $elementos = $lineaProductosBusiness->obtener();
             $flag = 0;
-            foreach ($elementos as $row) { if($row->getNombreTBCatalogoLineaProductos() == $_POST['nombreLineaProductos'] && $row->getActivoTBGrupoMuscular() == 1 && $row->getDescripcionTBCatalogoLineaProductos() == $_POST['descripcionLineaProductos']  ){  $flag = 1; } }
+            foreach ($elementos as $row) { if($row->getNombreTBCatalogoLineaProductos() == $_POST['nombreLineaProductos'] && $row->getActivoTBCatalogoLineaProductos() == 1 && $row->getDescripcionTBCatalogoLineaProductos() == $_POST['descripcionLineaProductos']  ){  $flag = 1; } }
                 
     if($flag == 0){
 
