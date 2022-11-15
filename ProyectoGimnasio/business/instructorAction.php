@@ -103,12 +103,6 @@ if (isset($_POST['actualizar'])) {
             && strlen($numCuenta) > 0 && strlen($tipoinstructor) > 0) {
             $tempTelefono = str_replace("-", "", $telefono);
 
-            $instructorBusiness = new InstructorBusiness();
-            $elementos = $instructorBusiness->obtener();
-            $flag = 0;
-            foreach ($elementos as $row) { if($row->getNombreTBInstructor() == $_POST['nombre'] && $row->getActivoTBInstructor() == 1 && $row->getApellidoTBInstructor() == $_POST['apellido'] &&  $row->getTelefonoTBInstructor() == $tempTelefono){  $flag = 1; } }
-                
-    if($flag == 0){
 
             if (!is_numeric($nombre) && !is_numeric($apellido)) {
                 if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
@@ -128,9 +122,6 @@ if (isset($_POST['actualizar'])) {
                 header("location: ../view/listarInstructores.php?error=numberFormat");
             }
 
-        } else {
-            header("location: ../view/listarInstructores.php?error=duplicate");
-        }
         } else {
             header("location: ../view/listarInstructores.php?error=emptyField");
         }
