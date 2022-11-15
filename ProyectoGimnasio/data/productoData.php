@@ -3,6 +3,7 @@
 include_once 'data.php';
 include '../domain/producto.php';
 
+
 class ProductoData extends Data {
 
     public function insertProducto($producto){
@@ -99,5 +100,6 @@ class ProductoData extends Data {
         }
         return $productos;
     }
+    
 }
 
