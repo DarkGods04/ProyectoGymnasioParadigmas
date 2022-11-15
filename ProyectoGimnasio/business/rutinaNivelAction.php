@@ -1,5 +1,5 @@
 <?php
-include 'RutinaNivelBusiness.php';
+include 'rutinaNivelBusiness.php';
 
 if (isset($_POST['insertar'])) {
     if (isset($_POST['nombreRutinaNivel']) && isset($_POST['descripcionRutinaNivel'])) {
