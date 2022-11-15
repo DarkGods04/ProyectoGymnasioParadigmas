@@ -124,7 +124,7 @@ include '../business/activoFijoBusiness.php';
                     <td><input type="text" name="placa" placeholder="Placa del activo" value="<?php if(isset($_GET['placa'])){ echo $_GET['placa']; }?>"></td>
                     <td><input type="text" name="serie" placeholder="Número de serie" value="<?php if(isset($_GET['serie'])){ echo $_GET['serie']; }?>"></td>
                     <td><input type="text" name="modelo" placeholder="Modelo del equipo" value="<?php if(isset($_GET['modelo'])){ echo $_GET['modelo']; }?>"></td>
-                    <td><input type="date" name="fechaCompra" value="<?php if(isset($_GET['fechaCompra'])){ echo $_GET['fechaCompra']; }?>"></td>
+                    <td><input type="date" class="classFechaCompra" id="fechaCompraIn" name="fechaCompra" value="<?php if(isset($_GET['fechaCompra'])){ echo $_GET['fechaCompra']; }?>"></td>
                     <td><input type="text" class="mascaramonto" name="montoCompra" placeholder="Monto de compra" value="<?php if(isset($_GET['montoCompra'])){ echo $_GET['montoCompra']; }?>"></td>
                     <td>
                         <select name="estadoUso">
@@ -137,6 +137,22 @@ include '../business/activoFijoBusiness.php';
             </table>
         </form>
     </div>
+
+    <script>
+        var todayDateMax = new Date();
+        var mesMax = todayDateMax.getMonth() + 1;
+        var anioMax = todayDateMax.getUTCFullYear();
+        var diaMax = todayDateMax.getDate();
+        if (mesMax < 10) {
+            mesMax = "0" + mesMax
+        }
+        if (diaMax < 10) {
+            diaMax = "0" + diaMax;
+        }
+        var maxDate = anioMax + "-" + mesMax + "-" + diaMax;
+        document.getElementById("fechaCompra").setAttribute("max", maxDate);
+        document.getElementById("fechaCompraIn").setAttribute("max", maxDate);
+    </script>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/activoFijoAction.php">

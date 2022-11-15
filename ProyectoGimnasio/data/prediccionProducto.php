@@ -13,7 +13,7 @@ $query->execute([$campo . '%', $campo . '%', $campo . '%', $campo . '%']);
 
 $html = "";
 while($row = $query-> fetch(PDO::FETCH_ASSOC)){
-    $html .= "<li onclick=\"mostrar('" . $row["tbproductonombre"] . "')\">" . $row["tbproductoid"] . " - " . $row["tbproductonombre"] . " " . $row["tbproductodescripcion"] . " " . $row["tbproductocantidad"] . "</li>";
+    $html .= "<li onclick=\"mostrar('" . $row["tbproductonombre"] . "')\">" . $row["tbproductoid"] . " - " . $row["tbproductonombre"] . " || " . $row["tbproductodescripcion"] . " || Cant. " . $row["tbproductocantidad"] . "</li>";
  }
 
 echo json_encode($html, JSON_UNESCAPED_UNICODE);
