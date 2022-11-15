@@ -72,6 +72,7 @@ class ProductoData extends Data {
         mysqli_close($conn);
         
         $productos = [];
+   
         while ($row = mysqli_fetch_array($result)) {
             $currentDireccion = new Producto($row['tbproductoid'], $row['tbproductonombre'], $row['tbproductodescripcion'], $row['tbcatalogolineaproductosid'], $row['tbproductopreciocompra'], $row['tbproductoprecioventa'], $row['tbproductocantidad'], $row['tbproductoactivo']);
             array_push($productos, $currentDireccion);
@@ -83,23 +84,20 @@ class ProductoData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
-        $querySelect = "SELECT * FROM tbproducto WHERE tbproductoid LIKE '%$palabra%' OR tbproductonombre LIKE '%$palabra%' OR tbproductodescripcion LIKE '%$palabra%' OR tbcatalogolineaproductosid LIKE '%$palabra%' OR
-        tbproductocantidad LIKE '%$palabra%';";
+        $querySelect = "SELECT * FROM tbproducto WHERE tbproductoid LIKE '%$palabra%' OR tbproductonombre LIKE '%$palabra%' OR tbproductodescripcion LIKE '%$palabra%' OR tbcatalogolineaproductosid LIKE '%$palabra%' OR tbproductocantidad LIKE '%$palabra%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
         
         $productos = [];
-        while ($row = mysqli_fetch_array($result)) {
+        while($row = mysqli_fetch_array($result)) {
+
             if($row['tbproductoactivo'] == 1){
                 $currentProducto = new Producto($row['tbproductoid'], $row['tbproductonombre'], $row['tbproductodescripcion'], $row['tbcatalogolineaproductosid'], $row['tbproductopreciocompra'], $row['tbproductoprecioventa'], $row['tbproductocantidad'], $row['tbproductoactivo']);
                 array_push($productos, $currentProducto);
             }
+
         }
         return $productos;
     }
-
-
-   
-    
 }
 

@@ -325,7 +325,7 @@ if (isset($_POST['reimprimirFactura'])) {
         $array = serialize($array);
         $array = urlencode($array);
 
-        Header("Location: ../view/imprimirPDF.php?success=inserted&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&montoNeto=$montoNeto&pagoMetodoId=$pagoMetodoId&idServicio=$array&cantidadServicio=$vetor");
+        Header("Location: ../view/imprimirPDF.php?success=imprimir&MontoBruto=$sumaMonto&clienteid=$clienteid&instructorid=$instructorid&fechaPago=$fechaPago&modalidadPago=$idModalidad&impuestoVentaid=$impuestoVentaid&serviciosMult=$serviciosMult&montoNeto=$montoNeto&pagoMetodoId=$pagoMetodoId&idServicio=$array&cantidadServicio=$vetor");
     } else {
         header("location: ../view/listarHistorialFactura.php?error=error");
     }
