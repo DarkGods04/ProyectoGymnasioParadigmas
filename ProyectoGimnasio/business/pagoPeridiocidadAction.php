@@ -11,6 +11,17 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0) {
 
+            $pagoPeridiocidadBusiness = new PagoPeridiocidadBusiness();
+            $pagoPeridiocidades = $pagoPeridiocidadBusiness->obtener();
+            $existe = false;
+            foreach ($pagoPeridiocidades as $row) {
+                if ($row->getNombreTBPagoPeridiocidad() == $nombre) {
+                    $existe = true;
+                }
+            }
+
+            if($existe == false){
+
             if (!is_numeric($nombre)) {
                 $pagoPeridiocidad = new PagoPeridiocidad($id, $nombre, $descripcion, 1);
                 $pagoPeridiocidadBusiness = new PagoPeridiocidadBusiness();
@@ -24,6 +35,10 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarPagoPeridiocidades.php?error=numberFormat");
             }
+
+        } else {
+            header("location: ../view/listarPagoPeridiocidades.php?error=existe");
+        }
         } else {
             header("location: ../view/listarPagoPeridiocidades.php?error=emptyField");
         }

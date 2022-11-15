@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2022 a las 01:51:22
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Tiempo de generación: 13-11-2022 a las 02:33:47
+-- Versión del servidor: 10.4.25-MariaDB
+-- Versión de PHP: 7.4.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -45,8 +45,7 @@ CREATE TABLE `tbactivofijo` (
 INSERT INTO `tbactivofijo` (`tbactivofijoid`, `tbactivofijoplaca`, `tbactivofijoserie`, `tbactivofijomodelo`, `tbactivofijofechacompra`, `tbactivofijomontocompra`, `tbactivofijoestadouso`, `tbactivofijoactivo`) VALUES
 (1, 'P065', '890LVLT27', 'Level', '2006-08-07', 20000, 'En uso', 1),
 (2, 'P066', '83421ULT28', 'LevelUltimate', '2022-09-10', 85000, 'Fuera de uso', 1),
-(3, 'P067', '345TEKT987', 'TEKTRO', '2022-09-01', 25150, 'En uso', 1),
-(4, 'P066', '83421ULT28', 'ULTIMATE', '2022-11-08', 150000, 'En uso', 0);
+(3, 'P067', '345TEKT987', 'TEKTRO', '2022-09-01', 25150, 'En uso', 1);
 
 -- --------------------------------------------------------
 
@@ -292,54 +291,6 @@ INSERT INTO `tbclientepeso` (`tbclientepesoid`, `tbclienteid`, `tbclientepesofec
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbcompra`
---
-
-CREATE TABLE `tbcompra` (
-  `tbcompraid` int(11) NOT NULL,
-  `tbcomprafecha` date NOT NULL,
-  `tbproveedorid` int(11) NOT NULL,
-  `tbcompramontoneto` int(11) NOT NULL,
-  `tbcompramodopago` tinyint(4) NOT NULL,
-  `tbcompraactivo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcompra`
---
-
-INSERT INTO `tbcompra` (`tbcompraid`, `tbcomprafecha`, `tbproveedorid`, `tbcompramontoneto`, `tbcompramodopago`, `tbcompraactivo`) VALUES
-(1, '2022-11-02', 2, 30000, 0, 0),
-(2, '2022-11-09', 3, 7700, 1, 1),
-(3, '2022-11-13', 2, 80000, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbcompradetalle`
---
-
-CREATE TABLE `tbcompradetalle` (
-  `tbcompradetalleid` int(11) NOT NULL,
-  `tbcompraid` int(11) NOT NULL,
-  `tbproductoid` int(11) NOT NULL,
-  `tbproductocantidad` int(11) NOT NULL,
-  `tbproductopreciobruto` int(11) NOT NULL,
-  `tbcompradetalleactivo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcompradetalle`
---
-
-INSERT INTO `tbcompradetalle` (`tbcompradetalleid`, `tbcompraid`, `tbproductoid`, `tbproductocantidad`, `tbproductopreciobruto`, `tbcompradetalleactivo`) VALUES
-(1, 1, 2, 3, 10000, 0),
-(2, 2, 1, 7, 1100, 1),
-(3, 3, 2, 8, 10000, 1);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbfactura`
 --
 
@@ -349,55 +300,22 @@ CREATE TABLE `tbfactura` (
   `tbinstructorid` int(11) NOT NULL,
   `tbfacturafechapago` date NOT NULL,
   `tbcatalogopagoperidiocidadid` varchar(200) NOT NULL,
+  `tbservicioid` varchar(200) NOT NULL,
+  `tbfacturamontobruto` float NOT NULL,
   `tbimpuestoventaid` int(11) NOT NULL,
   `tbfacturamontoneto` float NOT NULL,
-  `tbfacturaactivo` tinyint(4) NOT NULL,
-  `tbcatalogopagometodoid` int(11) NOT NULL
+  `tbfacturaactivo` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbfactura`
 --
 
-INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfacturafechapago`, `tbcatalogopagoperidiocidadid`, `tbimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`, `tbcatalogopagometodoid`) VALUES
-(1, 3, 3, '2022-11-04', '3', 1, 5675, 0, 1),
-(2, 1, 2, '2022-11-15', '3', 2, 19690, 1, 1),
-(3, 4, 4, '2022-11-03', '3', 2, 2860, 0, 1),
-(4, 3, 3, '2022-11-23', '3', 1, 28375, 1, 2),
-(5, 4, 4, '2022-11-17', '3', 2, 3520, 1, 2),
-(6, 2, 3, '2022-11-17', '2', 1, 2951, 1, 1),
-(7, 2, 2, '2022-11-25', '2', 1, 9307, 1, 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbfacturadetalle`
---
-
-CREATE TABLE `tbfacturadetalle` (
-  `tbfacturadetalleid` int(11) NOT NULL,
-  `tbfacturaid` int(11) NOT NULL,
-  `tbservicioid` int(11) NOT NULL,
-  `tbfacturadetallemontobruto` float NOT NULL,
-  `tbfacturadetalleactivo` tinyint(4) NOT NULL,
-  `tbserviciocantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbfacturadetalle`
---
-
-INSERT INTO `tbfacturadetalle` (`tbfacturadetalleid`, `tbfacturaid`, `tbservicioid`, `tbfacturadetallemontobruto`, `tbfacturadetalleactivo`, `tbserviciocantidad`) VALUES
-(1, 1, 1, 5000, 0, 2),
-(2, 2, 1, 2500, 1, 1),
-(3, 2, 2, 2600, 1, 1),
-(4, 2, 3, 12800, 1, 4),
-(5, 3, 2, 2600, 0, 1),
-(6, 4, 1, 2500, 1, 1),
-(7, 5, 3, 3200, 1, 1),
-(8, 6, 1, 2600, 1, 1),
-(9, 7, 1, 5200, 1, 2),
-(10, 7, 4, 3000, 1, 1);
+INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfacturafechapago`, `tbcatalogopagoperidiocidadid`, `tbservicioid`, `tbfacturamontobruto`, `tbimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`) VALUES
+(1, 1, 1, '2022-10-01', '1', '1;2', 6500, 1, 7345, 1),
+(2, 3, 2, '2022-10-20', '2', '1;2', 5800, 2, 6380, 1),
+(3, 2, 3, '2022-10-21', '3', '2;3', 6800, 1, 7718, 1),
+(4, 4, 2, '2022-11-02', '1', '1', 2600, 1, 2951, 1);
 
 -- --------------------------------------------------------
 
@@ -522,30 +440,6 @@ INSERT INTO `tbmodalidadfuncionalcriterio` (`tbmodalidadfuncionalcriterioid`, `t
 (1, 3, 'Resistencia tiempo', 'Mantener su esfuerzo de manera eficaz durante el mayor tiempo posible', 45, 15, 1),
 (2, 1, 'Fuerza del corazón', 'Cantidad de pulsaciones por minuto', 50, 10, 1),
 (3, 2, 'RM', 'Máximo de repeticiones ejecutadas por ejercicio', 30, 10, 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbproducto`
---
-
-CREATE TABLE `tbproducto` (
-  `tbproductoid` int(11) NOT NULL,
-  `tbproductonombre` varchar(50) NOT NULL,
-  `tbproductodescripcion` varchar(200) NOT NULL,
-  `tbproductopreciocompra` double NOT NULL,
-  `tbproductoprecioventa` double NOT NULL,
-  `tbproductocantidad` int(11) NOT NULL,
-  `tbproductoactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbproducto`
---
-
-INSERT INTO `tbproducto` (`tbproductoid`, `tbproductonombre`, `tbproductodescripcion`, `tbproductopreciocompra`, `tbproductoprecioventa`, `tbproductocantidad`, `tbproductoactivo`) VALUES
-(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 1100, 1200, 5, 1),
-(2, 'Suplementos', 'suplementos con carboidartos necesarios para subir de peso rapidamente', 10000, 13300, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -693,28 +587,10 @@ ALTER TABLE `tbclientepeso`
   ADD PRIMARY KEY (`tbclientepesoid`);
 
 --
--- Indices de la tabla `tbcompra`
---
-ALTER TABLE `tbcompra`
-  ADD PRIMARY KEY (`tbcompraid`);
-
---
--- Indices de la tabla `tbcompradetalle`
---
-ALTER TABLE `tbcompradetalle`
-  ADD PRIMARY KEY (`tbcompradetalleid`);
-
---
 -- Indices de la tabla `tbfactura`
 --
 ALTER TABLE `tbfactura`
   ADD PRIMARY KEY (`tbfacturaid`);
-
---
--- Indices de la tabla `tbfacturadetalle`
---
-ALTER TABLE `tbfacturadetalle`
-  ADD PRIMARY KEY (`tbfacturadetalleid`);
 
 --
 -- Indices de la tabla `tbimpuestoventa`
@@ -745,12 +621,6 @@ ALTER TABLE `tbmodalidadfuncional`
 --
 ALTER TABLE `tbmodalidadfuncionalcriterio`
   ADD PRIMARY KEY (`tbmodalidadfuncionalcriterioid`);
-
---
--- Indices de la tabla `tbproducto`
---
-ALTER TABLE `tbproducto`
-  ADD PRIMARY KEY (`tbproductoid`);
 
 --
 -- Indices de la tabla `tbproveedor`

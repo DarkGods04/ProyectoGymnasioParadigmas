@@ -15,6 +15,14 @@ if (isset($_POST['insertarModalidadfuncionalcriterio'])) {
         if (strlen($idModalidadfuncional) > 0 && strlen($nombre) > 0 && strlen($descripcion) > 0 && strlen($rangoValorMinimo) > 0
             && strlen($rangoValorMaximo) > 0 ) {
 
+                $modalidadfuncionalcriterioBusiness = new ModalidadFuncionalCriterioBusiness();
+                $elementos = $modalidadfuncionalcriterioBusiness->obtener();
+                $flag = 0;
+                foreach ($elementos as $row) { if($row->getNombreTBModalidadfuncionalcriterio() == $_POST['nombre'] && $row->getActivoTBModalidadfuncionalcriterio() == 1 && $row->getDescripcionTBModalidadfuncionalcriterio() == $_POST['descripcion']  ){  $flag = 1; } }
+                    
+        if($flag == 0){
+    
+
             if (!is_numeric($nombre) && !is_numeric($descripcion) && is_numeric($idModalidadfuncional) && is_numeric($rangoValorMinimo) && is_numeric($rangoValorMaximo) ) {
                 $modalidadfuncionalcriterio = new ModalidadFuncionalCriterio(0, $idModalidadfuncional, $nombre, $descripcion, $rangoValorMinimo, $rangoValorMaximo,1);
                 $modalidadfuncionalcriterioBusiness = new ModalidadFuncionalCriterioBusiness();
@@ -28,6 +36,10 @@ if (isset($_POST['insertarModalidadfuncionalcriterio'])) {
             } else {
                 header("location: ../view/listarModalidadFuncionalCriterio.php?error=numberFormat&idModalidadfuncional=$idModalidadfuncional&nombre=$nombre&descripcion=$descripcion&rangoValorMinimo=$rangoValorMinimo&rangoValorMaximo=$rangoValorMaximo");
             }
+
+        } else {
+            header("location: ../view/listarModalidadFuncionalCriterio.php?error=duplicate&idModalidadfuncional=$idModalidadfuncional&nombre=$nombre&descripcion=$descripcion&rangoValorMinimo=$rangoValorMinimo&rangoValorMaximo=$rangoValorMaximo");
+        }
         } else {
             header("location: ../view/listarModalidadFuncionalCriterio.php?error=emptyField&idModalidadfuncional=$idModalidadfuncional&nombre=$nombre&descripcion=$descripcion&rangoValorMinimo=$rangoValorMinimo&rangoValorMaximo=$rangoValorMaximo");
         }
@@ -69,6 +81,13 @@ if (isset($_POST['actualizarModalidadfuncionalcriterio'])) {
         if (strlen($idModalidadfuncional) > 0 && strlen($nombre) > 0 && strlen($descripcion) > 0 && strlen($rangoValorMinimo) > 0
         && strlen($rangoValorMaximo) > 0) {
 
+            $modalidadfuncionalcriterioBusiness = new ModalidadFuncionalCriterioBusiness();
+            $elementos = $modalidadfuncionalcriterioBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBModalidadfuncionalcriterio() == $_POST['nombre'] && $row->getActivoTBModalidadfuncionalcriterio() == 1 && $row->getDescripcionTBModalidadfuncionalcriterio() == $_POST['descripcion']  ){  $flag = 1; } }
+                
+    if($flag == 0){
+
             if (!is_numeric($nombre) && !is_numeric($descripcion) && is_numeric($idModalidadfuncional) && is_numeric($rangoValorMinimo) && is_numeric($rangoValorMaximo) ) {
 
                 $modalidadfuncionalcriterio = new ModalidadFuncionalCriterio($id,$idModalidadfuncional, $nombre, $descripcion, $rangoValorMaximo,$rangoValorMinimo, 1);
@@ -84,6 +103,10 @@ if (isset($_POST['actualizarModalidadfuncionalcriterio'])) {
             } else {
                 header("location: ../view/listarModalidadFuncionalCriterio.php?error=numberFormat");
             }
+
+        } else {
+            header("location: ../view/listarModalidadFuncionalCriterio.php?error=duplicate");
+        }
         } else {
             header("location: ../view/listarModalidadFuncionalCriterio.php?error=emptyField");
         }

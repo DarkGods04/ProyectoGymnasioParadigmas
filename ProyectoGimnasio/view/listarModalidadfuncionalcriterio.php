@@ -171,6 +171,8 @@ include '../business/modalidadFuncionalBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "dublicate") {
+                            echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';

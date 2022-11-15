@@ -121,6 +121,9 @@ include '../business/clienteTipoBusiness.php';
                         } else if ($_GET['error'] == "existe") {
                             echo '<center><p style="color: red">¡Este tipo de cliente ya existe, intente de nuevo con otro nombre!</p></center>';
                         }
+                        else if ($_GET['error'] == "dublicate") {
+                            echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
+                        }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
                     }

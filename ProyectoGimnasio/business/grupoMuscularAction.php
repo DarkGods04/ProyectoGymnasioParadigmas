@@ -16,6 +16,13 @@ if (isset($_POST['insertar'])) {
         }
         if (strlen($nombreGrupoMuscular) > 0 && strlen($descripcionGrupoMuscular) > 0) {
 
+            $grupoMuscularBusiness = new GrupoMuscularBusiness();
+            $elementos = $grupoMuscularBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBGrupoMuscular() == $_POST['nombreGrupoMuscular'] && $row->getActivoTBGrupoMuscular() == 1 && $row->getDescripcionTBGrupoMuscular() == $_POST['descripcionGrupoMuscular']  ){  $flag = 1; } }
+                
+    if($flag == 0){
+
             if (!is_numeric($nombreGrupoMuscular)) {
                 if ($existe == false) {
                     $grupoMuscular = new GrupoMuscular(0, $nombreGrupoMuscular, $descripcionGrupoMuscular, 1);
@@ -33,6 +40,11 @@ if (isset($_POST['insertar'])) {
             } else {
                 header("location: ../view/listarGrupoMuscular.php?error=numberFormat");
             }
+
+        } else {
+            header("location: ../view/listarGrupoMuscular.php?error=duplicate");
+        }
+
         } else {
             header("location: ../view/listarGrupoMuscular.php?error=emptyField");
         }
@@ -67,6 +79,14 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombreGrupoMuscular) > 0 && strlen($descripcionGrupoMuscular) > 0) {
 
+            $grupoMuscularBusiness = new GrupoMuscularBusiness();
+            $elementos = $grupoMuscularBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBGrupoMuscular() == $_POST['nombreGrupoMuscular'] && $row->getActivoTBGrupoMuscular() == 1 && $row->getDescripcionTBGrupoMuscular() == $_POST['descripcionGrupoMuscular']  ){  $flag = 1; } }
+                
+    if($flag == 0){
+
+
             if (!is_numeric($nombreGrupoMuscular)) {
                 $grupoMuscular = new GrupoMuscular($idGrupoMuscular, $nombreGrupoMuscular, $descripcionGrupoMuscular, 1);
                 $grupoMuscularBusiness = new grupoMuscularBusiness();
@@ -80,6 +100,10 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarGrupoMuscular.php?error=numberFormat");
             }
+
+        } else {
+            header("location: ../view/listarGrupoMuscular.php?error=duplicate");
+        }
         } else {
             header("location: ../view/listarGrupoMuscular.php?error=emptyField");
         }
