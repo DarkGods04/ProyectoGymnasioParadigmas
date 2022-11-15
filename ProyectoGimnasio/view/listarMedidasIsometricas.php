@@ -196,7 +196,7 @@ include '../business/grupoMuscularBusiness.php';
                             <?php foreach ($clientes as $row) : ?>
                                 <?php 
                                      if ($row->getActivoTBCliente() == 1) {
-                                    echo '<option value="' . $row->getIDTBCliente() . '">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . '</option>'; } ?>
+                                    echo '<option value="' . $row->getIDTBCliente() . '">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . ' - ' . $row->getTelefonoTBCliente() . '</option>'; } ?>
                           
                           <?php endforeach ?>
                         </select>
@@ -217,6 +217,34 @@ include '../business/grupoMuscularBusiness.php';
             </table>
         </form>
     </div>
+
+    <script>
+        var todayDateMax = new Date();
+        var mesMax = todayDateMax.getMonth() + 1;
+        var anioMax = todayDateMax.getUTCFullYear();
+        var diaMax = todayDateMax.getDate();
+        if (mesMax < 10) {
+            mesMax = "0" + mesMax
+        }
+        if (diaMax < 10) {
+            diaMax = "0" + diaMax;
+        }
+        var maxDate = anioMax + "-" + mesMax + "-" + diaMax;
+        document.getElementById("fechaMedicion").setAttribute("max", maxDate);
+
+        var todayDateMin = new Date();
+        var mesMin = todayDateMin.getMonth() - 1;
+        var anioMin = todayDateMin.getUTCFullYear();
+        var diaMin = todayDateMin.getDate();
+        if (mesMin < 10) {
+            mesMin = "0" + mesMin
+        }
+        if (diaMin < 10) {
+            diaMin = "0" + diaMin;
+        }
+        var minDate = anioMin + "-" + mesMin + "-" + diaMin;
+        document.getElementById("fechaMedicion").setAttribute("min", minDate);
+    </script>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/medidaIsometricaAction.php">
