@@ -1,9 +1,11 @@
 <?php
 include_once 'data.php';
 include '../domain/factura.php';
-class FacturaData extends Data {
+class FacturaData extends Data
+{
 
-    public function insertFactura($factura){
+    public function insertFactura($factura)
+    {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
@@ -72,6 +74,7 @@ class FacturaData extends Data {
 
     public function buscarFactura($palabra)
     {
+
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
@@ -112,8 +115,8 @@ class FacturaData extends Data {
                 $idModalidad = $rowModalidad['tbcatalogopagoperidiocidadid'];
             }
         }
-/*
-        $querySelectServicio = "SELECT * FROM tbservicio WHERE tbservicionombre LIKE '%$palabra%';";
+
+        /*$querySelectServicio = "SELECT * FROM tbservicio WHERE tbservicionombre LIKE '%$palabra%';";
         $idServicio = 0;
         $resultServicio = mysqli_query($conn, $querySelectServicio);
         while ($rowServicio = mysqli_fetch_array($resultServicio)) {
