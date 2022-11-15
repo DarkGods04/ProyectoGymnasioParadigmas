@@ -22,12 +22,18 @@ include '../business/facturaDetalleBusiness.php';
             return confirm("¿Está seguro de que desea eliminar esta factura?");
         }
     </script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+    <script src="../js/jquery_formato.js"></script>
 </head>
 
 <body>
     <?php
     include 'header.php';
     ?>
+    <br></br>
+    <a href="../view/listarFactura.php" style="text-decoration: none; color: blue; font-size: 150%;"> Generar nueva factura </a>
+    <br></br>
     <h1>Historial factura</h1>
     <form action="" method="post" autocomplete="off">
         <div>
@@ -135,16 +141,16 @@ include '../business/facturaDetalleBusiness.php';
                                     for ($i = 0; $i < count($array); $i++) {
 
                                         if ($serv->getIdTBServicio() == $array[$i]) {
-                                            
-                                        echo  '<input type="text" value="' .$serv->getNombreTBServicio() ." Cantidad: ". $arrayCantidad[$i]. '"readonly />';
+
+                                            echo  '<input type="text" value="' . $serv->getNombreTBServicio() . " Cantidad: " . $arrayCantidad[$i] . '"readonly />';
                                         }
                                     }
                                 }
-                               // print_r($array);
-                            //print_r($arrayCantidad);
+                                // print_r($array);
+                                //print_r($arrayCantidad);
                                 ?>
                             </td>
-                            <td><input type="text" name="MontoBruto" id="MontoBruto" value="<?php echo $montoBruto; ?>" /></td>
+                            <td><input type="text" class="mascaramonto" name="MontoBruto" id="MontoBruto" value="<?php echo $montoBruto; ?>" /></td>
                             <td>
                                 <?php
                                 $impuestoVentaBusiness = new ImpuestoVentaBusiness();
@@ -157,7 +163,7 @@ include '../business/facturaDetalleBusiness.php';
                             </td>
 
                             <?php
-                            echo '<td><input type="text" name="montoNeto" id="montoNeto" value="₡ ' . $row->getMontoNetoTBFactura() .  '"readonly /></td>';
+                            echo '<td><input type="text" class="mascaramonto" name="montoNeto" id="montoNeto" value="₡ ' . $row->getMontoNetoTBFactura() .  '"readonly /></td>';
                             ?>
                             <td>
                                 <?php

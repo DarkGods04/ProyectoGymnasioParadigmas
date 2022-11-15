@@ -21,6 +21,7 @@ include '../business/pagoMetodoBusiness.php';
     <?php
     include 'header.php';
     ?>
+
     <h2>Crear nueva factura</h2>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -28,6 +29,7 @@ include '../business/pagoMetodoBusiness.php';
 </head>
 
 <body>
+
     <div>
 
         <h3>Selcciones los Servicios</h3>
@@ -106,11 +108,11 @@ include '../business/pagoMetodoBusiness.php';
                         <th>Cliente</th>
                         <th>Instructor</th>
                         <th>Fecha de pago</th>
+                        <th>Método de pago</th>
                         <th>Peridiocidad de pago</th>
                         <th>Monto bruto</th>
                         <th>Impuesto de venta</th>
                         <th>Monto neto</th>
-                        <th>Método de pago</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -182,7 +184,38 @@ include '../business/pagoMetodoBusiness.php';
                         <td><input type="date" id="fechaPago" name="fechaPago" value="<?php if (isset($_GET['fechaPago'])) {
                                                                                             echo $_GET['fechaPago'];
                                                                                         } ?>" required>
+                        </td>
 
+                        <td>
+                            <?php
+                            $pagoMetodoBusiness = new PagoMetodoBusiness();
+                            $metodoPago = $pagoMetodoBusiness->obtener();
+                            ?>
+                            <select name="pagoMetodoId" id="pagoMetodoId" required>
+                                <?php
+                                if (isset($_GET['pagoMetodoId']) && strlen($_GET['pagoMetodoId']) > 0) {
+                                    foreach ($metodoPago as $pagoM) :
+                                        if ($pagoM->getActivoTBPagoMetodo() == 1) {
+                                            if ($_GET['pagoMetodoId'] == $pagoM->getIDPagoMetodo()) {
+                                                echo '<option value="' . $pagoM->getIDPagoMetodo() . '">' . $pagoM->getNombreTBPagoMetodo() . '</option>';
+                                            }
+                                        }
+
+                                    endforeach;
+                                } else { ?>
+                                    <option value="" required>Método pago</option>
+                                <?php }
+
+                                foreach ($metodoPago as $pagoM) :
+                                    if ($pagoM->getActivoTBPagoMetodo() == 1) {
+                                        if ($_GET['pagoMetodoId'] != $pagoM->getIDPagoMetodo()) {
+                                            echo '<option value="' . $pagoM->getIDPagoMetodo() . '">' . $pagoM->getNombreTBPagoMetodo() . '</option>';
+                                        }
+                                    }
+                                endforeach;
+                                ?>
+                            </select>
+                        </td>
                         <td>
 
 
@@ -222,7 +255,7 @@ include '../business/pagoMetodoBusiness.php';
                                                                                                             echo $_GET['MontoBruto'];
                                                                                                         } else {
                                                                                                             echo "";
-                                                                                                        } ?>" required>
+                                                                                                        } ?>" required></td>
                         <td>
                             <?php
                             $impuestoVentaBusiness = new ImpuestoVentaBusiness();
@@ -257,37 +290,7 @@ include '../business/pagoMetodoBusiness.php';
                         </td>
                         <td><input type="text" class="mascaramonto" name="MontoNeto" value="<?php if (isset($_GET['MontoNeto'])) {
                                                                                                 echo $_GET['MontoNeto'];
-                                                                                            } ?>" readonly>
-                        <td>
-                            <?php
-                            $pagoMetodoBusiness = new PagoMetodoBusiness();
-                            $metodoPago = $pagoMetodoBusiness->obtener();
-                            ?>
-                            <select name="pagoMetodoId" id="pagoMetodoId" required>
-                                <?php
-                                if (isset($_GET['pagoMetodoId']) && strlen($_GET['pagoMetodoId']) > 0) {
-                                    foreach ($metodoPago as $pagoM) :
-                                        if ($pagoM->getActivoTBPagoMetodo() == 1) {
-                                            if ($_GET['pagoMetodoId'] == $pagoM->getIDPagoMetodo()) {
-                                                echo '<option value="' . $pagoM->getIDPagoMetodo() . '">' . $pagoM->getNombreTBPagoMetodo() . '</option>';
-                                            }
-                                        }
-
-                                    endforeach;
-                                } else { ?>
-                                    <option value="" required>Método pago</option>
-                                <?php }
-
-                                foreach ($metodoPago as $pagoM) :
-                                    if ($pagoM->getActivoTBPagoMetodo() == 1) {
-                                        if ($_GET['pagoMetodoId'] != $pagoM->getIDPagoMetodo()) {
-                                            echo '<option value="' . $pagoM->getIDPagoMetodo() . '">' . $pagoM->getNombreTBPagoMetodo() . '</option>';
-                                        }
-                                    }
-                                endforeach;
-                                ?>
-                            </select>
-                        </td>
+                                                                                            } ?>" readonly></td>
                         <td><button type="submit" name="insertarFactura" id="insertarFactura" value="insertarFactura">Registrar factura</button></td>
                     </tr>
                 </tbody>
@@ -327,6 +330,9 @@ include '../business/pagoMetodoBusiness.php';
         </form>
     </div>
     <script src="../js/jquery_formato.js"></script>
+    <br></br>
+    <a href="../view/listarHistorialFactura.php" style="text-decoration: none; color: blue; font-size: 150%;"> Ver historial de facturación </a>
+
 </body>
 
 </html>
