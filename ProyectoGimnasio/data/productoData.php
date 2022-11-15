@@ -19,7 +19,7 @@ class ProductoData extends Data {
         }
 
         $queryInsert = "INSERT INTO tbproducto VALUES (" . $nextId . ",'" . $producto->getNombreTBProducto() . "','" .
-                $producto->getDescripcionTBProducto() . "','" . $producto->getPrecioCompraTBProducto() . "','" .
+                $producto->getDescripcionTBProducto() .  "','" . $producto->getIdLineaProductosTBProducto() . "','" . $producto->getPrecioCompraTBProducto() . "','" .
                 $producto->getPrecioVentaTBProducto() . "','" . $producto->getCantidadTBProducto() . "','" .
                 $producto->getActivoTBProducto() . "');";
 
@@ -48,13 +48,14 @@ class ProductoData extends Data {
         $id = $producto->getIdTBProducto();
         $nombre = $producto->getNombreTBProducto();
         $descripcion = $producto->getDescripcionTBProducto();
+        $idlineaProducto = $producto->getIdLineaProductosTBProducto();
         $precioCompra = $producto->getPrecioCompraTBProducto();
         $precioVenta = $producto->getPrecioVentaTBProducto();
         $cantidad = $producto->getCantidadTBProducto();
      
 
         $queryUpdate = "UPDATE tbproducto SET tbproductonombre='$nombre', tbproductodescripcion='$descripcion',
-            tbproductopreciocompra='$precioCompra', tbproductoprecioventa=$precioVenta, tbproductocantidad='$cantidad' WHERE tbproductoid =$id";
+            tbcatalogolineaproductosid='$idlineaProducto', tbproductopreciocompra='$precioCompra', tbproductoprecioventa=$precioVenta, tbproductocantidad='$cantidad' WHERE tbproductoid =$id";
 
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
@@ -72,7 +73,7 @@ class ProductoData extends Data {
         
         $productos = [];
         while ($row = mysqli_fetch_array($result)) {
-            $currentDireccion = new Producto($row['tbproductoid'], $row['tbproductonombre'], $row['tbproductodescripcion'], $row['tbproductopreciocompra'], $row['tbproductoprecioventa'], $row['tbproductocantidad'], $row['tbproductoactivo']);
+            $currentDireccion = new Producto($row['tbproductoid'], $row['tbproductonombre'], $row['tbproductodescripcion'], $row['tbcatalogolineaproductosid'], $row['tbproductopreciocompra'], $row['tbproductoprecioventa'], $row['tbproductocantidad'], $row['tbproductoactivo']);
             array_push($productos, $currentDireccion);
         }
         return $productos;
@@ -82,7 +83,7 @@ class ProductoData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
-        $querySelect = "SELECT * FROM tbproducto WHERE tbproductoid LIKE '%$palabra%' OR tbproductonombre LIKE '%$palabra%' OR tbproductodescripcion LIKE '%$palabra%' OR
+        $querySelect = "SELECT * FROM tbproducto WHERE tbproductoid LIKE '%$palabra%' OR tbproductonombre LIKE '%$palabra%' OR tbproductodescripcion LIKE '%$palabra%' OR tbcatalogolineaproductosid LIKE '%$palabra%' OR
         tbproductocantidad LIKE '%$palabra%';";
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
@@ -90,7 +91,7 @@ class ProductoData extends Data {
         $productos = [];
         while ($row = mysqli_fetch_array($result)) {
             if($row['tbproductoactivo'] == 1){
-                $currentProducto = new Producto($row['tbproductoid'], $row['tbproductonombre'], $row['tbproductodescripcion'], $row['tbproductopreciocompra'], $row['tbproductoprecioventa'], $row['tbproductocantidad'], $row['tbproductoactivo']);
+                $currentProducto = new Producto($row['tbproductoid'], $row['tbproductonombre'], $row['tbproductodescripcion'], $row['tbcatalogolineaproductosid'], $row['tbproductopreciocompra'], $row['tbproductoprecioventa'], $row['tbproductocantidad'], $row['tbproductoactivo']);
                 array_push($productos, $currentProducto);
             }
         }
