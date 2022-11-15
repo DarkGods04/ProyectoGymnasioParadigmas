@@ -23,6 +23,24 @@
             return confirm("¿Está seguro de que desea volver al menú de activos?");
         }
     </script>
+
+    <style>
+        table {
+            border: none;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 5px 10px;
+            text-align: center;
+            border: 1px solid #999;
+        }
+
+        tr:nth-child(1) {
+            background: #dedede;
+        }
+    </style>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
@@ -108,10 +126,18 @@
                 </thead>
 
                 <tbody>
-                    <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="name" class="form-control" placeholder="Nombre del activo" autofocus value="<?php if(isset($_GET['name'])){ echo $_GET['name']; }?>"></td>
-                    <td><input type="text" name="descripcion" class="form-control" placeholder="Descripción del activo" autofocus value="<?php if(isset($_GET['descripcion'])){ echo $_GET['descripcion']; }?>"></td>
-                    <td><input type="text" class="mascaracantidad" name="cantidad" class="form-control" placeholder="Cantidad" autofocus value="<?php if(isset($_GET['cantidad'])){ echo $_GET['cantidad']; }?>"></td>
-                    <td><input type="text" class="mascaramonto" name="montoCompra" class="form-control" placeholder="Monto de compra" autofocus value="<?php if(isset($_GET['montoCompra'])){ echo $_GET['montoCompra']; }?>"></td>
+                    <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" name="name" class="form-control" placeholder="Nombre del activo" autofocus value="<?php if (isset($_GET['name'])) {
+                                                                                                                                                                    echo $_GET['name'];
+                                                                                                                                                                } ?>"></td>
+                    <td><input type="text" name="descripcion" class="form-control" placeholder="Descripción del activo" autofocus value="<?php if (isset($_GET['descripcion'])) {
+                                                                                                                                                echo $_GET['descripcion'];
+                                                                                                                                            } ?>"></td>
+                    <td><input type="text" class="mascaracantidad" name="cantidad" class="form-control" placeholder="Cantidad" autofocus value="<?php if (isset($_GET['cantidad'])) {
+                                                                                                                                                    echo $_GET['cantidad'];
+                                                                                                                                                } ?>"></td>
+                    <td><input type="text" class="mascaramonto" name="montoCompra" class="form-control" placeholder="Monto de compra" autofocus value="<?php if (isset($_GET['montoCompra'])) {
+                                                                                                                                                            echo $_GET['montoCompra'];
+                                                                                                                                                        } ?>"></td>
                     <td><button type="submit" name="insertar" id="insertar" value="insertar">Registrar activo</button></td>
                 </tbody>
             </table>
