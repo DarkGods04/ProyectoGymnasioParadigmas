@@ -6,20 +6,60 @@ document.getElementById("campo").addEventListener("keyup",getNombresActivosFijos
 document.getElementById("campo").addEventListener("keyup",getNombresActivosVariables)
 document.getElementById("campo").addEventListener("keyup",getNombresImpuestoVenta)
 document.getElementById("campo").addEventListener("keyup",getNombresPagoPeridiocidad)
+document.getElementById("campo").addEventListener("keyup",getNombresProductos)
+
 document.getElementById("campo").addEventListener("keyup",getNombresPagoMetodo)
 document.getElementById("campo2").addEventListener("keyup",getNombresPagoMetodo)
+
 document.getElementById("campo").addEventListener("keyup",getNombresServicio)
 document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncional)
 document.getElementById("campo").addEventListener("keyup",getNombresModalidadFuncionalCriterio)
 document.getElementById("campo").addEventListener("keyup",getNombresFacturas)
 document.getElementById("campo").addEventListener("keyup",getNombresEjercicios)
+
 document.getElementById("campo").addEventListener("keyup", getNombresPeridiocidades)
 document.getElementById("campo2").addEventListener("keyup", getNombresPeridiocidades)
+
 document.getElementById("campo").addEventListener("keyup", getNombresGruposMusculares)
 document.getElementById("campo2").addEventListener("keyup", getNombresGruposMusculares)
+
 document.getElementById("campo").addEventListener("keyup", getNombresMedidasIsometricas)
 document.getElementById("campo").addEventListener("keyup", getNombresTipoClientes)
 document.getElementById("campo").addEventListener("keyup", getNombresRutinaNiveles)
+
+document.getElementById("campo").addEventListener("keyup", getNombresLineaProductos)
+document.getElementById("campo2").addEventListener("keyup", getNombresLineaProductos)
+
+document.getElementById("campo").addEventListener("keyup", getNombresProveedores)
+
+document.getElementById("campo").addEventListener("keyup", getNombresCompras)
+
+function getNombresProductos() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaProductos")
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionProducto.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+}
 
 function getNombresGruposMusculares() {
     let inputCP = document.getElementById("campo").value
@@ -119,6 +159,84 @@ function getNombresPeridiocidades() {
         lista.style.display = 'none'
     }
 }
+
+
+function getNombresLineaProductos() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaLineaProductos")
+    let inputCP2 = document.getElementById("campo2").value
+    let lista2 = document.getElementById("listaLineaProductos2")
+
+    if (inputCP2.length > 0) {
+
+        let url = "../data/prediccionLineaProductos.php"
+        let formData = new FormData()
+
+        formData.append("campo2", inputCP2)
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista2.style.display = 'block'
+                lista2.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista2.style.display = 'none'
+    }
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionLineaProductos.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+}
+
+
+function getNombresProveedores() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaProveedor")
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionProveedor.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+}
+
 
 function getNombresPagoMetodo() {
     let inputCP = document.getElementById("campo").value
@@ -437,6 +555,35 @@ function getNombresImpuestoVenta() {
     }
 }
 
+
+function getNombresProductos() {
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaProductos")
+
+    if (inputCP.length > 0) {
+
+        let url = "../data/prediccionProducto.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+            .then(data => {
+                lista.style.display = 'block'
+                lista.innerHTML = data
+            })
+            .catch(err => console.log(err))
+
+    } else {
+        lista.style.display = 'none'
+    }
+}
+
+
 function getNombresPagoPeridiocidad(){
     let inputCP = document.getElementById("campo").value
     let lista = document.getElementById("listaPagoPeridiocidad")
@@ -715,6 +862,34 @@ function getNombresRutinaNiveles(){
     }else {
         lista.style.display = 'none'
     }
+}
+
+function getNombresCompras(){
+    let inputCP = document.getElementById("campo").value
+    let lista = document.getElementById("listaCompras")
+
+    if(inputCP.length > 0){
+
+        let url= "../data/prediccionCompra.php"
+        let formData = new FormData()
+
+        formData.append("campo", inputCP)
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+            mode: "cors"
+        }).then(Response => Response.json())
+        .then(data => {
+            lista.style.display = 'block'
+            lista.innerHTML = data
+        })
+        .catch(err => console.log(err))
+
+    }else {
+        lista.style.display = 'none'
+    }
+
 }
 
 

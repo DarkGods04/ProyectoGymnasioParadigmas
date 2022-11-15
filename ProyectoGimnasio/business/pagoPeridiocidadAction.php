@@ -1,4 +1,3 @@
-
 <?php
 include 'pagoPeridiocidadBusiness.php';
 include 'facturaBusiness.php';
@@ -11,6 +10,17 @@ if (isset($_POST['actualizar'])) {
         $descripcion = $_POST['descripcionPagoPeridiocidad'];
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0) {
+
+            $pagoPeridiocidadBusiness = new PagoPeridiocidadBusiness();
+            $pagoPeridiocidades = $pagoPeridiocidadBusiness->obtener();
+            $existe = false;
+            foreach ($pagoPeridiocidades as $row) {
+                if ($row->getNombreTBPagoPeridiocidad() == $nombre) {
+                    $existe = true;
+                }
+            }
+
+            if($existe == false){
 
             if (!is_numeric($nombre)) {
                 $pagoPeridiocidad = new PagoPeridiocidad($id, $nombre, $descripcion, 1);
@@ -25,6 +35,10 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarPagoPeridiocidades.php?error=numberFormat");
             }
+
+        } else {
+            header("location: ../view/listarPagoPeridiocidades.php?error=existe");
+        }
         } else {
             header("location: ../view/listarPagoPeridiocidades.php?error=emptyField");
         }
@@ -68,8 +82,10 @@ if (isset($_POST['insertar'])) {
         $existe = false;
         $nombre = $_POST['nombrePagoPeridiocidad'];
         $descripcion = $_POST['descripcionPagoPeridiocidad'];
+        
         $pagoPeridiocidadBusiness = new PagoPeridiocidadBusiness();
         $pagoPeridiocidades = $pagoPeridiocidadBusiness->obtener();
+        
         foreach ($pagoPeridiocidades as $row) {
             if ($row->getNombreTBPagoPeridiocidad() == $nombre) {
                 $existe = true;
