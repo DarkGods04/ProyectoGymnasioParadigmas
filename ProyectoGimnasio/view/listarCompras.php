@@ -377,7 +377,20 @@ include '../business/proveedorBusiness.php';
 
     </div>
 
-
+    <script>
+        var todayDateMax = new Date();
+        var mesMax = todayDateMax.getMonth() + 1;
+        var anioMax = todayDateMax.getUTCFullYear();
+        var diaMax = todayDateMax.getDate();
+        if (mesMax < 10) {
+            mesMax = "0" + mesMax
+        }
+        if (diaMax < 10) {
+            diaMax = "0" + diaMax;
+        }
+        var maxDate = anioMax + "-" + mesMax + "-" + diaMax;
+        document.getElementById("fechaCompra").setAttribute("max", maxDate);
+    </script>
 
 
     <div>
