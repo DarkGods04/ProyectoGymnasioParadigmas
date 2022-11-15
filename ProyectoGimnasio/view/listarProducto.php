@@ -1,5 +1,7 @@
 <?php
 include '../business/productoBusiness.php';
+include '../business/lineaProductosBusiness.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -50,8 +52,17 @@ include '../business/productoBusiness.php';
         }
         $campo = $_POST['campo'];
 
+
+
+
+        $lineaProductosBusiness = new LineaProductosBusiness();
+        $lineas = $lineaProductosBusiness->obtener();
+
+
+
         $productoBusiness = new ProductoBusiness();
         $productos = $productoBusiness->buscar($campo);
+      
         if (!empty($productos)) {
         ?>
             <table border="1">
@@ -60,6 +71,7 @@ include '../business/productoBusiness.php';
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Descripcion</th>
+                        <th>Linea de producto</th>
                         <th>Precio de compra</th>
                         <th>Precio de venta</th>
                         <th>Cantidad</th>
@@ -77,6 +89,26 @@ include '../business/productoBusiness.php';
                             echo '<td>' . $row->getIdTBProducto() . '</td>';
                             echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="nombre" id="nombre" value="' . $row->getNombreTBProducto() . '"/></td>';
                             echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="descripcion" id="descripcion" value="' . $row->getDescripcionTBProducto() . '"/></td>';
+
+
+                            ?>
+
+                            <td>
+                           
+                            <select name="lineaproductoid">
+                        <?php foreach($lineas as $row2){ 
+                        if($row2->getIdTBCatalogoLineaProductos() == $row->getIdLineaProductosTBProducto()){
+                              echo '<option value="' .$row2->getIdTBCatalogoLineaProductos() .'">'.$row2->getNombreTBCatalogoLineaProductos().'</option>';
+                           }
+                        } ?>
+                        <?php foreach($lineas as $row1){ 
+                           echo '<option value="' .$row1->getIdTBCatalogoLineaProductos() .'">'.$row1->getNombreTBCatalogoLineaProductos().'</option>';
+                             } ?>
+                           </select>
+                            </td>
+
+                            <?php
+
                             echo '<td><input type="text"  class="mascaramonto" name="preciocompra" id="preciocompra" value="' . $row->getPrecioCompraTBProducto() .  '"/></td>';
                             echo '<td><input type="text"  class="mascaramonto"   name="precioventa" id="precioventa" value="' . $row->getPrecioVentaTBProducto() .  '"/></td>';
                             echo '<td><input type="text"  name="cantidad" id="cantidad" value="' . $row->getCantidadTBProducto() .  '"/></td>';
@@ -106,6 +138,7 @@ include '../business/productoBusiness.php';
                     <tr>
                         <th>Nombre</th>
                         <th>Descripcion</th>
+                        <th>Linea de producto</th>
                         <th>Precio de compra</th>
                         <th>Precio de venta</th>
                         <th>Cantidad</th>
@@ -116,6 +149,26 @@ include '../business/productoBusiness.php';
                     <tr>
                         <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="nombre" placeholder="Nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"></td>
                         <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="descripcion" placeholder="Descripcion" value="<?php if(isset($_GET['descripcion'])){ echo $_GET['descripcion']; }?>"></td>
+
+                        <td>
+
+                        <?php
+                   $lineaProductosBusiness = new LineaProductosBusiness();
+                   $lineas = $lineaProductosBusiness->obtener();
+                    ?>
+
+                        <select name="lineaproductoid">
+                       
+                            <?php foreach($lineas as $row5):
+                                  if($row5->getActivoTBCatalogoLineaProductos() == 1){
+                                ?>
+                                <?php echo '<option value="'. $row5->getIdTBCatalogoLineaProductos().'">'. $row5->getNombreTBCatalogoLineaProductos().'</option>' ?>
+                                <?php
+                                } endforeach ?>
+                        </select>
+                                
+                            </td>
+
                         <td><input type="text"  class="mascaramonto" name="preciocompra" placeholder="Precio de compra" value="<?php if(isset($_GET['preciocompra'])){ echo $_GET['preciocompra']; }?>"></td>
                         <td><input type="text"  class="mascaramonto" name="precioventa" placeholder="Precio de venta" value="<?php if(isset($_GET['precioventa'])){ echo $_GET['precioventa']; }?>"></td>
                         <td><input type="number" name="cantidad" placeholder="Cantidad de producto" value="<?php if(isset($_GET['cantidad'])){ echo $_GET['cantidad']; }?>"></td>

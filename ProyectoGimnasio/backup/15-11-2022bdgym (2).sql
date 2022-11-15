@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2022 a las 09:19:34
+-- Tiempo de generación: 15-11-2022 a las 08:58:34
 -- Versión del servidor: 10.4.11-MariaDB
 -- Versión de PHP: 7.4.3
 
@@ -556,7 +556,6 @@ CREATE TABLE `tbproducto` (
   `tbproductoid` int(11) NOT NULL,
   `tbproductonombre` varchar(50) NOT NULL,
   `tbproductodescripcion` varchar(200) NOT NULL,
-  `tbcatalogolineaproductosid` int(11) NOT NULL,
   `tbproductopreciocompra` double NOT NULL,
   `tbproductoprecioventa` double NOT NULL,
   `tbproductocantidad` int(11) NOT NULL,
@@ -567,9 +566,9 @@ CREATE TABLE `tbproducto` (
 -- Volcado de datos para la tabla `tbproducto`
 --
 
-INSERT INTO `tbproducto` (`tbproductoid`, `tbproductonombre`, `tbproductodescripcion`, `tbcatalogolineaproductosid`, `tbproductopreciocompra`, `tbproductoprecioventa`, `tbproductocantidad`, `tbproductoactivo`) VALUES
-(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 0, 1100, 1200, 5, 1),
-(2, 'Suplementos', 'suplementos con carboidartos necesarios para subir de peso rapidamente', 0, 10000, 13300, 7, 1);
+INSERT INTO `tbproducto` (`tbproductoid`, `tbproductonombre`, `tbproductodescripcion`, `tbproductopreciocompra`, `tbproductoprecioventa`, `tbproductocantidad`, `tbproductoactivo`) VALUES
+(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 1100, 1200, 5, 1),
+(2, 'Suplementos', 'suplementos con carboidartos necesarios para subir de peso rapidamente', 10000, 13300, 7, 1);
 
 -- --------------------------------------------------------
 

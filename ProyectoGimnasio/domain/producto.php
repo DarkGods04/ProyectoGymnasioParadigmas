@@ -5,15 +5,17 @@ class Producto {
 	private $idTBProducto;
 	private $nombreTBProducto;
 	private $descripcionTBProducto;
+	private $idLineaProductosTBProducto;
 	private $precioCompraTBProducto;
 	private $precioVentaTBProducto;
     private $cantidadTBProducto;
     private $activoTBProducto;
 
-	function Producto($idTBProducto, $nombreTBProducto, $descripcionTBProducto, $precioCompraTBProducto, $precioVentaTBProducto,$cantidadTBProducto,$activoTBProducto) {
+	function Producto($idTBProducto, $nombreTBProducto, $descripcionTBProducto,$idLineaProductosTBProducto, $precioCompraTBProducto, $precioVentaTBProducto,$cantidadTBProducto,$activoTBProducto) {
 		$this->idTBProducto = $idTBProducto;
 		$this->nombreTBProducto = $nombreTBProducto;
 		$this->descripcionTBProducto = $descripcionTBProducto;
+		$this->idLineaProductosTBProducto = $idLineaProductosTBProducto;
 		$this->precioCompraTBProducto = $precioCompraTBProducto;
 		$this->precioVentaTBProducto = $precioVentaTBProducto;
         $this->cantidadTBProducto = $cantidadTBProducto;
@@ -44,6 +46,14 @@ class Producto {
 
 	public function getDescripcionTBProducto() {
 		return $this->descripcionTBProducto;
+	}
+
+	public function setIdLineaProductosTBProducto($idLineaProductosTBProducto) {
+		$this->idLineaProductosTBProducto = $idLineaProductosTBProducto;
+	}
+
+	public function getIdLineaProductosTBProducto() {
+		return $this->idLineaProductosTBProducto;
 	}
 
 	public function setPrecioCompraTBProducto($precioCompraTBProducto) {
