@@ -27,10 +27,10 @@ include '../business/pagoMetodoBusiness.php';
                                 $clienteBusiness = new ClienteBusiness();
                                 $clientes = $clienteBusiness->obtener();
 
-                                if (isset($_GET['cliente'])) {
+                                if (isset($_GET['clienteid'])) {
                                     foreach ($clientes as $row) :
                                         if ($row->getActivoTBCliente() == 1) {
-                                            if ($_GET['cliente'] == $row->getIdTBCliente()) {
+                                            if ($_GET['clienteid'] == $row->getIdTBCliente()) {
 
                                                 echo " Cliente: " . $row->getNombreTBCliente() . " " . $row->getApellido1TBCliente();
                                             }
@@ -42,11 +42,11 @@ include '../business/pagoMetodoBusiness.php';
                                         $instructorBusiness = new InstructorBusiness();
                                         $instructores = $instructorBusiness->obtener();
 
-                                        if (isset($_GET['instructor'])) {
+                                        if (isset($_GET['instructorid'])) {
 
                                             foreach ($instructores as $row) :
                                                 if ($row->getActivoTBInstructor() == 1) {
-                                                    if ($_GET['instructor'] == $row->getIdTBInstructor()) {
+                                                    if ($_GET['instructorid'] == $row->getIdTBInstructor()) {
 
                                                         echo " Instructor: " . $row->getNombreTBInstructor() . " " . $row->getApellidoTBInstructor();
                                                     }
