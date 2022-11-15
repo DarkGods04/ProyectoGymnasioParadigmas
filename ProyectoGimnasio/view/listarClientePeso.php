@@ -178,6 +178,8 @@
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         } else if ($_GET['error'] == "dublicate") {
                             echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
+                        } else if ($_GET['error'] == "pesoError"){
+                            echo '<p style="color: red">Error, rango de peso no valido!</p>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
