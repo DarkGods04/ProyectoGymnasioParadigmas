@@ -102,7 +102,7 @@ include '../business/grupoMuscularBusiness.php';
                                 }
                             }
 
-                            echo '<td><input  type="date" name="fechaMedicion" id="fechaMedicion" value="' . $row->getFechaMedicion() . '" readonly/></td>';
+                            echo '<td><input  type="date" name="fechaMedicion" value="' . $row->getFechaMedicion() . '" readonly/></td>';
                             echo '<input  type="hidden" class="mascaramedida" name="medida" id="medida" value="' . $row->getMedida() . '"/>';
                             echo '<td>' . $row->getMedida() . '</td>';
                             echo '</tr>';

@@ -126,7 +126,7 @@
                         <select name="instructorid">
                         <option value="<?php if(isset($_GET['instructorid'])){foreach ($instructor as $row5){ if($_GET['instructorid'] == $row5->getIdTBInstructor()){echo $_GET['instructorid'];}}}?>"><?php if(isset($_GET['instructorid'])){foreach ($instructor as $row5){ if($_GET['instructorid'] == $row5->getIdTBInstructor()){echo $row5->getNombreTBInstructor();}}}?></option>
                             <?php foreach ($instructor as $row): ?>
-                                <?php echo '<option value="'. $row->getIdTBInstructor() .'">'. $row->getNombreTBInstructor() . '</option>' ?>
+                                <?php echo '<option value="'. $row->getIdTBInstructor() .'">'. $row->getNombreTBInstructor() . " " . $row->getApellidoTBInstructor() . ' - ' . $row->getTelefonoTBInstructor() . '</option>' ?>
                             <?php endforeach ?>
                         </select>
                     </td>
