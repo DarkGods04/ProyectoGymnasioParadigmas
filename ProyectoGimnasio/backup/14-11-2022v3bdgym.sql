@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2022 a las 01:51:22
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Tiempo de generación: 14-11-2022 a las 23:46:03
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -349,55 +350,22 @@ CREATE TABLE `tbfactura` (
   `tbinstructorid` int(11) NOT NULL,
   `tbfacturafechapago` date NOT NULL,
   `tbcatalogopagoperidiocidadid` varchar(200) NOT NULL,
+  `tbservicioid` varchar(200) NOT NULL,
+  `tbfacturamontobruto` float NOT NULL,
   `tbimpuestoventaid` int(11) NOT NULL,
   `tbfacturamontoneto` float NOT NULL,
-  `tbfacturaactivo` tinyint(4) NOT NULL,
-  `tbcatalogopagometodoid` int(11) NOT NULL
+  `tbfacturaactivo` tinyint(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `tbfactura`
 --
 
-INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfacturafechapago`, `tbcatalogopagoperidiocidadid`, `tbimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`, `tbcatalogopagometodoid`) VALUES
-(1, 3, 3, '2022-11-04', '3', 1, 5675, 0, 1),
-(2, 1, 2, '2022-11-15', '3', 2, 19690, 1, 1),
-(3, 4, 4, '2022-11-03', '3', 2, 2860, 0, 1),
-(4, 3, 3, '2022-11-23', '3', 1, 28375, 1, 2),
-(5, 4, 4, '2022-11-17', '3', 2, 3520, 1, 2),
-(6, 2, 3, '2022-11-17', '2', 1, 2951, 1, 1),
-(7, 2, 2, '2022-11-25', '2', 1, 9307, 1, 2);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbfacturadetalle`
---
-
-CREATE TABLE `tbfacturadetalle` (
-  `tbfacturadetalleid` int(11) NOT NULL,
-  `tbfacturaid` int(11) NOT NULL,
-  `tbservicioid` int(11) NOT NULL,
-  `tbfacturadetallemontobruto` float NOT NULL,
-  `tbfacturadetalleactivo` tinyint(4) NOT NULL,
-  `tbserviciocantidad` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbfacturadetalle`
---
-
-INSERT INTO `tbfacturadetalle` (`tbfacturadetalleid`, `tbfacturaid`, `tbservicioid`, `tbfacturadetallemontobruto`, `tbfacturadetalleactivo`, `tbserviciocantidad`) VALUES
-(1, 1, 1, 5000, 0, 2),
-(2, 2, 1, 2500, 1, 1),
-(3, 2, 2, 2600, 1, 1),
-(4, 2, 3, 12800, 1, 4),
-(5, 3, 2, 2600, 0, 1),
-(6, 4, 1, 2500, 1, 1),
-(7, 5, 3, 3200, 1, 1),
-(8, 6, 1, 2600, 1, 1),
-(9, 7, 1, 5200, 1, 2),
-(10, 7, 4, 3000, 1, 1);
+INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfacturafechapago`, `tbcatalogopagoperidiocidadid`, `tbservicioid`, `tbfacturamontobruto`, `tbimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`) VALUES
+(1, 1, 1, '2022-10-01', '1', '1;2', 6500, 1, 7345, 1),
+(2, 3, 2, '2022-10-20', '2', '1;2', 5800, 2, 6380, 1),
+(3, 2, 3, '2022-10-21', '3', '2;3', 6800, 1, 7718, 1),
+(4, 4, 2, '2022-11-02', '1', '1', 2600, 1, 2951, 1);
 
 -- --------------------------------------------------------
 
@@ -709,12 +677,6 @@ ALTER TABLE `tbcompradetalle`
 --
 ALTER TABLE `tbfactura`
   ADD PRIMARY KEY (`tbfacturaid`);
-
---
--- Indices de la tabla `tbfacturadetalle`
---
-ALTER TABLE `tbfacturadetalle`
-  ADD PRIMARY KEY (`tbfacturadetalleid`);
 
 --
 -- Indices de la tabla `tbimpuestoventa`
