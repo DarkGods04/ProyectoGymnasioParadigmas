@@ -93,7 +93,10 @@
     <div>
         <a href="./view/listarCategorizacionCliente.php" style="text-decoration: none; color: blue; font-size: 150%;">- Categorizacion de clientes</a>
     </div>
-
+    
+    <div>
+        <a href="./view/listarClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">- Crear rutina cliente </a>
+    </div>
     
 </body>
 
