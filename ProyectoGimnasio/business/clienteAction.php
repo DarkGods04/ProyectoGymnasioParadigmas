@@ -149,8 +149,6 @@ if (isset($_POST['actualizarCliente'])) {
             } else {
                 header("location: ../view/listarClientes.php?error=numberFormat");
             }
-
-     
         } else {
             header("location: ../view/listarClientes.php?error=emptyField");
         }
