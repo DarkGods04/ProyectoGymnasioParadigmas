@@ -10,10 +10,10 @@ class ClienteRutina{
     private $activoTBClienteRutina;
 
     function ClienteRutina($idTBClienteRutina, $idTBCliente, $idTBIstructor, $idTBModalidadFuncional,$fechaTBClienteRutina,$activoTBClienteRutina) {
-		$this->$idTBClienteRutina = $idTBClienteRutina;
+		$this->idTBClienteRutina = $idTBClienteRutina;
         $this->idTBCliente = $idTBCliente;
-        $this->$idTBIstructor = $idTBIstructor;
-        $this->$idTBModalidadFuncional = $idTBModalidadFuncional;
+        $this->idTBIstructor = $idTBIstructor;
+        $this->idTBModalidadFuncional = $idTBModalidadFuncional;
         $this->fechaTBClienteRutina = $fechaTBClienteRutina;
         $this->activoTBClienteRutina = $activoTBClienteRutina;
 	}

@@ -95,7 +95,7 @@
     </div>
     
     <div>
-        <a href="./view/listarClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">- Crear rutina cliente </a>
+        <a href="./view/listarMenuClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">- Rutina cliente </a>
     </div>
     
 </body>
