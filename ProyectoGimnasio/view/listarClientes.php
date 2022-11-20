@@ -83,7 +83,7 @@ include '../business/clienteBusiness.php';
                             echo '<td><input pattern="^[a-z A-Z\u00c0-\u017F]+" type="text" name="apellido2" id="apellido2" value="' . $row->getApellido2TBCliente() . '"/></td>';
                             echo '<td><input type="text" pattern="\w.+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+" name="correo" id="correo" value="' . $row->getCorreoTBCliente() .  '"/></td>';
                             echo '<td><input type="text" class="mascaratelefono" name="telefono" id="telefono" value="' . $row->getTelefonoTBCliente() .  '"/></td>';
-                            echo '<td><input type="date" name="fechaNacimiento" id="fechaNacimiento" value="' . $row->getFechaNacimientoTBCliente() .  '"/></td>';
+                            echo '<td><input type="date" name="fechaNacimiento" id="fechaNacimientoUp" value="' . $row->getFechaNacimientoTBCliente() .  '"/></td>';
                             echo '<td><select name="genero" id="genero">
                                     <option value="' . $row->getGeneroTBCliente() .  '">' . $row->getGeneroTBCliente() . '</option>
                                     <option value="Masculino">Masculino</option>
@@ -159,6 +159,22 @@ include '../business/clienteBusiness.php';
  
         </form>
     </div>    
+
+    <script>
+        var todayDateMax = new Date();
+        var mesMax = todayDateMax.getMonth() + 1;
+        var anioMax = todayDateMax.getUTCFullYear();
+        var diaMax = todayDateMax.getDate();
+        if (mesMax < 10) {
+            mesMax = "0" + mesMax
+        }
+        if (diaMax < 10) {
+            diaMax = "0" + diaMax;
+        }
+        var maxDate = anioMax + "-" + mesMax + "-" + diaMax;
+        document.getElementById("fechaNacimientoUp").setAttribute("max", maxDate);
+        document.getElementById("fechaNacimiento").setAttribute("max", maxDate);
+    </script>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/clienteAction.php">
