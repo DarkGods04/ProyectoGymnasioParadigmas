@@ -80,12 +80,7 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombreModalidadFuncional) > 0 && strlen($descripcionModalidadFuncional) > 0) {
 
-            $modalidadFuncionalBusiness = new modalidadFuncionalBusiness();
-            $elementos = $modalidadFuncionalBusiness->obtener();
-            $flag = 0;
-            foreach ($elementos as $row) { if($row->getNombreTBModalidadFuncional() == $_POST['nombreModalidadFuncional'] && $row->getActivoTBModalidadFuncional() == 1 && $row->getDescripcionTBModalidadFuncional() == $_POST['descripcionModalidadFuncional']  ){  $flag = 1; } }
-                
-    if($flag == 0){
+         
 
             if (!is_numeric($nombreModalidadFuncional)) {
                 $modalidadFuncional = new ModalidadFuncional($id, $nombreModalidadFuncional, $descripcionModalidadFuncional, 1);
@@ -102,9 +97,7 @@ if (isset($_POST['actualizar'])) {
                 header("location: ../view/listarModalidadFuncional.php?error=numberFormat");
             }
 
-        } else {
-            header("location: ../view/listarModalidadFuncional.php?error=duplicate");
-        }
+     
         } else {
             header("location: ../view/listarModalidadFuncional.php?error=emptyField");
         }

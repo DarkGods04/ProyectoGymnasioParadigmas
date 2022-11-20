@@ -12,12 +12,7 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0) {
 
-            $lineaProductosBusiness = new LineaProductosBusiness();
-            $elementos = $lineaProductosBusiness->obtener();
-            $flag = 0;
-            foreach ($elementos as $row) { if($row->getNombreTBCatalogoLineaProductos() == $_POST['nombreLineaProductos'] && $row->getActivoTBCatalogoLineaProductos() == 1 && $row->getDescripcionTBCatalogoLineaProductos() == $_POST['descripcionLineaProductos']  ){  $flag = 1; } }
-                
-    if($flag == 0){
+         
 
             if (!is_numeric($nombre)) {
                 $lineaProductos = new LineaProductos($id, $nombre, $descripcion, 1);
@@ -33,9 +28,7 @@ if (isset($_POST['actualizar'])) {
                 header("location: ../view/listarLineasProductos.php?error=numberFormat");
             }
 
-        } else {
-            header("location: ../view/listarLineasProductos.php?error=duplicate");
-        }
+       
         } else {
             header("location: ../view/listarLineasProductos.php?error=emptyField");
         }

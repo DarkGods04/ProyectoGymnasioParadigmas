@@ -21,6 +21,10 @@ include '../business/facturaDetalleBusiness.php';
         function confirmarAccionEliminar() {
             return confirm("¿Está seguro de que desea eliminar esta factura?");
         }
+
+        function confirmarAccionReimprimir() {
+            return confirm("¿Está seguro de que desea reimprimir esta factura?");
+        }
     </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -146,8 +150,6 @@ include '../business/facturaDetalleBusiness.php';
                                         }
                                     }
                                 }
-                                // print_r($array);
-                                //print_r($arrayCantidad);
                                 ?>
                             </td>
                             <td><input type="text" class="mascaramonto" name="MontoBruto" id="MontoBruto" value="<?php echo $montoBruto; ?>" /></td>
@@ -176,7 +178,9 @@ include '../business/facturaDetalleBusiness.php';
                                 } ?>
                             </td>
                     <?php
-                            echo '<td><input type="submit" name="eliminarFactura" id="eliminarFactura" value="Anular" onclick="return confirmarAccionEliminar()"/></td>';
+                            echo '<td><input type="submit" name="reimprimirFactura" id="reimprimirFactura" value="reimprimirFactura" onclick="return confirmarAccionReimprimir()"/>';
+                            echo '<input type="submit" name="eliminarFactura" id="eliminarFactura" value="eliminarFactura" onclick="return confirmarAccionEliminar()"/></td>';
+
                             echo '</tr>';
                             echo '</form>';
                         }

@@ -24,6 +24,23 @@ include '../business/activoFijoBusiness.php';
             return confirm("¿Está seguro de que desea volver al menú de activos?");
         }
     </script>
+    <style>
+        table {
+            border: none;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 5px 10px;
+            text-align: center;
+            border: 1px solid #999;
+        }
+
+        tr:nth-child(1) {
+            background: #dedede;
+        }
+    </style>
     <script src="../js/peticiones.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -82,7 +99,7 @@ include '../business/activoFijoBusiness.php';
                             echo '<td><input  type="text" name="serie" id="serie" value="' . $row->getSerie() . '"/></td>';
                             echo '<td><input type="text" name="modelo" id="modelo" value="' . $row->getModelo() .  '"/></td>';
                             echo '<td><input type="date" name="fechaCompra" id="fechaCompra" value="' . $row->getFechaCompra() .  '"/></td>';
-                            echo '<td><input type="text" class="mascaramonto" name="montoCompra" id="montoCompra" value="'. $row->getMontoCompra() . '"/></td>';
+                            echo '<td><input type="text" class="mascaramonto" name="montoCompra" id="montoCompra" value="' . $row->getMontoCompra() . '"/></td>';
                             echo '<td><select name="estadoUso" id="estadoUso">
                                     <option value="' . $row->getEstadoUso() .  '">' . $row->getEstadoUso() . '</option>
                                     <option value="En uso">En uso</option>
@@ -121,14 +138,28 @@ include '../business/activoFijoBusiness.php';
                 </thead>
 
                 <tbody>
-                    <td><input type="text" name="placa" placeholder="Placa del activo" value="<?php if(isset($_GET['placa'])){ echo $_GET['placa']; }?>"></td>
-                    <td><input type="text" name="serie" placeholder="Número de serie" value="<?php if(isset($_GET['serie'])){ echo $_GET['serie']; }?>"></td>
-                    <td><input type="text" name="modelo" placeholder="Modelo del equipo" value="<?php if(isset($_GET['modelo'])){ echo $_GET['modelo']; }?>"></td>
-                    <td><input type="date" class="classFechaCompra" id="fechaCompraIn" name="fechaCompra" value="<?php if(isset($_GET['fechaCompra'])){ echo $_GET['fechaCompra']; }?>"></td>
-                    <td><input type="text" class="mascaramonto" name="montoCompra" placeholder="Monto de compra" value="<?php if(isset($_GET['montoCompra'])){ echo $_GET['montoCompra']; }?>"></td>
+                    <td><input type="text" name="placa" placeholder="Placa del activo" value="<?php if (isset($_GET['placa'])) {
+                                                                                                    echo $_GET['placa'];
+                                                                                                } ?>"></td>
+                    <td><input type="text" name="serie" placeholder="Número de serie" value="<?php if (isset($_GET['serie'])) {
+                                                                                                    echo $_GET['serie'];
+                                                                                                } ?>"></td>
+                    <td><input type="text" name="modelo" placeholder="Modelo del equipo" value="<?php if (isset($_GET['modelo'])) {
+                                                                                                    echo $_GET['modelo'];
+                                                                                                } ?>"></td>
+                    <td><input type="date" class="classFechaCompra" id="fechaCompraIn" name="fechaCompra" value="<?php if (isset($_GET['fechaCompra'])) {
+                                                                                                                        echo $_GET['fechaCompra'];
+                                                                                                                    } ?>"></td>
+                    <td><input type="text" class="mascaramonto" name="montoCompra" placeholder="Monto de compra" value="<?php if (isset($_GET['montoCompra'])) {
+                                                                                                                            echo $_GET['montoCompra'];
+                                                                                                                        } ?>"></td>
                     <td>
                         <select name="estadoUso">
-                        <option value="<?php if(isset($_GET['estadoUso'])){ echo $_GET['estadoUso']; }?>"><?php if(isset($_GET['estadoUso'])){ echo $_GET['estadoUso']; }?></option>
+                            <option value="<?php if (isset($_GET['estadoUso'])) {
+                                                echo $_GET['estadoUso'];
+                                            } ?>"><?php if (isset($_GET['estadoUso'])) {
+                                                                                                                    echo $_GET['estadoUso'];
+                                                                                                                } ?></option>
                             <option value="En uso">En uso</option>
                             <option value="Fuera de uso">Fuera de uso</option>
                         </select>

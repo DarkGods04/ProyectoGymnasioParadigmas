@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-11-2022 a las 09:19:34
--- Versión del servidor: 10.4.11-MariaDB
--- Versión de PHP: 7.4.3
+-- Tiempo de generación: 15-11-2022 a las 01:51:22
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -235,28 +234,6 @@ INSERT INTO `tbcatalogorutinanivel` (`tbcatalogorutinanivelid`, `tbcatalogorutin
 (3, 'Moderada', 'Ejercicios intermedios', 1),
 (4, 'Alto', 'Ejercicios avanzados', 1),
 (5, 'Militar', 'Nivel súper avanzado', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbcategorizacioncliente`
---
-
-CREATE TABLE `tbcategorizacioncliente` (
-  `tbcategorizacionclienteid` int(11) NOT NULL,
-  `tbclienteid` int(11) NOT NULL,
-  `tbcatalogoclientetipoid` int(11) NOT NULL,
-  `tbcategorizacionclienteactivo` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbcategorizacioncliente`
---
-
-INSERT INTO `tbcategorizacioncliente` (`tbcategorizacionclienteid`, `tbclienteid`, `tbcatalogoclientetipoid`, `tbcategorizacionclienteactivo`) VALUES
-(1, 1, 1, 1),
-(2, 2, 2, 1),
-(3, 3, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -556,7 +533,6 @@ CREATE TABLE `tbproducto` (
   `tbproductoid` int(11) NOT NULL,
   `tbproductonombre` varchar(50) NOT NULL,
   `tbproductodescripcion` varchar(200) NOT NULL,
-  `tbcatalogolineaproductosid` int(11) NOT NULL,
   `tbproductopreciocompra` double NOT NULL,
   `tbproductoprecioventa` double NOT NULL,
   `tbproductocantidad` int(11) NOT NULL,
@@ -567,9 +543,9 @@ CREATE TABLE `tbproducto` (
 -- Volcado de datos para la tabla `tbproducto`
 --
 
-INSERT INTO `tbproducto` (`tbproductoid`, `tbproductonombre`, `tbproductodescripcion`, `tbcatalogolineaproductosid`, `tbproductopreciocompra`, `tbproductoprecioventa`, `tbproductocantidad`, `tbproductoactivo`) VALUES
-(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 0, 1100, 1200, 5, 1),
-(2, 'Suplementos', 'suplementos con carboidartos necesarios para subir de peso rapidamente', 0, 10000, 13300, 7, 1);
+INSERT INTO `tbproducto` (`tbproductoid`, `tbproductonombre`, `tbproductodescripcion`, `tbproductopreciocompra`, `tbproductoprecioventa`, `tbproductocantidad`, `tbproductoactivo`) VALUES
+(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 1100, 1200, 5, 1),
+(2, 'Suplementos', 'suplementos con carboidartos necesarios para subir de peso rapidamente', 10000, 13300, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -703,12 +679,6 @@ ALTER TABLE `tbcatalogopagoperidiocidad`
 --
 ALTER TABLE `tbcatalogorutinanivel`
   ADD PRIMARY KEY (`tbcatalogorutinanivelid`);
-
---
--- Indices de la tabla `tbcategorizacioncliente`
---
-ALTER TABLE `tbcategorizacioncliente`
-  ADD PRIMARY KEY (`tbcategorizacionclienteid`);
 
 --
 -- Indices de la tabla `tbcliente`
