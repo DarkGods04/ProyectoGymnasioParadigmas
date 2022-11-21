@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-11-2022 a las 00:34:33
--- Versión del servidor: 10.4.24-MariaDB
--- Versión de PHP: 7.4.29
+-- Tiempo de generación: 15-11-2022 a las 09:19:34
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -314,68 +315,6 @@ INSERT INTO `tbclientepeso` (`tbclientepesoid`, `tbclienteid`, `tbclientepesofec
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbclienterutina`
---
-
-CREATE TABLE `tbclienterutina` (
-  `tbclienterutinaid` int(11) NOT NULL,
-  `tbclienteid` int(11) NOT NULL,
-  `tbinstructorid` int(11) NOT NULL,
-  `tbmodalidadfuncionalid` int(11) NOT NULL,
-  `tbclienterutinafecha` date NOT NULL,
-  `tbclienterutinaactivo` tinyint(4) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbclienterutina`
---
-
-INSERT INTO `tbclienterutina` (`tbclienterutinaid`, `tbclienteid`, `tbinstructorid`, `tbmodalidadfuncionalid`, `tbclienterutinafecha`, `tbclienterutinaactivo`) VALUES
-(1, 2, 4, 1, '2022-11-16', 1),
-(2, 3, 2, 2, '2022-11-16', 1),
-(3, 2, 2, 3, '2022-11-16', 1),
-(4, 3, 3, 4, '2022-11-23', 1),
-(5, 1, 1, 2, '2022-11-16', 1);
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tbclienterutinadetalle`
---
-
-CREATE TABLE `tbclienterutinadetalle` (
-  `tbclienterutinadetalleid` int(11) NOT NULL,
-  `tbclienterutinaid` int(11) NOT NULL,
-  `tbejercicioid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `tbclienterutinadetalle`
---
-
-INSERT INTO `tbclienterutinadetalle` (`tbclienterutinadetalleid`, `tbclienterutinaid`, `tbejercicioid`) VALUES
-(1, 1, 1),
-(2, 1, 3),
-(3, 1, 5),
-(4, 1, 6),
-(5, 2, 1),
-(6, 2, 3),
-(7, 2, 5),
-(8, 2, 6),
-(9, 3, 1),
-(10, 4, 1),
-(11, 4, 4),
-(12, 4, 5),
-(13, 4, 6),
-(14, 5, 1),
-(15, 5, 2),
-(16, 5, 3),
-(17, 5, 4),
-(18, 5, 5);
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbcompra`
 --
 
@@ -395,8 +334,7 @@ CREATE TABLE `tbcompra` (
 INSERT INTO `tbcompra` (`tbcompraid`, `tbcomprafecha`, `tbproveedorid`, `tbcompramontoneto`, `tbcompramodopago`, `tbcompraactivo`) VALUES
 (1, '2022-11-02', 2, 30000, 0, 0),
 (2, '2022-11-09', 3, 7700, 1, 1),
-(3, '2022-11-13', 2, 80000, 1, 1),
-(4, '2022-11-10', 2, 20000, 0, 0);
+(3, '2022-11-13', 2, 80000, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -420,8 +358,7 @@ CREATE TABLE `tbcompradetalle` (
 INSERT INTO `tbcompradetalle` (`tbcompradetalleid`, `tbcompraid`, `tbproductoid`, `tbproductocantidad`, `tbproductopreciobruto`, `tbcompradetalleactivo`) VALUES
 (1, 1, 2, 3, 10000, 0),
 (2, 2, 1, 7, 1100, 1),
-(3, 3, 2, 8, 10000, 1),
-(4, 4, 2, 2, 10000, 0);
+(3, 3, 2, 8, 10000, 1);
 
 -- --------------------------------------------------------
 
@@ -452,8 +389,7 @@ INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfact
 (4, 3, 3, '2022-11-23', '3', 1, 28375, 1, 2),
 (5, 4, 4, '2022-11-17', '3', 2, 3520, 1, 2),
 (6, 2, 3, '2022-11-17', '2', 1, 2951, 1, 1),
-(7, 2, 2, '2022-11-25', '2', 1, 9307, 1, 2),
-(8, 2, 4, '2022-11-17', '2', 2, 12760, 1, 1);
+(7, 2, 2, '2022-11-25', '2', 1, 9307, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -484,11 +420,7 @@ INSERT INTO `tbfacturadetalle` (`tbfacturadetalleid`, `tbfacturaid`, `tbservicio
 (7, 5, 3, 3200, 1, 1),
 (8, 6, 1, 2600, 1, 1),
 (9, 7, 1, 5200, 1, 2),
-(10, 7, 4, 3000, 1, 1),
-(11, 8, 1, 2600, 1, 1),
-(12, 8, 2, 2800, 1, 1),
-(13, 8, 3, 3200, 1, 1),
-(14, 8, 4, 3000, 1, 1);
+(10, 7, 4, 3000, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -636,9 +568,8 @@ CREATE TABLE `tbproducto` (
 --
 
 INSERT INTO `tbproducto` (`tbproductoid`, `tbproductonombre`, `tbproductodescripcion`, `tbcatalogolineaproductosid`, `tbproductopreciocompra`, `tbproductoprecioventa`, `tbproductocantidad`, `tbproductoactivo`) VALUES
-(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 1, 1100, 1200, 5, 1),
-(2, 'Suplementos', 'suplementos con carboidartos necesarios para subir de peso rapidamente', 3, 10000, 13300, 7, 1),
-(3, 'coca', 'bebida ', 3, 33322, 34322, 1, 1);
+(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 0, 1100, 1200, 5, 1),
+(2, 'Suplementos', 'suplementos con carboidartos necesarios para subir de peso rapidamente', 0, 10000, 13300, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -790,18 +721,6 @@ ALTER TABLE `tbcliente`
 --
 ALTER TABLE `tbclientepeso`
   ADD PRIMARY KEY (`tbclientepesoid`);
-
---
--- Indices de la tabla `tbclienterutina`
---
-ALTER TABLE `tbclienterutina`
-  ADD PRIMARY KEY (`tbclienterutinaid`);
-
---
--- Indices de la tabla `tbclienterutinadetalle`
---
-ALTER TABLE `tbclienterutinadetalle`
-  ADD PRIMARY KEY (`tbclienterutinadetalleid`);
 
 --
 -- Indices de la tabla `tbcompra`

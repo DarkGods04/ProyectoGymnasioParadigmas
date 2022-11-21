@@ -18,14 +18,15 @@ include '../business/pagoMetodoBusiness.php';
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Factura</title>
 
-    <?php
-    include 'header.php';
-    ?>
-
     <h2>Crear nueva factura</h2>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
-    <script src="../js/jquery_formato.js"></script>
+    <script src="../js/jquery_formato.js">
+    </script>
+     <script> function confirmarVolverMenuPrincipal() {
+            return confirm("¿Está seguro de que desea volver al menú de factura?");
+        } </script>
+    <a onclick="return confirmarVolverMenuPrincipal()" href="menuListaFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">volver atrás</a>
 </head>
 
 <body>
@@ -346,7 +347,6 @@ include '../business/pagoMetodoBusiness.php';
     </div>
     <script src="../js/jquery_formato.js"></script>
     <br></br>
-    <a href="../view/listarHistorialFactura.php" style="text-decoration: none; color: blue; font-size: 150%;"> Ver historial de facturación </a>
 
 </body>
 

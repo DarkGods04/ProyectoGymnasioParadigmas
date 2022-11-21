@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú principal</title>
 </head>
-
 <body>
     <h1>Proyecto Gimnasio</h1>
     <h2>Menú principal</h2>
@@ -94,7 +93,11 @@
     <div>
         <a href="./view/listarCategorizacionCliente.php" style="text-decoration: none; color: blue; font-size: 150%;">- Categorizacion de clientes</a>
     </div>
-
+    
+    <div>
+        <a href="./view/listarMenuClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">- Rutina cliente </a>
+    </div>
+    
 </body>
 
 </html>

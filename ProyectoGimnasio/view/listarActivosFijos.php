@@ -24,23 +24,6 @@ include '../business/activoFijoBusiness.php';
             return confirm("¿Está seguro de que desea volver al menú de activos?");
         }
     </script>
-    <style>
-        table {
-            border: none;
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        td {
-            padding: 5px 10px;
-            text-align: center;
-            border: 1px solid #999;
-        }
-
-        tr:nth-child(1) {
-            background: #dedede;
-        }
-    </style>
     <script src="../js/peticiones.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
