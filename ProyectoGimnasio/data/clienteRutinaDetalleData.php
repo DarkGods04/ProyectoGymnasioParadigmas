@@ -34,6 +34,7 @@ class ClienteRutinaDetalleData extends Data{
         $conn->set_charset('UTF8');
 
         $querySelect = "SELECT * FROM tbclienterutinadetalle;";
+
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
 
