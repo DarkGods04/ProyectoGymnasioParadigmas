@@ -129,7 +129,6 @@ include '../business/lineaProductosBusiness.php';
                         } else if ($_GET['error'] == "existe") {
                             echo '<center><p style="color: red">¡Esta línea de productos ya se encuentra registrada en el sistema!</p></center>';
                         }
-
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
                     }

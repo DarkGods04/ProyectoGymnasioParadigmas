@@ -18,15 +18,17 @@ include '../business/clienteRutinaDetalleBusiness.php';
     <script type="text/javascript">
         function confirmarAccionModificar() {
             return confirm("¿Está seguro de que desea modificar esta rutina al cliente ?");
-        } 
+        }
+
         function confirmarVolverMenuPrincipal() {
             return confirm("¿Está seguro de que desea volver al menú de cliente rutina?");
         }
     </script>
     <a onclick="return confirmarVolverMenuPrincipal()" href="listarMenuClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">volver atrás</a>
-    
+
     <h2>Crear rutina cliente</h2>
 </head>
+
 <body>
     <div>
         <form name="formulario" method="POST" id="direccionform" action="../business/clienteRutinaAction.php">
@@ -80,7 +82,7 @@ include '../business/clienteRutinaDetalleBusiness.php';
                             $clienteBusiness = new ClienteBusiness();
                             $clientes = $clienteBusiness->obtener();
                             ?>
-                            <select name="idCliente" id="idCliente" required>
+                            <select name="idCliente" id="idCliente">
                                 <?php
                                 if (isset($_GET['idCliente']) && strlen($_GET['idCliente']) > 0) {
                                     foreach ($clientes as $row) :
@@ -110,7 +112,7 @@ include '../business/clienteRutinaDetalleBusiness.php';
                                 $instructorBusiness = new InstructorBusiness();
                                 $instructores = $instructorBusiness->obtener();
                                 ?>
-                            <select name="idInstructor" id="idInstructor" required>
+                            <select name="idInstructor" id="idInstructor">
                                 <?php
                                 if (isset($_GET['idInstructor']) && strlen($_GET['idInstructor']) > 0) {
                                     foreach ($instructores as $row) :
@@ -122,7 +124,7 @@ include '../business/clienteRutinaDetalleBusiness.php';
 
                                     endforeach;
                                 } else { ?>
-                                    <option value="" required>Instructor</option>
+                                    <option value="">Instructor</option>
                                 <?php }
 
                                 foreach ($instructores as $row) :
@@ -139,7 +141,7 @@ include '../business/clienteRutinaDetalleBusiness.php';
                             $modalidadFuncionalBusiness = new ModalidadFuncionalBusiness();
                             $modalidades = $modalidadFuncionalBusiness->obtener();
                             ?>
-                            <select name="idModalidadFuncional" id="idModalidadFuncional" required>
+                            <select name="idModalidadFuncional" id="idModalidadFuncional">
                                 <?php
                                 if (isset($_GET['idModalidadFuncional']) && strlen($_GET['idModalidadFuncional']) > 0) {
                                     foreach ($modalidades as $row) :
@@ -151,7 +153,7 @@ include '../business/clienteRutinaDetalleBusiness.php';
 
                                     endforeach;
                                 } else { ?>
-                                    <option value="" required>Modalidad funcional</option>
+                                    <option value="">Modalidad funcional</option>
                                 <?php }
 
                                 foreach ($modalidades as $row) :
@@ -175,7 +177,7 @@ include '../business/clienteRutinaDetalleBusiness.php';
                                     foreach ($ejercicios as $row) {
                                         for ($i = 0; $i < count($array); $i++) {
                                             if ($row->getIdEjercicio() == $array[$i]) {
-                                                echo '<input type="hidden" name="ejerciciosVector[]" required  value="' . $row->getIdEjercicio() . '">' . $row->getNombreEjercicio() . " : <br>" . $row->getDescripcionEjercicio() . '';
+                                                echo '<input type="hidden" name="ejerciciosVector[]"   value="' . $row->getIdEjercicio() . '">' . $row->getNombreEjercicio() . " : <br>" . $row->getDescripcionEjercicio() . '';
                             ?>
                                                 <button name="eliminarEjercicio" id="eliminarEjercicio" value="<?php echo $row->getIdEjercicio() ?>">Eliminar</button>
                                                 <br>
@@ -186,12 +188,12 @@ include '../business/clienteRutinaDetalleBusiness.php';
                                     }
                                 }
                                 if (isset($_GET['error'])) {
-                                    if ($_GET['error'] == "noServiceSelection") {
+                                    if ($_GET['error'] == "noEjercicioSelection") {
                                         echo '<center><p style="color: red">No existe el ejercicio seleccionado !</p></center>';
                                     }
                                 }
                             } else {
-                                echo '<center><p style="color: red">No existen ejerciciosVector seleccionados !</p></center>';
+                                echo '<center><p style="color: red">No existen ejercicios seleccionados !</p></center>';
                             }
                             ?>
                         </td>
@@ -202,6 +204,31 @@ include '../business/clienteRutinaDetalleBusiness.php';
                     </tr>
                 </tbody>
         </form>
+    </div>
+    <div>
+        <?php
+        if (isset($_GET['error'])) {
+            if ($_GET['error'] == "emptyField") {
+                echo '<p style="color: red">Campo(s) vacio(s)</p>';
+            } else if ($_GET['error'] == "numberFormat") {
+                echo '<p style="color: red">Error, formato de numero!</p>';
+            } else if ($_GET['error'] == "dbError") {
+                echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+            } else if ($_GET['error'] == "rutinaNotSelected") {
+                echo '<center><p style="color: red">Rutina no seleccionada</p></center>';
+            }
+        } else if (isset($_GET['success'])) {
+            if ($_GET['success'] == "inserted") {
+                echo '<p style="color: green">Transacción realizada!</p>';
+            }
+            if ($_GET['success'] == "selectedExercise") {
+                echo '<p style="color: green">Ejercicio seleccionado</p>';
+            }
+            if ($_GET['success'] == "delete") {
+                echo '<p style="color: green">Ejercicio eliminado</p>';
+            }
+        }
+        ?>
     </div>
 </body>
 
