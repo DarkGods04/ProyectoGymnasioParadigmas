@@ -48,7 +48,9 @@ class ClienteRutinaData extends Data {
         $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
         $conn->set_charset('UTF8');
 
-        $querySelect = "SELECT * FROM tbclienterutina;";
+        $querySelect = "SELECT * FROM tbclienterutina as one WHERE tbclienterutinafecha in (SELECT MAX(tbclienterutinafecha) FROM tbclienterutina WHERE one.tbclienteid=tbclienteid) order by tbclienterutinafecha DESC;";
+        
+
         $result = mysqli_query($conn, $querySelect);
         mysqli_close($conn);
 
