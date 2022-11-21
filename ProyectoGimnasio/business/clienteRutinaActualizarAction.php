@@ -24,9 +24,14 @@ if (!empty($ejerciciosSelec)) {
 if (!empty($_POST['fecha'])) {
     $fecha = $_POST['fecha'];
 }
+if (!empty($_POST['idRutinaCliente'])) {
+    $idRutinaCliente = $_POST['idRutinaCliente'];
+}
+
+
 
 if (isset($_POST['añadirEjercicio'])) {
-    header("Location: ../view/actualizarRutinaCliente.php?success=success&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$ejerciciosSelec");
+    header("Location: ../view/actualizarUnaRutinaCliente.php?success=success&idRutinaCliente=$idRutinaCliente&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$ejerciciosSelec");
 }
 
 if (isset($_POST['eliminarEjercicio'])) {
@@ -47,13 +52,15 @@ if (isset($_POST['eliminarEjercicio'])) {
         $array = serialize($array);
         $array = urlencode($array);
 
-        header("Location: ../view/actualizarRutinaCliente.php?success=success&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
+        echo 'idRutinaCliente= '.$idRutinaCliente.' idCliente= '. $idCliente . ' idInstructor= '. $idInstructor. ' idModalidadFuncional= '. $idModalidadFuncional. ' fecha= '. $fecha;
+
+        header("Location: ../view/actualizarUnaRutinaCliente.php?success=success&idRutinaCliente=$idRutinaCliente&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
     }
 }
 
 
 
-if (isset($_POST['insertarClienteRutina'])) {
+if (isset($_POST['actualizarRutinaCliente'])) {
     if (isset($_POST['ejerciciosVector'])) {
         if (isset($_POST['idCliente']) && isset($_POST['idInstructor']) && isset($_POST['fecha']) && isset($_POST['idModalidadFuncional'])) {
 
@@ -73,7 +80,7 @@ if (isset($_POST['insertarClienteRutina'])) {
                     $datos = urldecode($ejerciciosSelec);
                     $array = unserialize($datos);
                     if ($resultado == 0) {
-                        header("Location: ../view/actualizarRutinaCliente.php?error=insertError&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
+                        header("Location: ../view/actualizarUnaRutinaCliente.php?error=insertError&idRutinaCliente=$idRutinaCliente&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
                     } else {
                         for ($i = 0; $i < count($array); $i++) {
                             $clienteRutinaDetalle = new ClienteRutinaDetalle(0, $resultado, $array[$i]);
@@ -85,20 +92,20 @@ if (isset($_POST['insertarClienteRutina'])) {
                     $array = urlencode($array);
 
                     if ($resultado1 == 1) {
-                        header("Location: ../view/actualizarRutinaCliente.php?success=inserted&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
+                        header("Location: ../view/actualizarRutinaCliente.php?success=update");
                     } else {
-                        header("Location: ../view/actualizarRutinaCliente.php?error=dbError&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
+                        header("Location: ../view/actualizarUnaRutinaCliente.php?error=dbError&idRutinaCliente=$idRutinaCliente&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
                     }
                 } else {
-                    header("Location: ../view/actualizarRutinaCliente.php?error=numberFormat&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
+                    header("Location: ../view/actualizarUnaRutinaCliente.php?error=numberFormat&idRutinaCliente=$idRutinaCliente&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
                 }
             } else {
-                header("Location: ../view/actualizarRutinaCliente.php?error=emptyField&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
+                header("Location: ../view/actualizarUnaRutinaCliente.php?error=emptyField&idRutinaCliente=$idRutinaCliente&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
             }
         } else {
-            header("Location: ../view/actualizarRutinaCliente.php?error=error&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
+            header("Location: ../view/actualizarUnaRutinaCliente.php?error=error&idRutinaCliente=$idRutinaCliente&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
         }
     } else {
-        header("Location: ../view/actualizarRutinaCliente.php?error=rutinaNotSelected&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
+        header("Location: ../view/actualizarUnaRutinaCliente.php?error=rutinaNotSelected&idRutinaCliente=$idRutinaCliente&idCliente=$idCliente&idInstructor=$idInstructor&idModalidadFuncional=$idModalidadFuncional&fecha=$fecha&ejerciciosVector=$array");
     }
 }
