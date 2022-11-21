@@ -25,18 +25,18 @@ include '../business/facturaDetalleBusiness.php';
         function confirmarAccionReimprimir() {
             return confirm("¿Está seguro de que desea reimprimir esta factura?");
         }
+
+        function confirmarVolverMenuPrincipal() {
+            return confirm("¿Está seguro de que desea volver al menú de factura?");
+        }
     </script>
+    <a onclick="return confirmarVolverMenuPrincipal()" href="menuListaFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">volver atrás</a>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="../js/jquery_formato.js"></script>
 </head>
 
 <body>
-    <?php
-    include 'header.php';
-    ?>
-    <br></br>
-    <a href="../view/listarFactura.php" style="text-decoration: none; color: blue; font-size: 150%;"> Generar nueva factura </a>
     <br></br>
     <h1>Historial factura</h1>
     <form action="" method="post" autocomplete="off">

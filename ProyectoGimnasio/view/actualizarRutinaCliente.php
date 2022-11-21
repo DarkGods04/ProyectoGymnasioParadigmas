@@ -28,24 +28,7 @@ include '../business/clienteRutinaDetalleBusiness.php';
 </head>
 
 <body>
-    <form action="" method="post" autocomplete="off">
-        <div>
-            <label for="campo"> Buscar: </label>
-            <input type="text" name="campo" id="campo" placeholder="Buscar">
-            <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
-            <ul id="listaClienteRutina"></ul>
-        </div>
-    </form></br></br>
-
-    <script src="../js/peticiones.js"></script>
-    <script type="text/javascript" src="../js/jquery_formato.js"></script>
-    <?php
-    if (!isset($_POST['campo'])) {
-        $_POST['campo'] = "";
-        $campo = $_POST['campo'];
-    }
-    $campo = $_POST['campo'];
-    ?>
+    
     <div>
 
         <form name="formulario" method="POST" id="direccionform" action="../business/clienteRutinaActualizarAction.php">
