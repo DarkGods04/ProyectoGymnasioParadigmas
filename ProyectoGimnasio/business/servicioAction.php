@@ -1,6 +1,6 @@
 <?php
 include 'servicioBusiness.php';
-include 'facturaBusiness.php';
+include 'facturaDetalleBusiness.php';
 
 if (isset($_POST["insertar"])) {
     if (isset($_POST["nombreServicio"]) && isset($_POST["descripcionServicio"]) && isset($_POST["montoServicio"]) && isset($_POST["periodicidad"])) {
@@ -50,14 +50,15 @@ if (isset($_POST["insertar"])) {
 
 
 if (isset($_POST['eliminar'])) {
-    $facturaBusiness = new FacturaBusiness();
-    $facturas = $facturaBusiness->obtener();
+    $facturaDetalleBusiness = new FacturaDetalleBusiness();
+    $facturasDetalle = $facturaDetalleBusiness->obtener();
+
     $flag = 0;
-    foreach ($facturas as $row) {  $array = explode(";", $row->getServiciosTBFactura());
-       
-    foreach ($array as $selected) {  if(  $_POST['idServicio'] == $selected  && $row->getActivoTBFactura() == 1 ){  $flag = 1; } }
-        
-}
+    foreach ($facturasDetalle as $row) {  
+            if( $_POST['idServicio'] == $row->getIdServicioTBFacturaDetalle()){
+                $flag = 1; 
+            } 
+    }
 
     if($flag == 0){
 
