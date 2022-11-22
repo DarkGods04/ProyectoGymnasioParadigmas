@@ -205,6 +205,35 @@ include '../business/clienteRutinaDetalleBusiness.php';
                 </tbody>
         </form>
     </div>
+
+    <script>
+        var todayDateMax = new Date();
+        var mesMax = todayDateMax.getMonth() + 1;
+        var anioMax = todayDateMax.getUTCFullYear();
+        var diaMax = todayDateMax.getDate();
+        if (mesMax < 10) {
+            mesMax = "0" + mesMax
+        }
+        if (diaMax < 10) {
+            diaMax = "0" + diaMax;
+        }
+        var maxDate = anioMax + "-" + mesMax + "-" + diaMax;
+        document.getElementById("fecha").setAttribute("max", maxDate);
+
+        var todayDateMin = new Date();
+        var mesMin = todayDateMin.getMonth() - 1;
+        var anioMin = todayDateMin.getUTCFullYear();
+        var diaMin = todayDateMin.getDate();
+        if (mesMin < 10) {
+            mesMin = "0" + mesMin
+        }
+        if (diaMin < 10) {
+            diaMin = "0" + diaMin;
+        }
+        var minDate = anioMin + "-" + mesMin + "-" + diaMin;
+        document.getElementById("fecha").setAttribute("min", minDate);
+    </script>
+
     <div>
         <?php
         if (isset($_GET['error'])) {
