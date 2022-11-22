@@ -11,7 +11,7 @@
 <body>
     <?php include 'header.php'; ?>
 
-    <h2>Menú de activos</h2>
+    <h2>Menú de Rutinas</h2>
     <div>
         <a href="../view/listarClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">- Crear rutina cliente </a>
     </div>
