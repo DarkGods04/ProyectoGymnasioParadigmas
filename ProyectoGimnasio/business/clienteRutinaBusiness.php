@@ -24,6 +24,11 @@ class ClienteRutinaBusiness {
         return $this->ClienteRutinaData->getClienteRutina();
     }
 
+    public function obtenerTodos() {
+        return $this->ClienteRutinaData->getClienteRutinaPasadas();
+    }
+
+
     public function buscar($palabra) {
         return $this->ClienteRutinaData->buscarClienteRutina($palabra);
     }

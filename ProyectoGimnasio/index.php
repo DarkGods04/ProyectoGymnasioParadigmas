@@ -97,6 +97,10 @@
     <div>
         <a href="./view/listarMenuClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">- Rutina cliente </a>
     </div>
+
+    <div>
+        <a href="./view/buscarRutinaCliente.php" style="text-decoration: none; color: blue; font-size: 150%;">- Buscar Rutina cliente</a>
+    </div>
     
 </body>
 
