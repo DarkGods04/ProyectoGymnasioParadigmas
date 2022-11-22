@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-11-2022 a las 03:41:54
--- Versión del servidor: 10.4.25-MariaDB
--- Versión de PHP: 7.4.30
+-- Tiempo de generación: 21-11-2022 a las 21:29:56
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 7.4.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -46,7 +46,7 @@ INSERT INTO `tbactivofijo` (`tbactivofijoid`, `tbactivofijoplaca`, `tbactivofijo
 (1, 'P065', '890LVLT27', 'Level', '2006-08-07', 20000, 'En uso', 1),
 (2, 'P066', '83421ULT28', 'LevelUltimate', '2022-09-10', 85000, 'Fuera de uso', 1),
 (3, 'P067', '345TEKT987', 'TEKTRO', '2022-09-01', 25150, 'En uso', 1),
-(4, 'P066', '83421ULT28', 'ULTIMATE', '2022-11-08', 150000, 'En uso', 1);
+(4, 'P066', '83421ULT28', 'ULTIMATE', '2022-11-08', 150000, 'En uso', 0);
 
 -- --------------------------------------------------------
 
@@ -114,12 +114,12 @@ CREATE TABLE `tbcatalogoejercicio` (
 --
 
 INSERT INTO `tbcatalogoejercicio` (`tbcatalogoejercicioid`, `tbcatalogoejercicionombre`, `tbcatalogoejerciciodescripcion`, `tbcatalogoejercicioactivo`) VALUES
-(1, 'Press de banca', 'repeticiones: 4x10', 1),
-(2, 'Press militar', 'repeticiones: 4x10', 1),
-(3, 'Sentadilla búlgara', 'repeticiones: 4x12 ', 1),
-(4, 'Sentadilla goblet', 'repeticiones: 4x12', 1),
-(5, 'Abdominales', 'repeticiones: 2x20', 1),
-(6, 'Lagartijas', 'repeticiones: 4x15', 1);
+(1, 'Press de banca', 'repeticiones: 4 x 12 ', 1),
+(2, 'Press militar', 'repeticiones: 4 x 12 ', 1),
+(3, 'Sentadilla búlgara', 'repeticiones: 4 x 12 ', 1),
+(4, 'Sentadilla goblet', 'repeticiones: 4x10', 1),
+(5, 'Abdominales', 'repeticiones: 4x20', 1),
+(6, 'Lagartijas', 'repeticiones: 4x12', 1);
 
 -- --------------------------------------------------------
 
@@ -255,7 +255,7 @@ CREATE TABLE `tbcategorizacioncliente` (
 INSERT INTO `tbcategorizacioncliente` (`tbcategorizacionclienteid`, `tbclienteid`, `tbcatalogoclientetipoid`, `tbcategorizacionclienteactivo`) VALUES
 (1, 1, 1, 1),
 (2, 2, 2, 1),
-(3, 3, 3, 1);
+(3, 3, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -331,14 +331,20 @@ CREATE TABLE `tbclienterutina` (
 --
 
 INSERT INTO `tbclienterutina` (`tbclienterutinaid`, `tbclienteid`, `tbinstructorid`, `tbmodalidadfuncionalid`, `tbclienterutinafecha`, `tbclienterutinaactivo`) VALUES
-(1, 1, 1, 2, '2022-11-01', 1),
-(2, 2, 2, 3, '2022-11-01', 1),
-(3, 3, 3, 2, '2022-11-02', 1),
-(4, 4, 4, 2, '2022-11-02', 1),
-(5, 3, 3, 2, '2022-11-03', 1),
-(6, 4, 4, 2, '2022-11-03', 1),
-(7, 1, 1, 2, '2022-11-02', 1),
-(8, 2, 2, 2, '2022-11-02', 1);
+(1, 2, 1, 2, '2022-12-08', 1),
+(2, 3, 2, 1, '2022-11-17', 1),
+(3, 1, 3, 2, '2022-11-30', 1),
+(4, 1, 1, 3, '2022-12-01', 1),
+(5, 1, 2, 3, '2022-12-02', 1),
+(6, 1, 2, 1, '2022-12-03', 1),
+(7, 2, 1, 2, '2022-12-09', 1),
+(8, 4, 2, 2, '2022-11-23', 1),
+(9, 2, 1, 2, '2022-12-10', 1),
+(10, 2, 1, 2, '2022-12-11', 1),
+(11, 2, 1, 2, '2022-12-12', 1),
+(12, 2, 1, 2, '2022-12-13', 1),
+(13, 2, 3, 2, '2022-12-14', 1),
+(14, 1, 2, 1, '2022-12-04', 1);
 
 -- --------------------------------------------------------
 
@@ -357,31 +363,45 @@ CREATE TABLE `tbclienterutinadetalle` (
 --
 
 INSERT INTO `tbclienterutinadetalle` (`tbclienterutinadetalleid`, `tbclienterutinaid`, `tbejercicioid`) VALUES
-(1, 1, 1),
-(2, 1, 2),
-(3, 1, 3),
-(4, 2, 3),
-(5, 2, 5),
-(6, 2, 6),
-(7, 3, 1),
-(8, 3, 5),
-(9, 4, 3),
-(10, 4, 4),
+(1, 1, 3),
+(2, 2, 1),
+(3, 2, 3),
+(4, 2, 4),
+(5, 3, 1),
+(6, 3, 2),
+(7, 3, 3),
+(8, 3, 4),
+(9, 3, 5),
+(10, 3, 6),
 (11, 4, 5),
-(12, 5, 1),
+(12, 4, 6),
 (13, 5, 2),
-(14, 5, 5),
-(15, 5, 6),
-(16, 6, 1),
-(17, 6, 3),
-(18, 6, 4),
-(19, 7, 1),
-(20, 7, 3),
-(21, 7, 5),
-(22, 8, 1),
-(23, 8, 2),
+(14, 5, 3),
+(15, 5, 5),
+(16, 5, 6),
+(17, 6, 2),
+(18, 6, 5),
+(19, 6, 6),
+(20, 7, 2),
+(21, 7, 3),
+(22, 7, 4),
+(23, 7, 5),
 (24, 8, 3),
-(25, 8, 4);
+(25, 9, 1),
+(26, 9, 2),
+(27, 9, 3),
+(28, 9, 4),
+(29, 9, 5),
+(30, 9, 6),
+(31, 10, 5),
+(32, 10, 6),
+(33, 11, 2),
+(34, 12, 2),
+(35, 12, 3),
+(36, 13, 2),
+(37, 13, 3),
+(38, 13, 4),
+(39, 14, 2);
 
 -- --------------------------------------------------------
 
@@ -456,10 +476,14 @@ CREATE TABLE `tbfactura` (
 --
 
 INSERT INTO `tbfactura` (`tbfacturaid`, `tbclienteid`, `tbinstructorid`, `tbfacturafechapago`, `tbcatalogopagoperidiocidadid`, `tbimpuestoventaid`, `tbfacturamontoneto`, `tbfacturaactivo`, `tbcatalogopagometodoid`) VALUES
-(1, 1, 1, '2022-11-01', '1', 1, 2951, 1, 1),
-(2, 2, 2, '2022-11-02', '1', 1, 3178, 1, 1),
-(3, 3, 3, '2022-11-02', '1', 1, 7264, 1, 1),
-(4, 4, 4, '2022-11-03', '1', 1, 6810, 1, 1);
+(1, 3, 3, '2022-11-04', '3', 1, 5675, 0, 1),
+(2, 1, 2, '2022-11-15', '3', 2, 19690, 1, 1),
+(3, 4, 4, '2022-11-03', '3', 2, 2860, 0, 1),
+(4, 3, 3, '2022-11-23', '3', 1, 28375, 1, 2),
+(5, 4, 4, '2022-11-17', '3', 2, 3520, 1, 2),
+(6, 2, 3, '2022-11-17', '2', 1, 2951, 1, 1),
+(7, 2, 2, '2022-11-25', '2', 1, 9307, 1, 2),
+(8, 2, 4, '2022-11-17', '2', 2, 12760, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -481,10 +505,20 @@ CREATE TABLE `tbfacturadetalle` (
 --
 
 INSERT INTO `tbfacturadetalle` (`tbfacturadetalleid`, `tbfacturaid`, `tbservicioid`, `tbfacturadetallemontobruto`, `tbfacturadetalleactivo`, `tbserviciocantidad`) VALUES
-(1, 1, 1, 2600, 1, 1),
-(2, 2, 2, 2800, 1, 1),
-(3, 3, 3, 6400, 1, 2),
-(4, 4, 4, 6000, 0, 2);
+(1, 1, 1, 5000, 0, 2),
+(2, 2, 1, 2500, 1, 1),
+(3, 2, 2, 2600, 1, 1),
+(4, 2, 3, 12800, 1, 4),
+(5, 3, 2, 2600, 0, 1),
+(6, 4, 1, 2500, 1, 1),
+(7, 5, 3, 3200, 1, 1),
+(8, 6, 1, 2600, 1, 1),
+(9, 7, 1, 5200, 1, 2),
+(10, 7, 4, 3000, 1, 1),
+(11, 8, 1, 2600, 1, 1),
+(12, 8, 2, 2800, 1, 1),
+(13, 8, 3, 3200, 1, 1),
+(14, 8, 4, 3000, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -632,9 +666,9 @@ CREATE TABLE `tbproducto` (
 --
 
 INSERT INTO `tbproducto` (`tbproductoid`, `tbproductonombre`, `tbproductodescripcion`, `tbcatalogolineaproductosid`, `tbproductopreciocompra`, `tbproductoprecioventa`, `tbproductocantidad`, `tbproductoactivo`) VALUES
-(1, 'Bebida energetica Volt', 'Bebida energética Volt', 3, 1000, 1200, 25, 1),
-(2, 'Proteína WHEY', 'Proteína suplemento', 4, 38500, 44500, 12, 1),
-(3, 'Powerade', 'Bebida ', 3, 900, 1100, 40, 1);
+(1, 'Bebida energetica Volt', 'Bebida energetica Volt perfecta para personas sinenergia', 1, 1100, 1200, 5, 1),
+(2, 'Suplementos', 'suplementos con carboidartos necesarios para subir de peso rapidamente', 3, 10000, 13300, 7, 1),
+(3, 'coca', 'bebida ', 3, 33322, 34322, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -680,7 +714,8 @@ INSERT INTO `tbservicio` (`tbservicioid`, `tbservicionombre`, `tbserviciodescrip
 (1, 'Spinning', 'Cardio haciendo spinning', 1),
 (2, 'Zumba', 'Cardio haciendo zumba', 1),
 (3, 'Yoga', 'Meditación mediante el yoga', 1),
-(4, 'Aeróbicos', 'Ejercicios aeróbicos', 1);
+(4, 'Aeróbicos', 'Ejercicios aeróbicos', 1),
+(5, 'ewfew', 'wgerg', 0);
 
 -- --------------------------------------------------------
 
