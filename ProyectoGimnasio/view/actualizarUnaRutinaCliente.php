@@ -23,9 +23,9 @@ include '../business/clienteRutinaDetalleBusiness.php';
             return confirm("¿Está seguro de que desea volver al menú de cliente rutina?");
         }
     </script>
-    <a onclick="return confirmarVolverMenuPrincipal()" href="listarMenuClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">volver atrás</a>
+    <a onclick="return confirmarVolverMenuPrincipal()" href="actualizarRutinaCliente.php" style="text-decoration: none; color: blue; font-size: 150%;">Volver atrás</a>
 
-    <h2>Actualizar rutina cliente</h2>
+    <h2>Actualizando la rutina del cliente</h2>
 </head>
 
 <body>
