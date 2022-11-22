@@ -78,7 +78,7 @@ if (isset($_POST['insertar'])) {
             $activoVariableBusiness = new ActivoVariableBusiness();
             $activos = $activoVariableBusiness->obtener();
             $flag = 0;
-            foreach ($activos as $row) { if($row->getNameTBActivo() == $_POST['name'] && $row->getActivoTBActivo() == 1 && $row->getDescripcionTBActivo() == $_POST['descripcion'] && $row->getCantidadTBActivo() == $_POST['cantidad'] ){  $flag = 1; } }
+            foreach ($activos as $row) { if($row->getNameTBActivo() == $_POST['name'] && $row->getActivoTBActivo() == 1 && $row->getDescripcionTBActivo() == $_POST['descripcion']){  $flag = 1; } }
                 
     if($flag == 0){
 
