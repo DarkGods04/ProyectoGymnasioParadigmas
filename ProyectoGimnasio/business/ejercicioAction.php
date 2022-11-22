@@ -12,7 +12,7 @@ if (isset($_POST['insertar'])) {
         $ejercicios = $ejercicioBusiness->obtener();
 
         foreach ($ejercicios as $row) {
-            if ($row->getNombreEjercicio() == $nombre) {
+            if ($row->getNombreEjercicio() == $nombre && $row->getDescripcionEjercicio() == $descripcion && $row->getActivoEjercicio() == 1) {
                 $flag = true;
             }
         }
@@ -68,6 +68,8 @@ if (isset($_POST['actualizar'])) {
         $id = $_POST['idEjercicio'];
         $nombre = $_POST['nombre'];
         $descripcion = $_POST['descripcion'];
+        
+
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0) {
             $tempNombre = str_replace("%", "", $nombre);
@@ -82,10 +84,14 @@ if (isset($_POST['actualizar'])) {
                 } else {
                     Header("Location: ../view/listarEjercicios.php?error=dbError");
                 }
+
+                
            
         } else {
             header("location: ../view/listarEjercicios.php?error=emptyField");
         }
+
+
     } else {
         header("location: ../view/listarEjercicios.php?error=error");
     }

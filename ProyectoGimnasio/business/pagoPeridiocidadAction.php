@@ -11,6 +11,8 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombre) > 0 && strlen($descripcion) > 0) {
 
+          
+
             if (!is_numeric($nombre)) {
                 $pagoPeridiocidad = new PagoPeridiocidad($id, $nombre, $descripcion, 1);
                 $pagoPeridiocidadBusiness = new PagoPeridiocidadBusiness();
@@ -24,6 +26,8 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarPagoPeridiocidades.php?error=numberFormat");
             }
+
+       
         } else {
             header("location: ../view/listarPagoPeridiocidades.php?error=emptyField");
         }

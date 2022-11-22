@@ -82,7 +82,7 @@ include '../business/activoFijoBusiness.php';
                             echo '<td><input  type="text" name="serie" id="serie" value="' . $row->getSerie() . '"/></td>';
                             echo '<td><input type="text" name="modelo" id="modelo" value="' . $row->getModelo() .  '"/></td>';
                             echo '<td><input type="date" name="fechaCompra" id="fechaCompra" value="' . $row->getFechaCompra() .  '"/></td>';
-                            echo '<td><input type="text" class="mascaramonto" name="montoCompra" id="montoCompra" value="'. $row->getMontoCompra() . '"/></td>';
+                            echo '<td><input type="text" class="mascaramonto" name="montoCompra" id="montoCompra" value="' . $row->getMontoCompra() . '"/></td>';
                             echo '<td><select name="estadoUso" id="estadoUso">
                                     <option value="' . $row->getEstadoUso() .  '">' . $row->getEstadoUso() . '</option>
                                     <option value="En uso">En uso</option>
@@ -121,14 +121,28 @@ include '../business/activoFijoBusiness.php';
                 </thead>
 
                 <tbody>
-                    <td><input type="text" name="placa" placeholder="Placa del activo" value="<?php if(isset($_GET['placa'])){ echo $_GET['placa']; }?>"></td>
-                    <td><input type="text" name="serie" placeholder="Número de serie" value="<?php if(isset($_GET['serie'])){ echo $_GET['serie']; }?>"></td>
-                    <td><input type="text" name="modelo" placeholder="Modelo del equipo" value="<?php if(isset($_GET['modelo'])){ echo $_GET['modelo']; }?>"></td>
-                    <td><input type="date" name="fechaCompra" value="<?php if(isset($_GET['fechaCompra'])){ echo $_GET['fechaCompra']; }?>"></td>
-                    <td><input type="text" class="mascaramonto" name="montoCompra" placeholder="Monto de compra" value="<?php if(isset($_GET['montoCompra'])){ echo $_GET['montoCompra']; }?>"></td>
+                    <td><input type="text" name="placa" placeholder="Placa del activo" value="<?php if (isset($_GET['placa'])) {
+                                                                                                    echo $_GET['placa'];
+                                                                                                } ?>"></td>
+                    <td><input type="text" name="serie" placeholder="Número de serie" value="<?php if (isset($_GET['serie'])) {
+                                                                                                    echo $_GET['serie'];
+                                                                                                } ?>"></td>
+                    <td><input type="text" name="modelo" placeholder="Modelo del equipo" value="<?php if (isset($_GET['modelo'])) {
+                                                                                                    echo $_GET['modelo'];
+                                                                                                } ?>"></td>
+                    <td><input type="date" class="classFechaCompra" id="fechaCompraIn" name="fechaCompra" value="<?php if (isset($_GET['fechaCompra'])) {
+                                                                                                                        echo $_GET['fechaCompra'];
+                                                                                                                    } ?>"></td>
+                    <td><input type="text" class="mascaramonto" name="montoCompra" placeholder="Monto de compra" value="<?php if (isset($_GET['montoCompra'])) {
+                                                                                                                            echo $_GET['montoCompra'];
+                                                                                                                        } ?>"></td>
                     <td>
                         <select name="estadoUso">
-                        <option value="<?php if(isset($_GET['estadoUso'])){ echo $_GET['estadoUso']; }?>"><?php if(isset($_GET['estadoUso'])){ echo $_GET['estadoUso']; }?></option>
+                            <option value="<?php if (isset($_GET['estadoUso'])) {
+                                                echo $_GET['estadoUso'];
+                                            } ?>"><?php if (isset($_GET['estadoUso'])) {
+                                                                                                                    echo $_GET['estadoUso'];
+                                                                                                                } ?></option>
                             <option value="En uso">En uso</option>
                             <option value="Fuera de uso">Fuera de uso</option>
                         </select>
@@ -137,6 +151,22 @@ include '../business/activoFijoBusiness.php';
             </table>
         </form>
     </div>
+
+    <script>
+        var todayDateMax = new Date();
+        var mesMax = todayDateMax.getMonth() + 1;
+        var anioMax = todayDateMax.getUTCFullYear();
+        var diaMax = todayDateMax.getDate();
+        if (mesMax < 10) {
+            mesMax = "0" + mesMax
+        }
+        if (diaMax < 10) {
+            diaMax = "0" + diaMax;
+        }
+        var maxDate = anioMax + "-" + mesMax + "-" + diaMax;
+        document.getElementById("fechaCompra").setAttribute("max", maxDate);
+        document.getElementById("fechaCompraIn").setAttribute("max", maxDate);
+    </script>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/activoFijoAction.php">
@@ -150,6 +180,8 @@ include '../business/activoFijoBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "dublicate") {
+                            echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';

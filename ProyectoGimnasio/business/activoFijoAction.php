@@ -2,6 +2,8 @@
 include 'activoFijoBusiness.php';
 
 if (isset($_POST['insertar'])) {
+
+
     if (isset($_POST['placa']) && isset($_POST['serie']) && isset($_POST['modelo']) &&
         isset($_POST['fechaCompra']) && isset($_POST['montoCompra']) && isset($_POST['estadoUso'])) {
 
@@ -16,6 +18,13 @@ if (isset($_POST['insertar'])) {
             && strlen($montoCompra) > 0 && strlen($estadoUso) > 0) {
                 $tempMonto = str_replace("₡","",$montoCompra);
 
+                $activoFijoBusiness = new ActivoFijoBusiness();
+                $activos = $activoFijoBusiness->obtener();
+                $flag = 0;
+                foreach ($activos as $row) { if($row->getplaca() == $_POST['placa'] && $row->getActivo() == 1 && $row->getserie() == $_POST['serie'] ){  $flag = 1; } }
+                    
+        if($flag == 0){
+
             if (!is_numeric($estadoUso)) {
                 $activo = new ActivoFijo(0, $placa, $serie, $modelo, $fechaCompra, $tempMonto, $estadoUso, 1);
                 $activoBusiness = new ActivoFijoBusiness();
@@ -25,10 +34,16 @@ if (isset($_POST['insertar'])) {
                     Header("Location: ../view/listarActivosFijos.php?success=inserted");
                 } else {
                     Header("Location: ../view/listarActivosFijos.php?error=dbError&placa=$placa&serie=$serie&modelo=$modelo&fechaCompra=$fechaCompra&montoCompra=$montoCompra&estadoUso=$estadoUso");
-                }
+                } 
+                
             } else {
                 header("location: ../view/listarActivosFijos.php?error=numberFormat&placa=$placa&serie=$serie&modelo=$modelo&fechaCompra=$fechaCompra&montoCompra=$montoCompra&estadoUso=$estadoUso");
             }
+
+        } else {
+            Header("Location: ../view/listarActivosFijos.php?error=dublicate&placa=$placa&serie=$serie&modelo=$modelo&fechaCompra=$fechaCompra&montoCompra=$montoCompra&estadoUso=$estadoUso");
+        }
+
         } else {
             header("location: ../view/listarActivosFijos.php?error=emptyField&placa=$placa&serie=$serie&modelo=$modelo&fechaCompra=$fechaCompra&montoCompra=$montoCompra&estadoUso=$estadoUso");
         }
@@ -73,6 +88,9 @@ if (isset($_POST['actualizar'])) {
 
                 $tempMonto = str_replace("₡","",$montoCompra);
 
+
+             
+
             if (!is_numeric($estadoUso)) {
 
                 $activo = new ActivoFijo($id, $placa, $serie, $modelo, $fechaCompra, $tempMonto, $estadoUso, 1);
@@ -87,6 +105,7 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarActivosFijos.php?error=numberFormat");
             }
+
         } else {
             header("location: ../view/listarActivosFijos.php?error=emptyField");
         }

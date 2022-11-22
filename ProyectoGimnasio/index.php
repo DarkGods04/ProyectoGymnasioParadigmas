@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú principal</title>
 </head>
-
 <body>
     <h1>Proyecto Gimnasio</h1>
     <h2>Menú principal</h2>
@@ -45,7 +44,7 @@
     </div>
 
     <div>
-        <a href="./view/listarFacturas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Facturas</a>
+        <a href="./view/menuListaFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">- Facturación</a>
     </div>
 
     <div>
@@ -63,7 +62,6 @@
     <div>
         <a href="./view/listarMedidasIsometricas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Medidas isométricas</a>
     </div>
-
     <div>
         <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupos musculares</a>
     </div>
@@ -83,6 +81,27 @@
     <div>
         <a href="./view/listarProveedores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Proveedores</a>
     </div>
+
+    <div>
+        <a href="./view/listarProducto.php" style="text-decoration: none; color: blue; font-size: 150%;">- Productos</a>
+    </div>
+
+    <div>
+        <a href="./view/listarCompras.php" style="text-decoration: none; color: blue; font-size: 150%;">- Compras</a>
+    </div>
+
+    <div>
+        <a href="./view/listarCategorizacionCliente.php" style="text-decoration: none; color: blue; font-size: 150%;">- Categorizacion de clientes</a>
+    </div>
+    
+    <div>
+        <a href="./view/listarMenuClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">- Rutina cliente </a>
+    </div>
+
+    <div>
+        <a href="./view/buscarRutinaCliente.php" style="text-decoration: none; color: blue; font-size: 150%;">- Buscar Rutina cliente</a>
+    </div>
+    
 </body>
 
 </html>

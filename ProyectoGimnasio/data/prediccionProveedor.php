@@ -15,7 +15,7 @@ $query->execute([$campo . '%', $campo . '%', $campo . '%']);
 
 $html = "";
 while($row = $query-> fetch(PDO::FETCH_ASSOC)){
-    $html .= "<li onclick=\"mostrar('" . $row["tbproveedornombrecompleto"] . "')\">" . $row["tbproveedorid"] . " - " . $row["tbproveedornombrecompleto"] . " " . $row["tbproveedorcasacomercial"] . "</li>";
+    $html .= "<li onclick=\"mostrar('" . $row["tbproveedornombrecompleto"] . "')\">" . $row["tbproveedorid"] . " - " . $row["tbproveedornombrecompleto"] . " - " . $row["tbproveedorcasacomercial"] . "</li>";
 }
 
 echo json_encode($html, JSON_UNESCAPED_UNICODE);

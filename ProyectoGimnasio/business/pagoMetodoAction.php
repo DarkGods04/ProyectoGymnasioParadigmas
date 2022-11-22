@@ -66,6 +66,7 @@ if (isset($_POST['actualizar'])) {
         $descripcionPagoMetodo = $_POST['descripcionPagoMetodo'];
 
         if (strlen($nombrePagoMetodo) > 0 && strlen($descripcionPagoMetodo) > 0) {
+           
 
             if (!is_numeric($nombrePagoMetodo)) {
                 $pagoMetodo = new PagoMetodo($idPagoMetodo, $nombrePagoMetodo, $descripcionPagoMetodo, 1);
@@ -80,6 +81,7 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarPagoMetodos.php?error=numberFormat");
             }
+
         } else {
             header("location: ../view/listarPagoMetodos.php?error=emptyField");
         }

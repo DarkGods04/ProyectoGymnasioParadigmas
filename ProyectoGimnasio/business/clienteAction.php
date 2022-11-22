@@ -23,6 +23,13 @@ if (isset($_POST['insertarCliente'])) {
                 $tempPeso = str_replace("Kgg", "", $peso);
                 $tempAltura = str_replace("cmm", "", $altura);
 
+                $clienteBusiness = new ClienteBusiness();
+                $clientes = $clienteBusiness->obtener();
+                $flag = 0;
+                foreach ($clientes as $row) { if($row->getNombreTBCliente() == $_POST['nombre'] && $row->getActivoTBCliente() == 1 && $row->getApellido1TBCliente() == $_POST['apellido1'] && $row->getApellido2TBCliente() == $_POST['apellido2'] && $row->getTelefonoTBCliente() == $tempTelefono){  $flag = 1; } }
+                    
+        if($flag == 0){
+
             if (!is_numeric($nombre) && !is_numeric($apellido1) && !is_numeric($apellido2) && !is_numeric($genero)) {
                 if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
                     $cliente = new Cliente(0, $nombre, $apellido1 , $apellido2, $tempTelefono, $fechaNacimiento, $genero, $tempPeso, $tempAltura, $correo, 1);
@@ -40,6 +47,10 @@ if (isset($_POST['insertarCliente'])) {
             } else {
                 header("location: ../view/listarClientes.php?error=numberFormat&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo ");
             }
+
+        } else {
+            header("location: ../view/listarClientes.php?error=duplicate&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo ");
+        }
         } else {
             header("location: ../view/listarClientes.php?error=emptyField&nombre=$nombre&apellido1=$apellido1&apellido2=$apellido2&telefono=$telefono&fechaNacimiento=$fechaNacimiento&genero=$genero&peso=$peso&altura=$altura&correo=$correo");
         }
@@ -117,6 +128,9 @@ if (isset($_POST['actualizarCliente'])) {
             $tempTelefono = str_replace("-", "", $telefono);
             $tempPeso = str_replace("Kgg", "", $peso);
             $tempAltura = str_replace("cmm", "", $altura);
+
+
+          
 
             if (!is_numeric($nombre) && !is_numeric($apellido1) && !is_numeric($apellido2) && !is_numeric($genero)) {
                 if (filter_var($correo, FILTER_VALIDATE_EMAIL)){

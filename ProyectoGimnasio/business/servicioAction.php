@@ -16,6 +16,13 @@ if (isset($_POST["insertar"])) {
         if (strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0 ) {
             $tempMonto = str_replace("₡","",$montoServicio);
 
+            $servicioBusiness = new servicioBusiness();
+            $elementos = $servicioBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBServicio() == $_POST['nombreServicio'] && $row->getActivoTBServicio() == 1 && $row->getDescripcionTBServicio() == $_POST['descripcionServicio'] ){  $flag = 1; } }
+                
+    if($flag == 0){
+
             if (is_numeric($periodicidad)) {
                 $servicio = new Servicio(0, $nombreServicio, $descripcionServicio, $tempMonto, 1,$periodicidad,$fechaActualizacionProxima);
                 $servicioBusiness = new servicioBusiness();
@@ -29,6 +36,10 @@ if (isset($_POST["insertar"])) {
             } else {
                 header("location: ../view/listarServicios.php?error=numberFormat");
             }
+
+        } else {
+            header("location: ../view/listarServicios.php?error=duplicate");
+        }
         } else {
             header("location: ../view/listarServicios.php?error=emptyField&nombreServicio=$nombreServicio&descripcionServicio=$descripcionServicio&montoServicio=$montoServicio");
         }
@@ -85,6 +96,8 @@ if (isset($_POST['actualizar'])) {
             if ($periodicidad > 0 && strlen($fechaActualizacionProxima) > 0 && strlen($nombreServicio) > 0 && strlen($descripcionServicio) > 0 && strlen($montoServicio) > 0) {
                 $tempMonto = str_replace("₡","",$montoServicio);
 
+               
+
                 //if (is_numeric($montoServicio)) {
                     $servicio = new Servicio($id, $nombreServicio, $descripcionServicio, $tempMonto, 1,$periodicidad,$fechaActualizacionProxima);
                     $servicioBusiness = new servicioBusiness();
@@ -98,6 +111,7 @@ if (isset($_POST['actualizar'])) {
                 /*} else {
                     header("location: ../view/listarServicios.php?error=numberFormat");
                 }*/
+
             } else {
                 header("location: ../view/listarServicios.php?error=emptyField");
             }

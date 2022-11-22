@@ -18,6 +18,13 @@ if (isset($_POST['insertar'])) {
 
             $tempTelefono = str_replace("-", "", $telefono);
 
+            $instructorBusiness = new InstructorBusiness();
+            $elementos = $instructorBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBInstructor() == $_POST['nombre'] && $row->getActivoTBInstructor() == 1 && $row->getApellidoTBInstructor() == $_POST['apellido'] &&  $row->getTelefonoTBInstructor() == $tempTelefono){  $flag = 1; } }
+                
+    if($flag == 0){
+
             if (!is_numeric($nombre) && !is_numeric($apellido)) {
                 if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
                     $instructor = new Instructor(0, $nombre, $apellido, $correo, $tempTelefono, $numCuenta, $tipoinstructor, 1);
@@ -35,6 +42,10 @@ if (isset($_POST['insertar'])) {
             } else {
                 header("location: ../view/listarInstructores.php?error=numberFormat&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
             }
+
+        } else {
+            header("location: ../view/listarInstructores.php?error=duplicate&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
+        }
         } else {
             header("location: ../view/listarInstructores.php?error=emptyField&nombre=$nombre&apellido=$apellido&telefono=$telefono&correo=$correo&numcuenta=$numCuenta&tipoinstructor=$tipoinstructor");
         }
@@ -92,6 +103,7 @@ if (isset($_POST['actualizar'])) {
             && strlen($numCuenta) > 0 && strlen($tipoinstructor) > 0) {
             $tempTelefono = str_replace("-", "", $telefono);
 
+
             if (!is_numeric($nombre) && !is_numeric($apellido)) {
                 if (filter_var($correo, FILTER_VALIDATE_EMAIL)){
                     $instructor = new Instructor($id, $nombre, $apellido, $correo, $tempTelefono, $numCuenta, $tipoinstructor, 1);
@@ -109,6 +121,7 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarInstructores.php?error=numberFormat");
             }
+
         } else {
             header("location: ../view/listarInstructores.php?error=emptyField");
         }

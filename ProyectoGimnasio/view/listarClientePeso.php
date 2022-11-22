@@ -116,17 +116,17 @@
                         <select name="clienteid">
                         <option value="<?php if(isset($_GET['clienteid'])){foreach ($cliente as $row4){ if($_GET['clienteid'] == $row4->getIDTBCliente()){echo $_GET['clienteid'];}}}?>"><?php if(isset($_GET['clienteid'])){foreach ($cliente as $row4){ if($_GET['clienteid'] == $row4->getIDTBCliente()){echo $row4->getNombreTBCliente() . ' ' . $row4->getApellido1TBCliente();}}}?></option>
                             <?php foreach ($cliente as $row): ?>
-                                <?php echo '<option value="'. $row->getIDTBCliente().'">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . '</option>' ?> 
+                                <?php echo '<option value="'. $row->getIDTBCliente().'">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . ' - ' . $row->getTelefonoTBCliente() . '</option>' ?> 
                             <?php endforeach ?>
                         </select>
                     </td>
-                    <td><input type="date" name="clientepesofecha" value="<?php if(isset($_GET['clientepesofecha'])){ echo $_GET['clientepesofecha']; }?>"></td>
+                    <td><input type="date" id="clientepesofecha" name="clientepesofecha" value="<?php if(isset($_GET['clientepesofecha'])){ echo $_GET['clientepesofecha']; }?>"></td>
                     <td><input type="text" class="mascarapeso" name="clientepesopeso" placeholder="Peso del cliente" value="<?php if(isset($_GET['clientepesopeso'])){ echo $_GET['clientepesopeso']; }?>"></td>
                     <td>
                         <select name="instructorid">
                         <option value="<?php if(isset($_GET['instructorid'])){foreach ($instructor as $row5){ if($_GET['instructorid'] == $row5->getIdTBInstructor()){echo $_GET['instructorid'];}}}?>"><?php if(isset($_GET['instructorid'])){foreach ($instructor as $row5){ if($_GET['instructorid'] == $row5->getIdTBInstructor()){echo $row5->getNombreTBInstructor();}}}?></option>
                             <?php foreach ($instructor as $row): ?>
-                                <?php echo '<option value="'. $row->getIdTBInstructor() .'">'. $row->getNombreTBInstructor() . '</option>' ?>
+                                <?php echo '<option value="'. $row->getIdTBInstructor() .'">'. $row->getNombreTBInstructor() . " " . $row->getApellidoTBInstructor() . ' - ' . $row->getTelefonoTBInstructor() . '</option>' ?>
                             <?php endforeach ?>
                         </select>
                     </td>
@@ -135,6 +135,34 @@
             </table>
         </form>
     </div>
+
+    <script>
+        var todayDateMax = new Date();
+        var mesMax = todayDateMax.getMonth() + 1;
+        var anioMax = todayDateMax.getUTCFullYear();
+        var diaMax = todayDateMax.getDate();
+        if (mesMax < 10) {
+            mesMax = "0" + mesMax
+        }
+        if (diaMax < 10) {
+            diaMax = "0" + diaMax;
+        }
+        var maxDate = anioMax + "-" + mesMax + "-" + diaMax;
+        document.getElementById("clientepesofecha").setAttribute("max", maxDate);
+
+        var todayDateMin = new Date();
+        var mesMin = todayDateMin.getMonth() - 1;
+        var anioMin = todayDateMin.getUTCFullYear();
+        var diaMin = todayDateMin.getDate();
+        if (mesMin < 10) {
+            mesMin = "0" + mesMin
+        }
+        if (diaMin < 10) {
+            diaMin = "0" + diaMin;
+        }
+        var minDate = anioMin + "-" + mesMin + "-" + diaMin;
+        document.getElementById("clientepesofecha").setAttribute("min", minDate);
+    </script>
 
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/clientePesoAction.php">
@@ -148,6 +176,10 @@
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "dublicate") {
+                            echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
+                        } else if ($_GET['error'] == "pesoError"){
+                            echo '<p style="color: red">Error, rango de peso no valido!</p>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';

@@ -10,6 +10,13 @@ if (isset($_POST["insertar"])) {
 
         if (strlen($nombreModalidadFuncional) > 0 && strlen($descripcionModalidadFuncional) > 0) {
 
+            $modalidadFuncionalBusiness = new modalidadFuncionalBusiness();
+            $elementos = $modalidadFuncionalBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBModalidadFuncional() == $_POST['nombreModalidadFuncional'] && $row->getActivoTBModalidadFuncional() == 1 && $row->getDescripcionTBModalidadFuncional() == $_POST['descripcionModalidadFuncional']  ){  $flag = 1; } }
+                
+    if($flag == 0){
+
             if (!is_numeric($nombreModalidadFuncional)) {
                 $modalidadFuncional = new ModalidadFuncional(0, $nombreModalidadFuncional, $descripcionModalidadFuncional, 1);
                 $modalidadFuncionalBusiness = new modalidadFuncionalBusiness();
@@ -23,6 +30,10 @@ if (isset($_POST["insertar"])) {
             } else {
                 header("location: ../view/listarModalidadFuncional.php?error=numberFormat&nombreModalidadFuncional=$nombreModalidadFuncional&descripcionModalidadFuncional=$descripcionModalidadFuncional");
             }
+
+        } else {
+            header("location: ../view/listarModalidadFuncional.php?error=duplicate&nombreModalidadFuncional=$nombreModalidadFuncional&descripcionModalidadFuncional=$descripcionModalidadFuncional");
+        }
         } else {
             header("location: ../view/listarModalidadFuncional.php?error=emptyField&nombreModalidadFuncional=$nombreModalidadFuncional&descripcionModalidadFuncional=$descripcionModalidadFuncional");
         }
@@ -69,6 +80,8 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombreModalidadFuncional) > 0 && strlen($descripcionModalidadFuncional) > 0) {
 
+         
+
             if (!is_numeric($nombreModalidadFuncional)) {
                 $modalidadFuncional = new ModalidadFuncional($id, $nombreModalidadFuncional, $descripcionModalidadFuncional, 1);
                 $modalidadFuncionalBusiness = new modalidadFuncionalBusiness();
@@ -83,6 +96,8 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarModalidadFuncional.php?error=numberFormat");
             }
+
+     
         } else {
             header("location: ../view/listarModalidadFuncional.php?error=emptyField");
         }

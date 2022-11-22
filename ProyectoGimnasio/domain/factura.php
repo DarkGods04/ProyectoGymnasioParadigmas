@@ -1,28 +1,27 @@
 <?php
  
 class Factura{
+
     private $idTBFactura;
     private $clienteidTBFactura;
     private $instructoridTBFactura;
     private $fechaPagoTBFactura;
     private $pagoModalidadTBFactura;
-    private $serviciosTBFactura;
-    private $montoBrutoTBFactura;
     private $impuestoVentaidTBFactura;
     private $montoNetoTBFactura;
+	private $metodoDePagoidTBFactura;
     private $activoTBFactura;
 
-    function Factura($idTBFactura, $clienteidTBFactura, $instructoridTBFactura, $fechaPagoTBFactura,$pagoModalidadTBFactura,$serviciosTBFactura,$montoBrutoTBFactura,$impuestoVentaidTBFactura,
-    	$montoNetoTBFactura,$activoTBFactura) {
+    function Factura($idTBFactura, $clienteidTBFactura, $instructoridTBFactura, $fechaPagoTBFactura,$pagoModalidadTBFactura,$impuestoVentaidTBFactura,
+    	$montoNetoTBFactura,$metodoDePagoidTBFactura,$activoTBFactura) {
 		$this->idTBFactura = $idTBFactura;
         $this->clienteidTBFactura = $clienteidTBFactura;
         $this->instructoridTBFactura = $instructoridTBFactura;
         $this->fechaPagoTBFactura = $fechaPagoTBFactura;
         $this->pagoModalidadTBFactura = $pagoModalidadTBFactura;
-        $this->serviciosTBFactura = $serviciosTBFactura;
-        $this->montoBrutoTBFactura = $montoBrutoTBFactura;
         $this->impuestoVentaidTBFactura = $impuestoVentaidTBFactura;
         $this->montoNetoTBFactura = $montoNetoTBFactura;
+		$this->metodoDePagoidTBFactura = $metodoDePagoidTBFactura;
         $this->activoTBFactura = $activoTBFactura;
 	}
 
@@ -65,24 +64,6 @@ class Factura{
 	public function setPagoModalidadTBFactura($pagoModalidadTBFactura) {
 		$this->pagoModalidadTBFactura = $pagoModalidadTBFactura;
 	}
-
-
-	public function getServiciosTBFactura() {
-		return $this->serviciosTBFactura;
-	}
-
-	public function setServiciosTBFactura($serviciosTBFactura) {
-		$this->serviciosTBFactura = $serviciosTBFactura;
-	}
-
-
-    public function getMontoBrutoTBFactura() {
-		return $this->montoBrutoTBFactura;
-	}
-
-	public function setMontoBrutoTBFactura($montoBrutoTBFactura) {
-		$this->montoBrutoTBFactura = $montoBrutoTBFactura;
-	}
     
 	public function getImpuestoVentaidTBFactura() {
 		return $this->impuestoVentaidTBFactura;
@@ -100,6 +81,14 @@ class Factura{
 		$this->montoNetoTBFactura = $montoNetoTBFactura;
 	}
 
+	public function setMetodoDePagoidTBFactura($metodoDePagoidTBFactura) {
+		$this->metodoDePagoidTBFactura = $metodoDePagoidTBFactura;
+	}
+
+	public function getMetodoDePagoidTBFactura() {
+		return $this->metodoDePagoidTBFactura;
+	}
+
 	public function getActivoTBFactura() {
 		return $this->activoTBFactura;
 	}
@@ -107,7 +96,6 @@ class Factura{
 	public function setActivoTBFactura($activoTBFactura) {
 		$this->activoTBFactura = $activoTBFactura;
 	}
-
 
 }
 ?>

@@ -16,6 +16,13 @@ if (isset($_POST['insertar'])) {
         }
         if (strlen($nombreClienteTipo) > 0 && strlen($descripcionClienteTipo) > 0) {
 
+            $clienteTipoBusiness = new ClienteTipoBusiness();
+            $elementos = $clienteTipoBusiness->obtener();
+            $flag = 0;
+            foreach ($elementos as $row) { if($row->getNombreTBClienteTipo() == $_POST['nombreClienteTipo'] && $row->getActivoTBClienteTipo() == 1 && $row->getDescripcionTBClienteTipo() == $_POST['descripcionClienteTipo'] ){  $flag = 1; } }
+                
+    if($flag == 0){
+
             if (!is_numeric($nombreClienteTipo)) {
                 if ($existe == false) {
                     $clienteTipo = new ClienteTipo(0, $nombreClienteTipo, $descripcionClienteTipo, 1);
@@ -33,6 +40,9 @@ if (isset($_POST['insertar'])) {
             } else {
                 header("location: ../view/listarClienteTipo.php?error=numberFormat&nombreClienteTipo=$nombreClienteTipo&descripcionClienteTipo=$descripcionClienteTipo");
             }
+        } else {
+            header("location: ../view/listarClienteTipo.php?error=duplicate&nombreClienteTipo=$nombreClienteTipo&descripcionClienteTipo=$descripcionClienteTipo");
+        }
         } else {
             header("location: ../view/listarClienteTipo.php?error=emptyField&nombreClienteTipo=$nombreClienteTipo&descripcionClienteTipo=$descripcionClienteTipo");
         }
@@ -68,6 +78,7 @@ if (isset($_POST['actualizar'])) {
 
         if (strlen($nombreClienteTipo) > 0 && strlen($descripcionClienteTipo) > 0) {
 
+          
             if (!is_numeric($nombreClienteTipo)) {
                 $clienteTipo = new ClienteTipo($idClienteTipo, $nombreClienteTipo, $descripcionClienteTipo, 1);
                 $clienteTipoBusiness = new ClienteTipoBusiness();
@@ -81,6 +92,8 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarClienteTipo.php?error=numberFormat");
             }
+
+       
         } else {
             header("location: ../view/listarClienteTipo.php?error=emptyField");
         }

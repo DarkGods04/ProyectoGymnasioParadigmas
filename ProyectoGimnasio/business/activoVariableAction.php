@@ -17,6 +17,8 @@ if (isset($_POST['actualizar'])) {
 
                 $tempMonto = str_replace("₡","",$montoCompra);
 
+              
+
             if (is_numeric($cantidad)) {
                 $activo = new ActivoVariable($id, $name, $descripcion, $cantidad, $tempMonto, 1);
                 $activoVariableBusiness = new ActivoVariableBusiness();
@@ -30,6 +32,7 @@ if (isset($_POST['actualizar'])) {
             } else {
                 header("location: ../view/listarActivosVariables.php?error=numberFormat");
             }
+
         } else {
             header("location: ../view/listarActivosVariables.php?error=emptyField");
         }
@@ -71,6 +74,16 @@ if (isset($_POST['insertar'])) {
             $tempMonto = str_replace("₡","",$montoCompra);
             $activo = new ActivoVariable(0, $name, $descripcion, $cantidad, $tempMonto, 1);
 
+
+            $activoVariableBusiness = new ActivoVariableBusiness();
+            $activos = $activoVariableBusiness->obtener();
+            $flag = 0;
+            foreach ($activos as $row) { if($row->getNameTBActivo() == $_POST['name'] && $row->getActivoTBActivo() == 1 && $row->getDescripcionTBActivo() == $_POST['descripcion']){  $flag = 1; } }
+                
+    if($flag == 0){
+
+
+
             if (is_numeric($cantidad)) {
                 $activoVariableBusiness = new ActivoVariableBusiness();
                 $result = $activoVariableBusiness->insertar($activo);
@@ -83,6 +96,11 @@ if (isset($_POST['insertar'])) {
             } else {
                 header("location: ../view/listarActivosVariables.php?error=numberFormat&name=$name&descripcion=$descripcion&cantidad=$cantidad&montoCompra=$montoCompra");
             }
+
+        } else {
+            header("location: ../view/listarActivosVariables.php?error=duplicate&name=$name&descripcion=$descripcion&cantidad=$cantidad&montoCompra=$montoCompra");
+        }
+
         } else {
             header("location: ../view/listarActivosVariables.php?error=emptyField&name=$name&descripcion=$descripcion&cantidad=$cantidad&montoCompra=$montoCompra");
         }

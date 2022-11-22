@@ -102,7 +102,7 @@ include '../business/grupoMuscularBusiness.php';
                                 }
                             }
 
-                            echo '<td><input  type="date" name="fechaMedicion" id="fechaMedicion" value="' . $row->getFechaMedicion() . '" readonly/></td>';
+                            echo '<td><input  type="date" name="fechaMedicion" value="' . $row->getFechaMedicion() . '" readonly/></td>';
                             echo '<input  type="hidden" class="mascaramedida" name="medida" id="medida" value="' . $row->getMedida() . '"/>';
                             echo '<td>' . $row->getMedida() . '</td>';
                             echo '</tr>';
@@ -196,7 +196,7 @@ include '../business/grupoMuscularBusiness.php';
                             <?php foreach ($clientes as $row) : ?>
                                 <?php 
                                      if ($row->getActivoTBCliente() == 1) {
-                                    echo '<option value="' . $row->getIDTBCliente() . '">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . '</option>'; } ?>
+                                    echo '<option value="' . $row->getIDTBCliente() . '">' . $row->getNombreTBCliente() . ' ' . $row->getApellido1TBCliente() . ' - ' . $row->getTelefonoTBCliente() . '</option>'; } ?>
                           
                           <?php endforeach ?>
                         </select>
@@ -218,6 +218,34 @@ include '../business/grupoMuscularBusiness.php';
         </form>
     </div>
 
+    <script>
+        var todayDateMax = new Date();
+        var mesMax = todayDateMax.getMonth() + 1;
+        var anioMax = todayDateMax.getUTCFullYear();
+        var diaMax = todayDateMax.getDate();
+        if (mesMax < 10) {
+            mesMax = "0" + mesMax
+        }
+        if (diaMax < 10) {
+            diaMax = "0" + diaMax;
+        }
+        var maxDate = anioMax + "-" + mesMax + "-" + diaMax;
+        document.getElementById("fechaMedicion").setAttribute("max", maxDate);
+
+        var todayDateMin = new Date();
+        var mesMin = todayDateMin.getMonth() - 1;
+        var anioMin = todayDateMin.getUTCFullYear();
+        var diaMin = todayDateMin.getDate();
+        if (mesMin < 10) {
+            mesMin = "0" + mesMin
+        }
+        if (diaMin < 10) {
+            diaMin = "0" + diaMin;
+        }
+        var minDate = anioMin + "-" + mesMin + "-" + diaMin;
+        document.getElementById("fechaMedicion").setAttribute("min", minDate);
+    </script>
+
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/medidaIsometricaAction.php">
             <tr>
@@ -232,6 +260,8 @@ include '../business/grupoMuscularBusiness.php';
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
                         } else if ($_GET['error'] == "error") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
+                        } else if ($_GET['error'] == "dublicate") {
+                            echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
