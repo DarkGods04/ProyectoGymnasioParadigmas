@@ -18,3 +18,21 @@
         <a onclick="return confirmarVolverMenuPrincipal()" href="../index.php" style="text-decoration: none; color: blue; font-size: 150%;">Menú principal</a>
     </div>
 </body>
+
+<style>
+    table {
+        border: none;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    td {
+        padding: 5px 10px;
+        text-align: center;
+        border: 1px solid #999;
+    }
+
+    tr:nth-child(1) {
+        background: #dedede;
+    }
+</style>

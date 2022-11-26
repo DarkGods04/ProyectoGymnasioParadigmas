@@ -7,101 +7,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú principal</title>
 </head>
+<style>
+    a{color: #fff;
+        text-decoration: none;
+    }
+    .menugym ul{
+        padding: 0;
+        transform: translate(-100px,0);
+    }
+    
+     .menugym ul li{
+        margin: 0.5rem 5px;
+        background-color: #22aeBa;
+        width: 350px;
+        text-align: right;
+        padding: 05px;
+        border-radius: 0 30px 30px 0;
+        transition: all 1s;
+        font-size: 16px;
+    }
+    .menugym ul li:hover{
+        transform: translate(80px,0);
+        background: darkgray;
+    }
+    .menugym ul li:hover a{
+        color: #000;
+    }
+</style>
 <body>
     <h1>Proyecto Gimnasio</h1>
     <h2>Menú principal</h2>
+    <nav class="menugym">
+        <ul>
+            <li><a href="./view/listarInstructores.php"> Instructores</a></li>
+            <li><a href="./view/listarClientes.php"> Clientes</a></li>
+            <li><a href="./view/listarClientePeso.php"> Clientes pesos</a></li>
+            <li><a href="./view/menuListarActivos.php"> Activos</a></li>
+            <li><a href="./view/listarPagoPeridiocidades.php"> Peridiocidades de pago</a></li>
+            <li><a href="./view/listarPagoMetodos.php"> Métodos de pago</a></li>
+            <li><a href="./view/listarImpuestoVentas.php"> Impuestos de venta</a></li>
+            <li><a href="./view/listarServicios.php"> Servicios</a></li>
+            <li><a href="./view/menuListaFactura.php"> Facturación</a></li>
+            <li><a href="./view/listarModalidadFuncional.php"> Modalidades funcionale</a></li>
+            <li><a href="./view/listarModalidadFuncionalCriterio.php"> Criterios de modalidad funcional</a></li>
+            <li><a href="./view/listarEjercicios.php"> Ejercicios</a></li>
+            <li><a href="./view/listarMedidasIsometricas.php"> Medidas isométricas</a></li>
+            <li><a href="./view/listarGrupoMuscular.php"> Grupos musculares</a></li>
+            <li><a href="./view/listarClienteTipo.php"> Tipos de clientes</a></li>
+            <li><a href="./view/listarRutinaNivel.php"> Niveles de rutina</a></li>
+            <li><a href="./view/listarLineasProductos.php"> Líneas de productos</a></li>
+            <li><a href="./view/listarProveedores.php"> Proveedores</a></li>
+            <li><a href="./view/listarProducto.php"> Productos</a></li>
+            <li><a href="./view/listarCompras.php"> Compras</a></li>
+            <li><a href="./view/listarCategorizacionCliente.php"> Categorizacion de clientes</a></li>
+            <li><a href="./view/listarMenuClienteRutina.php"> Rutina cliente </a></li>
+            <li><a href="./view/buscarRutinaCliente.php"> Buscar Rutina cliente</a></li>
 
-    <div>
-        <a href="./view/listarInstructores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Instructores</a>
-    </div>
-
-    <div>
-        <a href="./view/listarClientes.php" style="text-decoration: none; color: blue; font-size: 150%;">- Clientes</a>
-    </div>
-
-    <div>
-        <a href="./view/listarClientePeso.php" style="text-decoration: none; color: blue; font-size: 150%;">- Clientes pesos</a>
-    </div>
-
-    <div>
-        <a href="./view/menuListarActivos.php" style="text-decoration: none; color: blue; font-size: 150%;">- Activos</a>
-    </div>
-
-    <div>
-        <a href="./view/listarPagoPeridiocidades.php" style="text-decoration: none; color: blue; font-size: 150%;">- Peridiocidades de pago</a>
-    </div>
-
-    <div>
-        <a href="./view/listarPagoMetodos.php" style="text-decoration: none; color: blue; font-size: 150%;">- Métodos de pago</a>
-    </div>
-
-    <div>
-        <a href="./view/listarImpuestoVentas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Impuestos de venta</a>
-    </div>
-
-    <div>
-        <a href="./view/listarServicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Servicios</a>
-    </div>
-
-    <div>
-        <a href="./view/menuListaFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">- Facturación</a>
-    </div>
-
-    <div>
-        <a href="./view/listarModalidadFuncional.php" style="text-decoration: none; color: blue; font-size: 150%;">- Modalidades funcionales</a>
-    </div>
-
-    <div>
-        <a href="./view/listarModalidadFuncionalCriterio.php" style="text-decoration: none; color: blue; font-size: 150%;">- Criterios de modalidad funcional</a>
-    </div>
-
-    <div>
-        <a href="./view/listarEjercicios.php" style="text-decoration: none; color: blue; font-size: 150%;">- Ejercicios</a>
-    </div>
-
-    <div>
-        <a href="./view/listarMedidasIsometricas.php" style="text-decoration: none; color: blue; font-size: 150%;">- Medidas isométricas</a>
-    </div>
-    <div>
-        <a href="./view/listarGrupoMuscular.php" style="text-decoration: none; color: blue; font-size: 150%;">- Grupos musculares</a>
-    </div>
-
-     <div>
-        <a href="./view/listarClienteTipo.php" style="text-decoration: none; color: blue; font-size: 150%;">- Tipos de clientes</a>
-    </div>
-
-    <div>
-        <a href="./view/listarRutinaNivel.php" style="text-decoration: none; color: blue; font-size: 150%;">- Niveles de rutina</a>
-    </div>
-
-    <div>
-        <a href="./view/listarLineasProductos.php" style="text-decoration: none; color: blue; font-size: 150%;">- Líneas de productos</a>
-    </div>
-
-    <div>
-        <a href="./view/listarProveedores.php" style="text-decoration: none; color: blue; font-size: 150%;">- Proveedores</a>
-    </div>
-
-    <div>
-        <a href="./view/listarProducto.php" style="text-decoration: none; color: blue; font-size: 150%;">- Productos</a>
-    </div>
-
-    <div>
-        <a href="./view/listarCompras.php" style="text-decoration: none; color: blue; font-size: 150%;">- Compras</a>
-    </div>
-
-    <div>
-        <a href="./view/listarCategorizacionCliente.php" style="text-decoration: none; color: blue; font-size: 150%;">- Categorizacion de clientes</a>
-    </div>
-    
-    <div>
-        <a href="./view/listarMenuClienteRutina.php" style="text-decoration: none; color: blue; font-size: 150%;">- Rutina cliente </a>
-    </div>
-
-    <div>
-        <a href="./view/buscarRutinaCliente.php" style="text-decoration: none; color: blue; font-size: 150%;">- Buscar Rutina cliente</a>
-    </div>
-    
+        </ul>
+    </nav>
 </body>
 
 </html>
