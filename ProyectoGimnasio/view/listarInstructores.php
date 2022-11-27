@@ -51,7 +51,7 @@ include '../business/instructorBusiness.php';
         $campo = $_POST['campo'];
 
         $instructorBusiness = new InstructorBusiness();
-        $instructores = $instructorBusiness->buscar($campo);
+        $instructores = $instructorBusiness->obtener();
         if (!empty($instructores)) {
         ?>
             <table border="1">
