@@ -6,6 +6,9 @@ include '../business/instructorBusiness.php';
 <html>
 
 <head>
+<?php
+    include 'header.php';
+    ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,11 +30,7 @@ include '../business/instructorBusiness.php';
 </head>
 
 <body>
-    <?php
-    include 'header.php';
-    ?>
     <h1>Instructores</h1>
-
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>

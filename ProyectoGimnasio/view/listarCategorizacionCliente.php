@@ -29,6 +29,7 @@ include '../business/clienteBusiness.php';
     <h1>Categorizacion de clientes</h1>
     <form action="" method="post" autocomplete="off">
         <div>
+        <br>
             <label for="campo"> Buscar: </label>
             <input type="text" name="campo" id="campo" placeholder="Buscar">
             <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
