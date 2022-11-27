@@ -66,8 +66,7 @@ include '../business/instructorBusiness.php';
                         <th>Tipo de instructor</th>
                         <th>Acciones</th>
                     </tr>
-                </thead>
-
+                </thead> 
                 <tbody>
                     <?php
                     foreach ($instructores as $row) {
