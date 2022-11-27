@@ -9,7 +9,7 @@ include '../business/proveedorBusiness.php';
 
 <!DOCTYPE html>
 <html>
-
+<link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -341,13 +341,6 @@ include '../business/proveedorBusiness.php';
                             <input class="button" type="submit" name="calcularProductos" id="calcularProductos" onclick="res()" value="Calcular">
 
                         </td>
-
-
-
-
-
-
-
 
 
                         <td><input type="text"  name="precioBrutoProducto" value="<?php if (isset($_GET['precioBrutoProducto'])) {

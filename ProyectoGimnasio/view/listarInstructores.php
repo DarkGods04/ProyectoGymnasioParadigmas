@@ -6,7 +6,7 @@ include '../business/instructorBusiness.php';
 <html>
 
 <head>
-<?php
+    <?php
     include 'header.php';
     ?>
     <meta charset="UTF-8">
@@ -28,19 +28,28 @@ include '../business/instructorBusiness.php';
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
 
 </head>
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-dark">Dark</button>
 
+<button type="button" class="btn btn-link">Link</button>
 <body>
+   
     <h1>Instructores</h1>
-    <form action="" method="post" autocomplete="off">
-        <div>
-            <label for="campo"> Buscar: </label>
-            <input type="text" name="campo" id="campo" placeholder="Buscar">
-            <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
+    <form action=""  id='search-form'  method="post" autocomplete="off">
+        <div id='search-box'>
+        <label for="campo"> Buscar: </label>
+            <input type="text"  id='campo' name="campo" placeholder="Buscar">
+            <button type="submit" id='search-button' name="buscar" id="buscar" value="buscar"><span>Buscar!</span></button>
             <ul id="listaInstructor"></ul>
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
-
     <div>
         <?php
         if (!isset($_POST['campo'])) {
@@ -65,7 +74,7 @@ include '../business/instructorBusiness.php';
                         <th>Tipo de instructor</th>
                         <th>Acciones</th>
                     </tr>
-                </thead> 
+                </thead>
                 <tbody>
                     <?php
                     foreach ($instructores as $row) {
@@ -86,8 +95,15 @@ include '../business/instructorBusiness.php';
                                     <option value="Nutricionista">Nutricionista</option>
                                 </select></td>';
 
-                            echo '<td><input type="submit" name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
-                            echo '<input type="submit" name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
+                            echo '<td>';
+                            ?>
+                              <button name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()" class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+
+
+                              <button name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()" class="btn btn-danger"><span  class="bi bi-trash-fill"></span></button>
+
+                            <?php
+                            echo '</td>';
                             echo '</tr>';
                             echo '</form>';
                         }
@@ -104,7 +120,7 @@ include '../business/instructorBusiness.php';
 
     <div>
         <h3>Registrar un nuevo instructor</h3>
-        
+
         <form method="POST" id="direccionform" action="../business/instructorAction.php">
             <table border="1">
                 <thead style="text-align: left;">
@@ -120,20 +136,35 @@ include '../business/instructorBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="nombre" placeholder="Nombre" value="<?php if(isset($_GET['nombre'])){ echo $_GET['nombre']; }?>"></td>
-                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="apellido" placeholder="Apellido(s)" value="<?php if(isset($_GET['apellido'])){ echo $_GET['apellido']; }?>"></td>
-                        <td><input type="text" pattern="\w.+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+" name="correo" placeholder="micorreo@gmail.com" value="<?php if(isset($_GET['correo'])){ echo $_GET['correo']; }?>"></td>
-                        <td><input type="tel" class="mascaratelefono" name="telefono" placeholder="Número de teléfono" value="<?php if(isset($_GET['telefono'])){ echo $_GET['telefono']; }?>"></td>
-                        <td><input type="text" class="mascaranumcuenta" name="numcuenta" placeholder="Número de cuenta bancaria" value="<?php if(isset($_GET['numcuenta'])){ echo $_GET['numcuenta']; }?>"></td>
+                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="nombre" placeholder="Nombre" value="<?php if (isset($_GET['nombre'])) {
+                                                                                                                                                        echo $_GET['nombre'];
+                                                                                                                                                    } ?>"></td>
+                        <td><input type="text" pattern="^[a-z A-Z\u00c0-\u017F]+" class="mascaranombre" name="apellido" placeholder="Apellido(s)" value="<?php if (isset($_GET['apellido'])) {
+                                                                                                                                                                echo $_GET['apellido'];
+                                                                                                                                                            } ?>"></td>
+                        <td><input type="text" pattern="\w.+@(gmail|est|una|hotmail|yahoo|outlook)+\.(com|es|org|cr|una.ac.cr|cr)+" name="correo" placeholder="micorreo@gmail.com" value="<?php if (isset($_GET['correo'])) {
+                                                                                                                                                                                                echo $_GET['correo'];
+                                                                                                                                                                                            } ?>"></td>
+                        <td><input type="tel" class="mascaratelefono" name="telefono" placeholder="Número de teléfono" value="<?php if (isset($_GET['telefono'])) {
+                                                                                                                                    echo $_GET['telefono'];
+                                                                                                                                } ?>"></td>
+                        <td><input type="text" class="mascaranumcuenta" name="numcuenta" placeholder="Número de cuenta bancaria" value="<?php if (isset($_GET['numcuenta'])) {
+                                                                                                                                            echo $_GET['numcuenta'];
+                                                                                                                                        } ?>"></td>
                         <td>
                             <select name="tipoinstructor">
-                            <option value="<?php if(isset($_GET['tipoinstructor'])){ echo $_GET['tipoinstructor']; }?>"><?php if(isset($_GET['tipoinstructor'])){ echo $_GET['tipoinstructor']; }?></option>
+                                <option value="<?php if (isset($_GET['tipoinstructor'])) {
+                                                    echo $_GET['tipoinstructor'];
+                                                } ?>"><?php if (isset($_GET['tipoinstructor'])) {
+                                                                                                                                echo $_GET['tipoinstructor'];
+                                                                                                                            } ?></option>
                                 <option value="Entrenador personal">Entrenador personal</option>
                                 <option value="Fisioterapeuta">Fisioterapeuta</option>
                                 <option value="Nutricionista">Nutricionista</option>
                             </select>
                         </td>
-                        <td><button type="submit" name="insertar" id="insertar" value="insertar" onclick="validarEspacios()">Registrar instructor</button></td>
+                        
+                        <td><button type="submit" name="insertar" id="insertar" value="insertar" onclick="validarEspacios()" class="btn btn-success"><span  class="bi bi-person-up"></span></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -152,14 +183,13 @@ include '../business/instructorBusiness.php';
                             echo '<p style="color: red">Error, formato de numero!</p>';
                         } else if ($_GET['error'] == "dbError") {
                             echo '<center><p style="color: red">Error al procesar la transacción!</p></center>';
-                        } else if ($_GET['error'] == "emailError"){
+                        } else if ($_GET['error'] == "emailError") {
                             echo '<p style="color: red">Error de formato en correo!</p>';
-                        } else if ($_GET['error'] == "relationError"){
-                        echo '<p style="color: red">Error al eliminar, el usuario tiene registros en otra(s) tabla(s)</p>';
-                         } else if ($_GET['error'] == "dublicate") {
+                        } else if ($_GET['error'] == "relationError") {
+                            echo '<p style="color: red">Error al eliminar, el usuario tiene registros en otra(s) tabla(s)</p>';
+                        } else if ($_GET['error'] == "dublicate") {
                             echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
                         }
-
                     } else if (isset($_GET['success'])) {
                         echo '<p style="color: green">Transacción realizada!</p>';
                     }

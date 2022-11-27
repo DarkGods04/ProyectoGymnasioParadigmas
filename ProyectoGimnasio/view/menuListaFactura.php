@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<link rel="stylesheet" href="css/style.css">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,13 +12,13 @@
     <?php include 'header.php'; ?>
 
     <h2>Menú Factura</h2>
-    <div>
-        <a href="../view/listarFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">- Generar factura </a>
-    </div>
 
-    <div>
-        <a href="../view/listarHistorialFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">- Ver historial de facturación </a>
-    </div>
+    <nav class="menugym">
+        <ul>
+            <li><a href="../view/listarFactura.php">  Generar factura</a></li>
+            <li><a href="../view/listarHistorialFactura.php">  Ver historial de facturación</a></li>
+        </ul>
+    </nav>
 
 </body>
 

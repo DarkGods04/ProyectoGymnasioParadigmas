@@ -4,11 +4,12 @@ include '../business/clienteBusiness.php';
 
 <!DOCTYPE html>
 <html>
-
+<link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Clientes</title>
     <script>
@@ -30,12 +31,11 @@ include '../business/clienteBusiness.php';
     include 'header.php';
     ?>
     <h1>Clientes</h1>
-
-    <form action="" method="post" autocomplete="off">
-        <div>
-            <label for="campo"> Buscar: </label>
-            <input type="text" name="campo" id="campo" placeholder="Buscar">
-            <button type="submit" name="buscar" id="buscar" value="buscar">Buscar</button>
+    <form action=""  id='search-form'  method="post" autocomplete="off">
+        <div id='search-box'>
+        <label for="campo"> Buscar: </label>
+            <input type="text"  id="campo" name="campo" placeholder="Buscar">
+            <button type="submit" id='search-button' name="buscar" id="buscar" value="buscar"><span>Buscar!</span></button>
             <ul id="listaClientes"></ul>
         </div>
     </form></br></br>
@@ -53,7 +53,7 @@ include '../business/clienteBusiness.php';
         $clientes = $clienteBusiness->buscar($campo);
         if (!empty($clientes)) {
         ?>
-            <table border="1">
+           <table border="1">
                 <thead style="text-align: left;">
                     <tr>
                         <th>ID</th>
@@ -93,9 +93,14 @@ include '../business/clienteBusiness.php';
 
                             echo '<td><input type="text" class="mascarapeso" name="peso" id="peso" value="' . $row->getPesoTBCliente() .  '"/></td>';
                             echo '<td><input type="text" class="mascaraaltura" name="altura" id="altura" value="' . $row->getAlturaTBCliente() .  '"/></td>';
-                            echo '<td><input type="submit" name="actualizarCliente" id="actualizarCliente" value="Actualizar" onclick="return confirmarAccionModificar()"/>';
+                            echo '<td>';
+                            ?>
+                              <button name="actualizarCliente" id="actualizarCliente" value="Actualizar" onclick="return confirmarAccionModificar()" class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+                              <button name="eliminarCliente" id="eliminarCliente" value="Eliminar" onclick="return confirmarAccionEliminar()" class="btn btn-danger"><span  class="bi bi-trash-fill"></span></button>
+                            <?php
+                            echo '</td>';
 
-                            echo '<input type="submit" name="eliminarCliente" id="eliminarCliente" value="Eliminar" onclick="return confirmarAccionEliminar()"/></td>';
+
                             echo '</tr>';
                             echo '</form>';
                         }
@@ -152,7 +157,7 @@ include '../business/clienteBusiness.php';
                         </td>
                         <td><input type="text" class="mascarapeso" name="peso" id="peso" min="20" max="250" placeholder="000.00kg"  value="<?php if(isset($_GET['peso'])){ echo $_GET['peso']; }?>" ></td>
                         <td><input type="text" class="mascaraaltura" name="altura" id="altura" placeholder="0.00m"  value="<?php if(isset($_GET['altura'])){ echo $_GET['altura']; }?>" ></td>
-                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente">Registrar cliente</button></td>
+                        <td><button type="submit" name="insertarCliente" id="insertarCliente" value="insertarCliente" onclick="validarEspacios()" class="btn btn-success"><span  class="bi bi-person-up"></span></button></td>
                     </tr>
                 </tbody>
             </table>
