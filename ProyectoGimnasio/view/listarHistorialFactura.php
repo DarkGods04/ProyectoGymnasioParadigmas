@@ -30,7 +30,7 @@ include '../business/facturaDetalleBusiness.php';
             return confirm("¿Está seguro de que desea volver al menú de factura?");
         }
     </script>
-    <a onclick="return confirmarVolverMenuPrincipal()" href="menuListaFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">volver atrás</a>
+    <a onclick="return confirmarVolverMenuPrincipal()" href="menuListaFactura.php" style="text-decoration: none; color: blue; font-size: 150%;">Volver atrás</a>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script src="../js/jquery_formato.js"></script>
@@ -38,7 +38,7 @@ include '../business/facturaDetalleBusiness.php';
 
 <body>
     <br></br>
-    <h1>Historial factura</h1>
+    <h1>Historial de facturación</h1>
     <form action="" method="post" autocomplete="off">
         <div>
             <label for="campo"> Buscar: </label>

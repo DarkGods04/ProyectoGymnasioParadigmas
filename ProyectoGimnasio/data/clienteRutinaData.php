@@ -41,7 +41,7 @@ class ClienteRutinaData extends Data {
         $result = mysqli_query($conn, $queryUpdate);
         mysqli_close($conn);
 
-        return $result;
+        return $result; 
     }*/
 
     public function getClienteRutina() {
@@ -49,6 +49,32 @@ class ClienteRutinaData extends Data {
         $conn->set_charset('UTF8');
 
         $querySelect = "SELECT * FROM tbclienterutina as one WHERE tbclienterutinafecha in (SELECT MAX(tbclienterutinafecha) FROM tbclienterutina WHERE one.tbclienteid=tbclienteid) order by tbclienterutinafecha DESC;";
+        
+
+        $result = mysqli_query($conn, $querySelect);
+        mysqli_close($conn);
+
+        $RutinasCliente = [];
+        while ($row = mysqli_fetch_array($result)) {
+            $current = new ClienteRutina(
+                $row['tbclienterutinaid'],
+                $row['tbclienteid'],
+                $row['tbinstructorid'],
+                $row['tbmodalidadfuncionalid'],
+                $row['tbclienterutinafecha'],
+                $row['tbclienterutinaactivo'] );
+            array_push($RutinasCliente, $current);
+        }
+        return $RutinasCliente;
+    }
+
+
+
+    public function getClienteRutinaPasadas() {
+        $conn = mysqli_connect($this->server, $this->user, $this->password, $this->db);
+        $conn->set_charset('UTF8');
+
+        $querySelect = "SELECT * FROM tbclienterutina as one WHERE tbclienterutinafecha < (SELECT MAX(tbclienterutinafecha) FROM tbclienterutina WHERE one.tbclienteid=tbclienteid) order by tbclienterutinafecha DESC;";
         
 
         $result = mysqli_query($conn, $querySelect);

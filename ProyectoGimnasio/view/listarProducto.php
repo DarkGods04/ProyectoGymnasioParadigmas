@@ -32,7 +32,7 @@ include '../business/lineaProductosBusiness.php';
     <?php
     include 'header.php';
     ?>
-    <h1>productos</h1>
+    <h1>Productos</h1>
 
     <form action="" method="post" autocomplete="off">
         <div>
