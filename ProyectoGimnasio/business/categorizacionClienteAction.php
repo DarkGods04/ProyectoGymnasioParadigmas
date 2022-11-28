@@ -76,6 +76,8 @@ if (isset($_POST['eliminar'])) {
 
 if (isset($_POST['actualizar'])) {
 
+
+
     if (isset($_POST['idCategorizacion'])  && isset($_POST['idTipoCliente'])) {
         $idCategorizacion = $_POST['idCategorizacion'];
         $idCliente = $_POST['idCliente'];

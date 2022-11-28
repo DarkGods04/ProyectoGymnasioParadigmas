@@ -31,8 +31,12 @@ include '../business/activoFijoBusiness.php';
 </head>
 
 <body>
-    <a onclick="return confirmarVolverMenuPrincipal()" href="menuListarActivos.php" style="text-decoration: none; color: blue; font-size: 150%;">Menú de activos</a>
-    <h1>Activos fijos</h1>
+<nav class="menugym">
+        <ul>
+            <li><a onclick="return confirmarVolverMenuPrincipal()" href="menuListarActivos.php">  Menú de activos</a></li>
+        </ul>
+    </nav>
+   <h1>Activos fijos</h1>
 
     <form action="" method="post" autocomplete="off">
         <div>

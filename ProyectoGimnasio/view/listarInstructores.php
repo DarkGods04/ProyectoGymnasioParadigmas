@@ -36,15 +36,17 @@ include '../business/instructorBusiness.php';
 <button type="button" class="btn btn-info">Info</button>
 <button type="button" class="btn btn-light">Light</button>
 <button type="button" class="btn btn-dark">Dark</button>
-
 <button type="button" class="btn btn-link">Link</button>
+
+<div id="gradient"></div>
+
 <body>
-   
+
     <h1>Instructores</h1>
-    <form action=""  id='search-form'  method="post" autocomplete="off">
+    <form action="" id='search-form' method="post" autocomplete="off">
         <div id='search-box'>
-        <label for="campo"> Buscar: </label>
-            <input type="text"  id='campo' name="campo" placeholder="Buscar">
+            <label for="campo"> Buscar: </label>
+            <input type="text" id='campo' name="campo" placeholder="Buscar">
             <button type="submit" id='search-button' name="buscar" id="buscar" value="buscar"><span>Buscar!</span></button>
             <ul id="listaInstructor"></ul>
         </div>
@@ -96,13 +98,13 @@ include '../business/instructorBusiness.php';
                                 </select></td>';
 
                             echo '<td>';
-                            ?>
-                              <button name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()" class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
+                    ?>
+                            <button name="actualizar" id="actualizar" value="Actualizar" onclick="return confirmarAccionModificar()" class="btn btn-primary"><span class="bi bi-pencil-square"></span></button>
 
 
-                              <button name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()" class="btn btn-danger"><span  class="bi bi-trash-fill"></span></button>
+                            <button name="eliminar" id="eliminar" value="Eliminar" onclick="return confirmarAccionEliminar()" class="btn btn-danger"><span class="bi bi-trash-fill"></span></button>
 
-                            <?php
+                    <?php
                             echo '</td>';
                             echo '</tr>';
                             echo '</form>';
@@ -156,15 +158,15 @@ include '../business/instructorBusiness.php';
                                 <option value="<?php if (isset($_GET['tipoinstructor'])) {
                                                     echo $_GET['tipoinstructor'];
                                                 } ?>"><?php if (isset($_GET['tipoinstructor'])) {
-                                                                                                                                echo $_GET['tipoinstructor'];
-                                                                                                                            } ?></option>
+                                                            echo $_GET['tipoinstructor'];
+                                                        } ?></option>
                                 <option value="Entrenador personal">Entrenador personal</option>
                                 <option value="Fisioterapeuta">Fisioterapeuta</option>
                                 <option value="Nutricionista">Nutricionista</option>
                             </select>
                         </td>
-                        
-                        <td><button type="submit" name="insertar" id="insertar" value="insertar" onclick="validarEspacios()" class="btn btn-success"><span  class="bi bi-person-up"></span></button></td>
+
+                        <td><button type="submit" name="insertar" id="insertar" value="insertar" onclick="validarEspacios()" class="btn btn-success"><span class="bi bi-person-up"></span></button></td>
                     </tr>
                 </tbody>
             </table>
