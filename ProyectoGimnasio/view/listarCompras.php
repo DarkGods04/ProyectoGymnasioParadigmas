@@ -58,16 +58,6 @@ include '../business/proveedorBusiness.php';
 
         $compraDetalleBusiness = new CompraDetalleBusiness();
         $comprasDetalle = $compraDetalleBusiness->buscar($campo);
-       
-     
-        
-        // $compraBusiness = new CompraBusiness();
-        // $compras = $compraBusiness->buscar($campo);
-
-        // $compraDetalleBusiness = new CompraDetalleBusiness();
-        // $comprasDetalle = $compraDetalleBusiness->buscar($campo);
-
-        
      
 
         if (!empty($compras) && !empty($comprasDetalle)) {
@@ -280,11 +270,11 @@ include '../business/proveedorBusiness.php';
                                 if (isset($_GET['modoPagoCompra'])) {
                                     if ($_GET['modoPagoCompra'] == 0) {
                                         echo '<option value="' . $_GET['modoPagoCompra'] . '">' . "Contado" . '</option>';
+                                        echo '<option value="' . 1 . '" >' . "Credito" . '</option>';
                                     } else {
                                         echo '<option value="' . $_GET['modoPagoCompra'] . '">' . "Credito" . '</option>';
+                                        echo '<option value="' . 0 . '" >' . "Contado" . '</option>';
                                     }
-                                    // echo '<option value="' . 0 . '" >' . "Contado" . '</option>';
-                                    // echo '<option value="' . 1 . '" >' . "credito" . '</option>';
                                 } else { ?>
                                     <option value="" required>Modo de pago</option>
                                 <?php

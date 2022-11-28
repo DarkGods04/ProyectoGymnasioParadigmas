@@ -2,9 +2,6 @@
 include 'compraBusiness.php';
 include 'compraDetalleBusiness.php';
 include 'productoBusiness.php';
-
-
-
      
      $fechaCompra = $_POST['fechaCompra'];
      $proveedor = $_POST['proveedorid'];
@@ -103,9 +100,7 @@ if (isset($_POST['anular'])) {
 
         if ($result == 1 && $result2 == 1) {
             header("Location: ../view/listarCompras.php?success=deleted");
-        } /*else {
-            header("Location: ../view/listarCompras.php?error=dbError");
-        }*/
+        } 
     } else {
         header("location: ../view/listarCompras.php?error=error");
     }
