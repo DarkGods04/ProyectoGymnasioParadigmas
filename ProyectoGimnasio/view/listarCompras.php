@@ -10,6 +10,7 @@ include '../business/proveedorBusiness.php';
 <!DOCTYPE html>
 <html>
 <link rel="stylesheet" type="text/css" href="../css/style.css" media="screen" />
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,7 +42,7 @@ include '../business/proveedorBusiness.php';
         </div>
     </form></br></br>
     <script src="../js/peticiones.js"></script>
-    <script type="text/javascript" src="../js/jquery_formato.js"></script>    
+    <script type="text/javascript" src="../js/jquery_formato.js"></script>
 
     <div>
 
@@ -52,16 +53,16 @@ include '../business/proveedorBusiness.php';
         }
         $campo = $_POST['campo'];
 
-      
+
         $compraBusiness = new CompraBusiness();
         $compras = $compraBusiness->buscar($campo);
 
         $compraDetalleBusiness = new CompraDetalleBusiness();
         $comprasDetalle = $compraDetalleBusiness->buscar($campo);
-     
+
 
         if (!empty($compras) && !empty($comprasDetalle)) {
-            
+
         ?>
             <table border="1">
                 <thead style="text-align: left;">
@@ -80,8 +81,8 @@ include '../business/proveedorBusiness.php';
                 <tbody>
                     <?php
                     foreach ($compras as $row) {
-                        
-                      
+
+
 
                         if ($row->getActivo() == 1) {
                             echo '<form  method="POST" enctype="multipart/form-data" action="../business/compraAction.php">';
@@ -100,7 +101,6 @@ include '../business/proveedorBusiness.php';
                                     if ($row1->getActivoTBProveedor() == 1) {
                                         if ($row1->getIdTBProveedor() == $row->getProveedorId()) {
                                             echo  '<input type="text" value="' .  $row1->getNombreCompletoTBProveedor() .  '"readonly />';
-                                            
                                         }
                                     }
                                 } ?>
@@ -109,48 +109,48 @@ include '../business/proveedorBusiness.php';
 
 
 
-                           <td>
-                            <?php
-                            $productoBusiness = new ProductoBusiness();
-                            $productos = $productoBusiness->obtener();
-                            
+                            <td>
+                                <?php
+                                $productoBusiness = new ProductoBusiness();
+                                $productos = $productoBusiness->obtener();
 
-                            foreach ($comprasDetalle as $row2) {
-                                foreach ($productos as $row1) {
-                                    if ($row1->getActivoTBProducto() == 1) {
-                                        if ($row1->getIdTBProducto() == $row2->getIdProducto()) {
-                                            if ($row->getIdCompra() == $row2->getIdCompra()) {
-                                                
-                                                echo  '<input type="text" value="' .  $row1->getNombreTBProducto() .  '"readonly />';
+
+                                foreach ($comprasDetalle as $row2) {
+                                    foreach ($productos as $row1) {
+                                        if ($row1->getActivoTBProducto() == 1) {
+                                            if ($row1->getIdTBProducto() == $row2->getIdProducto()) {
+                                                if ($row->getIdCompra() == $row2->getIdCompra()) {
+
+                                                    echo  '<input type="text" value="' .  $row1->getNombreTBProducto() .  '"readonly />';
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
-                            ?>
+                                ?>
 
-                           </td>
+                            </td>
 
-                           <td>
-                            <?php
-                            $productoBusiness = new ProductoBusiness();
-                            $productos = $productoBusiness->obtener();
+                            <td>
+                                <?php
+                                $productoBusiness = new ProductoBusiness();
+                                $productos = $productoBusiness->obtener();
 
-                            foreach ($comprasDetalle as $row2) {
-                                foreach ($productos as $row1) {
+                                foreach ($comprasDetalle as $row2) {
+                                    foreach ($productos as $row1) {
 
-                                    if ($row1->getActivoTBProducto() == 1) {
-                                        if ($row1->getIdTBProducto() == $row2->getIdProducto()) {
-                                            if ($row->getIdCompra() == $row2->getIdCompra()) {
-                                                
-                                                echo  '<input type="text" value="' .  $row2->getCantidadProducto() .  '"readonly />';
+                                        if ($row1->getActivoTBProducto() == 1) {
+                                            if ($row1->getIdTBProducto() == $row2->getIdProducto()) {
+                                                if ($row->getIdCompra() == $row2->getIdCompra()) {
+
+                                                    echo  '<input type="text" value="' .  $row2->getCantidadProducto() .  '"readonly />';
+                                                }
                                             }
                                         }
                                     }
                                 }
-                            }
-                            ?>
-                           </td>
+                                ?>
+                            </td>
 
 
                             <td>
@@ -186,8 +186,8 @@ include '../business/proveedorBusiness.php';
                             echo '</form>';
                         }
                     }
-                    
-                
+
+
                     ?>
                 </tbody>
             </table>
@@ -219,9 +219,6 @@ include '../business/proveedorBusiness.php';
                 </thead>
                 <tbody>
                     <tr>
-
-
-
 
                         <td><input type="date" id="fechaCompra" name="fechaCompra" value="<?php if (isset($_GET['fechaCompra'])) {
                                                                                                 echo $_GET['fechaCompra'];
@@ -325,20 +322,20 @@ include '../business/proveedorBusiness.php';
 
 
                         <td><input type="number" min="0" max="15" name="cantidadProducto" value="<?php if (isset($_GET['cantidadProducto'])) {
-                                                                                    echo $_GET['cantidadProducto'];
-                                                                                } ?>"required>
+                                                                                                        echo $_GET['cantidadProducto'];
+                                                                                                    } ?>" required>
 
                             <input class="button" type="submit" name="calcularProductos" id="calcularProductos" onclick="res()" value="Calcular">
 
                         </td>
 
 
-                        <td><input type="text"  name="precioBrutoProducto" value="<?php if (isset($_GET['precioBrutoProducto'])) {
-                                                                                                            echo "₡" . $_GET['precioBrutoProducto'];
-                                                                                                        } ?>"readonly></td>
-                        <td><input type="text"  name="montoNeto" value="<?php if (isset($_GET['montoNeto'])) {
-                                                                                                echo "₡" . $_GET['montoNeto'];
-                                                                                            } ?>"readonly></td>
+                        <td><input type="text" name="precioBrutoProducto" value="<?php if (isset($_GET['precioBrutoProducto'])) {
+                                                                                        echo "₡" . $_GET['precioBrutoProducto'];
+                                                                                    } ?>" readonly></td>
+                        <td><input type="text" name="montoNeto" value="<?php if (isset($_GET['montoNeto'])) {
+                                                                            echo "₡" . $_GET['montoNeto'];
+                                                                        } ?>" readonly></td>
 
 
 
@@ -374,8 +371,6 @@ include '../business/proveedorBusiness.php';
         var maxDate = anioMax + "-" + mesMax + "-" + diaMax;
         document.getElementById("fechaCompra").setAttribute("max", maxDate);
     </script>
-
-
     <div>
         <form method="POST" enctype="multipart/form-data" action="../business/compraAction.php">
             <tr>
