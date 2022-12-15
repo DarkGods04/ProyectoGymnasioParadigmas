@@ -12,7 +12,6 @@ include '../business/instructorBusiness.php';
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <title>Instructores</title>
     <script>
         function confirmarAccionModificar() {
@@ -26,7 +25,6 @@ include '../business/instructorBusiness.php';
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
     <script type="text/javascript" src="../js/jquery_formato.js"></script>
-
 </head>
 <button type="button" class="btn btn-primary">Primary</button>
 <button type="button" class="btn btn-secondary">Secondary</button>
@@ -61,24 +59,24 @@ include '../business/instructorBusiness.php';
         $campo = $_POST['campo'];
 
         $instructorBusiness = new InstructorBusiness();
-        $instructores = $instructorBusiness->obtener();
-        if (!empty($instructores)) {
+        $instructores = $instructorBusiness->buscar($campo);
         ?>
-            <table border="1">
-                <thead style="text-align: center;">
-                    <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Apellido(s)</th>
-                        <th>Correo electrónico</th>
-                        <th>Teléfono</th>
-                        <th>Número de cuenta</th>
-                        <th>Tipo de instructor</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
+        <table border="1">
+            <thead style="text-align: center;">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido(s)</th>
+                    <th>Correo electrónico</th>
+                    <th>Teléfono</th>
+                    <th>Número de cuenta</th>
+                    <th>Tipo de instructor</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                if (!empty($instructores)) {
                     foreach ($instructores as $row) {
                         if ($row->getActivoTBInstructor() == 1) {
                             echo '<form  method="POST" enctype="multipart/form-data" action="../business/instructorAction.php">';
@@ -110,14 +108,12 @@ include '../business/instructorBusiness.php';
                             echo '</form>';
                         }
                     }
-                    ?>
-                </tbody>
-            </table>
-        <?php
-        } else {
-            echo '<p style="color: red">SIN RESULTADOS: No se encontraron instructores!</p>';
-        }
-        ?>
+                } else {
+                    echo '<tr><td colspan="8"><p style="color: red; text-align: center;">SIN RESULTADOS: No se encontraron instructores!</p></td></tr>';
+                }
+                ?>
+            </tbody>
+        </table>
     </div></br>
 
     <div>
@@ -189,7 +185,7 @@ include '../business/instructorBusiness.php';
                             echo '<p style="color: red">Error de formato en correo!</p>';
                         } else if ($_GET['error'] == "relationError") {
                             echo '<p style="color: red">Error al eliminar, el usuario tiene registros en otra(s) tabla(s)</p>';
-                        } else if ($_GET['error'] == "dublicate") {
+                        } else if ($_GET['error'] == "duplicate") {
                             echo '<center><p style="color: red">Error al procesar la transacción, elemento duplicado!</p></center>';
                         }
                     } else if (isset($_GET['success'])) {
